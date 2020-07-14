@@ -1,0 +1,53 @@
+<project type="bio">
+  <property name="target.model" value="genomic"/>
+  <property name="common.os.prefix" value="common"/>
+  <property name="intermine.properties.file" value="alliancemine.properties"/>
+  <property name="default.intermine.properties.file" location="../default.intermine.integrate.properties"/>
+  <sources>
+
+    <!--<source name="alliance-genes" type="alliance-genes">
+      <property name="source.db.name" value=""/>
+      <property name="dataSourceName" value=""/>
+      <property name="converter.class" value="org.intermine.bio.dataconversion.AllianceGenesConverter"/>
+    </source>
+
+    <source name="go" type="go">
+      <property name="src.data.file" location="/home/intermine/intermine/alliancemine/data/go-basic.obo"/>
+    </source> -->
+
+    <source name="do" type="do">
+      <property name="src.data.file" location="/home/intermine/intermine/alliancemine/data/doid.obo"/>
+    </source>
+
+    <source name="update-publications" type="update-publications">
+      <property name="src.data.file" location="publications.xml"/>
+    </source>
+
+    <source name="entrez-organism" type="entrez-organism">
+      <property name="src.data.file" location="organisms.xml"/>
+    </source>
+
+    <source name="so" type="so">
+      <property name="src.data.file" location="so.obo"/>
+    </source>
+
+
+  </sources>
+
+  <post-processing>
+    <post-process name="create-references"/>
+    <post-process name="do-sources"/>
+    <post-process name="create-intergenic-region-features"/>
+    <post-process name="create-location-overlap-index"/>
+    <post-process name="create-overlap-view"/>
+    <post-process name="create-gene-flanking-features"/>
+    <post-process name="populate-child-features"/>
+    <post-process name="transfer-sequences"/>
+    <post-process name="create-search-index"/>
+    <post-process name="create-attribute-indexes"/>
+    <post-process name="summarise-objectstore"/>
+    <post-process name="create-autocomplete-index"/>
+  </post-processing>
+
+</project>
+
