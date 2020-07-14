@@ -9,11 +9,11 @@
       <property name="source.db.name" value=""/>
       <property name="dataSourceName" value=""/>
       <property name="converter.class" value="org.intermine.bio.dataconversion.AllianceGenesConverter"/>
-    </source>
+    </source>-->
 
     <source name="go" type="go">
       <property name="src.data.file" location="/home/intermine/intermine/data/ONTOLOGY_GO.obo"/>
-    </source> -->
+    </source>
 
     <source name="do" type="do">
       <property name="src.data.file" location="/home/intermine/intermine/data/ONTOLOGY_DOID.obo"/>
