@@ -6,7 +6,7 @@
   <sources>
 
     <source name="alliance-genes" type="alliance-genes">
-      <property name="source.data.file" location="/home/intermine/intermine/data/Gene.tsv"/>
+      <property name="src.data.dir" location="/home/intermine/intermine/data/"/>
     </source>
 
     <source name="do" type="do">
