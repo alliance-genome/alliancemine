@@ -6,7 +6,7 @@
   <sources>
 
     <source name="alliance-genes" type="alliance-genes">
-      <property name="src.data.dir" location="/data/"/>
+      <property name="src.data.dir" location="/System/Volumes/Data/Users/data/alliancedata/"/>
     </source>
 
     <source name="do" type="do">
