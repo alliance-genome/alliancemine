@@ -6,15 +6,15 @@
   <sources>
 
     <source name="alliance-genes" type="alliance-genes">
-      <property name="src.data.file" location="/System/Volumes/Data/Users/data/alliancedata/Genes.tsv"/>
+      <property name="src.data.dir" location="/root/data/genes"/>
     </source>
 
     <source name="do" type="do">
-      <property name="src.data.file" location="/System/Volumes/Data/Users/data/intermine/ontology/doid.obo"/>
+      <property name="src.data.file" location="/root/data/ONTOLOGY_DOID.obo"/>
     </source>
 
     <source name="go" type="go">
-      <property name="src.data.file" location="/System/Volumes/Data/Users/data/intermine/ontology/go-basic.obo"/>
+      <property name="src.data.file" location="/root/data/ONTOLOGY_GO.obo"/>
     </source>
 
     <source name="update-publications" type="update-publications">
