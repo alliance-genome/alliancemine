@@ -10,12 +10,17 @@
     </source>
 
     <source name="do" type="do">
-      <property name="src.data.file" location="/root/data/ONTOLOGY_DOID.obo"/>
+      <property name="src.data.file" location="/root/data/fms/ONTOLOGY_DOID.obo"/>
     </source>
 
-    <source name="go" type="go">
-      <property name="src.data.file" location="/root/data/go-basic.obo"/>
+    <!-- <source name="go" type="go">
+      <property name="src.data.file" location="/root/data/fms/ONTOLOGY_GO.obo"/>
     </source>
+
+    <source name="go-annotation" type="go-annotation">
+      <property name="src.data.dir" location="/root/data/gafs"/>
+      <property name="ontologyPrefix" value="GO"/>
+    </source> -->
 
     <source name="update-publications" type="update-publications">
       <property name="src.data.file" location="publications.xml"/>
