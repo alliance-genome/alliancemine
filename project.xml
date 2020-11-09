@@ -5,6 +5,60 @@
   <property name="default.intermine.properties.file" location="../default.intermine.integrate.properties"/>
   <sources>
 
+      <source name="alliance-wb-fasta" type="fasta">
+        <property name="fasta.className" value="org.intermine.model.bio.Chromosome"/>
+        <property name="fasta.dataSourceName" value="NCBI"/>
+        <property name="fasta.dataSetTitle" value="WB Genome Sequence"/>
+        <property name="fasta.taxonId" value="6239"/>
+        <property name="fasta.includes" value="FASTA_WB.fa"/>
+        <property name="src.data.dir" location="/root/data/fms"/>
+      </source>
+
+      <source name="alliance-fb-fasta" type="fasta">
+        <property name="fasta.className" value="org.intermine.model.bio.Chromosome"/>
+        <property name="fasta.dataSourceName" value="NCBI"/>
+        <property name="fasta.dataSetTitle" value="FB Genome Sequence"/>
+        <property name="fasta.taxonId" value="7227"/>
+        <property name="fasta.includes" value="FASTA_R627.fa"/>
+        <property name="src.data.dir" location="/root/data/fms"/>
+      </source>
+
+      <!--<source name="alliance-sgd-fasta" type="fasta">
+        <property name="fasta.className" value="org.intermine.model.bio.Chromosome"/>
+        <property name="fasta.dataSourceName" value="NCBI"/>
+        <property name="fasta.dataSetTitle" value="SGD Genome Sequence"/>
+        <property name="fasta.taxonId" value="4932"/>
+        <property name="fasta.includes" value="FASTA_SGDr64.fa"/>
+        <property name="src.data.dir" location="/root/data/fms"/>
+      </source>-->
+
+      <source name="alliance-zfin-fasta" type="fasta">
+        <property name="fasta.className" value="org.intermine.model.bio.Chromosome"/>
+        <property name="fasta.dataSourceName" value="NCBI"/>
+        <property name="fasta.dataSetTitle" value="ZFIN Genome Sequence"/>
+        <property name="fasta.taxonId" value="7955"/>
+        <property name="fasta.includes" value="FASTA_GRCz11.fa"/>
+        <property name="src.data.dir" location="/root/data/fms"/>
+      </source>
+
+      <source name="alliance-mgi-fasta" type="fasta">
+        <property name="fasta.className" value="org.intermine.model.bio.Chromosome"/>
+        <property name="fasta.dataSourceName" value="NCBI"/>
+        <property name="fasta.dataSetTitle" value="MGI Genome Sequence"/>
+        <property name="fasta.taxonId" value="10090"/>
+        <property name="fasta.includes" value="FASTA_GRCm38.fa"/>
+        <property name="src.data.dir" location="/root/data/fms"/>
+      </source>
+
+      <source name="alliance-rgd-fasta" type="fasta">
+        <property name="fasta.className" value="org.intermine.model.bio.Chromosome"/>
+        <property name="fasta.dataSourceName" value="NCBI"/>
+        <property name="fasta.dataSetTitle" value="RGD Genome Sequence"/>
+        <property name="fasta.taxonId" value="10116"/>
+        <property name="fasta.includes" value="FASTA_Rnor60.fa"/>
+        <property name="src.data.dir" location="/root/data/fms"/>
+      </source>
+
     <source name="alliance-genes" type="alliance-genes">
       <property name="src.data.dir" location="/root/data/genes"/>
     </source>
@@ -13,11 +67,27 @@
       <property name="src.data.file" location="/root/data/fms/ONTOLOGY_DOID.obo"/>
     </source>
 
-    <!-- <source name="go" type="go">
+    <source name="go" type="go">
       <property name="src.data.file" location="/root/data/fms/ONTOLOGY_GO.obo"/>
     </source>
 
-    <source name="go-annotation" type="go-annotation">
+    <source name="eco" type="eco">
+       <property name="src.data.file" location="/root/data/fms/ONTOLOGY_ECO.obo"/>
+    </source>
+
+    <source name="hpo" type="hpo">
+        <property name="src.data.file" location="/root/data/fms/ONTOLOGY_HPO.obo"/>
+    </source>
+
+    <source name="mpo" type="mpo">
+        <property name="src.data.file" location="/root/data/fms/ONTOLOGY_MPO.obo"/>
+    </source>
+
+    <source name="pato" type="pato">
+        <property name="src.data.file" location="/root/data/fms/ONTOLOGY_PATO.obo"/>
+    </source>
+
+    <!--<source name="go-annotation" type="go-annotation">
       <property name="src.data.dir" location="/root/data/gafs"/>
       <property name="ontologyPrefix" value="GO"/>
     </source> -->
@@ -31,7 +101,7 @@
     </source>
 
     <source name="so" type="so">
-      <property name="src.data.file" location="so.obo"/>
+      <property name="src.data.file" location="/root/data/fms/ONTOLOGY_SO.obo"/>
     </source>
 
 
