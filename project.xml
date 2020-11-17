@@ -23,14 +23,14 @@
         <property name="src.data.dir" location="/root/data/fms"/>
       </source>
 
-      <!--<source name="alliance-sgd-fasta" type="fasta">
+      <source name="alliance-sgd-fasta" type="fasta">
         <property name="fasta.className" value="org.intermine.model.bio.Chromosome"/>
         <property name="fasta.dataSourceName" value="NCBI"/>
         <property name="fasta.dataSetTitle" value="SGD Genome Sequence"/>
         <property name="fasta.taxonId" value="4932"/>
         <property name="fasta.includes" value="FASTA_SGDr64.fa"/>
         <property name="src.data.dir" location="/root/data/fms"/>
-      </source>-->
+      </source>
 
       <source name="alliance-zfin-fasta" type="fasta">
         <property name="fasta.className" value="org.intermine.model.bio.Chromosome"/>
@@ -76,21 +76,22 @@
     </source>
 
     <source name="hpo" type="hpo">
-        <property name="src.data.file" location="/root/data/fms/ONTOLOGY_HPO.obo"/>
+        <property name="src.data.file" location="/root/data/fms/ONTOLOGY_HP.obo"/>
     </source>
 
     <source name="mpo" type="mpo">
-        <property name="src.data.file" location="/root/data/fms/ONTOLOGY_MPO.obo"/>
+        <property name="src.data.file" location="/root/data/fms/ONTOLOGY_MP.obo"/>
     </source>
 
     <source name="pato" type="pato">
         <property name="src.data.file" location="/root/data/fms/ONTOLOGY_PATO.obo"/>
     </source>
 
-    <!--<source name="go-annotation" type="go-annotation">
-      <property name="src.data.dir" location="/root/data/gafs"/>
+    <source name="go-annotation" type="go-annotation">
+      <property name="src.data.dir" location="/root/data"/>
+      <property name="src.data.dir.includes" value="*.gaf"/>
       <property name="ontologyPrefix" value="GO"/>
-    </source> -->
+    </source>
 
     <source name="update-publications" type="update-publications">
       <property name="src.data.file" location="publications.xml"/>
