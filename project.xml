@@ -88,7 +88,7 @@
     </source>
 
     <source name="go-annotation" type="go-annotation">
-      <property name="src.data.dir" location="/root/data"/>
+      <property name="src.data.dir" location="/root/data/fms"/>
       <property name="src.data.dir.includes" value="*.gaf"/>
       <property name="ontologyPrefix" value="GO"/>
     </source>
