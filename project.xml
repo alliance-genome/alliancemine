@@ -114,15 +114,15 @@
       <property name="src.data.dir.includes" value="DISEASE-ALLIANCE_COMBINED.tsv"/>
     </source>
 
-    <source name="alliance-orthologs" type="alliance-orthologs">
-      <property name="src.data.dir" location="/root/data/fms"/>
-      <property name="src.data.dir.includes" value="ORTHOLOGY-ALLIANCE_COMBINED.tsv"/>
-    </source>
+    <!-- <source name="alliance-orthologs" type="alliance-orthologs">
+       <property name="src.data.dir" location="/root/data/fms"/>
+       <property name="src.data.dir.includes" value="ORTHOLOGY-ALLIANCE_COMBINED.tsv"/>
+     </source>
 
-    <!--<source name="alliance-expression" type="alliance-expression">
-         <property name="src.data.dir" location="/Users/kkarra/Dev/agr_java_software/agr_intermine_data_extractor/data/fms"/>
-         <property name="src.data.dir.includes" value="EXPRESSION-ALLIANCE_COMBINED.tsv"/>
-     </source>-->
+     <source name="alliance-expression" type="alliance-expression">
+          <property name="src.data.dir" location="/Users/kkarra/Dev/agr_java_software/agr_intermine_data_extractor/data/fms"/>
+          <property name="src.data.dir.includes" value="EXPRESSION-ALLIANCE_COMBINED.tsv"/>
+      </source>-->
 
     <source name="update-publications" type="update-publications">
       <property name="src.data.file" location="publications.xml"/>
