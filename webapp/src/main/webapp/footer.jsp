@@ -1,6 +1,8 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib uri="/WEB-INF/struts-tiles.tld" prefix="tiles" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fn"  uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <!-- footer.jsp -->
 
@@ -35,7 +37,7 @@
 
 <br/>
 <div  class="body" align="center" style="clear:both">
-<blockquote><font size="-2">YeastMine is a collaboration between SGD and the Intermine project at the <a href=" http://www.sysbiol.cam.ac.uk/"> Cambridge Systems Biology Centre</a>. YeastMine is funded by NHGRI grant 2R01HG004834.
+<blockquote><font size="-2">AllianceMine is a collaboration between all MODs and the Intermine project at the <a href=" http://www.sysbiol.cam.ac.uk/"> Cambridge Systems Biology Centre</a>. AllianceMine is funded by NHGRI grant 2R01XXXXX.
 </font></blockquote>
 
 <blockquote><font size="-2">Copyright &#169; 1997-2019 The Board of Trustees of Leland Stanford Junior University. SGD operates under the Creative Commons Attribution 4.0 International license  <a href="https://creativecommons.org/licenses/by/4.0/"> (CC BY 4.0) </a>. The SGD project at Stanford University is supported by a Genome Research Resource Grant from the US National Human Genome Research Institute, part of the US National Institutes of Health.

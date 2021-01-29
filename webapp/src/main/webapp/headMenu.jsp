@@ -14,7 +14,7 @@
 <!-- Header container -->
 <div align="center" id="headercontainer">
 
-  <!-- Header 
+  <!-- Header -->
   <c:set value="${WEB_PROPERTIES['header.links']}" var="headerLinks"/>
 
   <c:if test="${fn:length(headerLinks) > 0}">
@@ -33,21 +33,13 @@
         </c:choose>
       </c:forEach>
     </div>
-  </c:if> -->
-  
+  </c:if>
   <div id="header">
-  <a href="${WEB_PROPERTIES['project.modSitePrefix']}" alt="Home" rel="NOFOLLOW">
-    <!-- AGR -->
-    <img id="logo" src="model/images/logo.png" width="98px" height="65px"  alt="AGR" />
-  </a>
-  <h1>
-    <!-- YeastMine -->
-    <html:link href="${WEB_PROPERTIES['project.sitePrefix']}/" styleId="yeast-logo"></html:link>
-  </h1>
-  <p><c:out value="${WEB_PROPERTIES['project.subTitle']}" escapeXml="false"/></p>
-  <br>
-  <p id="version"><fmt:message key="header.version"/> <c:out value="${WEB_PROPERTIES['project.releaseVersion']}" escapeXml="false"/> </p>
-</div>
+    <a href="${WEB_PROPERTIES['project.modSitePrefix']}" alt="Home" rel="NOFOLLOW"><img id="logo" src="model/images/logo.png" width="98px" height="65px" alt="AGR" /></a>
+    <h1><html:link href="${WEB_PROPERTIES['project.sitePrefix']}/" styleId="yeast-logo"></html:link></h1>
+    <p id="version"><fmt:message key="header.version"/> <c:out value="${WEB_PROPERTIES['project.releaseVersion']}" escapeXml="false"/></span>
+    <p><c:out value="${WEB_PROPERTIES['project.subTitle']}" escapeXml="false"/></p>
+  </div>
 
     <!-- Tab Menu -->
   <fmt:message key="${pageName}.tab" var="tab" />
@@ -73,12 +65,7 @@
           <fmt:message key="menu.customQuery"/>&nbsp;
         </a>
       </li>
-      <li id="tools"  <c:if test="${tab == 'tools'}">class="activelink"</c:if>>
-        <a href="/${WEB_PROPERTIES['webapp.path']}/tools.do">
-          <fmt:message key="menu.tools"/>
-        </a>
-      </li>
-      <c:if test="${WEB_PROPERTIES['genomicRegionSearch.display'] == 'true'}"> 
+      <c:if test="${WEB_PROPERTIES['genomicRegionSearch.display'] == 'true'}">
           <li id="genomicRegionSearch" <c:if test="${tab == 'genomicRegionSearch'}">class="activelink"</c:if>>
             <a href="/${WEB_PROPERTIES['webapp.path']}/genomicRegionSearch.do">
               <fmt:message key="menu.genomicRegionSearch"/>
@@ -106,8 +93,9 @@
         <li><a href="https://www.yeastgenome.org/suggestion">Contact Us</a></li>
         <li><a href="https://sites.google.com/view/yeastgenome-help/video-tutorials/yeastmine">Video Tutorials</a></li>
         <li><a href="https://sites.google.com/view/yeastgenome-help/analyze-help/yeastmine">Help</a></li>
-       <c:if test="${PROFILE.loggedIn}">
+        <c:if test="${PROFILE.loggedIn}">
             <li>
+
               <!-- display (optionally trimmed) username -->
               <c:choose>
                 <c:when test="${! empty PROVIDER}">
@@ -115,16 +103,17 @@
                     <c:when test="${empty USERNAME || USERNAME == 'nullnull'}">
                       <c:set var="displayUserName" value="logged in with OpenID"/>
                     </c:when>
-            <c:otherwise>
-              <c:set var="displayUserName" value="${USERNAME}"/>
-            </c:otherwise>
+                   <c:otherwise>
+                     <c:set var="displayUserName" value="${USERNAME}"/>
+                   </c:otherwise>
                   </c:choose>
-        </c:when>
-        <c:otherwise>
-          <c:set var="displayUserName" value="${PROFILE.username}"/>
-        </c:otherwise>
-        </c:choose>
-        <c:choose>
+                </c:when>
+                <c:otherwise>
+                  <c:set var="displayUserName" value="${PROFILE.name}"/>
+                </c:otherwise>
+              </c:choose>
+
+              <c:choose>
                 <c:when test="${fn:length(displayUserName) > 25}">
                   <c:out value="${fn:substring(displayUserName,0,25)}"/>&hellip;
                 </c:when>
@@ -133,11 +122,10 @@
                 </c:otherwise>
               </c:choose>
             </li>
-        </c:if> 
+        </c:if>
         <li class="last"><im:login/></li>
     </ul>
   </div>
-
 
   <!-- Logged in section -->
   <c:set var="loggedin" value="${PROFILE.loggedIn}"/>
@@ -240,4 +228,3 @@
 
 </div>
 <!-- /headMenu.jsp -->
-
