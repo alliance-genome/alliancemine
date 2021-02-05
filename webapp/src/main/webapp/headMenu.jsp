@@ -37,8 +37,10 @@
   <div id="header">
     <a href="${WEB_PROPERTIES['project.modSitePrefix']}" alt="Home" rel="NOFOLLOW"><img id="logo" src="model/images/logo.png" width="98px" height="65px" alt="AGR" /></a>
     <h1><html:link href="${WEB_PROPERTIES['project.sitePrefix']}/" styleId="yeast-logo"></html:link></h1>
-    <p id="version"><fmt:message key="header.version"/> <c:out value="${WEB_PROPERTIES['project.releaseVersion']}" escapeXml="false"/></span>
     <p><c:out value="${WEB_PROPERTIES['project.subTitle']}" escapeXml="false"/></p>
+    <br>
+    <p id="version"><fmt:message key="header.version"/> <c:out value="${WEB_PROPERTIES['project.releaseVersion']}" escapeXml="false"/></span>
+
   </div>
 
     <!-- Tab Menu -->
