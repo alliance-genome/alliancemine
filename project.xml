@@ -27,7 +27,7 @@
         <property name="fasta.className" value="org.intermine.model.bio.Chromosome"/>
         <property name="fasta.dataSourceName" value="NCBI"/>
         <property name="fasta.dataSetTitle" value="SGD Genome Sequence"/>
-        <property name="fasta.taxonId" value="4932"/>
+        <property name="fasta.taxonId" value="559292"/>
         <property name="fasta.includes" value="FASTA_SGDr64.fa"/>
         <property name="src.data.dir" location="/root/data/fms"/>
       </source>
