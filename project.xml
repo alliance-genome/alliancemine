@@ -5,7 +5,7 @@
   <property name="default.intermine.properties.file" location="../default.intermine.integrate.properties"/>
   <sources>
 
-      <source name="alliance-wb-fasta" type="fasta">
+      <!--<source name="alliance-wb-fasta" type="fasta">
         <property name="fasta.className" value="org.intermine.model.bio.Chromosome"/>
         <property name="fasta.dataSourceName" value="NCBI"/>
         <property name="fasta.dataSetTitle" value="WB Genome Sequence"/>
@@ -57,7 +57,7 @@
         <property name="fasta.taxonId" value="10116"/>
         <property name="fasta.includes" value="FASTA_Rnor60.fa"/>
         <property name="src.data.dir" location="/root/data/fms"/>
-      </source>
+      </source>-->
 
     <source name="do" type="do">
       <property name="src.data.file" location="/root/data/fms/ONTOLOGY_DOID.obo"/>
@@ -144,8 +144,8 @@
     <post-process name="create-location-overlap-index"/>
     <post-process name="create-overlap-view"/>
     <post-process name="create-gene-flanking-features"/>
-    <post-process name="populate-child-features"/>-->
-    <post-process name="transfer-sequences"/>
+    <post-process name="populate-child-features"/>
+    <post-process name="transfer-sequences"/>-->
     <post-process name="create-search-index"/>
     <post-process name="create-attribute-indexes"/>
     <post-process name="summarise-objectstore"/>
