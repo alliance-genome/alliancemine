@@ -104,10 +104,10 @@
 
                                 <c:if test="${!empty WEB_PROPERTIES['begin.thirdBox.linkTitle']}">
                                     <div class="bottom">
-                                          <center>
+                                          <!--<center>
                                                 <a class="bluegenes" target="new"  href=":5000/#/"> New UI - bluegenes</a>
                                                  <br />
-                                          </center>
+                                          </center>-->
                                             <center>
                                                 <c:choose>
                                                     <c:when test="${!isNewUser && !empty (WEB_PROPERTIES['begin.thirdBox.visitedLink'])}">

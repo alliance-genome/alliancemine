@@ -75,6 +75,11 @@
       <property name="src.data.dir" location="/root/data/genes"/>
     </source>
 
+    <source name="alliance-genes-crossrefs" type="alliance-genes-crossrefs">
+      <property name="src.data.dir" location="/root/data/fms"/>
+      <property name="src.data.dir.includes" value="GENECROSSREFERENCE_COMBINED.tsv"/>
+    </source>
+
     <source name="go-annotation" type="go-annotation">
       <property name="src.data.dir" location="/root/data/fms"/>
       <property name="src.data.dir.includes" value="*.gaf"/>

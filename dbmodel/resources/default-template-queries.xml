@@ -1,152 +1,84 @@
 <template-queries>
-    <template name="AllGene_ChromosomalFeatures" title="All genes in organism --&gt; All Chromosomal Features" comment="">
-        <query name="AllGene_ChromosomalFeatures" model="genomic" view="SequenceFeature.primaryIdentifier SequenceFeature.featureType SequenceFeature.secondaryIdentifier SequenceFeature.symbol SequenceFeature.description SequenceFeature.sgdAlias SequenceFeature.qualifier" longDescription="Retrieve all &lt;a href=&quot;https://sites.google.com/view/yeastgenome-help/analyze-help/yeastmine &quot;&gt;chromosomal features&lt;/a&gt; for the reference genome of S. cerevisiae.  " sortOrder="SequenceFeature.primaryIdentifier asc" constraintLogic="A and B and E">
-            <constraint path="SequenceFeature.status" code="B" editable="false" description="" op="=" value="Active"/>
-            <constraint path="SequenceFeature.featureType" code="E" editable="true" description="" op="ONE OF">
-                <value>ARS
-                </value>
-                <value>LTR_retrotransposon
-                </value>
-                <value>ORF
-                </value>
-                <value>X_element
-                </value>
-                <value>X_element_combinatorial_repeat
-                </value>
-                <value>Y_prime_element
-                </value>
-                <value>blocked_reading_frame
-                </value>
-                <value>centromere
-                </value>
-                <value>intein_encoding_region
-                </value>
-                <value>long_terminal_repeat
-                </value>
-                <value>ncRNA_gene
-                </value>
-                <value>not in systematic sequence of S288C
-                </value>
-                <value>pseudogene
-                </value>
-                <value>rRNA_gene
-                </value>
-                <value>snRNA_gene
-                </value>
-                <value>snoRNA_gene
-                </value>
-                <value>tRNA_gene
-                </value>
-                <value>telomerase_RNA_gene
-                </value>
-                <value>telomere
-                </value>
-                <value>telomeric_repeat
-                </value>
-                <value>transposable_element_gene
-                </value>
-            </constraint>
-            <constraint path="SequenceFeature.organism.name" code="A" editable="true" description="" op="=" value="Saccharomyces cerevisiae"/>
-        </query>
-    </template>
     <template name="ChromosomeRegion_AllGenes" title="Chromosomal Region --&gt; All genes" comment="">
-        <query name="ChromosomeRegion_AllGenes" model="genomic" view="Gene.chromosome.primaryIdentifier Gene.primaryIdentifier Gene.secondaryIdentifier Gene.featureType Gene.symbol Gene.name Gene.sgdAlias Gene.organism.shortName Gene.qualifier Gene.chromosomeLocation.start Gene.chromosomeLocation.end Gene.chromosomeLocation.strand Gene.description" longDescription="Retrieve all &lt;a href = &quot;https://sites.google.com/view/yeastgenome-help/analyze-help/yeastmine&quot;&gt;genes&lt;/a&gt; located within the specified chromosome and coordinate range." sortOrder="Gene.primaryIdentifier asc" constraintLogic="(A or B) and C and D and E and I">
-            <constraint path="Gene.status" code="A" editable="false" op="=" value="Active"/>
-            <constraint path="Gene.status" code="B" editable="false" op="IS NULL"/>
-            <constraint path="Gene.featureType" code="I" editable="false" op="!=" value="not in systematic sequence of S288C"/>
+        <query name="ChromosomeRegion_AllGenes" model="genomic" view="Gene.chromosome.primaryIdentifier Gene.primaryIdentifier Gene.featureType Gene.symbol Gene.name Gene.organism.shortName Gene.qualifier Gene.chromosomeLocation.start Gene.chromosomeLocation.end Gene.chromosomeLocation.strand Gene.description" longDescription="Retrieve all &lt;a href = &quot;https://sites.google.com/view/yeastgenome-help/analyze-help/yeastmine&quot;&gt;genes&lt;/a&gt; located within the specified chromosome and coordinate range." sortOrder="Gene.primaryIdentifier asc" constraintLogic="C and D and E and A">
+            <constraint path="Gene.organism.shortName" code="A" editable="true" op="=" value="S. cerevisiae S288C"/>
             <constraint path="Gene.chromosome.primaryIdentifier" code="C" editable="true" op="=" value="chrXIV"/>
             <constraint path="Gene.chromosomeLocation.start" code="D" editable="true" op="&gt;=" value="1"/>
             <constraint path="Gene.chromosomeLocation.end" code="E" editable="true" op="&lt;=" value="20000"/>
         </query>
     </template>
-    <template name="Chromosome_AllFeatures" title="Chromosome --&gt; All features" comment="">
-        <query name="Chromosome_AllFeatures" model="genomic" view="SequenceFeature.chromosome.primaryIdentifier SequenceFeature.primaryIdentifier SequenceFeature.featureType SequenceFeature.secondaryIdentifier SequenceFeature.description SequenceFeature.sgdAlias SequenceFeature.qualifier" longDescription="Retrieve all &lt;a href = &quot;https://sites.google.com/view/yeastgenome-help/analyze-help/yeastmine &quot;&gt;feature types&lt;/a&gt; for the specified chromosome." sortOrder="SequenceFeature.primaryIdentifier asc" constraintLogic="(A or B or C or D or E or F or G or H or K or L or M or N or O or P or Q or R or S or I or J or V or W) and T and U and X">
-            <constraint path="SequenceFeature.status" code="U" editable="false" description="" op="=" value="Active"/>
-            <constraint path="SequenceFeature.featureType" code="S" editable="false" description="" op="=" value="transposable_element_gene"/>
-            <constraint path="SequenceFeature.featureType" code="R" editable="false" description="" op="=" value="telomeric_repeat"/>
-            <constraint path="SequenceFeature.featureType" code="Q" editable="false" description="" op="=" value="telomere"/>
-            <constraint path="SequenceFeature.featureType" code="P" editable="false" description="" op="=" value="tRNA_gene"/>
-            <constraint path="SequenceFeature.featureType" code="O" editable="false" description="" op="=" value="snoRNA_gene"/>
-            <constraint path="SequenceFeature.featureType" code="N" editable="false" description="" op="=" value="snRNA_gene"/>
-            <constraint path="SequenceFeature.featureType" code="M" editable="false" description="" op="=" value="LTR_retrotransposon"/>
-            <constraint path="SequenceFeature.featureType" code="L" editable="false" description="" op="=" value="rRNA_gene"/>
-            <constraint path="SequenceFeature.featureType" code="K" editable="false" description="" op="=" value="pseudogene"/>
-            <constraint path="SequenceFeature.featureType" code="H" editable="false" description="" op="=" value="ncRNA_gene"/>
-            <constraint path="SequenceFeature.featureType" code="G" editable="false" description="" op="=" value="long_terminal_repeat"/>
-            <constraint path="SequenceFeature.featureType" code="F" editable="false" description="" op="=" value="centromere"/>
-            <constraint path="SequenceFeature.featureType" code="E" editable="false" description="" op="=" value="Y_prime_element"/>
-            <constraint path="SequenceFeature.featureType" code="D" editable="false" description="" op="=" value="X_element"/>
-            <constraint path="SequenceFeature.featureType" code="C" editable="false" description="" op="=" value="X_element_combinatorial_repeat"/>
-            <constraint path="SequenceFeature.featureType" code="B" editable="false" description="" op="=" value="ARS"/>
-            <constraint path="SequenceFeature.featureType" code="A" editable="false" description="" op="=" value="ORF"/>
-            <constraint path="SequenceFeature.organism.name" code="T" editable="false" description="" op="=" value="Saccharomyces cerevisiae"/>
-            <constraint path="SequenceFeature.featureType" code="I" editable="false" description="" op="=" value="tRNA_gene"/>
-            <constraint path="SequenceFeature.featureType" code="J" editable="false" description="" op="=" value="blocked_reading_frame"/>
-            <constraint path="SequenceFeature.featureType" code="V" editable="false" description="" op="=" value="intein_encoding_region"/>
-            <constraint path="SequenceFeature.featureType" code="W" editable="false" description="" op="=" value="telomerase_RNA_gene"/>
-            <constraint path="SequenceFeature.chromosome.primaryIdentifier" code="X" editable="true" op="=" value="chrIII"/>
-        </query>
-    </template>
-    <template name="Chromosome_Gene" title="Chromosome --&gt; All genes." comment="">
-        <query name="Chromosome_Gene" model="genomic" view="Gene.primaryIdentifier Gene.secondaryIdentifier Gene.chromosome.primaryIdentifier Gene.chromosome.organism.name Gene.chromosomeLocation.start Gene.chromosomeLocation.end Gene.chromosomeLocation.strand Gene.description Gene.featureType Gene.qualifier Gene.sgdAlias" longDescription="Retrieve all &lt;a href = &quot;https://sites.google.com/view/yeastgenome-help/analyze-help/yeastmine &quot;&gt;genes&lt;/a&gt; located on a specified chromosome." sortOrder="Gene.primaryIdentifier asc" constraintLogic="(A or B) and C">
-            <constraint path="Gene.status" code="B" editable="false" description="" op="=" value="Active"/>
-            <constraint path="Gene.status" code="A" editable="false" description="" op="IS NULL"/>
-            <constraint path="Gene.chromosome.primaryIdentifier" code="C" editable="true" op="=" value="chrIII"/>
-        </query>
-    </template>
     <template name="Chromosome_Gene_FeatureType" title="Chromosome--&gt;Genes of a selected Feature Type" comment="">
-        <query name="Chromosome_Gene_FeatureType" model="genomic" view="Gene.chromosome.primaryIdentifier Gene.primaryIdentifier Gene.secondaryIdentifier Gene.featureType Gene.qualifier Gene.symbol Gene.name Gene.organism.shortName Gene.description" longDescription="Retrieve features located on chromosome." sortOrder="Gene.featureType asc" constraintLogic="A and B and (E or F)">
-            <constraint path="Gene.status" code="E" editable="false" op="=" value="Active"/>
-            <constraint path="Gene.status" code="F" editable="false" op="IS NULL"/>
-            <constraint path="Gene.featureType" code="A" editable="true" op="=" value="ORF"/>
-            <constraint path="Gene.chromosome.primaryIdentifier" code="B" editable="true" op="=" value="chrI"/>
+        <query name="Chromosome_Gene_FeatureType" model="genomic" view="Gene.chromosome.primaryIdentifier Gene.primaryIdentifier Gene.featureType Gene.qualifier Gene.symbol Gene.name Gene.organism.shortName Gene.description" longDescription="Retrieve features located on chromosome." sortOrder="Gene.featureType asc" constraintLogic="B and A and C">
+            <constraint path="Gene.organism.shortName" code="A" editable="true" op="=" value="D. melanogaster"/>
+            <constraint path="Gene.chromosome.primaryIdentifier" code="B" editable="true" op="=" value="2R"/>
+            <constraint path="Gene.featureType" code="C" editable="true" op="=" value="protein_coding_gene"/>
         </query>
     </template>
-    <template name="Chromosome_IntergenicSequence" title="Chromosome--&gt;All intergenic regions." comment="">
-        <query name="Chromosome_IntergenicSequence" model="genomic" view="IntergenicRegion.primaryIdentifier IntergenicRegion.length IntergenicRegion.chromosomeLocation.locatedOn.primaryIdentifier IntergenicRegion.chromosomeLocation.start IntergenicRegion.chromosomeLocation.end IntergenicRegion.chromosomeLocation.strand IntergenicRegion.adjacentGenes.primaryIdentifier IntergenicRegion.adjacentGenes.secondaryIdentifier IntergenicRegion.adjacentGenes.symbol" longDescription="Retrieve all intergenic regions (with their chromosomal locations and lengths) for a specified chromosome." sortOrder="IntergenicRegion.primaryIdentifier asc" constraintLogic="A and B and C and D">
-            <join path="IntergenicRegion.adjacentGenes" style="OUTER"/>
-            <pathDescription pathString="IntergenicRegion.chromosomeLocation.locatedOn" description="Chromosome"/>
-            <constraint path="IntergenicRegion.chromosomeLocation.locatedOn" editable="false" type="Chromosome"/>
-            <constraint path="IntergenicRegion.adjacentGenes.featureType" code="D" editable="false" op="!=" value="not in systematic sequence of S288C"/>
-            <constraint path="IntergenicRegion.organism.shortName" code="A" editable="false" description="" op="=" value="S. cerevisiae"/>
-            <constraint path="IntergenicRegion.chromosomeLocation.locatedOn.primaryIdentifier" code="B" editable="true" description="Show intergenic regions for chromosome:" op="=" value="chrI"/>
-            <constraint path="IntergenicRegion.length" code="C" editable="true" op="&lt;=" value="10000"/>
+    <template name="DOTerm_AllGenes" title="DO Term name --&gt; All genes" comment="">
+        <query name="DOTerm_AllGenes" model="genomic" view="Gene.primaryIdentifier Gene.symbol Gene.featureType Gene.diseaseAnnotation.ontologyTerm.identifier Gene.diseaseAnnotation.ontologyTerm.name Gene.diseaseAnnotation.evidence.code.code Gene.diseaseAnnotation.evidence.withText Gene.diseaseAnnotation.evidence.publications.pubMedId Gene.diseaseAnnotation.evidence.publications.pubXrefId Gene.organism.shortName" longDescription="Retrieve all &lt;ahref = https://sites.google.com/view/yeastgenome-help/analyze-help/yeastmine&gt; genes &lt;/a&gt; annotated to a specified Disease Ontology (DO) Term." sortOrder="Gene.primaryIdentifier asc">
+            <constraint path="Gene.diseaseAnnotation.ontologyTerm" editable="false" type="DOTerm"/>
+            <constraint path="Gene.diseaseAnnotation.evidence" editable="false" type="DiseaseEvidence"/>
+            <constraint path="Gene.diseaseAnnotation.ontologyTerm.name" editable="true" op="=" value="*cancer*"/>
         </query>
     </template>
-    <template name="Chromosome_Telomeres" title="Chromosome--&gt;Telomeric Regions" comment="">
-        <query name="Chromosome_Telomeres" model="genomic" view="Telomere.chromosome.primaryIdentifier Telomere.primaryIdentifier Telomere.secondaryIdentifier Telomere.featureType Telomere.organism.shortName Telomere.chromosomeLocation.start Telomere.chromosomeLocation.end Telomere.chromosomeLocation.strand Telomere.description" longDescription="Retrieve telomeres and telomeric regions on a specified chromosome." sortOrder="Telomere.primaryIdentifier asc">
-            <constraint path="Telomere.chromosome.primaryIdentifier" editable="true" op="=" value="chrI"/>
+    <template name="DOTerm_Children_AllGenes" title="DO Term name [and children of this term] --&gt; All genes" comment="">
+        <query name="DOTerm_Children_AllGenes" model="genomic" view="Gene.primaryIdentifier Gene.symbol Gene.featureType Gene.qualifier Gene.diseaseAnnotation.ontologyTerm.identifier Gene.diseaseAnnotation.ontologyTerm.name Gene.diseaseAnnotation.evidence.code.code Gene.diseaseAnnotation.evidence.withText Gene.diseaseAnnotation.ontologyTerm.parents.identifier Gene.diseaseAnnotation.ontologyTerm.parents.name Gene.diseaseAnnotation.evidence.publications.pubMedId" longDescription="Retrieve all genes that are annotated to the specified DO term and children of that specified DO Term. Wild card queries (such as *progeria*) are supported." sortOrder="Gene.primaryIdentifier asc">
+            <constraint path="Gene.diseaseAnnotation.evidence" editable="false" type="DiseaseEvidence"/>
+            <constraint path="Gene.diseaseAnnotation.ontologyTerm" editable="false" type="DOTerm"/>
+            <constraint path="Gene.diseaseAnnotation.ontologyTerm.parents" editable="false" type="DOTerm"/>
+            <constraint path="Gene.diseaseAnnotation.ontologyTerm.parents.name" editable="true" op="=" value="cancer"/>
         </query>
     </template>
-    <template name="FeatureType_Gene" title="Feature Type--&gt;Genes" comment="">
-        <query name="FeatureType_Gene" model="genomic" view="Gene.chromosome.primaryIdentifier Gene.primaryIdentifier Gene.secondaryIdentifier Gene.featureType Gene.name Gene.sgdAlias Gene.qualifier Gene.organism.shortName Gene.chromosomeLocation.start Gene.chromosomeLocation.end Gene.chromosomeLocation.strand Gene.description" longDescription="Retrieve genes of a selected &lt;a href = &quot;https://sites.google.com/view/yeastgenome-help/analyze-help/yeastmine&quot;&gt;feature type&lt;/a&gt;. " sortOrder="Gene.primaryIdentifier asc" constraintLogic="(A or B) and C and F">
-            <join path="Gene.chromosome" style="OUTER"/>
-            <join path="Gene.chromosomeLocation" style="OUTER"/>
-            <constraint path="Gene.organism.shortName" code="F" editable="false" description="" op="=" value="S. cerevisiae"/>
-            <constraint path="Gene.status" code="B" editable="false" op="IS NULL"/>
-            <constraint path="Gene.status" code="A" editable="false" op="=" value="Active"/>
-            <constraint path="Gene.featureType" code="C" editable="true" op="=" value="ORF"/>
+    <template name="DOTerm_DOTermIdentifier" title="DO Term name --&gt; DO Term Identifier" comment="">
+        <query name="DOTerm_DOTermIdentifier" model="genomic" view="DOTerm.name DOTerm.description DOTerm.identifier DOTerm.obsolete" longDescription="Retrieve the DO term identifier (DOID) and description for a specified DO term name. Wild card queries (such as *syndrome*) are supported." sortOrder="DOTerm.description asc">
+            <constraint path="DOTerm.name" editable="true" op="=" value="*syndrome*"/>
         </query>
     </template>
-    <template name="GOID_Gene" title="GO ID --&gt; Genes." comment="which also have a 'with' annotation (The 'with' field holds an additional identifier for annotations using certain evidence codes) ">
-        <query name="GOID_Gene" model="genomic" view="Gene.primaryIdentifier Gene.secondaryIdentifier Gene.symbol Gene.featureType Gene.goAnnotation.ontologyTerm.identifier Gene.goAnnotation.ontologyTerm.name Gene.goAnnotation.ontologyTerm.namespace Gene.goAnnotation.evidence.code.code Gene.goAnnotation.qualifier Gene.goAnnotation.evidence.code.withText Gene.goAnnotation.annotationExtension Gene.goAnnotation.evidence.code.annotType Gene.goAnnotation.evidence.publications.pubMedId Gene.goAnnotation.evidence.publications.citation" longDescription="Retrieve all &lt;a href = &quot;https://sites.google.com/view/yeastgenome-help/analyze-help/yeastmine&quot;&gt;genes&lt;/a&gt; annotated to a particular GO ID with a particular &lt;a href = &quot;http://www.geneontology.org/GO.evidence.shtml&quot;&gt;evidence code&lt;/a&gt;." sortOrder="Gene.secondaryIdentifier asc" constraintLogic="B and A">
-            <constraint path="Gene.goAnnotation.ontologyTerm" code="A" editable="true" op="LOOKUP" value="GO:0000182"/>
-            <constraint path="Gene.goAnnotation.evidence.code.code" code="B" editable="true" description="" switchable="off" op="!=" value="IEA"/>
+    <template name="GOTerm_GeneOrganism" title="GO Term name [and children of this term] --&gt;All genes" comment="">
+        <query name="GOTerm_GeneOrganism" model="genomic" view="Gene.primaryIdentifier Gene.symbol Gene.featureType Gene.qualifier Gene.goAnnotation.ontologyTerm.identifier Gene.goAnnotation.ontologyTerm.name Gene.goAnnotation.ontologyTerm.namespace Gene.goAnnotation.evidence.code.code Gene.goAnnotation.qualifier Gene.goAnnotation.evidence.code.withText Gene.goAnnotation.annotationExtension Gene.goAnnotation.ontologyTerm.parents.identifier Gene.goAnnotation.ontologyTerm.parents.name Gene.goAnnotation.evidence.publications.pubMedId" longDescription="Retrieve all &lt;a href = &quot;https://sites.google.com/view/yeastgenome-help/analyze-help/yeastmine&quot;&gt;genes&lt;/a&gt; that are annotated to the specified GO term and children of that specified GO Term. Wild card queries (such as *ascospore*) are supported. Only manually curated and high-throughput GO annotations are included. " sortOrder="Gene.primaryIdentifier asc">
+            <pathDescription pathString="Gene.goAnnotation.ontologyTerm.parents" description="GO annotation"/>
+            <pathDescription pathString="Gene.goAnnotation.ontologyTerm" description="GO annotation &gt; child term"/>
+            <constraint path="Gene.goAnnotation.ontologyTerm" editable="false" type="GOTerm"/>
+            <constraint path="Gene.goAnnotation.ontologyTerm.parents" editable="false" type="GOTerm"/>
+            <constraint path="Gene.goAnnotation.ontologyTerm.parents.name" editable="true" description="Show genes annotated with GO term (and any children of this GO term):" op="=" value="pseudohyphal growth"/>
         </query>
     </template>
     <template name="GOTerm_Genes" title="GO Term --&gt; All genes" comment="">
-        <query name="GOTerm_Genes" model="genomic" view="Gene.primaryIdentifier Gene.secondaryIdentifier Gene.symbol Gene.featureType Gene.qualifier Gene.goAnnotation.ontologyTerm.identifier Gene.goAnnotation.ontologyTerm.name Gene.goAnnotation.ontologyTerm.namespace Gene.goAnnotation.evidence.code.code Gene.goAnnotation.qualifier Gene.goAnnotation.evidence.code.withText Gene.goAnnotation.annotationExtension Gene.goAnnotation.evidence.code.annotType Gene.goAnnotation.evidence.publications.pubMedId Gene.goAnnotation.evidence.publications.citation" longDescription="Retrieve all &lt;a href = &quot;https://sites.google.com/view/yeastgenome-help/analyze-help/yeastmine&quot;&gt;genes&lt;/a&gt; annotated to a specified GO Term. Manually curated, high-throughput, and computational GO annotations are included. To also retrieve annotations to child terms use the &lt;a href=&quot;https://yeastmine.yeastgenome.org/yeastmine/template.do?name=GOTerm_GeneOrganism&amp;scope=global&quot;&gt; GO Term name [and children of this  term] --&gt;All genes template&lt;/a&gt;." sortOrder="Gene.symbol asc" constraintLogic="A and (B or C)">
+        <query name="GOTerm_Genes" model="genomic" view="Gene.primaryIdentifier Gene.secondaryIdentifier Gene.symbol Gene.featureType Gene.qualifier Gene.goAnnotation.ontologyTerm.identifier Gene.goAnnotation.ontologyTerm.name Gene.goAnnotation.ontologyTerm.namespace Gene.goAnnotation.evidence.code.code Gene.goAnnotation.qualifier Gene.goAnnotation.evidence.code.withText Gene.goAnnotation.annotationExtension Gene.goAnnotation.evidence.code.annotType Gene.goAnnotation.evidence.publications.pubMedId Gene.goAnnotation.evidence.publications.citation" longDescription="Retrieve all &lt;a href = &quot;https://sites.google.com/view/yeastgenome-help/analyze-help/yeastmine&quot;&gt;genes&lt;/a&gt; annotated to a specified GO Term. Manually curated, high-throughput, and computational GO annotations are included. To also retrieve annotations to child terms use the &lt;a href=&quot;https://yeastmine.yeastgenome.org/yeastmine/template.do?name=GOTerm_GeneOrganism&amp;scope=global&quot;&gt; GO Term name [and children of this  term] --&gt;All genes template&lt;/a&gt;." sortOrder="Gene.symbol asc">
             <constraint path="Gene.goAnnotation.ontologyTerm" editable="false" type="GOTerm"/>
-            <constraint path="Gene.goAnnotation.qualifier" code="B" editable="false" op="!=" value="NOT"/>
-            <constraint path="Gene.goAnnotation.qualifier" code="C" editable="false" op="IS NULL"/>
-            <constraint path="Gene.goAnnotation.ontologyTerm.name" code="A" editable="true" op="=" value="Pseudohyphal Growth"/>
+            <constraint path="Gene.goAnnotation.ontologyTerm.name" editable="true" op="=" value="Pseudohyphal Growth"/>
         </query>
     </template>
-    <template name="GOname_GOidentifier" title="GO Term name --&gt; GO Term Identifier." comment="">
-        <query name="GOname_GOidentifier" model="genomic" view="GOTerm.name GOTerm.identifier GOTerm.description GOTerm.namespace" longDescription="Retrieve the GO term identifier (GOID) and description for a specified GO term name.  Wild card queries (such as *ascospore*) are supported." sortOrder="GOTerm.name asc" constraintLogic="A and (B or C)">
-            <constraint path="GOTerm.obsolete" code="B" editable="false" op="=" value="false"/>
-            <constraint path="GOTerm.obsolete" code="C" editable="false" op="IS NULL"/>
-            <constraint path="GOTerm.name" code="A" editable="true" op="=" value="*ascospore*"/>
+    <template name="Gene_DOTerm" title="Gene --&gt; DO Terms" comment="">
+        <query name="Gene_DOTerm" model="genomic" view="Gene.primaryIdentifier Gene.symbol Gene.featureType Gene.diseaseAnnotation.ontologyTerm.identifier Gene.diseaseAnnotation.ontologyTerm.name Gene.diseaseAnnotation.evidence.code.code Gene.diseaseAnnotation.evidence.withText Gene.diseaseAnnotation.evidence.publications.pubMedId Gene.organism.shortName" longDescription="Retrieve all Disease Ontology (DO) annotations for a specified gene. Wild card queries (such as *YAL*) are supported." sortOrder="Gene.primaryIdentifier asc">
+            <constraint path="Gene.diseaseAnnotation.evidence" editable="false" type="DiseaseEvidence"/>
+            <constraint path="Gene" editable="true" op="LOOKUP" value="SGD:S000005857" extraValue="S. cerevisiae S288C"/>
+        </query>
+    </template>
+    <template name="Gene_Description" title="Gene --&gt; Automated descriptions" comment="">
+        <query name="Gene_Description" model="genomic" view="Gene.primaryIdentifier Gene.symbol Gene.name Gene.organism.shortName Gene.briefDescription Gene.description" longDescription="Retrieve genes with an automated gene description." sortOrder="Gene.primaryIdentifier asc" constraintLogic="A and B">
+            <constraint path="Gene.organism.shortName" code="A" editable="true" op="=" value="S. cerevisiae S288C"/>
+            <constraint path="Gene.description" code="B" editable="true" description="" switchable="on" op="CONTAINS" value="actin"/>
+        </query>
+    </template>
+    <template name="Gene_GOTerms" title="Gene --&gt; GO Terms" comment="">
+        <query name="Gene_GOTerms" model="genomic" view="Gene.primaryIdentifier Gene.secondaryIdentifier Gene.featureType Gene.goAnnotation.ontologyTerm.identifier Gene.goAnnotation.ontologyTerm.name Gene.goAnnotation.ontologyTerm.namespace Gene.goAnnotation.evidence.code.code Gene.goAnnotation.qualifier Gene.goAnnotation.evidence.code.withText Gene.goAnnotation.annotationExtension Gene.goAnnotation.evidence.publications.pubMedId Gene.organism.shortName" longDescription="Retrieve all GO annotations for a specified gene." sortOrder="Gene.primaryIdentifier asc">
+            <constraint path="Gene" editable="true" op="LOOKUP" value="SGD:S000005857" extraValue="S. cerevisiae S288C"/>
+        </query>
+    </template>
+    <template name="Gene_GenomicDNA" title="Gene --&gt; Genomic DNA" comment="">
+        <query name="Gene_GenomicDNA" model="genomic" view="Gene.primaryIdentifier Gene.featureType Gene.briefDescription Gene.sequence.residues Gene.sequence.length" longDescription="Retrieve genomic DNA (DNA sequence with introns) for the specified gene." sortOrder="Gene.primaryIdentifier asc">
+            <constraint path="Gene" editable="true" op="LOOKUP" value="SGD:S000003131" extraValue="S. cerevisiae S288C"/>
+        </query>
+    </template>
+    <template name="Literature_GO" title="Literature --&gt; GO annotations" comment="">
+        <query name="Literature_GO" model="genomic" view="Gene.primaryIdentifier Gene.symbol Gene.featureType Gene.goAnnotation.ontologyTerm.identifier Gene.goAnnotation.ontologyTerm.name Gene.goAnnotation.ontologyTerm.namespace Gene.goAnnotation.evidence.code.code Gene.goAnnotation.qualifier Gene.goAnnotation.evidence.code.withText Gene.goAnnotation.annotationExtension Gene.goAnnotation.evidence.publications.pubMedId" longDescription="Retrieve GO annotations made from a specified PubMed ID (PMID)." sortOrder="Gene.primaryIdentifier asc">
+            <constraint path="Gene.goAnnotation.evidence.publications" editable="true" op="LOOKUP" value="17118118"/>
+        </query>
+    </template>
+    <template name="Organism_Genes" title="Organism --&gt; All genes" comment="">
+        <query name="Organism_Genes" model="genomic" view="Gene.primaryIdentifier Gene.name Gene.briefDescription Gene.chromosome.primaryIdentifier Gene.chromosomeLocation.start Gene.chromosomeLocation.end Gene.chromosomeLocation.strand Gene.organism.shortName Gene.featureType" longDescription="Retrieve Genes of a given Organism." sortOrder="Gene.primaryIdentifier asc">
+            <constraint path="Gene.organism.shortName" editable="true" description="" op="=" value="S. cerevisiae S288C"/>
         </query>
     </template>
 </template-queries>
