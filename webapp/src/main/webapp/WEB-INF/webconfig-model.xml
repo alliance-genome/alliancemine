@@ -177,6 +177,12 @@
     </fields>
   </class>
 
+    <class className="org.intermine.model.bio.CrossReference">
+        <fields>
+            <fieldconfig fieldExpr="identifier"/>
+        </fields>
+    </class>
+
   <class className="org.intermine.model.bio.Transcript">
     <fields>
       <fieldconfig fieldExpr="primaryIdentifier"/>

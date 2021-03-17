@@ -9,7 +9,7 @@ chromosomal_inversion
 chromosomal_translocation
 chromosomal_transposition
 chromosome
-chromosome_band
+#chromosome_band
 chromosome_structure_variation
 EST
 enhancer

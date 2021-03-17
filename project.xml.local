@@ -6,7 +6,12 @@
   <sources>
 
     <source name="alliance-genes" type="alliance-genes">
-      <property name="src.data.dir" location="/System/Volumes/Data/Users/data/alliancedata/"/>
+      <property name="src.data.dir" location="/Users/kkarra/Dev/agr_java_software/agr_intermine_data_extractor/data/genes"/>
+    </source>
+
+    <source name="alliance-genes-crossrefs" type="alliance-genes-crossrefs">
+      <property name="src.data.dir" location="/Users/kkarra/Dev/agr_java_software/agr_intermine_data_extractor/data/fms"/>
+      <property name="src.data.dir.includes" value="GENECROSSREFERENCE_COMBINED.tsv"/>
     </source>
 
     <source name="do" type="do">
