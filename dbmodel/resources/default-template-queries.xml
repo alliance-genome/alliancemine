@@ -1,6 +1,6 @@
 <template-queries>
     <template name="ChromosomeRegion_AllGenes" title="Chromosomal Region --&gt; All genes" comment="">
-        <query name="ChromosomeRegion_AllGenes" model="genomic" view="Gene.chromosome.primaryIdentifier Gene.primaryIdentifier Gene.featureType Gene.symbol Gene.name Gene.organism.shortName Gene.qualifier Gene.chromosomeLocation.start Gene.chromosomeLocation.end Gene.chromosomeLocation.strand Gene.description" longDescription="Retrieve all &lt;a href = &quot;https://sites.google.com/view/yeastgenome-help/analyze-help/yeastmine&quot;&gt;genes&lt;/a&gt; located within the specified chromosome and coordinate range." sortOrder="Gene.primaryIdentifier asc" constraintLogic="C and D and E and A">
+        <query name="ChromosomeRegion_AllGenes" model="genomic" view="Gene.chromosome.primaryIdentifier Gene.primaryIdentifier Gene.symbol Gene.name Gene.chromosomeLocation.start Gene.chromosomeLocation.end Gene.chromosomeLocation.strand Gene.featureType Gene.description Gene.organism.shortName" longDescription="Retrieve all &lt;a href = &quot;https://sites.google.com/view/yeastgenome-help/analyze-help/yeastmine&quot;&gt;genes&lt;/a&gt; located within the specified chromosome and coordinate range." sortOrder="Gene.primaryIdentifier asc" constraintLogic="C and D and E and A">
             <constraint path="Gene.organism.shortName" code="A" editable="true" op="=" value="S. cerevisiae S288C"/>
             <constraint path="Gene.chromosome.primaryIdentifier" code="C" editable="true" op="=" value="chrXIV"/>
             <constraint path="Gene.chromosomeLocation.start" code="D" editable="true" op="&gt;=" value="1"/>
@@ -16,16 +16,16 @@
     </template>
     <template name="DOTerm_AllGenes" title="DO Term name --&gt; All genes" comment="">
         <query name="DOTerm_AllGenes" model="genomic" view="Gene.primaryIdentifier Gene.symbol Gene.featureType Gene.diseaseAnnotation.ontologyTerm.identifier Gene.diseaseAnnotation.ontologyTerm.name Gene.diseaseAnnotation.evidence.code.code Gene.diseaseAnnotation.evidence.withText Gene.diseaseAnnotation.evidence.publications.pubMedId Gene.diseaseAnnotation.evidence.publications.pubXrefId Gene.organism.shortName" longDescription="Retrieve all &lt;ahref = https://sites.google.com/view/yeastgenome-help/analyze-help/yeastmine&gt; genes &lt;/a&gt; annotated to a specified Disease Ontology (DO) Term." sortOrder="Gene.primaryIdentifier asc">
-            <constraint path="Gene.diseaseAnnotation.ontologyTerm" editable="false" type="DOTerm"/>
             <constraint path="Gene.diseaseAnnotation.evidence" editable="false" type="DiseaseEvidence"/>
+            <constraint path="Gene.diseaseAnnotation.ontologyTerm" editable="false" type="DOTerm"/>
             <constraint path="Gene.diseaseAnnotation.ontologyTerm.name" editable="true" op="=" value="*cancer*"/>
         </query>
     </template>
     <template name="DOTerm_Children_AllGenes" title="DO Term name [and children of this term] --&gt; All genes" comment="">
         <query name="DOTerm_Children_AllGenes" model="genomic" view="Gene.primaryIdentifier Gene.symbol Gene.featureType Gene.qualifier Gene.diseaseAnnotation.ontologyTerm.identifier Gene.diseaseAnnotation.ontologyTerm.name Gene.diseaseAnnotation.evidence.code.code Gene.diseaseAnnotation.evidence.withText Gene.diseaseAnnotation.ontologyTerm.parents.identifier Gene.diseaseAnnotation.ontologyTerm.parents.name Gene.diseaseAnnotation.evidence.publications.pubMedId" longDescription="Retrieve all genes that are annotated to the specified DO term and children of that specified DO Term. Wild card queries (such as *progeria*) are supported." sortOrder="Gene.primaryIdentifier asc">
-            <constraint path="Gene.diseaseAnnotation.evidence" editable="false" type="DiseaseEvidence"/>
-            <constraint path="Gene.diseaseAnnotation.ontologyTerm" editable="false" type="DOTerm"/>
             <constraint path="Gene.diseaseAnnotation.ontologyTerm.parents" editable="false" type="DOTerm"/>
+            <constraint path="Gene.diseaseAnnotation.ontologyTerm" editable="false" type="DOTerm"/>
+            <constraint path="Gene.diseaseAnnotation.evidence" editable="false" type="DiseaseEvidence"/>
             <constraint path="Gene.diseaseAnnotation.ontologyTerm.parents.name" editable="true" op="=" value="cancer"/>
         </query>
     </template>
@@ -38,8 +38,8 @@
         <query name="GOTerm_GeneOrganism" model="genomic" view="Gene.primaryIdentifier Gene.symbol Gene.featureType Gene.qualifier Gene.goAnnotation.ontologyTerm.identifier Gene.goAnnotation.ontologyTerm.name Gene.goAnnotation.ontologyTerm.namespace Gene.goAnnotation.evidence.code.code Gene.goAnnotation.qualifier Gene.goAnnotation.evidence.code.withText Gene.goAnnotation.annotationExtension Gene.goAnnotation.ontologyTerm.parents.identifier Gene.goAnnotation.ontologyTerm.parents.name Gene.goAnnotation.evidence.publications.pubMedId" longDescription="Retrieve all &lt;a href = &quot;https://sites.google.com/view/yeastgenome-help/analyze-help/yeastmine&quot;&gt;genes&lt;/a&gt; that are annotated to the specified GO term and children of that specified GO Term. Wild card queries (such as *ascospore*) are supported. Only manually curated and high-throughput GO annotations are included. " sortOrder="Gene.primaryIdentifier asc">
             <pathDescription pathString="Gene.goAnnotation.ontologyTerm.parents" description="GO annotation"/>
             <pathDescription pathString="Gene.goAnnotation.ontologyTerm" description="GO annotation &gt; child term"/>
-            <constraint path="Gene.goAnnotation.ontologyTerm" editable="false" type="GOTerm"/>
             <constraint path="Gene.goAnnotation.ontologyTerm.parents" editable="false" type="GOTerm"/>
+            <constraint path="Gene.goAnnotation.ontologyTerm" editable="false" type="GOTerm"/>
             <constraint path="Gene.goAnnotation.ontologyTerm.parents.name" editable="true" description="Show genes annotated with GO term (and any children of this GO term):" op="=" value="pseudohyphal growth"/>
         </query>
     </template>
