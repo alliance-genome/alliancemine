@@ -36,7 +36,7 @@
   </c:if>
   <div id="header">
     <a href="${WEB_PROPERTIES['project.modSitePrefix']}" alt="Home" rel="NOFOLLOW"><img id="logo" src="model/images/logo.png" width="98px" height="65px" alt="AGR" /></a>
-    <h1><html:link href="${WEB_PROPERTIES['project.sitePrefix']}/" styleId="yeast-logo"></html:link></h1>
+    <h1><html:link href="/${WEB_PROPERTIES['webapp.path']}/begin.do" styleId="yeast-logo"></html:link></h1>
     <!--<h1><html:link href="${WEB_PROPERTIES['project.sitePrefix']}/"><c:out value="${WEB_PROPERTIES['project.title']}" escapeXml="false"/></html:link></h1>-->
     <p><c:out value="${WEB_PROPERTIES['project.subTitle']}" escapeXml="false"/></p>
     <br>

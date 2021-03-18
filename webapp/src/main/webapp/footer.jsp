@@ -34,13 +34,14 @@
  	    </a>
  	</div>
 
-
 <br/>
 <div  class="body" align="center" style="clear:both">
-<blockquote><font size="-2">AllianceMine is a collaboration between all MODs and the Intermine project at the <a href=" http://www.sysbiol.cam.ac.uk/"> Cambridge Systems Biology Centre</a>. AllianceMine is funded by NHGRI grant 2R01XXXXX.
+<blockquote><font size="-2">AllianceMine is a collaboration between the Alliance of Genome Resources and the Intermine project at the
+ <a href=" http://www.sysbiol.cam.ac.uk/"> Cambridge Systems Biology Centre</a> Copyright 2021. Funding provided by NIH NHGRI and NHLBI <a href="https://www.alliancegenome.org/funding">.
 </font></blockquote>
 
-<blockquote><font size="-2">Copyright &#169; 1997-2019 The Board of Trustees of Leland Stanford Junior University. SGD operates under the Creative Commons Attribution 4.0 International license  <a href="https://creativecommons.org/licenses/by/4.0/"> (CC BY 4.0) </a>. The SGD project at Stanford University is supported by a Genome Research Resource Grant from the US National Human Genome Research Institute, part of the US National Institutes of Health.
+<blockquote><font size="-2">Copyright &#169; 2021 Alliance of Genome Resources operates
+under the Creative Commons Attribution 4.0 International license  <a href="https://www.alliancegenome.org/privacy-warranty-licensing "> (CC BY 4.0) </a>.
 
 <br>
 <br></font></blockquote>
