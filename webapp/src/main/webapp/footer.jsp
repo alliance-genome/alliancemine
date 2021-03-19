@@ -41,10 +41,9 @@
 </font></blockquote>
 
 <blockquote><font size="-2">Copyright &#169; 2021 The Alliance of Genome Resources.
-Alliance operates under the Creative Commons Attribution 4.0 International license  <a href="https://creativecommons.org/licenses/by/4.0/"> (CC BY 4.0) </a>.
+Alliance operates under the Creative Commons Attribution 4.0 International license <a href="https://creativecommons.org/licenses/by/4.0/"> (CC BY 4.0) </a>.</font></blockquote>
 
 <br>
-<br></font></blockquote>
 
 </div>
 <!-- /footer.jsp -->
