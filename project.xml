@@ -41,14 +41,14 @@
         <property name="src.data.dir" location="/root/data/fms"/>
       </source>
 
-      <!--<source name="alliance-mgi-fasta" type="fasta">
+      <source name="alliance-mgi-fasta" type="fasta">
         <property name="fasta.className" value="org.intermine.model.bio.Chromosome"/>
         <property name="fasta.dataSourceName" value="NCBI"/>
         <property name="fasta.dataSetTitle" value="MGI Genome Sequence"/>
         <property name="fasta.taxonId" value="10090"/>
         <property name="fasta.includes" value="FASTA_GRCm38.fa"/>
         <property name="src.data.dir" location="/root/data/fms"/>
-      </source>-->
+      </source>
 
       <source name="alliance-rgd-fasta" type="fasta">
         <property name="fasta.className" value="org.intermine.model.bio.Chromosome"/>
