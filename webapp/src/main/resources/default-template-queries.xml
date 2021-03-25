@@ -1,3 +1,10 @@
+<?xml version="1.0"?>
+<userprofile>
+    <items/>
+    <bags/>
+    <queries>
+    </queries>
+    
 <template-queries>
     <template name="ChromosomeRegion_AllGenes" title="Chromosomal Region --&gt; All genes" comment="">
         <query name="ChromosomeRegion_AllGenes" model="genomic" view="Gene.chromosome.primaryIdentifier Gene.primaryIdentifier Gene.symbol Gene.name Gene.chromosomeLocation.start Gene.chromosomeLocation.end Gene.chromosomeLocation.strand Gene.featureType Gene.description Gene.organism.shortName" longDescription="Retrieve all &lt;a href = &quot;https://sites.google.com/view/yeastgenome-help/analyze-help/yeastmine&quot;&gt;genes&lt;/a&gt; located within the specified chromosome and coordinate range." sortOrder="Gene.primaryIdentifier asc" constraintLogic="C and D and E and A">
@@ -82,7 +89,6 @@
         </query>
     </template>
 </template-queries>
-
 
 <tags>
 
@@ -377,3 +383,4 @@
 <tag name="im:summary" objectIdentifier="MicroarrayOligo.transcript" type="reference">
 </tag>
 </tags>
+</userprofile>
