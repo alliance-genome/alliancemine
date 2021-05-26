@@ -85,11 +85,11 @@
       <property name="src.data.dir" location="/root/data/fms"/>
       <property name="src.data.dir.includes" value="DISEASE-ALLIANCE_COMBINED.tsv"/>
     </source>
-
-    <!--<source name="alliance-orthologs" type="alliance-orthologs">
+    
+    <source name="alliance-orthologs" type="alliance-orthologs">
       <property name="src.data.dir" location="/root/data/fms"/>
       <property name="src.data.dir.includes" value="ORTHOLOGY-ALLIANCE_COMBINED.tsv"/>
-    </source>
+    </source>-->
 
     <source name="alliance-alleles" type="alliance-alleles">
           <property name="src.data.dir" location="/root/data/alleles"/>
