@@ -5,7 +5,7 @@
   <property name="default.intermine.properties.file" location="../default.intermine.integrate.properties"/>
   <sources>
 
-      <!--<source name="alliance-wb-fasta" type="fasta">
+      <source name="alliance-wb-fasta" type="fasta">
         <property name="fasta.className" value="org.intermine.model.bio.Chromosome"/>
         <property name="fasta.dataSourceName" value="NCBI"/>
         <property name="fasta.dataSetTitle" value="WB Genome Sequence"/>
@@ -57,7 +57,7 @@
         <property name="fasta.taxonId" value="10116"/>
         <property name="fasta.includes" value="FASTA_Rnor60.fa"/>
         <property name="src.data.dir" location="/root/data/fms"/>
-      </source>-->
+      </source>
 
     <source name="do" type="do">
       <property name="src.data.file" location="/root/data/fms/ONTOLOGY_DOID.obo"/>
@@ -91,38 +91,38 @@
       <property name="src.data.dir.includes" value="ORTHOLOGY-ALLIANCE_COMBINED.tsv"/>
     </source>
 
-    <!--<source name="alliance-alleles" type="alliance-alleles">
+    <source name="alliance-alleles" type="alliance-alleles">
           <property name="src.data.dir" location="/root/data/alleles"/>
     </source>
 
-     <source name="alliance-expression" type="alliance-expression">
-          <property name="src.data.dir" location="/Users/kkarra/Dev/agr_java_software/agr_intermine_data_extractor/data/fms"/>
-          <property name="src.data.dir.includes" value="EXPRESSION-ALLIANCE_COMBINED.tsv"/>
-      </source>-->
+    <!--<source name="alliance-expression" type="alliance-expression">
+         <property name="src.data.dir" location="/Users/kkarra/Dev/agr_java_software/agr_intermine_data_extractor/data/fms"/>
+         <property name="src.data.dir.includes" value="EXPRESSION-ALLIANCE_COMBINED.tsv"/>
+     </source>
 
-    <!--<source name="hpo" type="hpo">
-      <property name="src.data.file" location="/root/data/fms/ONTOLOGY_HP.obo"/>
-    </source>
+   <source name="hpo" type="hpo">
+     <property name="src.data.file" location="/root/data/fms/ONTOLOGY_HP.obo"/>
+   </source>
 
-    <source name="mpo" type="mpo">
-      <property name="src.data.file" location="/root/data/fms/ONTOLOGY_MP.obo"/>
-    </source>
+   <source name="mpo" type="mpo">
+     <property name="src.data.file" location="/root/data/fms/ONTOLOGY_MP.obo"/>
+   </source>
 
-    <source name="pato" type="pato">
-      <property name="src.data.file" location="/root/data/fms/ONTOLOGY_PATO.obo"/>
-    </source>
+   <source name="pato" type="pato">
+     <property name="src.data.file" location="/root/data/fms/ONTOLOGY_PATO.obo"/>
+   </source>
 
-    <source name="mmo" type="mmo">
-     <property name="src.data.file" location="/root/data/fms/ONTOLOGY_MMO.obo"/>
-    </source>
+   <source name="mmo" type="mmo">
+    <property name="src.data.file" location="/root/data/fms/ONTOLOGY_MMO.obo"/>
+   </source>
 
-    <source name="go-slim" type="go-slim">
-      <property name="src.data.file" location="/data/intermine/ontology/goslim_yeast.obo"/>
-    </source>
+   <source name="go-slim" type="go-slim">
+     <property name="src.data.file" location="/data/intermine/ontology/goslim_yeast.obo"/>
+   </source>
 
-    <source name="psi-mi-ontology" type="psi-mi-ontology">
-      <property name="src.data.file" location="/data/intermine/psi/ontology/current/psi-mi.obo"/>
-    </source>-->
+   <source name="psi-mi-ontology" type="psi-mi-ontology">
+     <property name="src.data.file" location="/data/intermine/psi/ontology/current/psi-mi.obo"/>
+   </source>-->
 
     <source name="update-publications" type="update-publications">
       <property name="src.data.file" location="publications.xml"/>
