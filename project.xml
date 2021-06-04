@@ -92,7 +92,8 @@
     </source>
 
     <source name="alliance-alleles" type="alliance-alleles">
-          <property name="src.data.dir" location="/root/data/alleles"/>
+      <property name="src.data.dir" location="/root/data/fms"/>
+      <property name="src.data.dir.includes" value="VARIANT-ALLELE_COMBINED.tsv"/>
     </source>
 
     <!--<source name="alliance-expression" type="alliance-expression">
