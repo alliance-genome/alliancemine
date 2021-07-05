@@ -57,7 +57,7 @@
         <property name="fasta.taxonId" value="10116"/>
         <property name="fasta.includes" value="FASTA_Rnor60.fa"/>
         <property name="src.data.dir" location="/root/data/fms"/>
-      </source> -->
+      </source>
 
     <source name="do" type="do">
       <property name="src.data.file" location="/root/data/fms/ONTOLOGY_DOID.obo"/>
@@ -69,7 +69,7 @@
 
     <source name="eco" type="eco">
        <property name="src.data.file" location="/root/data/fms/ONTOLOGY_ECO.obo"/>
-    </source>
+    </source>-->
 
     <source name="alliance-genes" type="alliance-genes">
       <property name="src.data.dir" location="/root/data/genes"/>
