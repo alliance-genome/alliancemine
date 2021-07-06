@@ -5,7 +5,7 @@
   <property name="default.intermine.properties.file" location="../default.intermine.integrate.properties"/>
   <sources>
 
-     <!-- <source name="alliance-wb-fasta" type="fasta">
+     <source name="alliance-wb-fasta" type="fasta">
         <property name="fasta.className" value="org.intermine.model.bio.Chromosome"/>
         <property name="fasta.dataSourceName" value="NCBI"/>
         <property name="fasta.dataSetTitle" value="WB Genome Sequence"/>
@@ -59,7 +59,7 @@
         <property name="src.data.dir" location="/root/data/fms"/>
       </source>
 
-    <source name="do" type="do">
+    <!--<source name="do" type="do">
       <property name="src.data.file" location="/root/data/fms/ONTOLOGY_DOID.obo"/>
     </source>
 
