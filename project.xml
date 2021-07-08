@@ -59,7 +59,7 @@
         <property name="src.data.dir" location="/root/data/fms"/>
       </source>
 
-    <!--<source name="do" type="do">
+    <source name="do" type="do">
       <property name="src.data.file" location="/root/data/fms/ONTOLOGY_DOID.obo"/>
     </source>
 
@@ -69,13 +69,13 @@
 
     <source name="eco" type="eco">
        <property name="src.data.file" location="/root/data/fms/ONTOLOGY_ECO.obo"/>
-    </source>-->
+    </source>
 
     <source name="alliance-genes" type="alliance-genes">
       <property name="src.data.dir" location="/root/data/genes"/>
     </source>
 
-    <!--<source name="go-annotation" type="go-annotation">
+    <source name="go-annotation" type="go-annotation">
      <property name="src.data.dir" location="/root/data/fms"/>
      <property name="src.data.dir.includes" value="*.gaf"/>
      <property name="ontologyPrefix" value="GO"/>
@@ -94,7 +94,7 @@
    <source name="alliance-alleles" type="alliance-alleles">
      <property name="src.data.dir" location="/root/data/fms"/>
      <property name="src.data.dir.includes" value="VARIANT-ALLELE_COMBINED.tsv"/>
-   </source> -->
+   </source>
 
     <!--<source name="alliance-expression" type="alliance-expression">
          <property name="src.data.dir" location="/Users/kkarra/Dev/agr_java_software/agr_intermine_data_extractor/data/fms"/>
