@@ -54,6 +54,13 @@
 " target="_new">GAF at Alliance</a> </td>
 </tr>
 
+<tr><td class="leftcol">
+<p> <h2>Homology</h2></p></td>
+<td>Orthologs at Alliance from DIOPT</td>
+<td><a href="https://fms.alliancegenome.org/api/datafile/by/ORTHOLOGY-ALLIANCE/
+" target="_new">Orthologs at Alliance</a> </td>
+</tr>
+
 </table>
 
 </div>
