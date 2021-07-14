@@ -1,14 +1,15 @@
 buildscript {
     repositories {
         mavenLocal()
-        jcenter()
-        maven {
-            url "https://oss.jfrog.org/artifactory/oss-snapshot-local"
-        }
+        mavenCentral()
+        //jcenter()
+        //maven {
+            //url "https://oss.jfrog.org/artifactory/oss-snapshot-local"
+        //}
     }
     dependencies {
         classpath group: 'org.intermine', name: 'plugin', version: System.getProperty("imVersion")
-        classpath 'com.bmuschko:gradle-cargo-plugin:2.3'
+        classpath 'com.bmuschko:gradle-cargo-plugin:2.8.0'
     }
 }
 
@@ -29,6 +30,7 @@ subprojects {
   
   repositories {
     mavenLocal()
+      mavenCentral()
     jcenter()
     maven { url 'https://clojars.org/repo' }
     maven {

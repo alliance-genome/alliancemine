@@ -56,7 +56,6 @@ EST.overlapping_EST_set
 RNase_MRP_RNA_gene
 RNase_P_RNA_gene
 SRP_RNA_gene
-antisense
 antisense_lncRNA_gene
 bidirectional_promoter_lncRNA
 biological_region
@@ -87,8 +86,9 @@ transposable_element_gene
 mt_rRNA
 mt_tRNA
 processed_pseudogene
-#transcribed_unprocessed_pseudogene
+transcribed_unprocessed_pseudogene
 non_processed_pseudogene
 unconfirmed_transcript
 processed_transcript
+antisense
 
