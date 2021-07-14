@@ -86,7 +86,7 @@ transposable_element_gene
 mt_rRNA
 mt_tRNA
 processed_pseudogene
-transcribed_unprocessed_pseudogene
+#transcribed_unprocessed_pseudogene
 non_processed_pseudogene
 unconfirmed_transcript
 processed_transcript
