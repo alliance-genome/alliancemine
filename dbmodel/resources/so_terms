@@ -61,8 +61,8 @@ bidirectional_promoter_lncRNA
 biological_region
 blocked_reading_frame
 gene
-gene_segment
-heritable_phenotypic_marker
+#gene_segment
+#heritable_phenotypic_marker
 lincRNA_gene
 lncRNA_gene
 miRNA_gene
