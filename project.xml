@@ -71,6 +71,10 @@
        <property name="src.data.file" location="/root/data/fms/ONTOLOGY_ECO.obo"/>
     </source>
 
+      <source name="mmo" type="mmo">
+          <property name="src.data.file" location="/root/data/fms/ONTOLOGY_MMO.obo"/>
+      </source>
+
     <source name="alliance-genes" type="alliance-genes">
       <property name="src.data.dir" location="/root/data/genes"/>
     </source>
@@ -97,11 +101,11 @@
    </source>
 
     <!--<source name="alliance-expression" type="alliance-expression">
-         <property name="src.data.dir" location="/Users/kkarra/Dev/agr_java_software/agr_intermine_data_extractor/data/fms"/>
+         <property name="src.data.dir" location="/root/data/fms"/>
          <property name="src.data.dir.includes" value="EXPRESSION-ALLIANCE_COMBINED.tsv"/>
-     </source>
+    </source>-->
 
-   <source name="hpo" type="hpo">
+   <!--<source name="hpo" type="hpo">
      <property name="src.data.file" location="/root/data/fms/ONTOLOGY_HP.obo"/>
    </source>
 
@@ -111,10 +115,6 @@
 
    <source name="pato" type="pato">
      <property name="src.data.file" location="/root/data/fms/ONTOLOGY_PATO.obo"/>
-   </source>
-
-   <source name="mmo" type="mmo">
-    <property name="src.data.file" location="/root/data/fms/ONTOLOGY_MMO.obo"/>
    </source>
 
    <source name="go-slim" type="go-slim">
