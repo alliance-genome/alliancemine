@@ -37,10 +37,10 @@
 <br/>
 <div  class="body" align="center" style="clear:both">
 <blockquote><font size="-2">AllianceMine is a collaboration between the Alliance of Genome Resources and the Intermine project at the
- <a href=" http://www.sysbiol.cam.ac.uk/"> Cambridge Systems Biology Centre</a> Copyright 2021. Funding provided by NIH NHGRI and NHLBI <a href="https://www.alliancegenome.org/funding"> Details here</a>.
+ <a href=" http://www.sysbiol.cam.ac.uk/"> Cambridge Systems Biology Centre</a> Copyright 2022. Funding provided by NIH NHGRI and NHLBI <a href="https://www.alliancegenome.org/funding"> Details here</a>.
 </font></blockquote>
 
-<blockquote><font size="-2">Copyright &#169; 2021 The Alliance of Genome Resources.
+<blockquote><font size="-2">Copyright &#169; 2022 The Alliance of Genome Resources.
 Alliance operates under the Creative Commons Attribution 4.0 International license <a href="https://creativecommons.org/licenses/by/4.0/"> (CC BY 4.0) </a>.</font></blockquote>
 
 <br>

@@ -71,9 +71,25 @@
        <property name="src.data.file" location="/root/data/fms/ONTOLOGY_ECO.obo"/>
     </source>
 
-      <source name="mmo" type="mmo">
-          <property name="src.data.file" location="/root/data/fms/ONTOLOGY_MMO.obo"/>
-      </source>
+   <source name="mmo" type="mmo">
+      <property name="src.data.file" location="/root/data/fms/ONTOLOGY_MMO.obo"/>
+   </source>
+
+   <source name="emapa" type="emapa">
+       <property name="src.data.file" location="/Users/kkarra/Dev/agr_java_software/agr_intermine_data_extractor/data/fms/ONTOLOGY_EMAPA.obo"/>
+   </source>
+
+   <source name="zfa" type="zfa">
+       <property name="src.data.file" location="/Users/kkarra/Dev/agr_java_software/agr_intermine_data_extractor/data/fms/ONTOLOGY_ZFA.obo"/>
+  </source>
+
+  <source name="wbbt" type="wbbt">
+       <property name="src.data.file" location="/Users/kkarra/Dev/agr_java_software/agr_intermine_data_extractor/data/fms/ONTOLOGY_WBBT.obo"/>
+  </source>
+
+  <source name="fbbt" type="fbbt">
+       <property name="src.data.file" location="/Users/kkarra/Dev/agr_java_software/agr_intermine_data_extractor/data/fms/ONTOLOGY_FBBT.obo"/>
+   </source>
 
     <source name="alliance-genes" type="alliance-genes">
       <property name="src.data.dir" location="/root/data/genes"/>
@@ -100,12 +116,21 @@
      <property name="src.data.dir.includes" value="VARIANT-ALLELE_COMBINED.tsv"/>
    </source>
 
-    <!--<source name="alliance-expression" type="alliance-expression">
+   <source name="alliance-expression" type="alliance-expression">
          <property name="src.data.dir" location="/root/data/fms"/>
          <property name="src.data.dir.includes" value="EXPRESSION-ALLIANCE_COMBINED.tsv"/>
-    </source>-->
+    </source>
 
-   <!--<source name="hpo" type="hpo">
+   <!--<source name="alliance-genetic-interactions" type="alliance-genetic-interactions">
+       <property name="src.data.dir" location="/Users/kkarra/Dev/agr_java_software/agr_intermine_data_extractor/data/fms"/>
+       <property name="src.data.dir.includes" value="INTERACTION-GEN_COMBINED.tsv"/>
+     </source>
+
+     <source name="alliance-molecular-interactions" type="alliance-molecular-interactions">
+        <property name="src.data.dir" location="/Users/kkarra/Dev/agr_java_software/agr_intermine_data_extractor/data/fms"/>
+        <property name="src.data.dir.includes" value="NTERACTION-MOL_COMBINED.tsv"/>
+      </source>
+    <source name="hpo" type="hpo">
      <property name="src.data.file" location="/root/data/fms/ONTOLOGY_HP.obo"/>
    </source>
 
