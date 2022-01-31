@@ -76,19 +76,19 @@
    </source>
 
    <source name="emapa" type="emapa">
-       <property name="src.data.file" location="/Users/kkarra/Dev/agr_java_software/agr_intermine_data_extractor/data/fms/ONTOLOGY_EMAPA.obo"/>
+       <property name="src.data.file" location="/root/data/fms/ONTOLOGY_EMAPA.obo"/>
    </source>
 
    <source name="zfa" type="zfa">
-       <property name="src.data.file" location="/Users/kkarra/Dev/agr_java_software/agr_intermine_data_extractor/data/fms/ONTOLOGY_ZFA.obo"/>
+       <property name="src.data.file" location="/root/data/fms/ONTOLOGY_ZFA.obo"/>
   </source>
 
   <source name="wbbt" type="wbbt">
-       <property name="src.data.file" location="/Users/kkarra/Dev/agr_java_software/agr_intermine_data_extractor/data/fms/ONTOLOGY_WBBT.obo"/>
+       <property name="src.data.file" location="/root/data/fms/ONTOLOGY_WBBT.obo"/>
   </source>
 
   <source name="fbbt" type="fbbt">
-       <property name="src.data.file" location="/Users/kkarra/Dev/agr_java_software/agr_intermine_data_extractor/data/fms/ONTOLOGY_FBBT.obo"/>
+       <property name="src.data.file" location="/root/data/fms/ONTOLOGY_FBBT.obo"/>
    </source>
 
     <source name="alliance-genes" type="alliance-genes">
