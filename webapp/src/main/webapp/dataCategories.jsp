@@ -61,6 +61,13 @@
 " target="_new">Orthologs at Alliance</a> </td>
 </tr>
 
+<tr><td class="leftcol">
+<p> <h2>Expression</h2></p></td>
+<td>Expression annotations at Alliance</td>
+<td><a href="https://fms.alliancegenome.org/api/datafile/by/EXPESSION-ALLIANCE/
+" target="_new">Expression at Alliance</a> </td>
+</tr>
+
 </table>
 
 </div>
