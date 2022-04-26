@@ -84,7 +84,7 @@
   </source>
 
   <source name="wbbt" type="wbbt">
-       <property name="src.data.file" location="/root/data/fms/ONTOLOGY_WBBT.obo"/>
+       <property name="src.data.file" location="/root/data/ONTOLOGY_WBBT.obo"/>
   </source>
 
   <source name="fbbt" type="fbbt">
@@ -150,9 +150,9 @@
      <property name="src.data.file" location="/data/intermine/psi/ontology/current/psi-mi.obo"/>
    </source>-->
 
-    <source name="update-publications" type="update-publications">
+    <!--<source name="update-publications" type="update-publications">
       <property name="src.data.file" location="publications.xml"/>
-    </source>
+    </source>-->
 
     <source name="entrez-organism" type="entrez-organism">
       <property name="src.data.file" location="organisms.xml"/>
