@@ -62,7 +62,7 @@ biological_region
 blocked_reading_frame
 gene
 #gene_segment
-heritable_phenotypic_marker
+#heritable_phenotypic_marker
 lincRNA_gene
 lncRNA_gene
 miRNA_gene
@@ -72,7 +72,7 @@ polymorphic_pseudogene
 polypeptide
 protein_coding_gene
 pseudogene
-pseudogenic_gene_segment
+#pseudogenic_gene_segment
 rRNA_gene
 ribozyme_gene
 scRNA_gene
