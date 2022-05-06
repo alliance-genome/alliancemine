@@ -62,7 +62,7 @@ biological_region
 blocked_reading_frame
 gene
 #gene_segment
-#heritable_phenotypic_marker
+heritable_phenotypic_marker
 lincRNA_gene
 lncRNA_gene
 miRNA_gene
