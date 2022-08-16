@@ -93,7 +93,7 @@
     </ul>
   <ul id="loginbar">
         <!--<li><a href="#" onclick="showContactForm();return false;"><fmt:message key="feedback.link"/></a></li>-->
-        <li><a href="mailto:alliancemine@alliancegenome.org?subject=Help%20Desk">Contact Us</a></li>
+        <li><a href="mailto:help@alliancegenome.org?subject=Help%20Desk">Contact Us</a></li>
         <!--<li><a href="https://www.yeastgenome.org/suggestion">Contact Us</a></li>-->
         <li><a href="https://sites.google.com/view/yeastgenome-help/video-tutorials/yeastmine">Video Tutorials</a></li>
         <li><a href="https://www.alliancegenome.org/intro-to-alliancemine/">Help</a></li>
