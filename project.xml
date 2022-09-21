@@ -59,6 +59,24 @@
         <property name="src.data.dir" location="/root/data/fms"/>
       </source>
 
+      <source name="alliance-xtrops-fasta" type="fasta">
+         <property name="fasta.className" value="org.intermine.model.bio.Chromosome"/>
+         <property name="fasta.dataSourceName" value="NCBI"/>
+         <property name="fasta.dataSetTitle" value="XB X.tropicalis Genome Sequence"/>
+         <property name="fasta.taxonId" value="8364"/>
+         <property name="fasta.includes" value="FASTA_XT9.1.fa"/>
+         <property name="src.data.dir" location="/root/data/fms"/>
+      </source>
+
+      <source name="alliance-xlaevis-fasta" type="fasta">
+        <property name="fasta.className" value="org.intermine.model.bio.Chromosome"/>
+        <property name="fasta.dataSourceName" value="NCBI"/>
+        <property name="fasta.dataSetTitle" value="XB X.laevis Genome Sequence"/>
+        <property name="fasta.taxonId" value="8355"/>
+        <property name="fasta.includes" value=""/>
+        <property name="src.data.dir" location="/root/data/fms"/>
+      </source>
+
     <source name="do" type="do">
       <property name="src.data.file" location="/root/data/fms/ONTOLOGY_DOID.obo"/>
     </source>
