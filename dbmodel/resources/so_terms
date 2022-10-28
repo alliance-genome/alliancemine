@@ -66,6 +66,20 @@ gene
 lincRNA_gene
 lncRNA_gene
 miRNA_gene
+#transcribed_unprocessed_pseudogene
+#mt_LSU_rRNA_gene
+#mt_SSU_rRNA_gene
+#hpRNA_gene
+#C_D_box_scaRNA_gene
+#C_D_box_snoRNA_gene
+#H_ACA_box_scaRNA_gene
+#H_ACA_box_snoRNA_gene
+#IG_V_gene
+#RNA_7SK_gene
+#TR_C_Gene
+#TR_J_Gene
+#TR_V_Gene
+#Y_RNA
 ncRNA_gene
 piRNA_gene
 polymorphic_pseudogene
@@ -76,6 +90,7 @@ pseudogene
 rRNA_gene
 ribozyme_gene
 scRNA_gene
+#sbRNA_gene
 sense_intronic_ncRNA_gene
 sense_overlap_ncRNA_gene
 snRNA_gene
@@ -86,7 +101,6 @@ transposable_element_gene
 mt_rRNA
 mt_tRNA
 processed_pseudogene
-#transcribed_unprocessed_pseudogene
 non_processed_pseudogene
 unconfirmed_transcript
 processed_transcript
