@@ -176,144 +176,6 @@
         <tag name="im:aspect:Genome" objectIdentifier="Allele_Identifiers" type="template">
         </tag>
 
-        <tag name="im:aspect:Genomics" objectIdentifier="Gene_allGOTerms" type="template">
-        </tag>
-
-        <tag name="im:aspect:Genomics" objectIdentifier="Chromosome.features" type="collection">
-        </tag>
-
-        <tag name="im:aspect:Genomics" objectIdentifier="org.intermine.model.bio.UTR" type="class">
-        </tag>
-
-        <tag name="im:aspect:Genomics" objectIdentifier="org.intermine.model.bio.Gene" type="class">
-        </tag>
-
-        <tag name="im:aspect:Genomics" objectIdentifier="LocatedSequenceFeature.overlappingFeatures" type="collection">
-        </tag>
-
-        <tag name="im:aspect:Genomics" objectIdentifier="org.intermine.model.bio.TFBindingSite" type="class">
-        </tag>
-
-        <tag name="im:aspect:Genomics" objectIdentifier="LocatedSequenceFeature.chromosome" type="reference">
-        </tag>
-
-        <tag name="im:aspect:Genomics" objectIdentifier="Gene_particularGoannotation" type="template">
-        </tag>
-
-        <tag name="im:aspect:Genomics" objectIdentifier="LocatedSequenceFeature.chromosomeLocation" type="reference">
-        </tag>
-
-        <tag name="im:aspect:Genomics" objectIdentifier="Gene.UTRs" type="collection">
-        </tag>
-
-        <tag name="im:aspect:Genomics" objectIdentifier="org.intermine.model.bio.ChromosomeBand" type="class">
-        </tag>
-
-        <tag name="im:aspect:Genomics" objectIdentifier="MRNA.UTRs" type="collection">
-        </tag>
-
-        <tag name="im:aspect:Genomics" objectIdentifier="org.intermine.model.bio.MRNA" type="class">
-        </tag>
-
-        <tag name="im:aspect:Genomics" objectIdentifier="Gene.transcripts" type="collection">
-        </tag>
-
-        <tag name="im:aspect:Genomics" objectIdentifier="Organism_GoTerm_Gene" type="template">
-        </tag>
-
-        <tag name="im:aspect:Genomics" objectIdentifier="Gene_GO" type="template">
-        </tag>
-
-        <tag name="im:aspect:Genomics" objectIdentifier="org.intermine.model.bio.GOTerm" type="class">
-        </tag>
-
-        <tag name="im:aspect:Genomics" objectIdentifier="org.intermine.model.bio.Transcript" type="class">
-        </tag>
-
-        <tag name="im:aspect:Genomics" objectIdentifier="org.intermine.model.bio.Chromosome" type="class">
-        </tag>
-
-        <tag name="im:aspect:Genomics" objectIdentifier="GO_name_Gene" type="template">
-        </tag>
-
-        <tag name="im:aspect:Genomics" objectIdentifier="org.intermine.model.bio.SnoRNA" type="class">
-        </tag>
-
-        <tag name="im:aspect:Genomics" objectIdentifier="Transcript.introns" type="collection">
-        </tag>
-
-        <tag name="im:aspect:Genomics" objectIdentifier="org.intermine.model.bio.NcRNA" type="class">
-        </tag>
-
-        <tag name="im:aspect:Genomics" objectIdentifier="Protein.genes" type="collection">
-        </tag>
-
-        <tag name="im:aspect:Genomics" objectIdentifier="Transcript.gene" type="reference">
-        </tag>
-
-        <tag name="im:aspect:Genomics" objectIdentifier="Chromosome.genes" type="collection">
-        </tag>
-
-        <tag name="im:aspect:Genomics" objectIdentifier="CDS.MRNA" type="reference">
-        </tag>
-
-        <tag name="im:aspect:Genomics" objectIdentifier="Chromosome.transcripts" type="collection">
-        </tag>
-
-        <tag name="im:aspect:Genomics" objectIdentifier="LocatedSequenceFeature.sequence" type="reference">
-        </tag>
-
-        <tag name="im:aspect:Proteins" objectIdentifier="org.intermine.model.bio.Protein" type="class">
-        </tag>
-
-        <tag name="im:aspect:Proteins" objectIdentifier="Protein.features" type="collection">
-        </tag>
-
-        <tag name="im:aspect:Proteins" objectIdentifier="Protein.proteinDomains" type="collection">
-        </tag>
-
-        <tag name="im:aspect:Proteins" objectIdentifier="ProteinInteraction.protein" type="reference">
-        </tag>
-
-        <tag name="im:aspect:Proteins" objectIdentifier="CDS.polypeptides" type="collection">
-        </tag>
-
-        <tag name="im:aspect:Proteins" objectIdentifier="CDS.protein" type="reference">
-        </tag>
-
-        <tag name="im:aspect:Proteins" objectIdentifier="Gene.proteins" type="collection">
-        </tag>
-
-        <tag name="im:aspect:Proteins" objectIdentifier="Protein.keywords" type="collection">
-        </tag>
-
-        <tag name="im:aspect:Proteins" objectIdentifier="Protein_GOtermsSpecificOntology" type="template">
-        </tag>
-
-        <tag name="im:aspect:Proteins" objectIdentifier="Protein.sequence" type="reference">
-        </tag>
-
-        <tag name="im:aspect:Proteins" objectIdentifier="org.intermine.model.bio.ProteinDomain" type="class">
-        </tag>
-
-        <tag name="im:converter" objectIdentifier="Gene_To_Protein_Type_Converter" type="template">
-        </tag>
-
-        <tag name="im:converter" objectIdentifier="Protein_To_Gene_Type_Converter" type="template">
-        </tag>
-
-        <tag name="im:frontpage" objectIdentifier="Organism_GoTerm_GeneWithannotation" type="template">
-        </tag>
-
-        <tag name="im:frontpage" objectIdentifier="Protein_GOterms" type="template">
-        </tag>
-
-        <tag name="im:frontpage" objectIdentifier="Gene_allGOTerms" type="template">
-        </tag>
-
-        <tag name="im:frontpage" objectIdentifier="Gene_GO" type="template">
-        </tag>
-
         <tag name="im:hidden" objectIdentifier="BioEntity.subjects" type="collection">
         </tag>
 
@@ -329,12 +191,6 @@
         <tag name="im:preferredBagType" objectIdentifier="org.intermine.model.bio.Gene" type="class">
         </tag>
 
-        <tag name="im:preferredBagType" objectIdentifier="org.intermine.model.bio.Protein" type="class">
-        </tag>
-
-        <tag name="im:public" objectIdentifier="Organism_GoTerm_Gene" type="template">
-        </tag>
-
         <tag name="im:public" objectIdentifier="Gene_GenomicDNA" type="template">
         </tag>
 
@@ -344,28 +200,16 @@
         <tag name="im:public" objectIdentifier="Gene_DOTerm" type="template">
         </tag>
 
-        <tag name="im:public" objectIdentifier="GOtermidentifier_name" type="template">
-        </tag>
-
         <tag name="im:public" objectIdentifier="GOTerm_Genes" type="template">
         </tag>
 
-        <tag name="im:public" objectIdentifier="Gene_GO" type="template">
-        </tag>
-
         <tag name="im:public" objectIdentifier="Gene_Description" type="template">
-        </tag>
-
-        <tag name="im:public" objectIdentifier="Protein_GOterms" type="template">
         </tag>
 
         <tag name="im:public" objectIdentifier="Gene_GOTerms" type="template">
         </tag>
 
         <tag name="im:public" objectIdentifier="DOTerm_DOTermIdentifier" type="template">
-        </tag>
-
-        <tag name="im:public" objectIdentifier="Organism_GoTerm_GeneWithannotation" type="template">
         </tag>
 
         <tag name="im:public" objectIdentifier="DOTerm_AllGenes" type="template">
@@ -377,25 +221,16 @@
         <tag name="im:public" objectIdentifier="Organism_Genes" type="template">
         </tag>
 
-        <tag name="im:public" objectIdentifier="Gene_particularGoannotation" type="template">
-        </tag>
-
         <tag name="im:public" objectIdentifier="Literature_GO" type="template">
         </tag>
 
         <tag name="im:public" objectIdentifier="Chromosome_Gene_FeatureType" type="template">
         </tag>
 
-        <tag name="im:public" objectIdentifier="Gene_allGOTerms" type="template">
-        </tag>
-
         <tag name="im:public" objectIdentifier="GOTerm_GeneOrganism" type="template">
         </tag>
 
         <tag name="im:public" objectIdentifier="ChromosomeRegion_AllGenes" type="template">
-        </tag>
-
-        <tag name="im:public" objectIdentifier="Protein_GOtermsSpecificOntology" type="template">
         </tag>
 
         <tag name="im:public" objectIdentifier="Gene_Allele" type="template">
@@ -410,34 +245,13 @@
         <tag name="im:public" objectIdentifier="Allele_Identifiers" type="template">
         </tag>
 
-        <tag name="im:summary" objectIdentifier="Protein.genes" type="collection">
-        </tag>
-
-        <tag name="im:summary" objectIdentifier="Protein.comments" type="collection">
-        </tag>
-
-        <tag name="im:summary" objectIdentifier="MicroarrayOligo.transcript" type="reference">
-        </tag>
-
         <tag name="im:summary" objectIdentifier="BioEntity.organism" type="reference">
-        </tag>
-
-        <tag name="im:summary" objectIdentifier="BindingSite.factor" type="reference">
         </tag>
 
         <tag name="im:summary" objectIdentifier="BioEntity.synonyms" type="collection">
         </tag>
 
-        <tag name="im:summary" objectIdentifier="RegulatoryRegion.gene" type="reference">
-        </tag>
-
-        <tag name="im:summary" objectIdentifier="Gene.proteins" type="collection">
-        </tag>
-
         <tag name="im:summary" objectIdentifier="Gene.publications" type="collection">
-        </tag>
-
-        <tag name="im:summary" objectIdentifier="Protein.publications" type="collection">
         </tag>
     </tags>
 </userprofile>

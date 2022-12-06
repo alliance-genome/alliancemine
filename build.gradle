@@ -2,10 +2,6 @@ buildscript {
     repositories {
         mavenLocal()
         mavenCentral()
-        //jcenter()
-        //maven {
-            //url "https://oss.jfrog.org/artifactory/oss-snapshot-local"
-        //}
     }
     dependencies {
         classpath group: 'org.intermine', name: 'plugin', version: System.getProperty("imVersion")
@@ -33,12 +29,13 @@ subprojects {
       mavenCentral()
     jcenter()
     maven { url 'https://clojars.org/repo' }
-    maven {
-        url "https://oss.jfrog.org/artifactory/oss-snapshot-local"
-    }
-//    maven {
-//        url 'http://www.ebi.ac.uk/intact/maven/nexus/content/repositories/ebi-repo/'
-//    }
+    //maven {
+        //url "https://oss.jfrog.org/artifactory/oss-snapshot-local"
+    //}
+      // maven {
+       // url 'http://www.ebi.ac.uk/intact/maven/nexus/content/repositories/ebi-repo/'
+      //  url 'https://www.ebi.ac.uk/Tools/maven/repos/content/groups/ebi-repo/' <--fly
+      // }
   }
 
   dependencies {

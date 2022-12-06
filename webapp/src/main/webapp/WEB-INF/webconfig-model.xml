@@ -5,6 +5,15 @@
         </fields>
     </class>
 
+    <class className="org.intermine.model.bio.Allele">
+        <fields>
+            <fieldconfig fieldExpr="alleleId"/>
+            <fieldconfig fieldExpr="alleleSymbol"/>
+            <fieldconfig fieldExpr="alleleType"/>
+            <fieldconfig fieldExpr="category"/>
+        </fields>
+    </class>
+
     <class className="org.intermine.model.bio.BioEntity">
         <headerconfig>
             <titles>
