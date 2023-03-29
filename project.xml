@@ -5,77 +5,77 @@
   <property name="default.intermine.properties.file" location="../default.intermine.integrate.properties"/>
   <sources>
 
-     <source name="alliance-wb-fasta" type="fasta">
-        <property name="fasta.className" value="org.intermine.model.bio.Chromosome"/>
-        <property name="fasta.dataSourceName" value="NCBI"/>
-        <property name="fasta.dataSetTitle" value="WB Genome Sequence"/>
-        <property name="fasta.taxonId" value="6239"/>
-        <property name="fasta.includes" value="FASTA_WB.fa"/>
-        <property name="src.data.dir" location="/root/data/fms"/>
-      </source>
-
-      <source name="alliance-fb-fasta" type="fasta">
-        <property name="fasta.className" value="org.intermine.model.bio.Chromosome"/>
-        <property name="fasta.dataSourceName" value="NCBI"/>
-        <property name="fasta.dataSetTitle" value="FB Genome Sequence"/>
-        <property name="fasta.taxonId" value="7227"/>
-        <property name="fasta.includes" value="FASTA_R627.fa"/>
-        <property name="src.data.dir" location="/root/data/fms"/>
-      </source>
-
-      <source name="alliance-sgd-fasta" type="fasta">
-        <property name="fasta.className" value="org.intermine.model.bio.Chromosome"/>
-        <property name="fasta.dataSourceName" value="NCBI"/>
-        <property name="fasta.dataSetTitle" value="SGD Genome Sequence"/>
-        <property name="fasta.taxonId" value="559292"/>
-        <property name="fasta.includes" value="FASTA_SGDr64.fa"/>
-        <property name="src.data.dir" location="/root/data/fms"/>
-      </source>
-
-      <source name="alliance-zfin-fasta" type="fasta">
-        <property name="fasta.className" value="org.intermine.model.bio.Chromosome"/>
-        <property name="fasta.dataSourceName" value="NCBI"/>
-        <property name="fasta.dataSetTitle" value="ZFIN Genome Sequence"/>
-        <property name="fasta.taxonId" value="7955"/>
-        <property name="fasta.includes" value="FASTA_GRCz11.fa"/>
-        <property name="src.data.dir" location="/root/data/fms"/>
-      </source>
-
-      <source name="alliance-mgi-fasta" type="fasta">
-        <property name="fasta.className" value="org.intermine.model.bio.Chromosome"/>
-        <property name="fasta.dataSourceName" value="NCBI"/>
-        <property name="fasta.dataSetTitle" value="MGI Genome Sequence"/>
-        <property name="fasta.taxonId" value="10090"/>
-        <property name="fasta.includes" value="FASTA_GRCm38.fa"/>
-        <property name="src.data.dir" location="/root/data/fms"/>
-      </source>
-
-      <source name="alliance-rgd-fasta" type="fasta">
-        <property name="fasta.className" value="org.intermine.model.bio.Chromosome"/>
-        <property name="fasta.dataSourceName" value="NCBI"/>
-        <property name="fasta.dataSetTitle" value="RGD Genome Sequence"/>
-        <property name="fasta.taxonId" value="10116"/>
-        <property name="fasta.includes" value="FASTA_Rnor60.fa"/>
-        <property name="src.data.dir" location="/root/data/fms"/>
-      </source>
-
-      <!--<source name="alliance-xtrops-fasta" type="fasta">
+      <!--<source name="alliance-wb-fasta" type="fasta">
          <property name="fasta.className" value="org.intermine.model.bio.Chromosome"/>
          <property name="fasta.dataSourceName" value="NCBI"/>
-         <property name="fasta.dataSetTitle" value="XB X.tropicalis Genome Sequence"/>
-         <property name="fasta.taxonId" value="8364"/>
-         <property name="fasta.includes" value="FASTA_XT9.1.fa"/>
+         <property name="fasta.dataSetTitle" value="WB Genome Sequence"/>
+         <property name="fasta.taxonId" value="6239"/>
+         <property name="fasta.includes" value="FASTA_WB.fa"/>
          <property name="src.data.dir" location="/root/data/fms"/>
-      </source>
+       </source>
 
-      <source name="alliance-xlaevis-fasta" type="fasta">
-        <property name="fasta.className" value="org.intermine.model.bio.Chromosome"/>
-        <property name="fasta.dataSourceName" value="NCBI"/>
-        <property name="fasta.dataSetTitle" value="XB X.laevis Genome Sequence"/>
-        <property name="fasta.taxonId" value="8355"/>
-        <property name="fasta.includes" value=""/>
-        <property name="src.data.dir" location="/root/data/fms"/>
-      </source>-->
+       <source name="alliance-fb-fasta" type="fasta">
+         <property name="fasta.className" value="org.intermine.model.bio.Chromosome"/>
+         <property name="fasta.dataSourceName" value="NCBI"/>
+         <property name="fasta.dataSetTitle" value="FB Genome Sequence"/>
+         <property name="fasta.taxonId" value="7227"/>
+         <property name="fasta.includes" value="FASTA_R627.fa"/>
+         <property name="src.data.dir" location="/root/data/fms"/>
+       </source>
+
+       <source name="alliance-sgd-fasta" type="fasta">
+         <property name="fasta.className" value="org.intermine.model.bio.Chromosome"/>
+         <property name="fasta.dataSourceName" value="NCBI"/>
+         <property name="fasta.dataSetTitle" value="SGD Genome Sequence"/>
+         <property name="fasta.taxonId" value="559292"/>
+         <property name="fasta.includes" value="FASTA_SGDr64.fa"/>
+         <property name="src.data.dir" location="/root/data/fms"/>
+       </source>
+
+       <source name="alliance-zfin-fasta" type="fasta">
+         <property name="fasta.className" value="org.intermine.model.bio.Chromosome"/>
+         <property name="fasta.dataSourceName" value="NCBI"/>
+         <property name="fasta.dataSetTitle" value="ZFIN Genome Sequence"/>
+         <property name="fasta.taxonId" value="7955"/>
+         <property name="fasta.includes" value="FASTA_GRCz11.fa"/>
+         <property name="src.data.dir" location="/root/data/fms"/>
+       </source>
+
+       <source name="alliance-mgi-fasta" type="fasta">
+         <property name="fasta.className" value="org.intermine.model.bio.Chromosome"/>
+         <property name="fasta.dataSourceName" value="NCBI"/>
+         <property name="fasta.dataSetTitle" value="MGI Genome Sequence"/>
+         <property name="fasta.taxonId" value="10090"/>
+         <property name="fasta.includes" value="FASTA_GRCm38.fa"/>
+         <property name="src.data.dir" location="/root/data/fms"/>
+       </source>
+
+       <source name="alliance-rgd-fasta" type="fasta">
+         <property name="fasta.className" value="org.intermine.model.bio.Chromosome"/>
+         <property name="fasta.dataSourceName" value="NCBI"/>
+         <property name="fasta.dataSetTitle" value="RGD Genome Sequence"/>
+         <property name="fasta.taxonId" value="10116"/>
+         <property name="fasta.includes" value="FASTA_Rnor60.fa"/>
+         <property name="src.data.dir" location="/root/data/fms"/>
+       </source>
+
+       <source name="alliance-xtrops-fasta" type="fasta">
+          <property name="fasta.className" value="org.intermine.model.bio.Chromosome"/>
+          <property name="fasta.dataSourceName" value="NCBI"/>
+          <property name="fasta.dataSetTitle" value="XB X.tropicalis Genome Sequence"/>
+          <property name="fasta.taxonId" value="8364"/>
+          <property name="fasta.includes" value="FASTA_XT9.1.fa"/>
+          <property name="src.data.dir" location="/root/data/fms"/>
+       </source>
+
+       <source name="alliance-xlaevis-fasta" type="fasta">
+         <property name="fasta.className" value="org.intermine.model.bio.Chromosome"/>
+         <property name="fasta.dataSourceName" value="NCBI"/>
+         <property name="fasta.dataSetTitle" value="XB X.laevis Genome Sequence"/>
+         <property name="fasta.taxonId" value="8355"/>
+         <property name="fasta.includes" value=""/>
+         <property name="src.data.dir" location="/root/data/fms"/>
+       </source>
 
     <source name="do" type="do">
       <property name="src.data.file" location="/root/data/fms/ONTOLOGY_DOID.obo"/>
@@ -107,13 +107,13 @@
 
   <source name="fbbt" type="fbbt">
        <property name="src.data.file" location="/root/data/fms/ONTOLOGY_FBBT.obo"/>
-   </source>
+   </source>-->
 
     <source name="alliance-genes" type="alliance-genes">
       <property name="src.data.dir" location="/root/data/genes"/>
     </source>
 
-    <source name="go-annotation" type="go-annotation">
+    <!--<source name="go-annotation" type="go-annotation">
      <property name="src.data.dir" location="/root/data/fms"/>
      <property name="src.data.dir.includes" value="*.gaf"/>
      <property name="ontologyPrefix" value="GO"/>
@@ -137,7 +137,7 @@
    <source name="alliance-expression" type="alliance-expression">
          <property name="src.data.dir" location="/root/data/fms"/>
          <property name="src.data.dir.includes" value="EXPRESSION-ALLIANCE_COMBINED.tsv"/>
-    </source>
+    </source>-->
 
    <!--<source name="alliance-genetic-interactions" type="alliance-genetic-interactions">
        <property name="src.data.dir" location="/Users/kkarra/Dev/agr_java_software/agr_intermine_data_extractor/data/fms"/>
