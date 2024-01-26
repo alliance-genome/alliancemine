@@ -1,0 +1,17 @@
+#!/bin/bash
+
+echo "Starting Alliancemine Solr Build: Host: $1 User: $2"
+date
+
+solr_indexes=(create-autocomplete-index create-search-index)
+
+for i in "${solr_indexes[@]}"
+do
+   echo "./gradlew --stacktrace --no-daemon postprocess -Pprocess=$i"
+   ./gradlew --stacktrace --no-daemon postprocess -Pprocess=$i
+   date
+done
+
+echo "Finished Alliancemine Solr Build"
+date
+
