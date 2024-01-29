@@ -27,7 +27,7 @@ date
 for i in "${fasta_sources[@]}"
 do
 	echo "./gradlew --stacktrace --no-daemon integrate -Psource=$i"
-	#./gradlew --stacktrace --no-daemon integrate -Psource=$i
+	./gradlew --stacktrace --no-daemon integrate -Psource=$i
 	date
 done
 
@@ -41,7 +41,7 @@ done
 for i in "${alliance_sources[@]}"
 do
 	echo "./gradlew --stacktrace --no-daemon integrate -Psource=$i"
-	#./gradlew --stacktrace --no-daemon integrate -Psource=$i
+	./gradlew --stacktrace --no-daemon integrate -Psource=$i
 	date
 done
 
