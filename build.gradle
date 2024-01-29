@@ -10,10 +10,8 @@ buildscript {
 }
 
 ext {
-  mineRelease = project.hasProperty('release') ? "." + release : ''
-  mineName = "alliancemine"
-  minePropertyFileName = "${mineName}.properties$mineRelease"
-  minePropertyFile = "${System.env.HOME}/.intermine/$minePropertyFileName"
+  minePropertyFileName = "alliancemine.properties"
+  minePropertyFile = "/root/alliancemine/$minePropertyFileName"
   println "Using properties file: '$minePropertyFile'"
 }
 
@@ -50,7 +48,6 @@ subprojects {
     from (minePropertyFile)
     into sourceSets.main.output.resourcesDir
     rename { fileName -> fileName.replace("$minePropertyFileName", "intermine.properties") }
-    inputs.sourceFiles.stopExecutionIfEmpty()
   }
 }
 
