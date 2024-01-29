@@ -4,6 +4,7 @@
 if [[ -z $1 || -z $2 ]]
 then 
 	echo Please run with via the following: $0 postgres_host postgres_user
+	exit
 fi
 
 echo "Starting Alliancemine DB Build: Host: $1 User: $2"
@@ -55,6 +56,9 @@ echo pg_dump -F c -U $2 -h $1 -f /root/data/alliancemine.dump alliancemine
 pg_dump -F c -U $2 -h $1 -f /root/data/alliancemine.dump alliancemine
 
 date
+
+echo "Backup DB File to S3: aws s3 cp /root/data/alliancemine.dump s3://agr-db-backups/alliancemine/stage/`date "+%Y-%m-%d_%H:%M:%S".dump`"
+aws s3 cp /root/data/alliancemine.dump s3://agr-db-backups/alliancemine/stage/`date "+%Y-%m-%d_%H:%M:%S".dump`
 
 echo "Finished Alliancemine DB Build"
 date
