@@ -1,0 +1,16 @@
+#!/bin/bash
+# cp aws dump file
+export DB_FILE=`aws s3api list-objects-v2 --bucket "agr-db-backups" --query 'reverse(sort_by(Contents[?contains(Key, \`alliancemine/stage/\`)], &LastModified))[:1].Key' --output=text`
+aws s3 cp s3://agr-db-backups/$DB_FILE /root/data/db_backup.dump
+# load into database
+createdb -U postgres -h agr.stage.alliancemine.postgres.server alliancemine
+pg_restore -U postgres -O -x -d allinacemine -h agr.stage.alliancemine.postgres.server -j 4 /root/data/db_backup.dump
+# Pull Secrets file
+aws secretsmanager get-secret-value --region=us-east-1 --secret-id IntermineStagePropertiesFile --query SecretString --output text > alliancemine.properties
+# Copy
+echo "index.solrurl=http://agr.stage.alliancemine.solr.server:8983/solr/alliancemine-search" >> dbmodel/resources/keyword_search.properties
+echo "autocomplete.solrurl=http://agr.stage.alliancemine.solr.server:8983/solr/alliancemine-autocomplete" >> dbmodel/resources/objectstoresummary.config.properties
+# run load solr
+./build_solr
+# deploy tomcat
+./gradlew cargoRedeployRemote --stacktrace
