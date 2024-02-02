@@ -13,4 +13,4 @@ echo "autocomplete.solrurl=http://agr.stage.alliancemine.solr.server:8983/solr/a
 # run load solr
 ./build_solr
 # deploy tomcat
-./gradlew cargoRedeployRemote --stacktrace
+#./gradlew cargoRedeployRemote --stacktrace
