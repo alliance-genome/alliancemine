@@ -1,7 +1,7 @@
 #!/bin/bash
 # cp aws dump file
 export DB_FILE=`aws s3api list-objects-v2 --bucket "agr-db-backups" --query 'reverse(sort_by(Contents[?contains(Key, \`alliancemine/stage/\`)], &LastModified))[:1].Key' --output=text`
-aws s3 cp s3://agr-db-backups/$DB_FILE /root/data/db_backup.dump
+aws s3 cp s3://agr-db-backups/$DB_FILE /root/data/db_backup.dump --no-progress
 # load into database
 createdb -U postgres -h agr.stage.alliancemine.postgres.server alliancemine
 pg_restore -U postgres -O -x -d alliancemine -h agr.stage.alliancemine.postgres.server -j 4 /root/data/db_backup.dump
