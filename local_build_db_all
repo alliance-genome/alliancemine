@@ -1,0 +1,65 @@
+#!/bin/bash
+
+
+if [[ -z $1 || -z $2 ]]
+then 
+	echo Please run with via the following: $0 postgres_host postgres_user
+	exit
+fi
+
+echo "Starting Alliancemine DB Build: Host: $1 User: $2"
+date
+
+fasta_sources=(alliance-wb-fasta alliance-fb-fasta alliance-sgd-fasta alliance-zfin-fasta alliance-mgi-fasta alliance-rgd-fasta)
+ontology_sources=(do go eco mmo emapa zfa wbbt fbbt so)
+alliance_sources=(alliance-genes go-annotation alliance-disease alliance-orthologs alliance-alleles alliance-expression entrez-organism)
+postprocess_sources=(create-references do-sources transfer-sequences create-attribute-indexes summarise-objectstore)
+solr_indexes=(create-autocomplete-index create-search-index)
+
+echo createdb -U $2 -h $1 alliancemine || true
+createdb -U $2 -h $1 alliancemine || true
+echo createdb -U $2 -h $1 items-alliancemine || true
+createdb -U $2 -h $1 items-alliancemine || true
+echo ./gradlew --no-daemon builddb
+./gradlew --no-daemon builddb
+date
+
+for i in "${fasta_sources[@]}"
+do
+	echo "./gradlew --no-daemon integrate -Psource=$i"
+	./gradlew --no-daemon integrate -Psource=$i
+	date
+done
+
+for i in "${ontology_sources[@]}"
+do
+	echo "./gradlew --no-daemon integrate -Psource=$i"
+	./gradlew --no-daemon integrate -Psource=$i
+	date
+done
+
+for i in "${alliance_sources[@]}"
+do
+	echo "./gradlew --no-daemon integrate -Psource=$i"
+	./gradlew --no-daemon integrate -Psource=$i
+	date
+done
+
+for i in "${postprocess_sources[@]}"
+do
+	echo "./gradlew --no-daemon postprocess -Pprocess=$i"
+	./gradlew --no-daemon postprocess -Pprocess=$i
+	date
+done
+
+echo pg_dump -F c -U $2 -h $1 -f /root/data/alliancemine.dump alliancemine
+pg_dump -F c -U $2 -h $1 -f /root/data/alliancemine.dump alliancemine
+
+date
+
+echo "Backup DB File to S3: aws s3 cp /root/data/alliancemine.dump s3://agr-db-backups/alliancemine/local/`date "+%Y-%m-%d_%H:%M:%S".dump`"
+aws s3 cp /root/data/alliancemine.dump s3://agr-db-backups/alliancemine/local/`date "+%Y-%m-%d_%H:%M:%S".dump`
+
+echo "Finished Alliancemine DB Build"
+date
+
