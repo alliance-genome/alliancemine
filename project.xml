@@ -76,69 +76,61 @@
          <property name="fasta.includes" value=""/>
          <property name="src.data.dir" location="/root/data/fms"/>
        </source>-->
-
-    <source name="do" type="do">
-      <property name="src.data.file" location="/root/data/fms/ONTOLOGY_DOID.obo"/>
-    </source>
-
-    <source name="go" type="go">
-      <property name="src.data.file" location="/root/data/fms/ONTOLOGY_GO.obo"/>
-    </source>
-
-    <source name="eco" type="eco">
-       <property name="src.data.file" location="/root/data/fms/ONTOLOGY_ECO.obo"/>
-    </source>
-
-   <source name="mmo" type="mmo">
-      <property name="src.data.file" location="/root/data/fms/ONTOLOGY_MMO.obo"/>
-   </source>
-
-   <source name="emapa" type="emapa">
-       <property name="src.data.file" location="/root/data/fms/ONTOLOGY_EMAPA.obo"/>
-   </source>
-
-   <source name="zfa" type="zfa">
-       <property name="src.data.file" location="/root/data/fms/ONTOLOGY_ZFA.obo"/>
-  </source>
-
-  <source name="wbbt" type="wbbt">
-       <property name="src.data.file" location="/root/data/fms/ONTOLOGY_WBBT.obo"/>
-  </source>
-
-  <source name="fbbt" type="fbbt">
-       <property name="src.data.file" location="/root/data/fms/ONTOLOGY_FBBT.obo"/>
-   </source>-->
-
-    <source name="alliance-genes" type="alliance-genes">
-      <property name="src.data.dir" location="/root/data/genes"/>
-    </source>
-
-    <source name="go-annotation" type="go-annotation">
-     <property name="src.data.dir" location="/root/data/fms"/>
-     <property name="src.data.dir.includes" value="*.gaf"/>
-     <property name="ontologyPrefix" value="GO"/>
-   </source>
-
-   <source name="alliance-disease" type="alliance-disease">
-     <property name="src.data.dir" location="/root/data/fms"/>
-     <property name="src.data.dir.includes" value="DISEASE-ALLIANCE_COMBINED.tsv"/>
-   </source>
-
-   <source name="alliance-orthologs" type="alliance-orthologs">
-     <property name="src.data.dir" location="/root/data/fms"/>
-     <property name="src.data.dir.includes" value="ORTHOLOGY-ALLIANCE_COMBINED.tsv"/>
-   </source>
-
-   <source name="alliance-alleles" type="alliance-alleles">
-     <property name="src.data.dir" location="/root/data/fms"/>
-     <!--<property name="src.data.dir.includes" value="VARIANT-ALLELE_NCBITaxon*.tsv"/>-->
-     <property name="src.data.dir.includes" value="VARIANT-ALLELE_COMBINED.tsv"/>
-   </source>
-
-   <source name="alliance-expression" type="alliance-expression">
-         <property name="src.data.dir" location="/root/data/fms"/>
+      <source name="do" type="do">
+          <property name="src.data.file" location="/root/data/fms/ONTOLOGY_DOID.obo"/>
+      </source>
+      <source name="go" type="go">
+          <property name="src.data.file" location="/root/data/fms/ONTOLOGY_GO.obo"/>
+      </source>
+      <source name="eco" type="eco">
+          <property name="src.data.file" location="/root/data/fms/ONTOLOGY_ECO.obo"/>
+      </source>
+      <source name="mmo" type="mmo">
+          <property name="src.data.file" location="/root/data/fms/ONTOLOGY_MMO.obo"/>
+      </source>
+      <source name="emapa" type="emapa">
+          <property name="src.data.file" location="/root/data/fms/ONTOLOGY_EMAPA.obo"/>
+      </source>
+      <source name="zfa" type="zfa">
+          <property name="src.data.file" location="/root/data/fms/ONTOLOGY_ZFA.obo"/>
+      </source>
+      <source name="wbbt" type="wbbt">
+          <property name="src.data.file" location="/root/data/fms/ONTOLOGY_WBBT.obo"/>
+      </source>
+      <source name="fbbt" type="fbbt">
+          <property name="src.data.file" location="/root/data/fms/ONTOLOGY_FBBT.obo"/>
+      </source>
+      <!--<source name="go-slim" type="go-slim">
+          <property name="src.data.file" location="/root/data/fms/goslim_yeast.obo"/>
+      </source>-->
+      <source name="psi-mi-ontology" type="psi-mi-ontology">
+          <property name="src.data.file" location="/root/data/fms/ONTOLOGY_MI.obo"/>
+      </source>
+      <source name="alliance-genes" type="alliance-genes">
+          <property name="src.data.dir" location="/root/data/genes"/>
+      </source>
+      <source name="go-annotation" type="go-annotation">
+          <property name="src.data.dir" location="/root/data/fms"/>
+          <property name="src.data.dir.includes" value="*.gaf"/>
+          <property name="ontologyPrefix" value="GO"/>
+      </source>
+      <source name="alliance-disease" type="alliance-disease">
+          <property name="src.data.dir" location="/root/data/fms"/>
+          <property name="src.data.dir.includes" value="DISEASE-ALLIANCE_COMBINED.tsv"/>
+      </source>
+      <source name="alliance-orthologs" type="alliance-orthologs">
+          <property name="src.data.dir" location="/root/data/fms"/>
+          <property name="src.data.dir.includes" value="ORTHOLOGY-ALLIANCE_COMBINED.tsv"/>
+      </source>
+      <source name="alliance-alleles" type="alliance-alleles">
+          <property name="src.data.dir" location="/root/data/fms"/>
+          <!--<property name="src.data.dir.includes" value="VARIANT-ALLELE_NCBITaxon*.tsv"/>-->
+          <property name="src.data.dir.includes" value="VARIANT-ALLELE_COMBINED.tsv"/>
+      </source>
+      <source name="alliance-expression" type="alliance-expression">
+          <property name="src.data.dir" location="/root/data/fms"/>
          <property name="src.data.dir.includes" value="EXPRESSION-ALLIANCE_COMBINED.tsv"/>
-    </source>
+      </source>
 
    <!--<source name="alliance-genetic-interactions" type="alliance-genetic-interactions">
        <property name="src.data.dir" location="/Users/kkarra/Dev/agr_java_software/agr_intermine_data_extractor/data/fms"/>
@@ -159,15 +151,70 @@
 
    <source name="pato" type="pato">
      <property name="src.data.file" location="/root/data/fms/ONTOLOGY_PATO.obo"/>
-   </source>
-
-   <source name="go-slim" type="go-slim">
-     <property name="src.data.file" location="/data/intermine/ontology/goslim_yeast.obo"/>
-   </source>
-
-   <source name="psi-mi-ontology" type="psi-mi-ontology">
-     <property name="src.data.file" location="/data/intermine/psi/ontology/current/psi-mi.obo"/>
    </source>-->
+
+      <source name="sgd" type="sgd">
+          <property name="source.db.name" value="sgd"/>
+          <property name="dataSourceName" value="SGD"/>
+          <property name="converter.class" value="org.intermine.bio.dataconversion.SgdConverter"/>
+      </source>
+
+      <source name="sgd-gff" type="sgd-gff">
+          <property name="gff3.taxonId" value="4932"/>
+          <property name="gff3.dataSourceName" value="SGD Transcriptome v1.0"/>
+          <property name="gff3.seqClsName" value="Chromosome"/>
+          <property name="gff3.dataSetTitle" value="Preliminary Transcripts"/>
+          <property name="src.data.dir" location="/data/intermine/gff"/>
+      </source>
+
+      <source name="sgd-gff-utr" type="sgd-gff-utr">
+          <property name="src.data.dir" location="/data/intermine/gff-utr"/>
+      </source>
+
+      <source name="sgd-db-utr" type="sgd-db-utr">
+          <property name="src.data.dir" location="/data/intermine/db-utr"/>
+      </source>
+
+      <source name="fungi-homologs" type="fungi-homologs">
+          <property name="src.data.dir" location="/data/intermine/yeast_orthologs/fungidb"/>
+      </source>
+
+      <source name="cgob-homologs" type="cgob-homologs">
+          <property name="src.data.dir" location="/data/intermine/yeast_orthologs/CGOB"/>
+      </source>
+
+      <source name="cglabrata-homologs" type="cglabrata-homologs">
+          <property name="src.data.dir" location="/data/intermine/yeast_orthologs/C.glabrata"/>
+      </source>
+
+      <source name="pombe-homologs" type="pombe-homologs">
+          <property name="src.data.dir" location="/data/intermine/yeast_orthologs/pombe"/>
+      </source>
+
+      <source name="homolog-genes" type="homolog-genes">
+          <property name="src.data.dir" location="/data/intermine/yeast_orthologs/homolog_genes"/>
+      </source>
+
+      <source name="sgd-complementation-db" type="sgd-complementation-db">
+          <property name="source.db.name" value="sgd"/>
+          <property name="dataSourceName" value="SGD"/>
+          <property name="converter.class" value="org.intermine.bio.dataconversion.SgdComplementationDbConverter"/>
+      </source>
+
+      <source name="sgd-complexes" type="sgd-complexes">
+          <property name="source.db.name" value="sgd"/>
+          <property name="dataSourceName" value="SGD"/>
+          <property name="converter.class" value="org.intermine.bio.dataconversion.SgdComplexesConverter"/>
+      </source>
+
+
+      <source name="sgd-protein-properties" type="sgd-protein-properties">
+          <property name="src.data.dir" location="/data/intermine/protein-properties"/>
+      </source>
+
+      <source name="sgd-protein-ntermini" type="sgd-protein-ntermini">
+          <property name="src.data.dir" location="/data/intermine/protein-ntermini"/>
+      </source>
 
     <!--<source name="update-publications" type="update-publications">
       <property name="src.data.file" location="publications.xml"/>

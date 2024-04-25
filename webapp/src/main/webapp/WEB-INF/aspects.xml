@@ -10,6 +10,7 @@
     <tile-name>model/genomics.jsp</tile-name>
     <aspect-source name="Alliance" url="http://alliancegenome.org"/>
   </aspect>
+
   <aspect name="Proteins">
     <subtitle>Protein and proteomics&lt;br/&gt;data</subtitle>
     <icon-image>model/images/proteins.png</icon-image>
@@ -39,6 +40,57 @@
     <subtitle>Homology</subtitle>
     <intro-text> &lt;p&gt; Homology data. </intro-text>
     <aspect-source name="Homology" url="https://www.alliancegenome.org//" />
+  </aspect>
+
+  <aspect name="Phenotypes">
+    <subtitle>Phenotypes</subtitle>
+    <intro-text> Phenotype data</intro-text>
+    <tile-name>model/phenotypes.jsp</tile-name>
+    <aspect-source name="SGD" url="http://www.yeastgenome.org" />
+  </aspect>
+
+  <aspect name="Interactions">
+    <subtitle>Interactions</subtitle>
+    <intro-text>Interactions from BioGRID.</intro-text>
+    <tile-name>model/interactions.jsp</tile-name>
+    <aspect-source name="BioGRID" url="http://www.thebiogrid.org/" />
+  </aspect>
+
+  <aspect name="Literature">
+    <subtitle>Literature</subtitle>
+    <intro-text> A mapping between genes and publications for
+      &lt;i&gt;S.cerevisiae&lt;/i&gt;.</intro-text>
+    <tile-name>model/literature.jsp</tile-name>
+    <aspect-source name="NCBI" url="http://www.ncbi.nlm.nih.gov/" />
+    <aspect-source name="SGD" url="http://www.yeastgenome.org" />
+  </aspect>
+
+  <aspect name="Expression">
+    <subtitle>Gene Expression</subtitle>
+    <intro-text> &lt;p&gt; Gene expression data for &lt;i&gt;S. cerevisiae
+      &lt;/i&gt;.</intro-text>
+    <tile-name>model/microarray.jsp</tile-name>
+    <aspect-source name="SPELL" url="http://spell.yeastgenome.org/" />
+  </aspect>
+
+  <aspect name="Downloads">
+    <subtitle>Downloads</subtitle>
+    <intro-text> &lt;p&gt; Download data for &lt;i&gt;S. cerevisiae
+      &lt;/i&gt;. </intro-text>
+    <aspect-source name="Downloads" url="http://yeastmine.yeastgenome.org/" />
+  </aspect>
+
+  <aspect name="Regulation">
+    <subtitle>Regulation</subtitle>
+    <intro-text> &lt;p&gt; Gene regulation data for &lt;i&gt;S. cerevisiae
+      &lt;/i&gt;. </intro-text>
+    <aspect-source name="Regulation" url="http://yeastract.com/" />
+  </aspect>
+
+  <aspect name="YeastMine">
+    <subtitle>YeastMine</subtitle>
+    <intro-text> &lt;p&gt; SGD data for YeastMine. </intro-text>
+    <aspect-source name="YeastMine" url="https://www.yeastgenome.org//" />
   </aspect>
 
 
