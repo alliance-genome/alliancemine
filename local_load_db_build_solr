@@ -3,33 +3,51 @@
 # Set error handling
 set -e
 
+echo "Starting the script to update the PostgreSQL database from the latest S3 backup."
+
 # Get the latest dump file from AWS S3
+echo "Retrieving the latest database dump from S3..."
 export DB_FILE=$(aws s3api list-objects-v2 --bucket "agr-db-backups" --query 'reverse(sort_by(Contents[?contains(Key, `alliancemine/local/`)], &LastModified))[:1].Key' --output=text)
 aws s3 cp s3://agr-db-backups/$DB_FILE /root/data/db_backup.dump --no-progress
+echo "Database dump retrieved and stored at /root/data/db_backup.dump."
 
 # Check if the database exists, drop if it does, and create a new one
 DB_NAME="alliancemine"
 DB_HOST="agr.local.alliancemine.postgres.server"
 DB_USER="postgres"
 
-# Drop the database if it exists
+echo "Checking if the database '$DB_NAME' exists and dropping it if it does..."
 psql -U $DB_USER -h $DB_HOST -c "DROP DATABASE IF EXISTS $DB_NAME;"
+echo "Database '$DB_NAME' dropped."
 
-# Create a new database
+echo "Creating a new database '$DB_NAME'..."
 psql -U $DB_USER -h $DB_HOST -c "CREATE DATABASE $DB_NAME;"
+echo "Database '$DB_NAME' created."
 
 # Load the database from the dump file
+echo "Restoring the database from the dump file..."
 pg_restore -U $DB_USER -O -x -d $DB_NAME -h $DB_HOST -j 4 /root/data/db_backup.dump
+echo "Database restoration complete."
 
 # Pull secrets file
+echo "Retrieving secrets from AWS Secrets Manager..."
 aws secretsmanager get-secret-value --region=us-east-1 --secret-id IntermineLocalPropertiesFile --query SecretString --output text > alliancemine.properties
+echo "Secrets retrieved and stored."
 
 # Copy properties
+echo "Updating Solr URLs in property files..."
 echo "index.solrurl=http://agr.local.alliancemine.solr.server:8983/solr/alliancemine-search" >> dbmodel/resources/keyword_search.properties
 echo "autocomplete.solrurl=http://agr.local.alliancemine.solr.server:8983/solr/alliancemine-autocomplete" >> dbmodel/resources/objectstoresummary.config.properties
+echo "Solr URLs updated."
 
 # Run load Solr
+echo "Loading Solr with new data..."
 ./build_solr postgres postgres
+echo "Solr data load complete."
 
 # Deploy Tomcat
+echo "Redeploying Tomcat server..."
 ./gradlew cargoRedeployRemote --stacktrace
+echo "Tomcat redeployed successfully."
+
+echo "Script completed successfully."
