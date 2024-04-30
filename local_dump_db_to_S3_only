@@ -1,5 +1,15 @@
 #!/bin/bash
 
+# Exit script on any error
+set -e
+
+# Check for required arguments
+if [[ -z $1 || -z $2 ]]
+then 
+	echo "Please run with via the following: $0 postgres_host postgres_user"
+	exit 1
+fi
+
 # Dump the database
 echo pg_dump -F c -U $2 -h $1 -f /root/data/alliancemine.dump alliancemine
 pg_dump -F c -U $2 -h $1 -f /root/data/alliancemine.dump alliancemine
