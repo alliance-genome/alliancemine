@@ -1,0 +1,26 @@
+#!/bin/bash
+
+echo "Starting the process to update configuration and deploy services."
+
+# Pull Secrets file
+echo "Retrieving secrets from AWS Secrets Manager..."
+aws secretsmanager get-secret-value --region=us-east-1 --secret-id IntermineStagePropertiesFile --query SecretString --output text > alliancemine.properties
+echo "Secrets have been successfully retrieved and stored in 'alliancemine.properties'."
+
+# Copy updated Solr URLs to property files
+echo "Updating Solr URLs in property files..."
+echo "index.solrurl=http://agr.stage.alliancemine.solr.server:8983/solr/alliancemine-search" >> dbmodel/resources/keyword_search.properties
+echo "autocomplete.solrurl=http://agr.stage.alliancemine.solr.server:8983/solr/alliancemine-autocomplete" >> dbmodel/resources/objectstoresummary.config.properties
+echo "Solr URLs have been updated successfully."
+
+# Run load Solr script
+echo "Loading data into Solr..."
+./build_solr postgres postgres
+echo "Data loading into Solr completed."
+
+# Deploy Tomcat via Gradle
+echo "Deploying Tomcat server using Gradle..."
+./gradlew cargoRedeployRemote --stacktrace
+echo "Tomcat server has been successfully redeployed."
+
+echo "Script completed successfully."
