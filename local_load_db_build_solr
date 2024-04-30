@@ -26,8 +26,10 @@ echo "Database '$DB_NAME' created."
 
 # Load the database from the dump file
 echo "Restoring the database from the dump file..."
-pg_restore -U $DB_USER -O -x -d $DB_NAME -h $DB_HOST -j 4 /root/data/db_backup.dump
-echo "Database restoration complete."
+if ! pg_restore -U $DB_USER -O -x -d $DB_NAME -h $DB_HOST -j 6 --on-error-continue /root/data/db_backup.dump; then
+    echo "Error occurred during database restoration. Continuing."
+fi
+echo "Database restoration attempt complete."
 
 # Pull secrets file
 echo "Retrieving secrets from AWS Secrets Manager..."
