@@ -13,7 +13,7 @@ echo "Database dump retrieved and stored at /root/data/db_backup.dump."
 
 # Check if the database exists, drop if it does, and create a new one
 DB_NAME="alliancemine"
-DB_HOST="agr.local.alliancemine.postgres.server"
+DB_HOST="postgres"
 DB_USER="postgres"
 
 echo "Checking if the database '$DB_NAME' exists and dropping it if it does..."
