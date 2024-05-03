@@ -49,7 +49,7 @@ echo "Solr data load complete."
 
 # Deploy Tomcat
 echo "Redeploying Tomcat server..."
-./gradlew cargoRedeployRemote --stacktrace --debug
+./gradlew cargoRedeployRemote --stacktrace --info
 echo "Tomcat redeployed successfully."
 
 echo "Script completed successfully."
