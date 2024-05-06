@@ -6,7 +6,7 @@ set -e
 # Check for required arguments
 if [[ -z $1 || -z $2 ]]
 then 
-	echo "Please run with via the following: $0 postgres_host postgres_user"
+	echo "Please run with via the following: $0 agr.local.alliancemine.postgres.server postgres"
 	exit 1
 fi
 
