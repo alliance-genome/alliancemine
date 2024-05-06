@@ -16,9 +16,6 @@ date
 echo "Checking if the database 'alliancemine' exists and dropping it if it does..."
 psql -U $2 -h $1 -c "DROP DATABASE IF EXISTS alliancemine;"
 
-echo "Checking if the database 'items-alliancemine' exists and dropping it if it does..."
-psql -U $2 -h $1 -c "DROP DATABASE IF EXISTS items-alliancemine;"
-
 # Database and integration sources setup
 fasta_sources=(alliance-wb-fasta alliance-fb-fasta alliance-sgd-fasta alliance-zfin-fasta alliance-mgi-fasta alliance-rgd-fasta)
 ontology_sources=(do go eco mmo emapa zfa wbbt fbbt so)
