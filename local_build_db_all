@@ -32,6 +32,9 @@ createdb -U $2 -h $1 alliancemine || true
 echo createdb -U $2 -h $1 items-alliancemine || true
 createdb -U $2 -h $1 items-alliancemine || true
 
+# Pull Secrets file
+aws secretsmanager get-secret-value --region=us-east-1 --secret-id IntermineStagePropertiesFile --query SecretString --output text > alliancemine.properties
+
 # Build database
 echo "./gradlew --no-daemon builddb"
 ./gradlew --no-daemon builddb
