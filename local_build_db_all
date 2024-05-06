@@ -37,35 +37,35 @@ echo "Pulling secrets file from AWS."
 aws secretsmanager get-secret-value --region=us-east-1 --secret-id IntermineLocalPropertiesFile --query SecretString --output text > alliancemine.properties
 
 # Build database
-echo "./gradlew --no-daemon builddb"
+echo "./gradlew --stacktrace --no-daemon builddb"
 ./gradlew --no-daemon builddb
 date
 
 # Integrate various sources
 for i in "${fasta_sources[@]}"
 do
-	echo "./gradlew --no-daemon integrate -Psource=$i"
+	echo "./gradlew --stacktrace --no-daemon integrate -Psource=$i"
 	./gradlew --no-daemon integrate -Psource=$i
 	date
 done
 
 for i in "${ontology_sources[@]}"
 do
-	echo "./gradlew --no-daemon integrate -Psource=$i"
+	echo "./gradlew --stacktrace --no-daemon integrate -Psource=$i"
 	./gradlew --no-daemon integrate -Psource=$i
 	date
 done
 
 for i in "${alliance_sources[@]}"
 do
-	echo "./gradlew --no-daemon integrate -Psource=$i"
+	echo "./gradlew --stacktrace --no-daemon integrate -Psource=$i"
 	./gradlew --no-daemon integrate -Psource=$i
 	date
 done
 
 for i in "${postprocess_sources[@]}"
 do
-	echo "./gradlew --no-daemon postprocess -Pprocess=$i"
+	echo "./gradlew --stacktrace --no-daemon postprocess -Pprocess=$i"
 	./gradlew --no-daemon postprocess -Pprocess=$i
 	date
 done
