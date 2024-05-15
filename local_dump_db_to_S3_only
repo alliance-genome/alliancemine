@@ -1,0 +1,38 @@
+#!/bin/bash
+
+# Exit script on any error
+set -e
+
+# Check for required arguments
+if [[ -z $1 || -z $2 ]]
+then 
+	echo "Please run with via the following: $0 postgres_host postgres_user"
+	exit 1
+fi
+
+# Dump the database
+echo pg_dump -F c -U $2 -h $1 -f /root/data/alliancemine.dump alliancemine
+pg_dump -F c -U $2 -h $1 -f /root/data/alliancemine.dump alliancemine
+date
+
+# Backup DB File to S3
+backup_file_name=$(date "+%Y-%m-%d_%H:%M:%S").dump
+echo "Backup DB File to S3: aws s3 cp /root/data/alliancemine.dump s3://agr-db-backups/alliancemine/local/$backup_file_name"
+aws s3 cp /root/data/alliancemine.dump s3://agr-db-backups/alliancemine/local/$backup_file_name
+
+# Keep only the last 5 backups
+echo "Checking and maintaining only the last 5 backups..."
+backup_files=$(aws s3 ls s3://agr-db-backups/alliancemine/local/ | awk '{print $4}' | sort)
+backup_count=$(echo "$backup_files" | wc -l)
+
+if [ "$backup_count" -gt 5 ]; then
+    echo "More than 5 backups exist. Removing the oldest ones..."
+    backups_to_remove=$(echo "$backup_files" | head -n -$((5)))
+    for file in $backups_to_remove; do
+        aws s3 rm s3://agr-db-backups/alliancemine/local/$file
+        echo "Removed $file"
+    done
+fi
+
+echo "Finished Alliancemine DB Build"
+date
