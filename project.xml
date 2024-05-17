@@ -110,7 +110,7 @@
      </source>-->
 
       <source name="psi-mi-ontology" type="psi-mi-ontology">
-          <property name="src.data.file" location="/root/data/intermine/psi/ontology/current/psi-mi.obo"/>
+          <property name="src.data.file" location="/root/data/intermine/ontology/psi-mi.obo"/>
       </source>
 
       <source name="go-slim" type="go-slim">
