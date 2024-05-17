@@ -5,7 +5,7 @@
   <property name="default.intermine.properties.file" location="../default.intermine.integrate.properties"/>
   <sources>
 
-      <!-- <source name="alliance-wb-fasta" type="fasta">
+       <source name="alliance-wb-fasta" type="fasta">
          <property name="fasta.className" value="org.intermine.model.bio.Chromosome"/>
          <property name="fasta.dataSourceName" value="NCBI"/>
          <property name="fasta.dataSetTitle" value="WB Genome Sequence"/>
@@ -23,14 +23,14 @@
          <property name="src.data.dir" location="/root/data/fms"/>
        </source>
 
-       <source name="alliance-sgd-fasta" type="fasta">
+       <!--<source name="alliance-sgd-fasta" type="fasta">
          <property name="fasta.className" value="org.intermine.model.bio.Chromosome"/>
          <property name="fasta.dataSourceName" value="NCBI"/>
          <property name="fasta.dataSetTitle" value="SGD Genome Sequence"/>
          <property name="fasta.taxonId" value="559292"/>
          <property name="fasta.includes" value="FASTA_SGDr64.fa"/>
          <property name="src.data.dir" location="/root/data/fms"/>
-       </source>
+       </source>-->
 
        <source name="alliance-zfin-fasta" type="fasta">
          <property name="fasta.className" value="org.intermine.model.bio.Chromosome"/>
@@ -107,7 +107,7 @@
 
      <source name="fbbt" type="fbbt">
        <property name="src.data.file" location="/root/data/fms/ONTOLOGY_FBBT.obo"/>
-     </source>-->
+     </source>
 
       <source name="psi-mi-ontology" type="psi-mi-ontology">
           <property name="src.data.file" location="/root/data/intermine/ontology/psi-mi.obo"/>
