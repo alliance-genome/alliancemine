@@ -9,10 +9,11 @@ buildscript {
     }
 }
 
+
 ext {
-  minePropertyFileName = "alliancemine.properties"
-  minePropertyFile = "/root/alliancemine/$minePropertyFileName"
-  println "Using properties file: '$minePropertyFile'"
+    minePropertyFileName = "alliancemine.properties"
+    minePropertyFile = "/root/alliancemine/$minePropertyFileName"
+    println "Using properties file: '$minePropertyFile'"
 }
 
 subprojects {

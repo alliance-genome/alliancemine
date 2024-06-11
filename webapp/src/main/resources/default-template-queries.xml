@@ -6,13 +6,13 @@
     </queries>
 
     <template-queries>
-        <template name="Allele_Identifiers" title="Allele --&gt; Identifiers" comment="">
+        <template name="Allele_Identifiers" title="Allele --&gt; Identifiers" comment="" dataTypes="java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String">
             <query name="Allele_Identifiers" model="genomic" view="Gene.primaryIdentifier Gene.secondaryIdentifier Gene.symbol Gene.alleles.alleleId Gene.alleles.alleleSymbol Gene.alleles.alleleType Gene.crossReferences.identifier Gene.synonyms.value Gene.organism.shortName" longDescription="Find all identifier for a given allele." sortOrder="Gene.primaryIdentifier asc" constraintLogic="A and B">
                 <constraint path="Gene.organism.shortName" code="A" editable="true" op="=" value="D. rerio"/>
                 <constraint path="Gene.alleles.alleleSymbol" code="B" editable="true" op="=" value="sa45217"/>
             </query>
         </template>
-        <template name="ChromosomeRegion_AllGenes" title="Chromosomal Region --&gt; All genes" comment="">
+        <template name="ChromosomeRegion_AllGenes" title="Chromosomal Region --&gt; All genes" comment="" dataTypes="java.lang.String java.lang.String java.lang.String java.lang.String java.lang.Integer java.lang.Integer java.lang.String java.lang.String java.lang.String java.lang.String">
             <query name="ChromosomeRegion_AllGenes" model="genomic" view="Gene.chromosome.primaryIdentifier Gene.primaryIdentifier Gene.symbol Gene.name Gene.chromosomeLocation.start Gene.chromosomeLocation.end Gene.chromosomeLocation.strand Gene.featureType Gene.description Gene.organism.shortName" longDescription="Retrieve all &lt;a href = &quot;https://sites.google.com/view/yeastgenome-help/analyze-help/yeastmine&quot;&gt;genes&lt;/a&gt; located within the specified chromosome and coordinate range." sortOrder="Gene.primaryIdentifier asc" constraintLogic="C and D and E and A">
                 <constraint path="Gene.organism.shortName" code="A" editable="true" op="=" value="S. cerevisiae S288C"/>
                 <constraint path="Gene.chromosome.primaryIdentifier" code="C" editable="true" op="=" value="chrXIV"/>
@@ -20,76 +20,94 @@
                 <constraint path="Gene.chromosomeLocation.end" code="E" editable="true" op="&lt;=" value="20000"/>
             </query>
         </template>
-        <template name="Chromosome_Gene_FeatureType" title="Chromosome--&gt;Genes of a selected Feature Type" comment="">
+        <template name="Chromosome_Gene_FeatureType" title="Chromosome--&gt;Genes of a selected Feature Type" comment="" dataTypes="java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String">
             <query name="Chromosome_Gene_FeatureType" model="genomic" view="Gene.chromosome.primaryIdentifier Gene.primaryIdentifier Gene.featureType Gene.qualifier Gene.symbol Gene.name Gene.organism.shortName Gene.description" longDescription="Retrieve features located on chromosome." sortOrder="Gene.featureType asc" constraintLogic="B and A and C">
                 <constraint path="Gene.organism.shortName" code="A" editable="true" op="=" value="D. melanogaster"/>
                 <constraint path="Gene.chromosome.primaryIdentifier" code="B" editable="true" op="=" value="2R"/>
                 <constraint path="Gene.featureType" code="C" editable="true" op="=" value="protein_coding_gene"/>
             </query>
         </template>
-        <template name="DOTerm_AllGenes" title="DO Term name --&gt; All genes" comment="">
+        <template name="DOTerm_AllGenes" title="DO Term name --&gt; All genes" comment="" dataTypes="java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String">
             <query name="DOTerm_AllGenes" model="genomic" view="Gene.primaryIdentifier Gene.symbol Gene.featureType Gene.diseaseAnnotation.ontologyTerm.identifier Gene.diseaseAnnotation.ontologyTerm.name Gene.diseaseAnnotation.evidence.code.code Gene.diseaseAnnotation.evidence.withText Gene.diseaseAnnotation.evidence.publications.pubMedId Gene.diseaseAnnotation.evidence.publications.pubXrefId Gene.organism.shortName Gene.diseaseAnnotation.qualifier Gene.name" longDescription="Retrieve all &lt;ahref = https://sites.google.com/view/yeastgenome-help/analyze-help/yeastmine&gt; genes &lt;/a&gt; annotated to a specified Disease Ontology (DO) Term." sortOrder="Gene.primaryIdentifier asc">
                 <constraint path="Gene.diseaseAnnotation.ontologyTerm" editable="false" type="DOTerm"/>
                 <constraint path="Gene.diseaseAnnotation.evidence" editable="false" type="DiseaseEvidence"/>
                 <constraint path="Gene.diseaseAnnotation.ontologyTerm.name" editable="true" op="=" value="*cancer*"/>
             </query>
         </template>
-        <template name="DOTerm_Children_AllGenes" title="DO Term name [and children of this term] --&gt; All genes" comment="">
-            <query name="DOTerm_Children_AllGenes" model="genomic" view="Gene.primaryIdentifier Gene.symbol Gene.featureType Gene.diseaseAnnotation.ontologyTerm.identifier Gene.diseaseAnnotation.ontologyTerm.name Gene.diseaseAnnotation.evidence.code.code Gene.diseaseAnnotation.evidence.withText Gene.diseaseAnnotation.ontologyTerm.parents.identifier Gene.diseaseAnnotation.ontologyTerm.parents.name Gene.diseaseAnnotation.evidence.publications.pubMedId Gene.diseaseAnnotation.qualifier Gene.name Gene.diseaseAnnotation.evidence.publications.pubXrefId" longDescription="Retrieve all genes that are annotated to the specified DO term and children of that specified DO Term. Wild card queries (such as *progeria*) are supported." sortOrder="Gene.primaryIdentifier asc">
+        <template name="DOTerm_Children_AllGenes" title="DO Term name [and descendants of this term] --&gt; All genes" comment="" dataTypes="java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String">
+            <query name="DOTerm_Children_AllGenes" model="genomic" view="Gene.primaryIdentifier Gene.symbol Gene.featureType Gene.diseaseAnnotation.ontologyTerm.identifier Gene.diseaseAnnotation.ontologyTerm.name Gene.diseaseAnnotation.evidence.code.code Gene.diseaseAnnotation.evidence.withText Gene.diseaseAnnotation.ontologyTerm.parents.identifier Gene.diseaseAnnotation.ontologyTerm.parents.name Gene.diseaseAnnotation.evidence.publications.pubMedId Gene.diseaseAnnotation.qualifier Gene.name Gene.diseaseAnnotation.evidence.publications.pubXrefId" longDescription="Retrieve all genes that are annotated to the specified DO term and descendants of that specified DO Term. Wild card queries (such as *progeria*) are supported." sortOrder="Gene.primaryIdentifier asc">
                 <constraint path="Gene.diseaseAnnotation.evidence" editable="false" type="DiseaseEvidence"/>
                 <constraint path="Gene.diseaseAnnotation.ontologyTerm" editable="false" type="DOTerm"/>
                 <constraint path="Gene.diseaseAnnotation.ontologyTerm.parents" editable="false" type="DOTerm"/>
-                <constraint path="Gene.diseaseAnnotation.ontologyTerm.parents.name" editable="true" op="=" value="cancer"/>
+                <constraint path="Gene.diseaseAnnotation.ontologyTerm.parents.name" editable="true" op="CONTAINS" value="*cancer*"/>
             </query>
         </template>
-        <template name="DOTerm_DOTermIdentifier" title="DO Term name --&gt; DO Term Identifier" comment="">
+        <template name="DOTerm_DOTermIdentifier" title="DO Term name --&gt; DO Term Identifier" comment="" dataTypes="java.lang.String java.lang.String java.lang.String java.lang.Boolean">
             <query name="DOTerm_DOTermIdentifier" model="genomic" view="DOTerm.name DOTerm.description DOTerm.identifier DOTerm.obsolete" longDescription="Retrieve the DO term identifier (DOID) and description for a specified DO term name. Wild card queries (such as *syndrome*) are supported." sortOrder="DOTerm.description asc">
                 <constraint path="DOTerm.name" editable="true" op="=" value="*syndrome*"/>
             </query>
         </template>
-        <template name="GOTerm_GeneOrganism" title="GO Term name [and children of this term] --&gt;All genes" comment="">
-            <query name="GOTerm_GeneOrganism" model="genomic" view="Gene.primaryIdentifier Gene.symbol Gene.featureType Gene.qualifier Gene.goAnnotation.ontologyTerm.identifier Gene.goAnnotation.ontologyTerm.name Gene.goAnnotation.ontologyTerm.namespace Gene.goAnnotation.evidence.code.code Gene.goAnnotation.qualifier Gene.goAnnotation.evidence.code.withText Gene.goAnnotation.annotationExtension Gene.goAnnotation.ontologyTerm.parents.identifier Gene.goAnnotation.ontologyTerm.parents.name Gene.goAnnotation.evidence.publications.pubMedId" longDescription="Retrieve all &lt;a href = &quot;https://sites.google.com/view/yeastgenome-help/analyze-help/yeastmine&quot;&gt;genes&lt;/a&gt; that are annotated to the specified GO term and children of that specified GO Term. Wild card queries (such as *ascospore*) are supported. Only manually curated and high-throughput GO annotations are included. " sortOrder="Gene.primaryIdentifier asc">
-                <pathDescription pathString="Gene.goAnnotation.ontologyTerm.parents" description="GO annotation"/>
-                <pathDescription pathString="Gene.goAnnotation.ontologyTerm" description="GO annotation &gt; child term"/>
-                <constraint path="Gene.goAnnotation.ontologyTerm" editable="false" type="GOTerm"/>
-                <constraint path="Gene.goAnnotation.ontologyTerm.parents" editable="false" type="GOTerm"/>
-                <constraint path="Gene.goAnnotation.ontologyTerm.parents.name" editable="true" description="Show genes annotated with GO term (and any children of this GO term):" op="=" value="pseudohyphal growth"/>
+        <template name="Expression_Gene" title="Expression --&gt; Gene" comment="" dataTypes="java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String">
+            <query name="Expression_Gene" model="genomic" view="Gene.primaryIdentifier Gene.secondaryIdentifier Gene.symbol Gene.name Gene.expressionAnnotations.location Gene.expressionAnnotations.source Gene.expressionAnnotations.sourceURL Gene.expressionAnnotations.stageTerm Gene.expressionAnnotations.assay.identifier Gene.expressionAnnotations.assay.name Gene.expressionAnnotations.anatomy.identifier Gene.expressionAnnotations.anatomy.name Gene.expressionAnnotations.cellularcomponent.identifier Gene.expressionAnnotations.cellularcomponent.name Gene.expressionAnnotations.substructure.identifier Gene.expressionAnnotations.substructure.name Gene.expressionAnnotations.publications.pubMedId Gene.organism.shortName" longDescription="For a given expression annotation retrieve genes ." sortOrder="Gene.primaryIdentifier asc">
+                <join path="Gene.expressionAnnotations.substructure" style="OUTER"/>
+                <join path="Gene.expressionAnnotations.cellularcomponent" style="OUTER"/>
+                <join path="Gene.expressionAnnotations.anatomy" style="OUTER"/>
+                <join path="Gene.expressionAnnotations.assay" style="OUTER"/>
+                <join path="Gene.expressionAnnotations.publications" style="OUTER"/>
+                <constraint path="Gene.expressionAnnotations.location" editable="true" op="=" value="midbrain hindbrain boundary"/>
             </query>
         </template>
-        <template name="GOTerm_Genes" title="GO Term --&gt; All genes" comment="">
+        <template name="GOTerm_GeneOrganism" title="GO Term name [and children of this term] --&gt;All genes" comment="" dataTypes="java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String">
+            <query name="GOTerm_GeneOrganism" model="genomic" view="Gene.primaryIdentifier Gene.symbol Gene.featureType Gene.qualifier Gene.goAnnotation.ontologyTerm.identifier Gene.goAnnotation.ontologyTerm.name Gene.goAnnotation.ontologyTerm.namespace Gene.goAnnotation.evidence.code.code Gene.goAnnotation.qualifier Gene.goAnnotation.evidence.code.withText Gene.goAnnotation.annotationExtension Gene.goAnnotation.ontologyTerm.parents.identifier Gene.goAnnotation.ontologyTerm.parents.name Gene.goAnnotation.evidence.publications.pubMedId" longDescription="Retrieve all &lt;a href = &quot;https://sites.google.com/view/yeastgenome-help/analyze-help/yeastmine&quot;&gt;genes&lt;/a&gt; that are annotated to the specified GO term and children of that specified GO Term. Wild card queries (such as *ascospore*) are supported. Only manually curated and high-throughput GO annotations are included. " sortOrder="Gene.primaryIdentifier asc">
+                <constraint path="Gene.goAnnotation.ontologyTerm" editable="false" type="GOTerm"/>
+                <constraint path="Gene.goAnnotation.ontologyTerm.parents" editable="false" type="GOTerm"/>
+                <constraint path="Gene.goAnnotation.ontologyTerm.parents.name" editable="true" op="=" value="pseudohyphal growth"/>
+            </query>
+        </template>
+        <template name="GOTerm_Genes" title="GO Term --&gt; All genes" comment="" dataTypes="java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String">
             <query name="GOTerm_Genes" model="genomic" view="Gene.primaryIdentifier Gene.secondaryIdentifier Gene.symbol Gene.featureType Gene.qualifier Gene.goAnnotation.ontologyTerm.identifier Gene.goAnnotation.ontologyTerm.name Gene.goAnnotation.ontologyTerm.namespace Gene.goAnnotation.evidence.code.code Gene.goAnnotation.qualifier Gene.goAnnotation.evidence.code.withText Gene.goAnnotation.annotationExtension Gene.goAnnotation.evidence.code.annotType Gene.goAnnotation.evidence.publications.pubMedId Gene.goAnnotation.evidence.publications.citation Gene.organism.shortName" longDescription="Retrieve all &lt;a href = &quot;https://sites.google.com/view/yeastgenome-help/analyze-help/yeastmine&quot;&gt;genes&lt;/a&gt; annotated to a specified GO Term. Manually curated, high-throughput, and computational GO annotations are included. To also retrieve annotations to child terms use the &lt;a href=&quot;https://yeastmine.yeastgenome.org/yeastmine/template.do?name=GOTerm_GeneOrganism&amp;scope=global&quot;&gt; GO Term name [and children of this  term] --&gt;All genes template&lt;/a&gt;." sortOrder="Gene.symbol asc">
                 <constraint path="Gene.goAnnotation.ontologyTerm" editable="false" type="GOTerm"/>
                 <constraint path="Gene.goAnnotation.ontologyTerm.name" editable="true" op="=" value="DNA binding"/>
             </query>
         </template>
-        <template name="Gene_Allele" title="Gene --&gt; Alleles" comment="">
+        <template name="Gene_Allele" title="Gene --&gt; Alleles" comment="" dataTypes="java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String">
             <query name="Gene_Allele" model="genomic" view="Gene.primaryIdentifier Gene.secondaryIdentifier Gene.symbol Gene.name Gene.organism.shortName Gene.alleles.alleleId Gene.alleles.alleleSymbol Gene.alleles.alleleType" longDescription="For a given gene retrieve alleles" sortOrder="Gene.primaryIdentifier asc">
-                <constraint path="Gene" editable="true" op="LOOKUP" value="ZFIN:ZDB-GENE-000112-47" extraValue="D. rerio"/>
+                <constraint path="Gene" editable="true" op="LOOKUP" value="ZFIN:ZDB-GENE-000112-47"/>
             </query>
         </template>
-        <template name="Gene_DOTerm" title="Gene --&gt; DO Terms" comment="">
-            <query name="Gene_DOTerm" model="genomic" view="Gene.primaryIdentifier Gene.symbol Gene.featureType Gene.diseaseAnnotation.ontologyTerm.identifier Gene.diseaseAnnotation.ontologyTerm.name Gene.diseaseAnnotation.evidence.code.code Gene.diseaseAnnotation.qualifier Gene.diseaseAnnotation.evidence.withText Gene.diseaseAnnotation.evidence.publications.pubMedId Gene.organism.shortName" longDescription="Retrieve all Disease Ontology (DO) annotations for a specified gene. Wild card queries (such as *YAL*) are supported." sortOrder="Gene.primaryIdentifier asc">
+        <template name="Gene_DOTerm" title="Gene --&gt; DO Terms" comment="" dataTypes="java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String">
+            <query name="Gene_DOTerm" model="genomic" view="Gene.primaryIdentifier Gene.symbol Gene.featureType Gene.diseaseAnnotation.ontologyTerm.identifier Gene.diseaseAnnotation.ontologyTerm.name Gene.diseaseAnnotation.evidence.code.code Gene.diseaseAnnotation.qualifier Gene.diseaseAnnotation.evidence.publications.pubMedId Gene.organism.shortName Gene.diseaseAnnotation.evidence.withText" longDescription="Retrieve all Disease Ontology (DO) annotations for a specified gene. Wild card queries (such as *YAL*) are supported." sortOrder="Gene.primaryIdentifier asc">
                 <constraint path="Gene.diseaseAnnotation.evidence" editable="false" type="DiseaseEvidence"/>
-                <constraint path="Gene" editable="true" op="LOOKUP" value="SGD:S000005857" extraValue="S. cerevisiae S288C"/>
+                <constraint path="Gene" editable="true" description="" op="LOOKUP" value="FAA1"/>
             </query>
         </template>
-        <template name="Gene_Description" title="Gene --&gt; Automated descriptions" comment="">
+        <template name="Gene_Description" title="Gene --&gt; Automated descriptions" comment="" dataTypes="java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String">
             <query name="Gene_Description" model="genomic" view="Gene.primaryIdentifier Gene.symbol Gene.name Gene.organism.shortName Gene.briefDescription Gene.description" longDescription="Retrieve genes with an automated gene description." sortOrder="Gene.primaryIdentifier asc" constraintLogic="A and B">
                 <constraint path="Gene.organism.shortName" code="A" editable="true" op="=" value="S. cerevisiae S288C"/>
-                <constraint path="Gene.description" code="B" editable="true" description="" switchable="on" op="CONTAINS" value="actin"/>
+                <constraint path="Gene.description" code="B" editable="true" op="CONTAINS" value="actin"/>
             </query>
         </template>
-        <template name="Gene_GOTerms" title="Gene --&gt; GO Terms" comment="">
+        <template name="Gene_Expression" title="Gene --&gt; Expression" comment="" dataTypes="java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String">
+            <query name="Gene_Expression" model="genomic" view="Gene.primaryIdentifier Gene.secondaryIdentifier Gene.symbol Gene.name Gene.expressionAnnotations.location Gene.expressionAnnotations.source Gene.expressionAnnotations.sourceURL Gene.expressionAnnotations.stageTerm Gene.expressionAnnotations.assay.identifier Gene.expressionAnnotations.assay.name Gene.expressionAnnotations.anatomy.identifier Gene.expressionAnnotations.anatomy.name Gene.expressionAnnotations.cellularcomponent.identifier Gene.expressionAnnotations.cellularcomponent.name Gene.expressionAnnotations.substructure.identifier Gene.expressionAnnotations.substructure.name Gene.expressionAnnotations.publications.pubMedId Gene.organism.shortName" longDescription="For a given gene retrieve expression annotations." sortOrder="Gene.primaryIdentifier asc">
+                <join path="Gene.expressionAnnotations.substructure" style="OUTER"/>
+                <join path="Gene.expressionAnnotations.cellularcomponent" style="OUTER"/>
+                <join path="Gene.expressionAnnotations.anatomy" style="OUTER"/>
+                <join path="Gene.expressionAnnotations.assay" style="OUTER"/>
+                <join path="Gene.expressionAnnotations.publications" style="OUTER"/>
+                <constraint path="Gene" editable="true" op="LOOKUP" value="fgf8b"/>
+            </query>
+        </template>
+        <template name="Gene_GOTerms" title="Gene --&gt; GO Terms" comment="" dataTypes="java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String">
             <query name="Gene_GOTerms" model="genomic" view="Gene.primaryIdentifier Gene.featureType Gene.goAnnotation.ontologyTerm.identifier Gene.goAnnotation.ontologyTerm.name Gene.goAnnotation.ontologyTerm.namespace Gene.goAnnotation.evidence.code.code Gene.goAnnotation.qualifier Gene.goAnnotation.evidence.code.withText Gene.goAnnotation.evidence.publications.pubMedId Gene.organism.shortName Gene.symbol Gene.name Gene.goAnnotation.evidence.publications.pubXrefId" longDescription="Retrieve all GO annotations for a specified gene." sortOrder="Gene.primaryIdentifier asc">
-                <constraint path="Gene" editable="true" op="LOOKUP" value="SGD:S000005857" extraValue="S. cerevisiae S288C"/>
+                <constraint path="Gene" editable="true" op="LOOKUP" value="SGD:S000005857"/>
             </query>
         </template>
-        <template name="Gene_GenomicDNA" title="Gene --&gt; Genomic DNA" comment="">
+        <template name="Gene_GenomicDNA" title="Gene --&gt; Genomic DNA" comment="" dataTypes="java.lang.String java.lang.String java.lang.String org.intermine.objectstore.query.ClobAccess int">
             <query name="Gene_GenomicDNA" model="genomic" view="Gene.primaryIdentifier Gene.featureType Gene.briefDescription Gene.sequence.residues Gene.sequence.length" longDescription="Retrieve genomic DNA (DNA sequence with introns) for the specified gene." sortOrder="Gene.primaryIdentifier asc">
-                <constraint path="Gene" editable="true" op="LOOKUP" value="SGD:S000003131" extraValue="S. cerevisiae S288C"/>
+                <constraint path="Gene" editable="true" op="LOOKUP" value="SGD:S000003131"/>
             </query>
         </template>
-        <template name="Gene_Identifiers" title="Gene --&gt; Identifiers" comment="">
+        <template name="Gene_Identifiers" title="Gene --&gt; Identifiers" comment="" dataTypes="java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String">
             <query name="Gene_Identifiers" model="genomic" view="Gene.primaryIdentifier Gene.symbol Gene.name Gene.synonyms.value Gene.crossReferences.identifier" longDescription="Find all identifiers for a gene" sortOrder="Gene.primaryIdentifier asc" constraintLogic="A and B and C">
                 <join path="Gene.synonyms" style="OUTER"/>
                 <join path="Gene.crossReferences" style="OUTER"/>
@@ -98,24 +116,646 @@
                 <constraint path="Gene.primaryIdentifier" code="A" editable="true" op="=" value="*ZDB*"/>
             </query>
         </template>
-        <template name="Gene_Orthologs" title="Gene --&gt; Orthologs" comment="">
-            <query name="Gene_Orthologs" model="genomic" view="Gene.primaryIdentifier Gene.secondaryIdentifier Gene.symbol Gene.name Gene.homologues.source Gene.homologues.algorithmsAttempted Gene.homologues.algorithmsMatch Gene.homologues.isBestScore Gene.homologues.isBestReverseScore Gene.homologues.algorithms Gene.organism.shortName Gene.homologues.homologue.organism.shortName" longDescription="For a given gene retrieve orthologs in other MOD organisms." sortOrder="Gene.primaryIdentifier asc">
-                <constraint path="Gene" editable="true" op="LOOKUP" value="ZFIN:ZDB-GENE-030131-2808" extraValue="D. rerio"/>
+        <template name="Gene_Orthologs" title="Gene --&gt; Orthologs" comment="" dataTypes="java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String">
+            <query name="Gene_Orthologs" model="genomic" view="Gene.primaryIdentifier Gene.secondaryIdentifier Gene.symbol Gene.name Gene.homologues.source Gene.organism.shortName Gene.homologues.homologue.organism.shortName Gene.homologues.homologue.primaryIdentifier Gene.homologues.homologue.secondaryIdentifier Gene.homologues.algorithmsAttempted Gene.homologues.algorithmsMatch Gene.homologues.isBestScore Gene.homologues.isBestReverseScore Gene.homologues.algorithms" longDescription="For a given gene retrieve orthologs in other MOD organisms." sortOrder="Gene.primaryIdentifier asc">
+                <constraint path="Gene" editable="true" op="LOOKUP" value="ZFIN:ZDB-GENE-030131-2808"/>
             </query>
         </template>
-        <template name="Gene_Variants" title="Gene --&gt; Alleles and its Variants" comment="">
+        <template name="Gene_Variants" title="Gene --&gt; Alleles and its Variants" comment="" dataTypes="java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String">
             <query name="Gene_Variants" model="genomic" view="Gene.primaryIdentifier Gene.secondaryIdentifier Gene.symbol Gene.name Gene.organism.shortName Gene.alleles.alleleId Gene.alleles.alleleSymbol Gene.alleles.alleleType Gene.alleles.variants.variantId Gene.alleles.variants.VariantsHgvsNames Gene.alleles.variants.variantSymbol Gene.alleles.variants.variantType Gene.alleles.variants.variantdetails.chr Gene.alleles.variants.variantdetails.chrStartPosition Gene.alleles.variants.variantdetails.chrEndPosition Gene.alleles.variants.variantdetails.hasDiseaseAnnotations Gene.alleles.variants.variantdetails.hasPhenotypeAnnotations Gene.alleles.variants.variantdetails.mostSevereConsequenceName Gene.alleles.variants.variantdetails.variantInformationReference Gene.alleles.variants.variantdetails.sequenceOfReference Gene.alleles.variants.variantdetails.sequenceOfVariant" longDescription="For a given gene retrieve alleles and their variants." sortOrder="Gene.primaryIdentifier asc">
-                <constraint path="Gene" editable="true" op="LOOKUP" value="ZFIN:ZDB-GENE-081022-110" extraValue="D. rerio"/>
+                <constraint path="Gene" editable="true" op="LOOKUP" value="ZFIN:ZDB-GENE-081022-110"/>
             </query>
         </template>
-        <template name="Literature_GO" title="Literature --&gt; GO annotations" comment="">
+        <template name="Literature_GO" title="Literature --&gt; GO annotations" comment="" dataTypes="java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String">
             <query name="Literature_GO" model="genomic" view="Gene.primaryIdentifier Gene.symbol Gene.featureType Gene.goAnnotation.ontologyTerm.identifier Gene.goAnnotation.ontologyTerm.name Gene.goAnnotation.ontologyTerm.namespace Gene.goAnnotation.evidence.code.code Gene.goAnnotation.qualifier Gene.goAnnotation.evidence.code.withText Gene.goAnnotation.annotationExtension Gene.goAnnotation.evidence.publications.pubMedId" longDescription="Retrieve GO annotations made from a specified PubMed ID (PMID)." sortOrder="Gene.primaryIdentifier asc">
                 <constraint path="Gene.goAnnotation.evidence.publications" editable="true" op="LOOKUP" value="17118118"/>
             </query>
         </template>
-        <template name="Organism_Genes" title="Organism --&gt; All genes" comment="">
+        <template name="Organism_Genes" title="Organism --&gt; All genes" comment="" dataTypes="java.lang.String java.lang.String java.lang.String java.lang.String java.lang.Integer java.lang.Integer java.lang.String java.lang.String java.lang.String java.lang.String">
             <query name="Organism_Genes" model="genomic" view="Gene.primaryIdentifier Gene.name Gene.briefDescription Gene.chromosome.primaryIdentifier Gene.chromosomeLocation.start Gene.chromosomeLocation.end Gene.chromosomeLocation.strand Gene.organism.shortName Gene.featureType Gene.symbol" longDescription="Retrieve Genes of a given Organism." sortOrder="Gene.primaryIdentifier asc">
-                <constraint path="Gene.organism.shortName" editable="true" description="" op="=" value="S. cerevisiae S288C"/>
+                <constraint path="Gene.organism.shortName" editable="true" op="=" value="S. cerevisiae S288C"/>
+            </query>
+        </template>
+        <template name="Organism_Orthologs" title="Organism --&gt; Orthologs" comment="" dataTypes="java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String">
+            <query name="Organism_Orthologs" model="genomic" view="Gene.primaryIdentifier Gene.secondaryIdentifier Gene.symbol Gene.name Gene.homologues.source Gene.homologues.algorithmsAttempted Gene.homologues.algorithmsMatch Gene.homologues.isBestScore Gene.homologues.isBestReverseScore Gene.homologues.algorithms Gene.organism.shortName Gene.homologues.homologue.organism.shortName" longDescription="For a given organism retrieve orthologs in other MOD organisms." sortOrder="Gene.primaryIdentifier asc">
+                <constraint path="Gene.organism.shortName" editable="true" op="=" value="H. sapiens"/>
+            </query>
+        </template>
+        <template name="AGR_Yeast_Genes" title="Organism --&gt; All genes" comment="" dataTypes="java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.Integer java.lang.Integer java.lang.String java.lang.String java.lang.String">
+            <query name="AGR_Yeast_Genes" model="genomic" view="Gene.primaryIdentifier Gene.secondaryIdentifier Gene.symbol Gene.name Gene.sgdAlias Gene.briefDescription Gene.chromosome.primaryIdentifier Gene.chromosomeLocation.start Gene.chromosomeLocation.end Gene.chromosomeLocation.strand Gene.organism.shortName Gene.featureType" longDescription="Retrieve Yeast Gene Information" sortOrder="Gene.primaryIdentifier asc">
+                <constraint path="Gene.organism.shortName" editable="true" op="=" value="S. cerevisiae"/>
+            </query>
+        </template>
+        <template name="A_IdentifierSynonym_Object" title="Identifier or synonym --&gt; Database object." comment="This is the template that the quick search runs.  If the name is changed it also has to be changed for the quick search configuration - Rachel. Removed tags so no longer displayed - just used for quick search now.  Rachel." dataTypes="java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String">
+            <query name="A_IdentifierSynonym_Object" model="genomic" view="Synonym.subject.primaryIdentifier Synonym.subject.secondaryIdentifier Synonym.subject.symbol Synonym.value Synonym.subject.sgdAlias Synonym.subject.organism.name" longDescription="Find an entry in the database using any identifier or synonym." sortOrder="Synonym.subject.primaryIdentifier asc">
+                <constraint path="Synonym.value" editable="true" op="=" value="act1"/>
+            </query>
+        </template>
+        <template name="AllGene_ChromosomalFeatures" title="All genes in organism --&gt; All Chromosomal Features" comment="" dataTypes="java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String">
+            <query name="AllGene_ChromosomalFeatures" model="genomic" view="SequenceFeature.primaryIdentifier SequenceFeature.featureType SequenceFeature.secondaryIdentifier SequenceFeature.symbol SequenceFeature.description SequenceFeature.sgdAlias SequenceFeature.qualifier" longDescription="Retrieve all &lt;a href=&quot;https://sites.google.com/view/yeastgenome-help/analyze-help/yeastmine &quot;&gt;chromosomal features&lt;/a&gt; for the reference genome of S. cerevisiae.  " sortOrder="SequenceFeature.primaryIdentifier asc" constraintLogic="A and B and E">
+                <constraint path="SequenceFeature.status" code="B" editable="false" description="" op="=" value="Active"/>
+                <constraint path="SequenceFeature.featureType" code="E" editable="true" description="" op="ONE OF">
+                    <value>ARS
+                    </value>
+                    <value>LTR_retrotransposon
+                    </value>
+                    <value>ORF
+                    </value>
+                    <value>X_element
+                    </value>
+                    <value>X_element_combinatorial_repeat
+                    </value>
+                    <value>Y_prime_element
+                    </value>
+                    <value>blocked_reading_frame
+                    </value>
+                    <value>centromere
+                    </value>
+                    <value>intein_encoding_region
+                    </value>
+                    <value>long_terminal_repeat
+                    </value>
+                    <value>ncRNA_gene
+                    </value>
+                    <value>not in systematic sequence of S288C
+                    </value>
+                    <value>pseudogene
+                    </value>
+                    <value>rRNA_gene
+                    </value>
+                    <value>snRNA_gene
+                    </value>
+                    <value>snoRNA_gene
+                    </value>
+                    <value>tRNA_gene
+                    </value>
+                    <value>telomerase_RNA_gene
+                    </value>
+                    <value>telomere
+                    </value>
+                    <value>telomeric_repeat
+                    </value>
+                    <value>transposable_element_gene
+                    </value>
+                </constraint>
+                <constraint path="SequenceFeature.organism.name" code="A" editable="true" description="" op="=" value="Saccharomyces cerevisiae"/>
+            </query>
+        </template>
+        <template name="AllGenes_Topic_Literature" title="All genes in organism --&gt;Topic--&gt;Literature" comment="" dataTypes="java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String">
+            <query name="AllGenes_Topic_Literature" model="genomic" view="Gene.primaryIdentifier Gene.secondaryIdentifier Gene.symbol Gene.name Gene.sgdAlias Gene.organism.shortName Gene.publicationAnnotations.publication.pubMedId Gene.publicationAnnotations.publication.citation Gene.publicationAnnotations.publication.title Gene.publicationAnnotations.publication.journal Gene.publicationAnnotations.literatureTopics.name" longDescription="Show all genes associated with a certain topic." sortOrder="Gene.primaryIdentifier asc" constraintLogic="A and B">
+                <constraint path="Gene.organism.shortName" code="B" editable="false" description="" op="=" value="S. cerevisiae"/>
+                <constraint path="Gene.publicationAnnotations.literatureTopics.name" code="A" editable="true" op="=" value="Omics"/>
+            </query>
+        </template>
+        <template name="All_Literature" title="Retrieve all papers in SGD" comment="" dataTypes="java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.Integer java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String">
+            <query name="All_Literature" model="genomic" view="Publication.pubMedId Publication.pubXrefId Publication.citation Publication.title Publication.journal Publication.year Publication.firstAuthor Publication.issue Publication.volume Publication.pages Publication.authors.name Publication.literatureTopics.name Publication.entities.symbol Publication.entities.secondaryIdentifier" longDescription="Retrieve all papers in SGD" sortOrder="Publication.pubMedId asc" constraintLogic="A and B and C">
+                <join path="Publication.authors" style="OUTER"/>
+                <constraint path="Publication.pubXrefId" code="C" editable="false" description="" op="IS NOT NULL"/>
+                <constraint path="Publication.pubMedId" code="B" editable="false" description="" op="IS NOT NULL"/>
+                <constraint path="Publication.entities" editable="false" type="SequenceFeature"/>
+                <constraint path="Publication" code="A" editable="true" description="" switchable="off" op="LOOKUP" value="11051561"/>
+            </query>
+        </template>
+        <template name="ChromosomeRegion_AllGenes" title="Chromosomal Region --&gt; All genes" comment="" dataTypes="java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.Integer java.lang.Integer java.lang.String java.lang.String">
+            <query name="ChromosomeRegion_AllGenes" model="genomic" view="Gene.chromosome.primaryIdentifier Gene.primaryIdentifier Gene.secondaryIdentifier Gene.featureType Gene.symbol Gene.name Gene.sgdAlias Gene.organism.shortName Gene.qualifier Gene.chromosomeLocation.start Gene.chromosomeLocation.end Gene.chromosomeLocation.strand Gene.description" longDescription="Retrieve all &lt;a href = &quot;https://sites.google.com/view/yeastgenome-help/analyze-help/yeastmine&quot;&gt;genes&lt;/a&gt; located within the specified chromosome and coordinate range." sortOrder="Gene.primaryIdentifier asc" constraintLogic="(A or B) and C and D and E and I">
+                <constraint path="Gene.featureType" code="I" editable="false" op="!=" value="not in systematic sequence of S288C"/>
+                <constraint path="Gene.status" code="B" editable="false" op="IS NULL"/>
+                <constraint path="Gene.status" code="A" editable="false" op="=" value="Active"/>
+                <constraint path="Gene.chromosome.primaryIdentifier" code="C" editable="true" op="=" value="chrXIV"/>
+                <constraint path="Gene.chromosomeLocation.start" code="D" editable="true" op="&gt;=" value="1"/>
+                <constraint path="Gene.chromosomeLocation.end" code="E" editable="true" op="&lt;=" value="20000"/>
+            </query>
+        </template>
+        <template name="Chromosome_AllFeatures" title="Chromosome --&gt; All features" comment="" dataTypes="java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String">
+            <query name="Chromosome_AllFeatures" model="genomic" view="SequenceFeature.chromosome.primaryIdentifier SequenceFeature.primaryIdentifier SequenceFeature.featureType SequenceFeature.secondaryIdentifier SequenceFeature.description SequenceFeature.sgdAlias SequenceFeature.qualifier" longDescription="Retrieve all &lt;a href = &quot;https://sites.google.com/view/yeastgenome-help/analyze-help/yeastmine &quot;&gt;feature types&lt;/a&gt; for the specified chromosome." sortOrder="SequenceFeature.primaryIdentifier asc" constraintLogic="(A or B or F or K or Q or Y or O or N or G or L or H or J or P or S or I or V or W) and T and U and X">
+                <constraint path="SequenceFeature.organism.name" code="T" editable="false" description="" op="=" value="Saccharomyces cerevisiae"/>
+                <constraint path="SequenceFeature.featureType" code="A" editable="false" description="" op="=" value="ORF"/>
+                <constraint path="SequenceFeature.featureType" code="B" editable="false" description="" op="=" value="ARS"/>
+                <constraint path="SequenceFeature.featureType" code="F" editable="false" description="" op="=" value="centromere"/>
+                <constraint path="SequenceFeature.featureType" code="K" editable="false" description="" op="=" value="pseudogene"/>
+                <constraint path="SequenceFeature.featureType" code="Q" editable="false" description="" op="=" value="telomere"/>
+                <constraint path="SequenceFeature.status" code="U" editable="false" description="" op="=" value="Active"/>
+                <constraint path="SequenceFeature.featureType" code="Y" editable="false" description="" op="=" value="tRNA gene"/>
+                <constraint path="SequenceFeature.featureType" code="O" editable="false" description="" op="=" value="snoRNA gene"/>
+                <constraint path="SequenceFeature.featureType" code="N" editable="false" description="" op="=" value="snRNA gene"/>
+                <constraint path="SequenceFeature.featureType" code="G" editable="false" description="" op="=" value="long terminal repeat"/>
+                <constraint path="SequenceFeature.featureType" code="L" editable="false" description="" op="=" value="rRNA gene"/>
+                <constraint path="SequenceFeature.featureType" code="H" editable="false" description="" op="=" value="ncRNA gene"/>
+                <constraint path="SequenceFeature.featureType" code="J" editable="false" description="" op="=" value="blocked reading frame"/>
+                <constraint path="SequenceFeature.featureType" code="P" editable="false" description="" op="=" value="transposable element gene"/>
+                <constraint path="SequenceFeature.featureType" code="S" editable="false" description="" op="=" value="telomerase RNA gene"/>
+                <constraint path="SequenceFeature.featureType" code="I" editable="false" description="" op="=" value="intein encoding region"/>
+                <constraint path="SequenceFeature.featureType" code="V" editable="false" description="" op="=" value="intein_encoding_region"/>
+                <constraint path="SequenceFeature.featureType" code="W" editable="false" description="" op="=" value="LTR retrotransposon"/>
+                <constraint path="SequenceFeature.chromosome.primaryIdentifier" code="X" editable="true" op="=" value="chrIII"/>
+            </query>
+        </template>
+        <template name="Chromosome_Gene_FeatureType" title="Chromosome--&gt;Genes of a selected Feature Type" comment="" dataTypes="java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String">
+            <query name="Chromosome_Gene_FeatureType" model="genomic" view="Gene.chromosome.primaryIdentifier Gene.primaryIdentifier Gene.secondaryIdentifier Gene.featureType Gene.qualifier Gene.symbol Gene.name Gene.organism.shortName Gene.description" longDescription="Retrieve features located on chromosome." sortOrder="Gene.featureType asc" constraintLogic="A and B and (E or F)">
+                <constraint path="Gene.status" code="F" editable="false" op="IS NULL"/>
+                <constraint path="Gene.status" code="E" editable="false" op="=" value="Active"/>
+                <constraint path="Gene.featureType" code="A" editable="true" op="=" value="ORF"/>
+                <constraint path="Gene.chromosome.primaryIdentifier" code="B" editable="true" op="=" value="chrI"/>
+            </query>
+        </template>
+        <template name="Chromosome_IntergenicSequence" title="Chromosome--&gt;All intergenic regions." comment="" dataTypes="java.lang.String java.lang.Integer java.lang.String java.lang.Integer java.lang.Integer java.lang.String java.lang.String java.lang.String java.lang.String">
+            <query name="Chromosome_IntergenicSequence" model="genomic" view="IntergenicRegion.primaryIdentifier IntergenicRegion.length IntergenicRegion.chromosomeLocation.locatedOn.primaryIdentifier IntergenicRegion.chromosomeLocation.start IntergenicRegion.chromosomeLocation.end IntergenicRegion.chromosomeLocation.strand IntergenicRegion.adjacentGenes.primaryIdentifier IntergenicRegion.adjacentGenes.secondaryIdentifier IntergenicRegion.adjacentGenes.symbol" longDescription="Retrieve all intergenic regions (with their chromosomal locations and lengths) for a specified chromosome." sortOrder="IntergenicRegion.primaryIdentifier asc" constraintLogic="A and B and C and D">
+                <join path="IntergenicRegion.adjacentGenes" style="OUTER"/>
+                <pathDescription pathString="IntergenicRegion.chromosomeLocation.locatedOn" description="Chromosome"/>
+                <constraint path="IntergenicRegion.organism.shortName" code="A" editable="false" description="" op="=" value="S. cerevisiae"/>
+                <constraint path="IntergenicRegion.adjacentGenes.featureType" code="D" editable="false" op="!=" value="not in systematic sequence of S288C"/>
+                <constraint path="IntergenicRegion.chromosomeLocation.locatedOn" editable="false" type="Chromosome"/>
+                <constraint path="IntergenicRegion.chromosomeLocation.locatedOn.primaryIdentifier" code="B" editable="true" description="Show intergenic regions for chromosome:" op="=" value="chrI"/>
+                <constraint path="IntergenicRegion.length" code="C" editable="true" op="&lt;=" value="10000"/>
+            </query>
+        </template>
+        <template name="Chromosome_Telomeres" title="Chromosome--&gt;Telomeric Regions" comment="" dataTypes="java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.Integer java.lang.Integer java.lang.String java.lang.String">
+            <query name="Chromosome_Telomeres" model="genomic" view="Telomere.chromosome.primaryIdentifier Telomere.primaryIdentifier Telomere.secondaryIdentifier Telomere.featureType Telomere.organism.shortName Telomere.chromosomeLocation.start Telomere.chromosomeLocation.end Telomere.chromosomeLocation.strand Telomere.description" longDescription="Retrieve telomeres and telomeric regions on a specified chromosome." sortOrder="Telomere.primaryIdentifier asc">
+                <constraint path="Telomere.chromosome.primaryIdentifier" editable="true" op="=" value="chrI"/>
+            </query>
+        </template>
+        <template name="Complex_Details_Participant" title="Complex --&gt;  Details + Participants" comment="" dataTypes="java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.Integer java.lang.String java.lang.Integer java.lang.String java.lang.String java.lang.String java.lang.String">
+            <query name="Complex_Details_Participant" model="genomic" view="Complex.accession Complex.name Complex.function Complex.systematicName Complex.allInteractors.biologicalRole Complex.allInteractors.stoichiometry Complex.allInteractors.type Complex.goAnnotation.id Complex.goAnnotation.qualifier Complex.publications.pubMedId Complex.allInteractors.participant.secondaryIdentifier Complex.allInteractors.participant.symbol" longDescription="For a given macromolecular complex, retrieve Gene Ontology annotations and references for the complex as a whole; also retrieve the subunits of the complex, their stoichiometry, and their biological roles in the complex." sortOrder="Complex.name asc" constraintLogic="A and B">
+                <join path="Complex.publications" style="OUTER"/>
+                <join path="Complex.goAnnotation" style="OUTER"/>
+                <constraint path="Complex.accession" code="B" editable="true" description="" switchable="on" op="=" value="CPX-599"/>
+                <constraint path="Complex.name" code="A" editable="true" description="" switchable="off" op="CONTAINS" value="U4/U6 small nuclear ribonucleoprotein complex"/>
+            </query>
+        </template>
+        <template name="CrossRefs_Tab" title="Retrieve all cross-references for all genes." comment="" dataTypes="java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String">
+            <query name="CrossRefs_Tab" model="genomic" view="Gene.crossReferences.identifier Gene.crossReferences.source.name Gene.crossReferences.dbxreftype Gene.primaryIdentifier Gene.secondaryIdentifier Gene.symbol" longDescription="Retrieve all cross-references for all genes." sortOrder="Gene.primaryIdentifier asc" constraintLogic="A and B">
+                <constraint path="Gene.organism.shortName" code="A" editable="true" description="" switchable="off" op="=" value="S. cerevisiae"/>
+                <constraint path="Gene.featureType" code="B" editable="true" op="=" value="ORF"/>
+            </query>
+        </template>
+        <template name="Deleted_Merged_Features_Tab" title="Deleted Merged Features" comment="" dataTypes="java.lang.String java.lang.String java.lang.String java.lang.Integer java.lang.Integer java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String">
+            <query name="Deleted_Merged_Features_Tab" model="genomic" view="Gene.secondaryIdentifier Gene.featureType Gene.chromosome.primaryIdentifier Gene.chromosomeLocation.start Gene.chromosomeLocation.end Gene.chromosomeLocation.strand Gene.primaryIdentifier Gene.symbol Gene.briefDescription Gene.organism.shortName" longDescription="Retrieve all deleted and merged features." sortOrder="Gene.secondaryIdentifier asc" constraintLogic="B and E and D">
+                <constraint path="Gene.status" code="D" editable="false" description="" switchable="on" op="NOT LIKE" value="Active"/>
+                <constraint path="Gene.status" code="E" editable="false" description="" switchable="on" op="IS NOT NULL"/>
+                <constraint path="Gene.organism.shortName" code="B" editable="true" description="" switchable="on" op="=" value="S. cerevisiae"/>
+            </query>
+        </template>
+        <template name="Domains_Tab" title="Retrieve all domains of all genes" comment="" dataTypes="java.lang.String java.lang.String java.lang.String java.lang.String java.lang.Integer java.lang.Integer java.lang.String java.lang.Integer">
+            <query name="Domains_Tab" model="genomic" view="Gene.secondaryIdentifier Gene.symbol Gene.proteins.proteinDomains.name Gene.proteins.proteinDomains.description Gene.proteins.proteinDomains.start Gene.proteins.proteinDomains.end Gene.proteins.proteinDomains.method Gene.proteins.proteinDomains.id" longDescription="Retrieve Proteins/Genes that have a given domain." sortOrder="Gene.symbol asc">
+                <constraint path="Gene.organism.shortName" editable="true" description="" switchable="off" op="=" value="S. cerevisiae"/>
+            </query>
+        </template>
+        <template name="FeatureType_Gene" title="Feature Type--&gt;Genes" comment="" dataTypes="java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.Integer java.lang.Integer java.lang.String java.lang.String">
+            <query name="FeatureType_Gene" model="genomic" view="Gene.chromosome.primaryIdentifier Gene.primaryIdentifier Gene.secondaryIdentifier Gene.featureType Gene.name Gene.sgdAlias Gene.qualifier Gene.organism.shortName Gene.chromosomeLocation.start Gene.chromosomeLocation.end Gene.chromosomeLocation.strand Gene.description" longDescription="Retrieve genes of a selected &lt;a href = &quot;https://sites.google.com/view/yeastgenome-help/analyze-help/yeastmine&quot;&gt;feature type&lt;/a&gt;. " sortOrder="Gene.primaryIdentifier asc" constraintLogic="(A or B) and C and F">
+                <join path="Gene.chromosome" style="OUTER"/>
+                <join path="Gene.chromosomeLocation" style="OUTER"/>
+                <constraint path="Gene.status" code="A" editable="false" op="=" value="Active"/>
+                <constraint path="Gene.status" code="B" editable="false" op="IS NULL"/>
+                <constraint path="Gene.organism.shortName" code="F" editable="false" description="" op="=" value="S. cerevisiae"/>
+                <constraint path="Gene.featureType" code="C" editable="true" op="=" value="ORF"/>
+            </query>
+        </template>
+        <template name="FeatureType_SequenceFeature" title="Feature Type --&gt; Features of a selected feature Type" comment="" dataTypes="java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String">
+            <query name="FeatureType_SequenceFeature" model="genomic" view="SequenceFeature.primaryIdentifier SequenceFeature.secondaryIdentifier SequenceFeature.symbol SequenceFeature.sgdAlias SequenceFeature.description SequenceFeature.featureType SequenceFeature.qualifier" longDescription="Retrieve all &lt;a href =&quot;https://sites.google.com/view/yeastgenome-help/analyze-help/yeastmine&quot;&gt;chromosomal features&lt;/a&gt; of a selected &lt;a href=&quot;https://sites.google.com/view/yeastgenome-help/analyze-help/yeastmine&quot;&gt;feature type&lt;/a&gt;." sortOrder="SequenceFeature.description asc" constraintLogic="Q and T and U">
+                <constraint path="SequenceFeature.organism.name" code="T" editable="false" description="" op="=" value="Saccharomyces cerevisiae"/>
+                <constraint path="SequenceFeature.status" code="U" editable="false" description="" op="=" value="Active"/>
+                <constraint path="SequenceFeature.featureType" code="Q" editable="true" op="=" value="telomere"/>
+            </query>
+        </template>
+        <template name="GO_Terms_Tab" title="Retrieve GO Terms" comment="" dataTypes="java.lang.String java.lang.String java.lang.String java.lang.String">
+            <query name="GO_Terms_Tab" model="genomic" view="GOTerm.identifier GOTerm.name GOTerm.namespace GOTerm.description" longDescription="Retrieve GO Terms" sortOrder="GOTerm.identifier asc">
+                <constraint path="GOTerm.namespace" editable="true" op="ONE OF">
+                    <value>biological_process
+                    </value>
+                    <value>cellular_component
+                    </value>
+                    <value>molecular_function
+                    </value>
+                </constraint>
+            </query>
+        </template>
+        <template name="GeneFactor_GeneTarget" title="Gene (regulator) --&gt; Gene (targets)" comment="" dataTypes="java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String">
+            <query name="GeneFactor_GeneTarget" model="genomic" view="Gene.regulatoryRegions.regulator.symbol Gene.regulatoryRegions.regulator.secondaryIdentifier Gene.symbol Gene.secondaryIdentifier Gene.regulatoryRegions.regEvidence.ontologyTerm.name Gene.regulatoryRegions.regEvidence.ontologyTerm.identifier Gene.regulatoryRegions.experimentCondition Gene.regulatoryRegions.strainBackground Gene.regulatoryRegions.regulationDirection Gene.regulatoryRegions.regulatorType Gene.regulatoryRegions.regulationType Gene.regulatoryRegions.publications.pubMedId Gene.regulatoryRegions.datasource Gene.regulatoryRegions.annotationType" longDescription="Retrieve &lt;a href = &quot;https://sites.google.com/view/yeastgenome-help/analyze-help/yeastmine&quot;&gt;genes&lt;/a&gt; that are targets of a given regulator gene." sortOrder="Gene.secondaryIdentifier asc" constraintLogic="B and A">
+                <constraint path="Gene.regulatoryRegions" editable="false" type="TFBindingSite"/>
+                <constraint path="Gene.regulatoryRegions.regulator.organism.shortName" code="B" editable="false" description="" switchable="off" op="=" value="S. cerevisiae"/>
+                <constraint path="Gene.regulatoryRegions.regulator" code="A" editable="true" op="LOOKUP" value="GAL4" extraValue="S. cerevisiae"/>
+            </query>
+        </template>
+        <template name="GeneTarget_GeneFactor" title="Gene (target) --&gt; Gene (regulators)" comment="" dataTypes="java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String">
+            <query name="GeneTarget_GeneFactor" model="genomic" view="Gene.regulatoryRegions.regulator.symbol Gene.regulatoryRegions.regulator.secondaryIdentifier Gene.symbol Gene.secondaryIdentifier Gene.regulatoryRegions.regEvidence.ontologyTerm.name Gene.regulatoryRegions.regEvidence.ontologyTerm.identifier Gene.regulatoryRegions.experimentCondition Gene.regulatoryRegions.strainBackground Gene.regulatoryRegions.regulationDirection Gene.regulatoryRegions.regulationType Gene.regulatoryRegions.regulatorType Gene.regulatoryRegions.publications.pubMedId Gene.regulatoryRegions.datasource Gene.regulatoryRegions.annotationType" longDescription="Retrieve genes that are regulators of a given target gene." sortOrder="Gene.secondaryIdentifier asc">
+                <constraint path="Gene.regulatoryRegions" editable="false" type="TFBindingSite"/>
+                <constraint path="Gene" editable="true" op="LOOKUP" value="HIS3" extraValue="S. cerevisiae"/>
+            </query>
+        </template>
+        <template name="Gene_Alleles" title="Genes --&gt; Alleles" comment="" dataTypes="java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String">
+            <query name="Gene_Alleles" model="genomic" view="Gene.primaryIdentifier Gene.secondaryIdentifier Gene.symbol Gene.name Gene.alleles.alleleSgdid Gene.alleles.name Gene.alleles.alleleClass Gene.alleles.description Gene.alleles.aliasName Gene.alleles.publications.pubMedId" longDescription="Retrieve alleles of a given gene." sortOrder="Gene.primaryIdentifier asc">
+                <join path="Gene.alleles.publications" style="OUTER"/>
+                <constraint path="Gene" editable="true" op="LOOKUP" value="act1"/>
+            </query>
+        </template>
+        <template name="Gene_ChromosomeLocation" title="Gene --&gt; Chromosomal location" comment="" dataTypes="java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.Integer java.lang.Integer java.lang.String">
+            <query name="Gene_ChromosomeLocation" model="genomic" view="Gene.primaryIdentifier Gene.secondaryIdentifier Gene.symbol Gene.name Gene.organism.shortName Gene.chromosome.primaryIdentifier Gene.chromosomeLocation.start Gene.chromosomeLocation.end Gene.chromosomeLocation.strand" longDescription="Retrieve the chromosomal location for a specified &lt;a href = &quot;https://sites.google.com/view/yeastgenome-help/analyze-help/yeastmine&quot;&gt;gene&lt;/a&gt;." sortOrder="Gene.primaryIdentifier asc" constraintLogic="A and B">
+                <constraint path="Gene.organism.shortName" code="B" editable="false" description="" op="=" value="S. cerevisiae"/>
+                <constraint path="Gene" code="A" editable="true" op="LOOKUP" value="act1"/>
+            </query>
+        </template>
+        <template name="Gene_Complex_New" title="Gene --&gt; Complex + Details" comment="" dataTypes="java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.Integer java.lang.String java.lang.String java.lang.Integer java.lang.String java.lang.String">
+            <query name="Gene_Complex_New" model="genomic" view="Complex.name Complex.function Complex.systematicName Complex.allInteractors.participant.symbol Complex.allInteractors.participant.genes.briefDescription Complex.allInteractors.participant.secondaryIdentifier Complex.allInteractors.biologicalRole Complex.allInteractors.stoichiometry Complex.allInteractors.participant.genes.secondaryIdentifier Complex.allInteractors.type Complex.goAnnotation.id Complex.goAnnotation.qualifier Complex.publications.pubMedId" longDescription="Retrieve the complex details including other members that are part of the complex for a given gene." sortOrder="Complex.name asc">
+                <join path="Complex.publications" style="OUTER"/>
+                <join path="Complex.goAnnotation" style="OUTER"/>
+                <constraint path="Complex.allInteractors.participant" editable="false" type="Protein"/>
+                <constraint path="Complex.allInteractors.participant.genes" editable="true" op="LOOKUP" value="pep8" extraValue="S. cerevisiae"/>
+            </query>
+        </template>
+        <template name="Gene_CrossRefs" title="Gene --&gt; External IDs" comment="" dataTypes="java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String">
+            <query name="Gene_CrossRefs" model="genomic" view="Gene.primaryIdentifier Gene.secondaryIdentifier Gene.symbol Gene.name Gene.sgdAlias Gene.crossReferences.identifier Gene.crossReferences.source.name" longDescription="Retrieve external database identifiers (e.g. UniProtKB ID, E.C. #) for a specified &lt;i&gt;S. cerevisiae&lt;/i&gt; &lt;a href = &quot;https://sites.google.com/view/yeastgenome-help/analyze-help/yeastmine&quot;&gt;gene&lt;/a&gt;." sortOrder="Gene.primaryIdentifier asc" constraintLogic="A and B">
+                <constraint path="Gene.organism.shortName" code="B" editable="false" description="" op="=" value="S. cerevisiae"/>
+                <constraint path="Gene" code="A" editable="true" op="LOOKUP" value="act1"/>
+            </query>
+        </template>
+        <template name="Gene_FeatureType_Introns" title="All genes of a selected Feature Type--&gt;Genes with introns" comment="" dataTypes="java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String">
+            <query name="Gene_FeatureType_Introns" model="genomic" view="Gene.primaryIdentifier Gene.secondaryIdentifier Gene.name Gene.description Gene.featureType Gene.qualifier Gene.sgdAlias Gene.organism.shortName" longDescription="Retrieve &lt;a href = &quot;http://www.yeastgenome.org/yeastmine-help-page#gene&quot;&gt;genes&lt;/a&gt; of a selected &lt;a href = &quot;http://www.yeastgenome.org/yeastmine-help-page#type&quot;&gt;feature type&lt;/a&gt; that have introns." sortOrder="Gene.primaryIdentifier asc" constraintLogic="B and C and (F or G) and (H or I) and J">
+                <constraint path="Gene.organism.name" code="J" editable="false" description="" op="=" value="Saccharomyces cerevisiae"/>
+                <constraint path="Gene.introns.primaryIdentifier" code="B" editable="false" op="IS NOT NULL"/>
+                <constraint path="Gene.introns.status" code="H" editable="false" op="=" value="Active"/>
+                <constraint path="Gene.introns.status" code="I" editable="false" op="IS NULL"/>
+                <constraint path="Gene.status" code="F" editable="false" op="=" value="Active"/>
+                <constraint path="Gene.status" code="G" editable="false" op="IS NULL"/>
+                <constraint path="Gene.featureType" code="C" editable="true" op="=" value="ORF"/>
+            </query>
+        </template>
+        <template name="Gene_Flanking_Sequence" title="Gene --&gt; Sequence Upstream and Downstream (+/-) Kb." comment="" dataTypes="java.lang.String java.lang.String java.lang.Integer java.lang.String int org.intermine.objectstore.query.ClobAccess">
+            <query name="Gene_Flanking_Sequence" model="genomic" view="Gene.secondaryIdentifier Gene.symbol Gene.length Gene.flankingRegions.direction Gene.flankingRegions.sequence.length Gene.flankingRegions.sequence.residues" longDescription="For a given gene(s), get a chosen length of upstream and/or downstream sequence along with the gene sequence. Choose to retrieve 0.5 kb, 1.0 kb, or 2.0 kb of upstream or downstream flanking regions, or both. To retrieve only flanking regions without the coding sequence, select false for the Gene Flanking Region &gt; Include Gene option (for this option, you must select only upstream or downstream flanking regions, not both)." sortOrder="Gene.secondaryIdentifier asc" constraintLogic="A and B and C and D">
+                <constraint path="Gene" code="B" editable="true" op="LOOKUP" value="act1" extraValue="S. cerevisiae"/>
+                <constraint path="Gene.flankingRegions.direction" code="C" editable="true" description="" op="=" value="both"/>
+                <constraint path="Gene.flankingRegions.distance" code="A" editable="true" op="=" value="1.0kb"/>
+                <constraint path="Gene.flankingRegions.includeGene" code="D" editable="true" op="=" value="true"/>
+            </query>
+        </template>
+        <template name="Gene_FungalHomologs" title="Gene --&gt; Fungal Homologs" comment="" dataTypes="java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String">
+            <query name="Gene_FungalHomologs" model="genomic" view="Gene.symbol Gene.secondaryIdentifier Gene.name Gene.sgdAlias Gene.homologues.homologue.organism.shortName Gene.homologues.homologue.primaryIdentifier Gene.homologues.homologue.symbol Gene.homologues.dataSets.dataSource.name Gene.homologues.homologue.briefDescription Gene.homologues.homologue.sgdAlias Gene.homologues.type" longDescription="Retrieve fungal homologs for a specified &lt;i&gt;S. cerevisiae&lt;/i&gt; &lt;a href = &quot;https://sites.google.com/view/yeastgenome-help/analyze-help/yeastmine&quot;&gt;gene&lt;/a&gt;." sortOrder="Gene.homologues.homologue.organism.shortName asc" constraintLogic="A and C and B">
+                <constraint path="Gene.homologues.homologue.organism.shortName" code="C" editable="false" description="" op="ONE OF">
+                    <value>A. flavus NRRL3357
+                    </value>
+                    <value>A. fumigatus Af293
+                    </value>
+                    <value>A. nidulans FGSC A4
+                    </value>
+                    <value>A. niger ATCC 1015
+                    </value>
+                    <value>C. albicans SC5314
+                    </value>
+                    <value>C. albicans WO-1
+                    </value>
+                    <value>C. dubliniensis CD36
+                    </value>
+                    <value>C. gattii R265
+                    </value>
+                    <value>C. gattii WM276
+                    </value>
+                    <value>C. glabrata CBS 138
+                    </value>
+                    <value>C. immitis H538.4
+                    </value>
+                    <value>C. immitis RS
+                    </value>
+                    <value>C. neoformans var. grubii H99
+                    </value>
+                    <value>C. neoformans var. neoformans JEC21
+                    </value>
+                    <value>C. parapsilosis CDC317
+                    </value>
+                    <value>C. posadasii C735 delta SOWgp
+                    </value>
+                    <value>M. oryzae 70-15
+                    </value>
+                    <value>N. crassa OR74A
+                    </value>
+                    <value>S. cerevisiae
+                    </value>
+                    <value>S. pombe
+                    </value>
+                    <value>T. marneffei ATCC 18224
+                    </value>
+                    <value>U. maydis 521
+                    </value>
+                </constraint>
+                <constraint path="Gene.organism.shortName" code="B" editable="false" description="" op="=" value="S. cerevisiae"/>
+                <constraint path="Gene" code="A" editable="true" description="" op="LOOKUP" value="ACT1"/>
+            </query>
+        </template>
+        <template name="Gene_Genetic_Interaction" title="Gene --&gt; Genetic Interactions" comment="" dataTypes="java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.Float java.lang.Float">
+            <query name="Gene_Genetic_Interaction" model="genomic" view="Gene.primaryIdentifier Gene.symbol Gene.secondaryIdentifier Gene.sgdAlias Gene.name Gene.organism.shortName Gene.interactions.details.annotationType Gene.interactions.details.phenotype Gene.interactions.details.role1 Gene.interactions.participant2.symbol Gene.interactions.participant2.secondaryIdentifier Gene.interactions.details.experiment.interactionDetectionMethods.identifier Gene.interactions.details.experiment.name Gene.interactions.details.relationshipType Gene.interactions.details.note Gene.interactions.alleleinteractions.allele1.name Gene.interactions.alleleinteractions.allele2.name Gene.interactions.alleleinteractions.pvalue Gene.interactions.alleleinteractions.sgaScore" longDescription="Retrieve all genetic interactions for a specified &lt;a href = &quot;https://sites.google.com/view/yeastgenome-help/analyze-help/yeastmine&quot;&gt;gene&lt;/a&gt;." sortOrder="Gene.primaryIdentifier asc" constraintLogic="A and B and D">
+                <join path="Gene.interactions.alleleinteractions" style="OUTER"/>
+                <constraint path="Gene.organism.shortName" code="B" editable="false" description="" op="=" value="S. cerevisiae"/>
+                <constraint path="Gene.interactions.participant2" editable="false" type="Gene"/>
+                <constraint path="Gene.interactions.details.relationshipType" code="D" editable="false" description="" op="=" value="genetic"/>
+                <constraint path="Gene" code="A" editable="true" op="LOOKUP" value="act1"/>
+            </query>
+        </template>
+        <template name="Gene_GenomicDNA" title="Gene--&gt;Genomic DNA" comment="" dataTypes="java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String int org.intermine.objectstore.query.ClobAccess java.lang.String java.lang.String">
+            <query name="Gene_GenomicDNA" model="genomic" view="Gene.primaryIdentifier Gene.secondaryIdentifier Gene.symbol Gene.name Gene.sgdAlias Gene.organism.shortName Gene.sequence.length Gene.sequence.residues Gene.description Gene.qualifier" longDescription="Retrieve genomic DNA (DNA sequence with introns) for the specified &lt;a href = &quot;https://sites.google.com/view/yeastgenome-help/analyze-help/yeastmine&quot;&gt;gene&lt;/a&gt;." sortOrder="Gene.primaryIdentifier asc" constraintLogic="(C or D) and E">
+                <constraint path="Gene.status" code="D" editable="false" description="" op="IS NULL"/>
+                <constraint path="Gene.status" code="C" editable="false" description="" op="=" value="Active"/>
+                <constraint path="Gene" code="E" editable="true" op="LOOKUP" value="rad54" extraValue="S. cerevisiae"/>
+            </query>
+        </template>
+        <template name="Gene_Homologs" title="Gene --&gt; Non-Fungal and S. cerevisiae Homologs" comment="" dataTypes="java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String">
+            <query name="Gene_Homologs" model="genomic" view="Gene.symbol Gene.secondaryIdentifier Gene.name Gene.sgdAlias Gene.homologues.homologue.organism.shortName Gene.homologues.homologue.primaryIdentifier Gene.homologues.homologue.symbol Gene.homologues.type Gene.homologues.dataSets.dataSource.name Gene.homologues.algorithms Gene.homologues.algorithmsMatch Gene.homologues.algorithmsAttempted Gene.homologues.isBestScore Gene.homologues.isBestReverseScore" longDescription="Retrieve all DiOPT homologs for a specified &lt;i&gt;S. cerevisiae&lt;/i&gt; &lt;a href = &quot;https://sites.google.com/view/yeastgenome-help/analyze-help/yeastmine&quot;&gt;gene&lt;/a&gt;." sortOrder="Gene.homologues.homologue.organism.shortName asc" constraintLogic="A and B and D">
+                <constraint path="Gene.organism.shortName" code="B" editable="false" description="" op="=" value="S. cerevisiae"/>
+                <constraint path="Gene.homologues.dataSets.dataSource.name" code="D" editable="false" description="" op="ONE OF">
+                    <value>DiOPT
+                    </value>
+                </constraint>
+                <constraint path="Gene" code="A" editable="true" op="LOOKUP" value="ACT1"/>
+            </query>
+        </template>
+        <template name="Gene_Introns" title="Retrieve--&gt;All genes that have introns" comment="" dataTypes="java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String">
+            <query name="Gene_Introns" model="genomic" view="Gene.primaryIdentifier Gene.secondaryIdentifier Gene.symbol Gene.name Gene.organism.shortName Gene.featureType Gene.qualifier Gene.description" longDescription="Retrieve &lt;a href=&quot;https://sites.google.com/view/yeastgenome-help/analyze-help/yeastmine&quot;&gt;genes&lt;/a&gt; that have introns. " sortOrder="Gene.primaryIdentifier asc" constraintLogic="(A or B) and C and (G or H) and I">
+                <constraint path="Gene.status" code="H" editable="false" op="IS NULL"/>
+                <constraint path="Gene.status" code="G" editable="false" op="=" value="Active"/>
+                <constraint path="Gene.introns.primaryIdentifier" code="C" editable="false" op="IS NOT NULL"/>
+                <constraint path="Gene.introns.status" code="B" editable="false" op="IS NULL"/>
+                <constraint path="Gene.introns.status" code="A" editable="false" op="=" value="Active"/>
+                <constraint path="Gene.organism.name" code="I" editable="true" op="=" value="Saccharomyces cerevisiae"/>
+            </query>
+        </template>
+        <template name="Gene_Literature" title="Gene--&gt;Literature" comment="" dataTypes="java.lang.String java.lang.String java.lang.Integer java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String">
+            <query name="Gene_Literature" model="genomic" view="Gene.publicationAnnotations.publication.pubMedId Gene.publicationAnnotations.publication.citation Gene.publicationAnnotations.publication.year Gene.publicationAnnotations.literatureTopics.name Gene.primaryIdentifier Gene.symbol Gene.secondaryIdentifier Gene.sgdAlias Gene.name" longDescription="Retrieve all references and literature topics associated with a specified &lt;a href=&quot;https://sites.google.com/view/yeastgenome-help/analyze-help/yeastmine&quot;&gt;gene&lt;/a&gt;." sortOrder="Gene.primaryIdentifier asc" constraintLogic="A and B">
+                <constraint path="Gene.organism.shortName" code="B" editable="false" description="" op="=" value="S. cerevisiae"/>
+                <constraint path="Gene" code="A" editable="true" op="LOOKUP" value="HEM2" extraValue="S. cerevisiae"/>
+            </query>
+        </template>
+        <template name="Gene_OverlappingGenes" title="Retrieve --&gt; All overlapping genes" comment="" dataTypes="java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.Integer java.lang.Integer java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.Integer java.lang.Integer java.lang.String">
+            <query name="Gene_OverlappingGenes" model="genomic" view="Gene.primaryIdentifier Gene.secondaryIdentifier Gene.symbol Gene.qualifier Gene.chromosome.primaryIdentifier Gene.chromosomeLocation.start Gene.chromosomeLocation.end Gene.chromosomeLocation.strand Gene.overlappingFeatures.primaryIdentifier Gene.overlappingFeatures.secondaryIdentifier Gene.overlappingFeatures.symbol Gene.overlappingFeatures.qualifier Gene.overlappingFeatures.chromosomeLocation.start Gene.overlappingFeatures.chromosomeLocation.end Gene.overlappingFeatures.chromosomeLocation.strand" longDescription="Retrieve all overlapping &lt;a href = &quot;https://sites.google.com/view/yeastgenome-help/analyze-help/yeastmine&quot;&gt;genes&lt;/a&gt;. Caution: since the relationships are reciprocal, each gene in an overlapping pair has a separate line in the output file." sortOrder="Gene.primaryIdentifier asc" constraintLogic="A and C and G">
+                <pathDescription pathString="Gene.overlappingFeatures" description="Overlapping gene"/>
+                <pathDescription pathString="Gene.overlappingFeatures.chromosomeLocation" description="Overlapping feature &gt; chromosome gene"/>
+                <pathDescription pathString="Gene.chromosomeLocation" description="Gene &gt; chromosome location"/>
+                <constraint path="Gene.status" code="A" editable="false" op="=" value="Active"/>
+                <constraint path="Gene.overlappingFeatures.status" code="G" editable="false" op="=" value="Active"/>
+                <constraint path="Gene.overlappingFeatures" editable="false" type="Gene"/>
+                <constraint path="Gene.organism.shortName" code="C" editable="true" op="=" value="S. cerevisiae"/>
+            </query>
+        </template>
+        <template name="Gene_Phenotype_New" title="Gene --&gt; Phenotype" comment="" dataTypes="java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String">
+            <query name="Gene_Phenotype_New" model="genomic" view="Gene.primaryIdentifier Gene.secondaryIdentifier Gene.symbol Gene.sgdAlias Gene.qualifier Gene.phenotypes.experimentType Gene.phenotypes.mutantType Gene.phenotypes.observable Gene.phenotypes.qualifier Gene.phenotypes.allele Gene.phenotypes.alleleDescription Gene.phenotypes.strainBackground Gene.phenotypes.chemical Gene.phenotypes.condition Gene.phenotypes.details Gene.phenotypes.reporter Gene.phenotypes.publications.pubMedId Gene.phenotypes.publications.citation" longDescription="Retrieve all phenotypes for a specified &lt;a href = &quot;https://sites.google.com/view/yeastgenome-help/analyze-help/yeastmine&quot;&gt;gene&lt;/a&gt;." sortOrder="Gene.primaryIdentifier asc">
+                <constraint path="Gene" editable="true" op="LOOKUP" value="act1" extraValue="S. cerevisiae"/>
+            </query>
+        </template>
+        <template name="Gene_Physical_Interaction" title="Gene --&gt; Physical Interactions" comment="" dataTypes="java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String">
+            <query name="Gene_Physical_Interaction" model="genomic" view="Gene.primaryIdentifier Gene.symbol Gene.secondaryIdentifier Gene.sgdAlias Gene.name Gene.organism.shortName Gene.interactions.details.annotationType Gene.interactions.details.role1 Gene.interactions.participant2.symbol Gene.interactions.participant2.secondaryIdentifier Gene.interactions.details.experiment.interactionDetectionMethods.identifier Gene.interactions.details.experiment.name Gene.interactions.details.relationshipType Gene.interactions.details.note" longDescription="Retrieve all physical interactions for a specified &lt;a href = &quot;https://sites.google.com/view/yeastgenome-help/analyze-help/yeastmine&quot;&gt;gene&lt;/a&gt;." sortOrder="Gene.primaryIdentifier asc" constraintLogic="A and B and C">
+                <constraint path="Gene.interactions.participant2" editable="false" type="Gene"/>
+                <constraint path="Gene.organism.shortName" code="B" editable="false" description="" op="=" value="S. cerevisiae"/>
+                <constraint path="Gene.interactions.details.relationshipType" code="C" editable="false" description="" op="=" value="physical"/>
+                <constraint path="Gene" code="A" editable="true" op="LOOKUP" value="act1" extraValue="S. cerevisiae"/>
+            </query>
+        </template>
+        <template name="Gene_ProteinAbundance" title="Gene --&gt; Protein Abundance" comment="" dataTypes="java.lang.String java.lang.String java.lang.String java.lang.String java.lang.Float java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String">
+            <query name="Gene_ProteinAbundance" model="genomic" view="Gene.primaryIdentifier Gene.proteins.symbol Gene.secondaryIdentifier Gene.qualifier Gene.proteins.proteinAbundance.abundance Gene.proteins.proteinAbundance.units Gene.proteins.proteinAbundance.media Gene.proteins.proteinAbundance.treatment Gene.proteins.proteinAbundance.treatmentTime Gene.proteins.proteinAbundance.foldChange Gene.proteins.proteinAbundance.visualization Gene.proteins.proteinAbundance.strainBackground Gene.proteins.proteinAbundance.origPublication.pubMedId Gene.proteins.proteinAbundance.publication.pubMedId" longDescription="Retrieve protein abundance for the protein(s) encoded by the specified &lt;a href = &quot;https://sites.google.com/view/yeastgenome-help/analyze-help/yeastmine&quot;&gt;gene(s)&lt;/a&gt;." sortOrder="Gene.primaryIdentifier asc" constraintLogic="B and A">
+                <pathDescription pathString="Gene.proteins" description="Protein"/>
+                <constraint path="Gene.organism.shortName" code="B" editable="false" description="" op="=" value="S. cerevisiae"/>
+                <constraint path="Gene" code="A" editable="true" description="" op="LOOKUP" value="tfc3"/>
+            </query>
+        </template>
+        <template name="Gene_ProteinMods_Ntermini" title="Gene --&gt; Experimental N-termini and N-terminal modifications" comment="" dataTypes="java.lang.String java.lang.String java.lang.String java.lang.Integer java.lang.Double java.lang.Float java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String">
+            <query name="Gene_ProteinMods_Ntermini" model="genomic" view="Gene.primaryIdentifier Gene.proteins.symbol Gene.secondaryIdentifier Gene.proteins.length Gene.proteins.molecularWeight Gene.proteins.pI Gene.proteins.proteinModificationSites.experimentalNterminalSite Gene.proteins.proteinModificationSites.modificationType Gene.proteins.proteinModificationSites.modificationSite Gene.proteins.proteinModificationSites.experimentalNterminalSequence Gene.proteins.proteinModificationSites.category Gene.proteins.proteinModificationSites.publication.pubMedId" longDescription="Retrieve N-terminal modifications of the protein for a specified &lt;a href = &quot;https://sites.google.com/view/yeastgenome-help/analyze-help/yeastmine&quot;&gt;gene&lt;/a&gt;." sortOrder="Gene.primaryIdentifier asc" constraintLogic="B and A and C">
+                <pathDescription pathString="Gene.proteins" description="Protein"/>
+                <constraint path="Gene.proteins.proteinModificationSites.category" code="C" editable="false" description="" op="=" value="N-terminus"/>
+                <constraint path="Gene.organism.shortName" code="B" editable="false" description="" op="=" value="S. cerevisiae"/>
+                <constraint path="Gene" code="A" editable="true" op="LOOKUP" value="cor1, cha1"/>
+            </query>
+        </template>
+        <template name="Gene_Protein_Half_Life" title="Gene --&gt; Protein Half-life" comment="" dataTypes="java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.Float java.lang.String java.lang.String java.lang.String">
+            <query name="Gene_Protein_Half_Life" model="genomic" view="Gene.primaryIdentifier Gene.secondaryIdentifier Gene.symbol Gene.description Gene.proteins.symbol Gene.proteins.proteinHalfLife.experiment Gene.proteins.proteinHalfLife.value Gene.proteins.proteinHalfLife.units Gene.proteins.proteinHalfLife.publication.pubMedId Gene.organism.shortName" longDescription="Retrieve Protein half-life for a given gene(s). This study had reported value of &gt;=100 hours for the most stable proteins. To facilitate sorting and searching this values have been substituted  '10000' hours." sortOrder="Gene.secondaryIdentifier asc">
+                <constraint path="Gene" editable="true" op="LOOKUP" value="act1" extraValue="S. cerevisiae"/>
+            </query>
+        </template>
+        <template name="Gene_To_Protein_Type_Converter" title="Gene to protein type converter" comment="" dataTypes="java.lang.Integer java.lang.Integer">
+            <query name="Gene_To_Protein_Type_Converter" model="genomic" view="Gene.id Gene.proteins.id" longDescription="" sortOrder="Gene.id asc">
+                <constraint path="Gene.id" editable="true" description="Gene.id" op="=" value="0"/>
+            </query>
+        </template>
+        <template name="Gene_Topic_Literature" title="Gene--&gt;Topic--&gt;Literature" comment="" dataTypes="java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.Integer">
+            <query name="Gene_Topic_Literature" model="genomic" view="Gene.primaryIdentifier Gene.secondaryIdentifier Gene.organism.shortName Gene.symbol Gene.name Gene.featureType Gene.publicationAnnotations.literatureTopics.name Gene.publicationAnnotations.publication.citation Gene.publicationAnnotations.publication.pubMedId Gene.publicationAnnotations.publication.year" longDescription="Retrieve references associated with the selected literature topic for a given &lt;a href = &quot;https://sites.google.com/view/yeastgenome-help/analyze-help/yeastmine&quot;&gt;gene&lt;/a&gt;. " sortOrder="Gene.primaryIdentifier asc" constraintLogic="A and B and C">
+                <constraint path="Gene.organism.shortName" code="C" editable="false" description="" op="=" value="S. cerevisiae"/>
+                <constraint path="Gene" code="B" editable="true" op="LOOKUP" value="HEM2"/>
+                <constraint path="Gene.publicationAnnotations.literatureTopics.name" code="A" editable="true" op="=" value="Primary Literature"/>
+            </query>
+        </template>
+        <template name="Gene_Transcript" title="Gene --&gt; Transcripts" comment="" dataTypes="java.lang.String java.lang.String java.lang.String java.lang.Integer java.lang.Integer java.lang.String java.lang.String java.lang.String java.lang.String">
+            <query name="Gene_Transcript" model="genomic" view="Gene.secondaryIdentifier Gene.transcripts.primaryIdentifier Gene.transcripts.chromosome.primaryIdentifier Gene.transcripts.chromosomeLocation.start Gene.transcripts.chromosomeLocation.end Gene.transcripts.chromosomeLocation.strand Gene.transcripts.in_gal Gene.transcripts.in_ypd Gene.transcripts.publications.pubMedId" longDescription="Retrieve &lt;a href = &quot;https://sites.google.com/view/yeastgenome-help/analyze-help/yeastmine#h.p_uyw_Yd2T3HAF&quot;&gt;transcript&lt;/a&gt; iso-forms for a given  gene. " sortOrder="Gene.secondaryIdentifier asc" constraintLogic="A and B and C">
+                <constraint path="Gene.transcripts" editable="false" type="MRNA"/>
+                <constraint path="Gene.organism.shortName" code="B" editable="false" description="" op="=" value="S. cerevisiae"/>
+                <constraint path="Gene.transcripts.dataSets.name" code="C" editable="false" description="" op="=" value="SGD data set"/>
+                <constraint path="Gene" code="A" editable="true" op="LOOKUP" value="YHR191C"/>
+            </query>
+        </template>
+        <template name="Gene_UTRs" title="Gene --&gt; UTRs" comment="" dataTypes="java.lang.String java.lang.String java.lang.String java.lang.Integer java.lang.Integer java.lang.String java.lang.String org.intermine.objectstore.query.ClobAccess java.lang.String java.lang.String">
+            <query name="Gene_UTRs" model="genomic" view="Gene.secondaryIdentifier Gene.transcripts.primaryIdentifier Gene.transcripts.chromosome.primaryIdentifier Gene.transcripts.UTRs.chromosomeLocation.start Gene.transcripts.UTRs.chromosomeLocation.end Gene.chromosomeLocation.strand Gene.transcripts.UTRs.primaryIdentifier Gene.transcripts.UTRs.sequence.residues Gene.transcripts.in_gal Gene.transcripts.in_ypd" longDescription="Retrieve UTR location information for a given gene by taking the differences between the gene and  &lt;a href = &quot;https://sites.google.com/view/yeastgenome-help/analyze-help/yeastmine#h.p_uyw_Yd2T3HAF&quot;&gt; transcript &lt;/a&gt; start locations and the gene and transcript end locations.  Transcripts are based on Pelechano et al, 2013." sortOrder="Gene.transcripts.primaryIdentifier asc" constraintLogic="A and B and C">
+                <constraint path="Gene.transcripts" editable="false" type="MRNA"/>
+                <constraint path="Gene.organism.shortName" code="B" editable="false" description="" op="=" value="S. cerevisiae"/>
+                <constraint path="Gene.transcripts.dataSets.name" code="C" editable="false" description="" op="=" value="SGD data set"/>
+                <constraint path="Gene" code="A" editable="true" description="" op="LOOKUP" value="YHR191C"/>
+            </query>
+        </template>
+        <template name="Gene_UpstreamIntergenic" title="Gene--&gt;Upstream intergenic region" comment="" dataTypes="java.lang.String java.lang.String java.lang.String java.lang.String java.lang.Integer java.lang.String java.lang.Integer java.lang.Integer java.lang.String">
+            <query name="Gene_UpstreamIntergenic" model="genomic" view="Gene.primaryIdentifier Gene.secondaryIdentifier Gene.symbol Gene.upstreamIntergenicRegion.primaryIdentifier Gene.upstreamIntergenicRegion.length Gene.upstreamIntergenicRegion.chromosome.primaryIdentifier Gene.upstreamIntergenicRegion.chromosomeLocation.start Gene.upstreamIntergenicRegion.chromosomeLocation.end Gene.upstreamIntergenicRegion.chromosomeLocation.strand" longDescription="Retrieve upstream intergenic region with its length and chromosomal location for a specified &lt;a href = &quot;https://sites.google.com/view/yeastgenome-help/analyze-help/yeastmine&quot;&gt;gene&lt;/a&gt;." sortOrder="Gene.primaryIdentifier asc" constraintLogic="A and B">
+                <pathDescription pathString="Gene.upstreamIntergenicRegion.chromosomeLocation" description="Upstream intergenic region &gt; chromosome location"/>
+                <pathDescription pathString="Gene.upstreamIntergenicRegion" description="Upstream intergenic region"/>
+                <pathDescription pathString="Gene.upstreamIntergenicRegion.chromosome" description="Chromosome"/>
+                <constraint path="Gene.organism.shortName" code="B" editable="false" description="" op="=" value="S. cerevisiae"/>
+                <constraint path="Gene" code="A" editable="true" description="Show upstream intergenic region for gene:" op="LOOKUP" value="act1"/>
+            </query>
+        </template>
+        <template name="Gene_YeastParalogs" title="Organism --&gt; All S. cerevisiae Paralogs" comment="" dataTypes="java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String">
+            <query name="Gene_YeastParalogs" model="genomic" view="Gene.symbol Gene.secondaryIdentifier Gene.name Gene.homologues.homologue.symbol Gene.homologues.homologue.secondaryIdentifier Gene.homologues.homologue.name Gene.homologues.type Gene.homologues.source Gene.homologues.publication.pubMedId" longDescription="Retrieve paralogs for a specified S. cerevisiae gene(s)." sortOrder="Gene.symbol asc" constraintLogic="C and A">
+                <constraint path="Gene.homologues.dataSets.dataSource.name" code="C" editable="false" description="" switchable="on" op="=" value="SGD"/>
+                <constraint path="Gene" code="A" editable="true" description="" switchable="on" op="LOOKUP" value="dog2, kcc4, aac3" extraValue="S. cerevisiae"/>
+            </query>
+        </template>
+        <template name="GenomeWide_Papers" title="Retrieve all Publications associated with genome-wide analysis topics." comment="" dataTypes="java.lang.String java.lang.String java.lang.String java.lang.Integer java.lang.String">
+            <query name="GenomeWide_Papers" model="genomic" view="Publication.pubMedId Publication.title Publication.firstAuthor Publication.year Publication.literatureTopics.name" longDescription="Show publications associated with the genome-wide analysis topic." sortOrder="Publication.pubMedId asc">
+                <constraint path="Publication.literatureTopics.name" editable="true" description="" switchable="on" op="=" value="Omics"/>
+            </query>
+        </template>
+        <template name="GoSlimTerm_Gene" title="GO Slim Term --&gt; Gene" comment="" dataTypes="java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String">
+            <query name="GoSlimTerm_Gene" model="genomic" view="Gene.primaryIdentifier Gene.secondaryIdentifier Gene.symbol Gene.featureType Gene.qualifier Gene.goAnnotation.ontologyTerm.identifier Gene.goAnnotation.ontologyTerm.name Gene.goAnnotation.ontologyTerm.namespace Gene.goAnnotation.evidence.code.code Gene.goAnnotation.qualifier Gene.goAnnotation.evidence.code.withText Gene.goAnnotation.annotationExtension Gene.goAnnotation.evidence.code.annotType Gene.goAnnotation.ontologyTerm.parents.identifier Gene.goAnnotation.ontologyTerm.parents.name Gene.goAnnotation.evidence.publications.pubMedId Gene.goAnnotation.evidence.publications.citation" longDescription="Retrieve all &lt;a href = &quot;https://sites.google.com/view/yeastgenome-help/analyze-help/yeastmine&quot;&gt;genes&lt;/a&gt; that are annotated to the selected GO Slim term and children of that selected GO Slim Term. Only manually curated and high-throughput GO annotations are included." sortOrder="Gene.featureType asc" constraintLogic="(C or D) and (E or F) and G">
+                <constraint path="Gene.goAnnotation.qualifier" code="C" editable="false" description="" op="!=" value="NOT"/>
+                <constraint path="Gene.goAnnotation.qualifier" code="D" editable="false" description="" op="IS NULL"/>
+                <constraint path="Gene.goAnnotation.evidence.code.annotType" code="E" editable="false" description="" op="=" value="high-throughput"/>
+                <constraint path="Gene.goAnnotation.evidence.code.annotType" code="F" editable="false" description="" op="=" value="manually curated"/>
+                <constraint path="Gene.goAnnotation.ontologyTerm.parents" editable="false" type="GOSlimTerm"/>
+                <constraint path="Gene.goAnnotation.ontologyTerm.parents.name" code="G" editable="true" op="=" value="DNA binding"/>
+            </query>
+        </template>
+        <template name="Interaction_Tab" title="Retrieve all interactions for all genes." comment="" dataTypes="java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String">
+            <query name="Interaction_Tab" model="genomic" view="Gene.secondaryIdentifier Gene.symbol Gene.interactions.participant2.secondaryIdentifier Gene.interactions.participant2.symbol Gene.interactions.details.experiment.name Gene.interactions.details.relationshipType Gene.interactions.details.annotationType Gene.interactions.details.note Gene.interactions.details.phenotype Gene.interactions.details.role1 Gene.interactions.details.experiment.interactionDetectionMethods.identifier Gene.interactions.details.experiment.publication.pubMedId Gene.interactions.details.experiment.publication.pubXrefId Gene.interactions.details.experiment.publication.citation" longDescription="Retrieve all interactions for all genes." sortOrder="Gene.secondaryIdentifier asc">
+                <constraint path="Gene.interactions.participant2" editable="false" type="Gene"/>
+                <constraint path="Gene.organism.shortName" editable="true" description="" switchable="off" op="=" value="S. cerevisiae"/>
+            </query>
+        </template>
+        <template name="Literature_Complements" title="Literature --&gt; Functional Complementation" comment="" dataTypes="java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String">
+            <query name="Literature_Complements" model="genomic" view="Gene.primaryIdentifier Gene.secondaryIdentifier Gene.symbol Gene.complements.complement.primaryIdentifier Gene.complements.complement.symbol Gene.complements.complement.crossReferences.identifier Gene.complements.complement.crossReferences.source.name Gene.complements.direction Gene.complements.publication.pubMedId Gene.complements.source Gene.complements.notes" longDescription="Retrieve functional complements made from a specified PubMed ID (PMID)." sortOrder="Gene.primaryIdentifier asc">
+                <join path="Gene.complements.complement.crossReferences" style="OUTER"/>
+                <constraint path="Gene.complements.publication" editable="true" description="" switchable="off" op="LOOKUP" value="25999509"/>
+            </query>
+        </template>
+        <template name="Literature_Complex" title="Literature --&gt; Molecular Complexes" comment="" dataTypes="java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.Integer java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String">
+            <query name="Literature_Complex" model="genomic" view="Complex.identifier Complex.name Complex.function Complex.properties Complex.systematicName Complex.publications.pubMedId Complex.allInteractors.biologicalRole Complex.allInteractors.stoichiometry Complex.allInteractors.type Complex.allInteractors.participant.secondaryIdentifier Complex.allInteractors.participant.symbol Complex.allInteractors.participant.name Complex.allInteractors.participant.primaryIdentifier" longDescription="Retrieve all molecular complexes curated to a PubMed ID (PMID)." sortOrder="Complex.identifier asc">
+                <constraint path="Complex.publications.pubMedId" editable="true" description="" switchable="off" op="=" value="22762203"/>
+            </query>
+        </template>
+        <template name="Literature_DO" title="Literature --&gt; Disease Annotations" comment="" dataTypes="java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String">
+            <query name="Literature_DO" model="genomic" view="Gene.primaryIdentifier Gene.secondaryIdentifier Gene.symbol Gene.featureType Gene.diseaseAnnotation.ontologyTerm.identifier Gene.diseaseAnnotation.ontologyTerm.name Gene.diseaseAnnotation.evidence.code.code Gene.diseaseAnnotation.evidence.annotType Gene.diseaseAnnotation.evidence.withText Gene.diseaseAnnotation.evidence.publications.pubMedId Gene.diseaseAnnotation.evidence.publications.citation" longDescription="Retrieve disease annotations made from a specified PubMed ID (PMID)." sortOrder="Gene.primaryIdentifier asc">
+                <constraint path="Gene.diseaseAnnotation.evidence" editable="false" type="DiseaseEvidence"/>
+                <constraint path="Gene.diseaseAnnotation.ontologyTerm" editable="false" type="DOTerm"/>
+                <constraint path="Gene.diseaseAnnotation.evidence.publications" editable="true" description="" switchable="off" op="LOOKUP" value="26354769"/>
+            </query>
+        </template>
+        <template name="Literature_GO" title="Literature --&gt; GO annotations" comment="" dataTypes="java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String">
+            <query name="Literature_GO" model="genomic" view="Gene.primaryIdentifier Gene.secondaryIdentifier Gene.symbol Gene.featureType Gene.goAnnotation.ontologyTerm.identifier Gene.goAnnotation.ontologyTerm.name Gene.goAnnotation.ontologyTerm.namespace Gene.goAnnotation.evidence.code.code Gene.goAnnotation.qualifier Gene.goAnnotation.evidence.code.withText Gene.goAnnotation.annotationExtension Gene.goAnnotation.evidence.code.annotType Gene.goAnnotation.evidence.publications.pubMedId Gene.goAnnotation.evidence.publications.citation" longDescription="Retrieve GO annotations made from a specified PubMed ID (PMID)." sortOrder="Gene.primaryIdentifier asc">
+                <constraint path="Gene.goAnnotation.evidence.publications" editable="true" description="" switchable="off" op="LOOKUP" value="17118118"/>
+            </query>
+        </template>
+        <template name="Literature_Gene" title="Literature--&gt;Genes" comment="" dataTypes="java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.Integer">
+            <query name="Literature_Gene" model="genomic" view="PublicationAnnotation.genes.primaryIdentifier PublicationAnnotation.genes.secondaryIdentifier PublicationAnnotation.genes.symbol PublicationAnnotation.genes.sgdAlias PublicationAnnotation.genes.name PublicationAnnotation.publication.pubMedId PublicationAnnotation.publication.citation PublicationAnnotation.publication.year" longDescription="Retrieve all &lt;a href = &quot;https://sites.google.com/view/yeastgenome-help/analyze-help/yeastmine&quot;&gt;genes&lt;/a&gt; curated to a PubMed ID (PMID)." sortOrder="PublicationAnnotation.genes.symbol asc">
+                <constraint path="PublicationAnnotation.publication" editable="true" description="Constrains on PMID" op="LOOKUP" value="20424846"/>
+            </query>
+        </template>
+        <template name="Literature_Interaction" title="Literature --&gt; Interaction" comment="" dataTypes="java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.Float java.lang.Float java.lang.String java.lang.String">
+            <query name="Literature_Interaction" model="genomic" view="Gene.primaryIdentifier Gene.secondaryIdentifier Gene.symbol Gene.name Gene.sgdAlias Gene.interactions.details.annotationType Gene.interactions.details.phenotype Gene.interactions.details.role1 Gene.interactions.details.experiment.publication.pubMedId Gene.interactions.details.experiment.publication.citation Gene.interactions.details.experiment.publication.title Gene.interactions.details.experiment.publication.journal Gene.interactions.participant2.symbol Gene.interactions.participant2.secondaryIdentifier Gene.interactions.details.experiment.interactionDetectionMethods.identifier Gene.interactions.details.experiment.name Gene.interactions.details.relationshipType Gene.interactions.alleleinteractions.pvalue Gene.interactions.alleleinteractions.sgaScore Gene.interactions.alleleinteractions.allele1.name Gene.interactions.alleleinteractions.allele2.name" longDescription="Retrieve all the interactions curated from the specified PubMed ID (PMID)." sortOrder="Gene.primaryIdentifier asc">
+                <join path="Gene.interactions.alleleinteractions" style="OUTER"/>
+                <constraint path="Gene.interactions.participant2" editable="false" type="Gene"/>
+                <constraint path="Gene.interactions.details.experiment.publication" editable="true" description="" switchable="off" op="LOOKUP" value="16554755"/>
+            </query>
+        </template>
+        <template name="Literature_Phenotype_New" title="Literature --&gt; Phenotype" comment="" dataTypes="java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String">
+            <query name="Literature_Phenotype_New" model="genomic" view="Gene.primaryIdentifier Gene.secondaryIdentifier Gene.symbol Gene.sgdAlias Gene.qualifier Gene.phenotypes.experimentType Gene.phenotypes.mutantType Gene.phenotypes.observable Gene.phenotypes.qualifier Gene.phenotypes.allele Gene.phenotypes.alleleDescription Gene.phenotypes.strainBackground Gene.phenotypes.chemical Gene.phenotypes.condition Gene.phenotypes.details Gene.phenotypes.reporter Gene.phenotypes.publications.pubMedId Gene.phenotypes.publications.citation" longDescription="Retrieve phenotypes from a specified PubMed ID (PMID)." sortOrder="Gene.primaryIdentifier asc">
+                <constraint path="Gene.phenotypes.publications" editable="true" description="" switchable="off" op="LOOKUP" value="7744777"/>
+            </query>
+        </template>
+        <template name="Literature_ProteinMods" title="Literature --&gt; Post-translational Modifications" comment="" dataTypes="java.lang.String java.lang.String java.lang.String java.lang.Integer java.lang.Double java.lang.Float java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String org.intermine.objectstore.query.ClobAccess">
+            <query name="Literature_ProteinMods" model="genomic" view="Gene.primaryIdentifier Gene.proteins.symbol Gene.secondaryIdentifier Gene.proteins.length Gene.proteins.molecularWeight Gene.proteins.pI Gene.proteins.proteinModificationSites.modificationSite Gene.proteins.proteinModificationSites.modificationType Gene.proteins.proteinModificationSites.modifier Gene.proteins.proteinModificationSites.publication.pubMedId Gene.description Gene.proteins.sequence.residues" longDescription="Retrieve all protein post-translational modifications made from a specified PubMed ID (PMID)." sortOrder="Gene.primaryIdentifier asc" constraintLogic="C and D">
+                <pathDescription pathString="Gene.proteins" description="Protein"/>
+                <constraint path="Gene.proteins.proteinModificationSites.category" code="C" editable="false" description="" switchable="off" op="IS NULL"/>
+                <constraint path="Gene.proteins.proteinModificationSites.publication.pubMedId" code="D" editable="true" description="" switchable="off" op="=" value="23954790"/>
+            </query>
+        </template>
+        <template name="Literature_Regulation" title="Literature --&gt; Regulation" comment="" dataTypes="java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String">
+            <query name="Literature_Regulation" model="genomic" view="Gene.regulatoryRegions.regulator.symbol Gene.regulatoryRegions.regulator.secondaryIdentifier Gene.symbol Gene.secondaryIdentifier Gene.regulatoryRegions.regEvidence.ontologyTerm.name Gene.regulatoryRegions.regEvidence.ontologyTerm.identifier Gene.regulatoryRegions.experimentCondition Gene.regulatoryRegions.strainBackground Gene.regulatoryRegions.regulationDirection Gene.regulatoryRegions.regulationType Gene.regulatoryRegions.regulatorType Gene.regulatoryRegions.publications.pubMedId Gene.regulatoryRegions.datasource Gene.regulatoryRegions.annotationType" longDescription="Retrieve all regulators curated from the specified PubMed ID (PMID)." sortOrder="Gene.secondaryIdentifier asc">
+                <constraint path="Gene.regulatoryRegions" editable="false" type="TFBindingSite"/>
+                <constraint path="Gene.regulatoryRegions.publications" editable="true" description="" switchable="off" op="LOOKUP" value="3909104"/>
+            </query>
+        </template>
+        <template name="Organism_Genes" title="Retrieve --&gt; All chromosomal locations" comment="" dataTypes="java.lang.String java.lang.String java.lang.String java.lang.String java.lang.Integer java.lang.String java.lang.String java.lang.String java.lang.Integer java.lang.Integer java.lang.String java.lang.String java.lang.String">
+            <query name="Organism_Genes" model="genomic" view="Gene.primaryIdentifier Gene.secondaryIdentifier Gene.symbol Gene.name Gene.length Gene.qualifier Gene.sgdAlias Gene.chromosome.primaryIdentifier Gene.chromosomeLocation.start Gene.chromosomeLocation.end Gene.chromosomeLocation.strand Gene.organism.name Gene.description" longDescription="Retrieve all &lt;a href = &quot;https://sites.google.com/view/yeastgenome-help/analyze-help/yeastmine&quot;&gt;genes&lt;/a&gt;, their chromosomal locations, nomenclature, sequence lengths, and descriptions, in the reference genome of &lt;i&gt;S. cerevisiae&lt;/i&gt;" sortOrder="Gene.primaryIdentifier asc" constraintLogic="(C or D) and E and F">
+                <join path="Gene.chromosome" style="OUTER"/>
+                <join path="Gene.chromosomeLocation" style="OUTER"/>
+                <constraint path="Gene.dataSets.name" code="F" editable="false" description="" op="=" value="SGD data set"/>
+                <constraint path="Gene.status" code="C" editable="false" op="=" value="Active"/>
+                <constraint path="Gene.status" code="D" editable="false" op="IS NULL"/>
+                <constraint path="Gene.organism.name" code="E" editable="true" op="=" value="Saccharomyces cerevisiae"/>
+            </query>
+        </template>
+        <template name="Organism_IntergenicRegions" title="Retrieve--&gt;All intergenic regions" comment="" dataTypes="java.lang.String java.lang.Integer java.lang.String java.lang.Integer java.lang.Integer java.lang.String java.lang.String java.lang.String java.lang.String">
+            <query name="Organism_IntergenicRegions" model="genomic" view="IntergenicRegion.primaryIdentifier IntergenicRegion.length IntergenicRegion.chromosome.primaryIdentifier IntergenicRegion.chromosomeLocation.start IntergenicRegion.chromosomeLocation.end IntergenicRegion.adjacentGenes.primaryIdentifier IntergenicRegion.chromosomeLocation.strand IntergenicRegion.adjacentGenes.secondaryIdentifier IntergenicRegion.adjacentGenes.symbol" longDescription="Retrieve all intergenic regions with their chromosomal locations, lengths and adjacent genes." sortOrder="IntergenicRegion.primaryIdentifier asc" constraintLogic="A and B and C">
+                <join path="IntergenicRegion.adjacentGenes" style="OUTER"/>
+                <constraint path="IntergenicRegion.adjacentGenes.featureType" code="C" editable="false" op="!=" value="not in systematic sequence of S288C"/>
+                <constraint path="IntergenicRegion.organism.name" code="A" editable="true" description="Restrict to organism:" op="=" value="Saccharomyces cerevisiae"/>
+                <constraint path="IntergenicRegion.length" code="B" editable="true" op="&lt;=" value="10000"/>
+            </query>
+        </template>
+        <template name="Pathways_Tab" title="Retrieve all pathways for all genes." comment="" dataTypes="java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String">
+            <query name="Pathways_Tab" model="genomic" view="Gene.pathways.name Gene.pathways.identifier Gene.symbol Gene.secondaryIdentifier Gene.name" longDescription="Retrieve all pathways for all genes." sortOrder="Gene.pathways.name asc">
+                <constraint path="Gene.organism.shortName" editable="true" description="" switchable="off" op="=" value="S. cerevisiae"/>
+            </query>
+        </template>
+        <template name="Phenotype_Genes_New" title="Phenotype --&gt; Genes" comment="" dataTypes="java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String">
+            <query name="Phenotype_Genes_New" model="genomic" view="Phenotype.genes.primaryIdentifier Phenotype.genes.secondaryIdentifier Phenotype.genes.symbol Phenotype.genes.sgdAlias Phenotype.genes.qualifier Phenotype.experimentType Phenotype.mutantType Phenotype.observable Phenotype.qualifier Phenotype.allele Phenotype.alleleDescription Phenotype.strainBackground Phenotype.chemical Phenotype.condition Phenotype.details Phenotype.reporter Phenotype.publications.pubMedId Phenotype.publications.citation" longDescription="Retrieve &lt;a href = &quot;https://sites.google.com/view/yeastgenome-help/analyze-help/yeastmine&quot;&gt;genes&lt;/a&gt; that are annotated to a specified phenotype." sortOrder="Phenotype.experimentType asc">
+                <constraint path="Phenotype.observable" editable="true" op="=" value="protein secretion"/>
+            </query>
+        </template>
+        <template name="Phenotype_Tab_New" title="Retrieve all phenotypes for all genes." comment="" dataTypes="java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String">
+            <query name="Phenotype_Tab_New" model="genomic" view="Gene.primaryIdentifier Gene.secondaryIdentifier Gene.symbol Gene.sgdAlias Gene.qualifier Gene.phenotypes.experimentType Gene.phenotypes.mutantType Gene.phenotypes.observable Gene.phenotypes.qualifier Gene.phenotypes.allele Gene.phenotypes.alleleDescription Gene.phenotypes.strainBackground Gene.phenotypes.chemical Gene.phenotypes.condition Gene.phenotypes.details Gene.phenotypes.reporter Gene.phenotypes.publications.pubMedId Gene.phenotypes.publications.citation" longDescription="Retrieve all phenotypes for all genes." sortOrder="Gene.primaryIdentifier asc">
+                <constraint path="Gene.organism.shortName" editable="true" description="" switchable="off" op="=" value="S. cerevisiae"/>
+            </query>
+        </template>
+        <template name="Protein_Aggregation" title="Retrieve proteins with aggregation information." comment="" dataTypes="java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String">
+            <query name="Protein_Aggregation" model="genomic" view="Protein.primaryIdentifier Protein.primaryAccession Protein.symbol Protein.proteinProperties.source Protein.proteinProperties.condition Protein.proteinProperties.location Protein.proteinProperties.isReversible Protein.proteinProperties.propertyName Protein.proteinProperties.publication.pubMedId" longDescription="" sortOrder="Protein.primaryIdentifier asc">
+                <constraint path="Protein.organism.shortName" editable="true" description="" switchable="on" op="=" value="S. cerevisiae"/>
+            </query>
+        </template>
+        <template name="Protein_Median_Abundance" title="Gene --&gt; Median Protein Abundance" comment="" dataTypes="java.lang.String java.lang.String java.lang.String java.lang.String java.lang.Float java.lang.String java.lang.Float java.lang.String">
+            <query name="Protein_Median_Abundance" model="genomic" view="Gene.primaryIdentifier Gene.proteins.symbol Gene.secondaryIdentifier Gene.qualifier Gene.proteins.median Gene.proteins.units Gene.proteins.MAD Gene.proteins.proteinAbundance.publication.pubMedId" longDescription="Retrieve median protein abundance and median absolute deviation for the protein(s) encoded by the specified &lt;a href = &quot;https://sites.google.com/view/yeastgenome-help/analyze-help/yeastmine&quot;&gt;gene(s).&lt;/a&gt;" sortOrder="Gene.primaryIdentifier asc" constraintLogic="B and A">
+                <pathDescription pathString="Gene.proteins" description="Protein"/>
+                <constraint path="Gene.organism.shortName" code="B" editable="false" description="" op="=" value="S. cerevisiae"/>
+                <constraint path="Gene" code="A" editable="true" op="LOOKUP" value="tfc3"/>
+            </query>
+        </template>
+        <template name="Protein_Properties_Tab" title="Retrieve protein properties of all proteins of ORFs" comment="" dataTypes="java.lang.String java.lang.String java.lang.Double java.lang.Float java.lang.Integer java.lang.String java.lang.String java.lang.Float java.lang.Float java.lang.Float java.lang.Float java.lang.Float java.lang.Integer java.lang.Integer java.lang.Integer java.lang.Integer java.lang.Integer java.lang.Integer java.lang.Integer java.lang.Integer java.lang.Integer java.lang.Integer java.lang.Integer java.lang.Integer java.lang.Integer java.lang.Integer java.lang.Integer java.lang.Integer java.lang.Integer java.lang.Integer java.lang.Integer java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.Float java.lang.Float java.lang.Float java.lang.Float">
+            <query name="Protein_Properties_Tab" model="genomic" view="Gene.secondaryIdentifier Gene.proteins.secondaryIdentifier Gene.proteins.molecularWeight Gene.proteins.pI Gene.proteins.length Gene.proteins.ntermseq Gene.proteins.ctermseq Gene.proteins.gravyScore Gene.proteins.aromaticityScore Gene.proteins.cai Gene.proteins.codonBias Gene.proteins.fopScore Gene.proteins.ala Gene.proteins.arg Gene.proteins.asn Gene.proteins.asp Gene.proteins.cys Gene.proteins.gln Gene.proteins.glu Gene.proteins.gly Gene.proteins.his Gene.proteins.ile Gene.proteins.leu Gene.proteins.lys Gene.proteins.met Gene.proteins.phe Gene.proteins.pro Gene.proteins.ser Gene.proteins.thr Gene.proteins.trp Gene.proteins.val Gene.proteins.carbon Gene.proteins.hydrogen Gene.proteins.nitrogen Gene.proteins.oxygen Gene.proteins.sulphur Gene.proteins.instabilityIndex Gene.proteins.allCysHalf Gene.proteins.noCysHalf Gene.proteins.aliphaticIndex" longDescription="Retrieve protein properties of all proteins of ORFs" sortOrder="Gene.secondaryIdentifier asc" constraintLogic="A and B">
+                <constraint path="Gene.organism.shortName" code="B" editable="false" description="" op="=" value="S. cerevisiae"/>
+                <constraint path="Gene.featureType" code="A" editable="true" op="=" value="ORF"/>
+            </query>
+        </template>
+        <template name="Publications_Literature" title="Topic--&gt;Literature" comment="" dataTypes="java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String">
+            <query name="Publications_Literature" model="genomic" view="Publication.pubMedId Publication.citation Publication.title Publication.journal Publication.literatureTopics.name" longDescription="Retrieve publications associated with a specified topic. " sortOrder="Publication.pubMedId asc">
+                <constraint path="Publication.literatureTopics.name" editable="true" op="=" value="Primary Literature"/>
+            </query>
+        </template>
+        <template name="Qualifier_ORF" title="Qualifier --&gt; ORFs of selected type" comment="" dataTypes="java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String">
+            <query name="Qualifier_ORF" model="genomic" view="ORF.primaryIdentifier ORF.secondaryIdentifier ORF.symbol ORF.sgdAlias ORF.featureType ORF.qualifier ORF.name ORF.description" longDescription="Retrieve ORFs of a specified &lt;a href = &quot;https://sites.google.com/view/yeastgenome-help/analyze-help/yeastmine&quot;&gt;qualifier&lt;/a&gt; type." sortOrder="ORF.primaryIdentifier asc" constraintLogic="A and (B or C) and D">
+                <constraint path="ORF.status" code="B" editable="false" description="" op="=" value="Active"/>
+                <constraint path="ORF.status" code="C" editable="false" description="" op="IS NULL"/>
+                <constraint path="ORF.organism.shortName" code="D" editable="false" description="" op="=" value="S. cerevisiae"/>
+                <constraint path="ORF.qualifier" code="A" editable="true" op="=" value="Verified"/>
+            </query>
+        </template>
+        <template name="SGD_Chr_Features_Tab" title="Retrieve SGD chromosomal Features" comment="" dataTypes="java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.Integer java.lang.Integer java.lang.String java.lang.String">
+            <query name="SGD_Chr_Features_Tab" model="genomic" view="SequenceFeature.primaryIdentifier SequenceFeature.featureType SequenceFeature.qualifier SequenceFeature.name SequenceFeature.secondaryIdentifier SequenceFeature.symbol SequenceFeature.sgdAlias SequenceFeature.chromosome.primaryIdentifier SequenceFeature.chromosomeLocation.start SequenceFeature.chromosomeLocation.end SequenceFeature.chromosomeLocation.strand SequenceFeature.description" longDescription="" sortOrder="SequenceFeature.primaryIdentifier asc" constraintLogic="A and B and C and D and E">
+                <constraint path="SequenceFeature.featureType" code="B" editable="false" description="" op="IS NOT NULL"/>
+                <constraint path="SequenceFeature.featureType" code="C" editable="false" description="" op="!=" value="chromosome"/>
+                <constraint path="SequenceFeature.featureType" code="D" editable="false" description="" op="!=" value="not in systematic sequence of S288C"/>
+                <constraint path="SequenceFeature.organism.shortName" code="A" editable="true" description="" switchable="off" op="=" value="S. cerevisiae"/>
+                <constraint path="SequenceFeature.status" code="E" editable="true" op="=" value="Active"/>
+            </query>
+        </template>
+        <template name="SequenceFeature_Topics" title="Sequence Feature --&gt; Topic --&gt; Literature" comment="" dataTypes="java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.Integer">
+            <query name="SequenceFeature_Topics" model="genomic" view="SequenceFeature.primaryIdentifier SequenceFeature.secondaryIdentifier SequenceFeature.symbol SequenceFeature.name SequenceFeature.featureType SequenceFeature.publications.literatureTopics.name SequenceFeature.publications.pubMedId SequenceFeature.publications.citation SequenceFeature.publications.year" longDescription="Retrieve references and associated literature topics for a given sequence feature." sortOrder="SequenceFeature.primaryIdentifier asc">
+                <constraint path="SequenceFeature" editable="true" description="" switchable="off" op="LOOKUP" value="CEN1" extraValue="S. cerevisiae"/>
+            </query>
+        </template>
+        <template name="gene_overlapping_flanking_regions" title=" Gene--&gt;Flanking features within a specific distance" comment="" dataTypes="java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.Integer">
+            <query name="gene_overlapping_flanking_regions" model="genomic" view="GeneFlankingRegion.gene.primaryIdentifier GeneFlankingRegion.gene.secondaryIdentifier GeneFlankingRegion.gene.symbol GeneFlankingRegion.overlappingFeatures.primaryIdentifier GeneFlankingRegion.overlappingFeatures.secondaryIdentifier GeneFlankingRegion.overlappingFeatures.symbol GeneFlankingRegion.overlappingFeatures.featureType GeneFlankingRegion.direction GeneFlankingRegion.length" longDescription="Retrieve any annotated flanking features at least partially overlapping within a specified distance from the 5' or 3' end of a given gene." sortOrder="GeneFlankingRegion.gene.primaryIdentifier asc" constraintLogic="B and D and E and A and C">
+                <pathDescription pathString="GeneFlankingRegion.overlappingFeatures" description="Overlapping Feature"/>
+                <constraint path="GeneFlankingRegion.overlappingFeatures" editable="false" type="Gene"/>
+                <constraint path="GeneFlankingRegion.organism.shortName" code="C" editable="false" description="" op="=" value="S. cerevisiae"/>
+                <constraint path="GeneFlankingRegion.gene" code="B" editable="true" description="Gene" op="LOOKUP" value="his3" extraValue="S. cerevisiae"/>
+                <constraint path="GeneFlankingRegion.direction" code="D" editable="true" description="Upstream/Downstream" op="=" value="upstream"/>
+                <constraint path="GeneFlankingRegion.overlappingFeatures.featureType" code="E" editable="true" description="Feature Type" op="=" value="ORF"/>
+                <constraint path="GeneFlankingRegion.length" code="A" editable="true" description="Distance in bp" op="=" value="2000"/>
+            </query>
+        </template>
+        <template name="im_available_gene" title="im_available_gene" comment="" dataTypes="java.lang.String java.lang.String">
+            <query name="im_available_gene" model="genomic" view="Gene.primaryIdentifier Gene.symbol" longDescription="test if a specific gene is in mine" sortOrder="Gene.primaryIdentifier asc">
+                <constraint path="Gene" editable="true" op="LOOKUP" value="act1" extraValue="S. cerevisiae"/>
+            </query>
+        </template>
+        <template name="im_available_homologues" title="Homologue mapping query" comment="used for linking to other intermines" dataTypes="java.lang.String java.lang.String java.lang.String">
+            <query name="im_available_homologues" model="genomic" view="Gene.organism.shortName Gene.homologues.dataSets.name Gene.homologues.homologue.organism.shortName" longDescription="Returns organisms with orthologues and their datasets" sortOrder="Gene.homologues.dataSets.name asc" constraintLogic="A and B">
+                <constraint path="Gene.homologues.type" code="B" editable="false" op="=" value="orthologue"/>
+                <constraint path="Gene.primaryIdentifier" code="A" editable="true" op="=" value="*"/>
+            </query>
+        </template>
+        <template name="im_available_organisms" title="All genes --&gt; TaxonId" comment="used for displaying links to other intermines" dataTypes="java.lang.String">
+            <query name="im_available_organisms" model="genomic" view="Gene.organism.shortName" longDescription="For all genes, list the taxonIds available.  Used by webservice to construct links to other intermines." sortOrder="Gene.organism.shortName asc">
+                <constraint path="Gene.primaryIdentifier" editable="true" op="=" value="*"/>
+            </query>
+        </template>
+        <template name="im_gene_orthologue" title="im_gene_orthologue" comment="" dataTypes="java.lang.String java.lang.String java.lang.String">
+            <query name="im_gene_orthologue" model="genomic" view="Gene.organism.shortName Gene.primaryIdentifier Gene.symbol" longDescription="Used for intermine report pages.  For a gene, return all orthologues" sortOrder="Gene.primaryIdentifier asc" constraintLogic="A and C">
+                <constraint path="Gene.homologues.type" code="C" editable="false" description="" op="!=" value="paralogue"/>
+                <constraint path="Gene.homologues.homologue" code="A" editable="true" op="LOOKUP" value="act1" extraValue="S. cerevisiae"/>
+            </query>
+        </template>
+        <template name="im_orthologue_converter" title="Orthologue converter" comment="don't delete please" dataTypes="java.lang.String">
+            <query name="im_orthologue_converter" model="genomic" view="Gene.homologues.homologue.primaryIdentifier" longDescription="used for mapping to other intermines" sortOrder="Gene.homologues.homologue.primaryIdentifier asc">
+                <constraint path="Gene.organism.shortName" editable="true" op="=" value="S. cerevisiae"/>
             </query>
         </template>
     </template-queries>
@@ -134,6 +774,12 @@
         <tag name="im:aspect:Disease" objectIdentifier="Gene_DOTerm" type="template">
         </tag>
 
+        <tag name="im:aspect:Expression" objectIdentifier="Expression_Gene" type="template">
+        </tag>
+
+        <tag name="im:aspect:Expression" objectIdentifier="Gene_Expression" type="template">
+        </tag>
+
         <tag name="im:aspect:Function" objectIdentifier="GOTerm_Genes" type="template">
         </tag>
 
@@ -144,9 +790,6 @@
         </tag>
 
         <tag name="im:aspect:Function" objectIdentifier="Literature_GO" type="template">
-        </tag>
-
-        <tag name="im:aspect:Function" objectIdentifier="Gene_Orthologs" type="template">
         </tag>
 
         <tag name="im:aspect:Genome" objectIdentifier="Gene_Description" type="template">
@@ -176,6 +819,12 @@
         <tag name="im:aspect:Genome" objectIdentifier="Allele_Identifiers" type="template">
         </tag>
 
+        <tag name="im:aspect:Homology" objectIdentifier="Organism_Orthologs" type="template">
+        </tag>
+
+        <tag name="im:aspect:Homology" objectIdentifier="Gene_Orthologs" type="template">
+        </tag>
+
         <tag name="im:hidden" objectIdentifier="BioEntity.subjects" type="collection">
         </tag>
 
@@ -201,9 +850,6 @@
         </tag>
 
         <tag name="im:public" objectIdentifier="GOTerm_Genes" type="template">
-        </tag>
-
-        <tag name="im:public" objectIdentifier="Gene_Description" type="template">
         </tag>
 
         <tag name="im:public" objectIdentifier="Gene_GOTerms" type="template">
@@ -245,6 +891,54 @@
         <tag name="im:public" objectIdentifier="Allele_Identifiers" type="template">
         </tag>
 
+        <tag name="im:public" objectIdentifier="Organism_Orthologs" type="template">
+        </tag>
+
+        <tag name="im:public" objectIdentifier="Expression_Gene" type="template">
+        </tag>
+
+        <tag name="im:public" objectIdentifier="Gene_Expression" type="template">
+        </tag>
+
+        <tag name="im:public" objectIdentifier="Human_Genes" type="bag">
+        </tag>
+
+        <tag name="im:public" objectIdentifier="Human_Genes_With_MouseRat_Orthologs" type="bag">
+        </tag>
+
+        <tag name="im:public" objectIdentifier="Human_Genes_Without_MouseRat_Orthologs" type="bag">
+        </tag>
+
+        <tag name="im:public" objectIdentifier="Yeast Genes" type="bag">
+        </tag>
+
+        <tag name="im:public" objectIdentifier="Fly Genes" type="bag">
+        </tag>
+
+        <tag name="im:public" objectIdentifier="Frog (Laevis) Genes" type="bag">
+        </tag>
+
+        <tag name="im:public" objectIdentifier="Frog (Tropicalis) Genes" type="bag">
+        </tag>
+
+        <tag name="im:public" objectIdentifier="Human Genes" type="bag">
+        </tag>
+
+        <tag name="im:public" objectIdentifier="Mouse Genes" type="bag">
+        </tag>
+
+        <tag name="im:public" objectIdentifier="Rat Genes" type="bag">
+        </tag>
+
+        <tag name="im:public" objectIdentifier="Worm Genes" type="bag">
+        </tag>
+
+        <tag name="im:public" objectIdentifier="Zebrafish Genes" type="bag">
+        </tag>
+
+        <tag name="im:public" objectIdentifier="Gene_Description" type="template">
+        </tag>
+
         <tag name="im:summary" objectIdentifier="BioEntity.organism" type="reference">
         </tag>
 
@@ -252,6 +946,974 @@
         </tag>
 
         <tag name="im:summary" objectIdentifier="Gene.publications" type="collection">
+        </tag>
+        <tag name="im:admin" objectIdentifier="im_available_organisms" type="template">
+        </tag>
+
+        <tag name="im:admin" objectIdentifier="im_available_homologues" type="template">
+        </tag>
+
+        <tag name="im:admin" objectIdentifier="im_orthologue_converter" type="template">
+        </tag>
+
+        <tag name="im:admin" objectIdentifier="im_gene_orthologue" type="template">
+        </tag>
+
+        <tag name="im:admin" objectIdentifier="im_available_gene" type="template">
+        </tag>
+
+        <tag name="im:aspect:Comparative Genomics" objectIdentifier="Gene_OrthologueOrganism_new" type="template">
+        </tag>
+
+        <tag name="im:aspect:Comparative Genomics" objectIdentifier="Gene_Orthologue" type="template">
+        </tag>
+
+        <tag name="im:aspect:Comparative Genomics" objectIdentifier="Gene_OrthologueGO_new" type="template">
+        </tag>
+
+        <tag name="im:aspect:Comparative Genomics" objectIdentifier="Gene_OrthologueGO" type="template">
+        </tag>
+
+        <tag name="im:aspect:Disease" objectIdentifier="Literature_DO" type="template">
+        </tag>
+
+        <tag name="im:aspect:Downloads" objectIdentifier="Domains_Tab" type="template">
+        </tag>
+
+        <tag name="im:aspect:Downloads" objectIdentifier="Interaction_Tab" type="template">
+        </tag>
+
+        <tag name="im:aspect:Downloads" objectIdentifier="Deleted_Merged_Features_Tab" type="template">
+        </tag>
+
+        <tag name="im:aspect:Downloads" objectIdentifier="GO_Terms_Tab" type="template">
+        </tag>
+
+        <tag name="im:aspect:Downloads" objectIdentifier="CrossRefs_Tab" type="template">
+        </tag>
+
+        <tag name="im:aspect:Downloads" objectIdentifier="Protein_Properties_Tab" type="template">
+        </tag>
+
+        <tag name="im:aspect:Downloads" objectIdentifier="SGD_Chr_Features_Tab" type="template">
+        </tag>
+
+        <tag name="im:aspect:Downloads" objectIdentifier="Phenotype_Tab_New" type="template">
+        </tag>
+
+        <tag name="im:aspect:Downloads" objectIdentifier="All_Literature" type="template">
+        </tag>
+
+        <tag name="im:aspect:Downloads" objectIdentifier="Literature_DO" type="template">
+        </tag>
+
+        <tag name="im:aspect:Downloads" objectIdentifier="Literature_Complements" type="template">
+        </tag>
+
+        <tag name="im:aspect:Downloads" objectIdentifier="Literature_GO" type="template">
+        </tag>
+
+        <tag name="im:aspect:Downloads" objectIdentifier="Literature_Interaction" type="template">
+        </tag>
+
+        <tag name="im:aspect:Downloads" objectIdentifier="Literature_Complex" type="template">
+        </tag>
+
+        <tag name="im:aspect:Downloads" objectIdentifier="Literature_Phenotype_New" type="template">
+        </tag>
+
+        <tag name="im:aspect:Downloads" objectIdentifier="Literature_ProteinMods" type="template">
+        </tag>
+
+        <tag name="im:aspect:Downloads" objectIdentifier="Literature_Regulation" type="template">
+        </tag>
+
+        <tag name="im:aspect:Expression" objectIdentifier="Gene_Transcript" type="template">
+        </tag>
+
+        <tag name="im:aspect:Expression" objectIdentifier="Gene_UTRs" type="template">
+        </tag>
+
+        <tag name="im:aspect:Function" objectIdentifier="Literature_GO" type="template">
+        </tag>
+
+        <tag name="im:aspect:Function" objectIdentifier="GoSlimTerm_Gene" type="template">
+        </tag>
+
+        <tag name="im:aspect:Function" objectIdentifier="GO_Terms_Tab" type="template">
+        </tag>
+
+        <tag name="im:aspect:Function" objectIdentifier="Pathways_Tab" type="template">
+        </tag>
+
+        <tag name="im:aspect:Gene Ontology" objectIdentifier="Gene_GOSlim" type="template">
+        </tag>
+
+        <tag name="im:aspect:Gene Ontology" objectIdentifier="organism_GOtermsOrthologues" type="template">
+        </tag>
+
+        <tag name="im:aspect:Gene Ontology" objectIdentifier="Organism_GoTerm_GeneWithannotation" type="template">
+        </tag>
+
+        <tag name="im:aspect:Gene Ontology" objectIdentifier="Gene_GOSlim_GO" type="template">
+        </tag>
+
+        <tag name="im:aspect:Gene Ontology" objectIdentifier="ChromosomeLocation_GO" type="template">
+        </tag>
+
+        <tag name="im:aspect:Gene Ontology" objectIdentifier="org.intermine.model.bio.Gene" type="class">
+        </tag>
+
+        <tag name="im:aspect:Gene Ontology" objectIdentifier="Chromosome_Genes_GOSlim" type="template">
+        </tag>
+
+        <tag name="im:aspect:Gene Ontology" objectIdentifier="GOSlimTerm_Genes" type="template">
+        </tag>
+
+        <tag name="im:aspect:Gene Ontology" objectIdentifier="GOSlimTerm_Direct_Gene" type="template">
+        </tag>
+
+        <tag name="im:aspect:Gene Ontology" objectIdentifier="Gene_particularGoannotation" type="template">
+        </tag>
+
+        <tag name="im:aspect:Gene Ontology" objectIdentifier="Gene_FeatureType_GOSlimTerm" type="template">
+        </tag>
+
+        <tag name="im:aspect:Gene Ontology" objectIdentifier="Gene_allGOTerms2" type="template">
+        </tag>
+
+        <tag name="im:aspect:Gene Ontology" objectIdentifier="Gene.goAnnotation" type="collection">
+        </tag>
+
+        <tag name="im:aspect:Gene Ontology" objectIdentifier="Gene_GOSlimTerm" type="template">
+        </tag>
+
+        <tag name="im:aspect:Gene Ontology" objectIdentifier="Organism_GoTerm_Gene" type="template">
+        </tag>
+
+        <tag name="im:aspect:Genome" objectIdentifier="ChromosomeRegion_AllGenes" type="template">
+        </tag>
+
+        <tag name="im:aspect:Genome" objectIdentifier="Chromosome_Gene_FeatureType" type="template">
+        </tag>
+
+        <tag name="im:aspect:Genome" objectIdentifier="Chromosome_IntergenicSequence" type="template">
+        </tag>
+
+        <tag name="im:aspect:Genome" objectIdentifier="Chromosome_Telomeres" type="template">
+        </tag>
+
+        <tag name="im:aspect:Genome" objectIdentifier="FeatureType_SequenceFeature" type="template">
+        </tag>
+
+        <tag name="im:aspect:Genome" objectIdentifier="Gene_ChromosomeLocation" type="template">
+        </tag>
+
+        <tag name="im:aspect:Genome" objectIdentifier="Gene_OverlappingGenes" type="template">
+        </tag>
+
+        <tag name="im:aspect:Genome" objectIdentifier="Gene_UpstreamIntergenic" type="template">
+        </tag>
+
+        <tag name="im:aspect:Genome" objectIdentifier="gene_overlapping_flanking_regions" type="template">
+        </tag>
+
+        <tag name="im:aspect:Genome" objectIdentifier="Gene_CrossRefs" type="template">
+        </tag>
+
+        <tag name="im:aspect:Genome" objectIdentifier="Gene_FeatureType_Introns" type="template">
+        </tag>
+
+        <tag name="im:aspect:Genome" objectIdentifier="Gene_Introns" type="template">
+        </tag>
+
+        <tag name="im:aspect:Genome" objectIdentifier="Organism_IntergenicRegions" type="template">
+        </tag>
+
+        <tag name="im:aspect:Genome" objectIdentifier="Gene_Homologs" type="template">
+        </tag>
+
+        <tag name="im:aspect:Genome" objectIdentifier="Gene_GenomicDNA" type="template">
+        </tag>
+
+        <tag name="im:aspect:Genome" objectIdentifier="Chromosome_AllFeatures" type="template">
+        </tag>
+
+        <tag name="im:aspect:Genome" objectIdentifier="FeatureType_Gene" type="template">
+        </tag>
+
+        <tag name="im:aspect:Genome" objectIdentifier="Qualifier_ORF" type="template">
+        </tag>
+
+        <tag name="im:aspect:Genome" objectIdentifier="Organism_Genes" type="template">
+        </tag>
+
+        <tag name="im:aspect:Genome" objectIdentifier="Gene_Flanking_Sequence" type="template">
+        </tag>
+
+        <tag name="im:aspect:Genome" objectIdentifier="AGR_Yeast_Genes" type="template">
+        </tag>
+
+        <tag name="im:aspect:Genome" objectIdentifier="AllGene_ChromosomalFeatures" type="template">
+        </tag>
+
+        <tag name="im:aspect:Genome" objectIdentifier="SGD_Chr_Features_Tab" type="template">
+        </tag>
+
+        <tag name="im:aspect:Genome" objectIdentifier="Gene_Alleles" type="template">
+        </tag>
+
+        <tag name="im:aspect:Genome" objectIdentifier="Gene_Transcript" type="template">
+        </tag>
+
+        <tag name="im:aspect:Genome" objectIdentifier="Gene_UTRs" type="template">
+        </tag>
+
+        <tag name="im:aspect:Genome" objectIdentifier="CrossRefs_Tab" type="template">
+        </tag>
+
+        <tag name="im:aspect:Genome" objectIdentifier="Deleted_Merged_Features_Tab" type="template">
+        </tag>
+
+        <tag name="im:aspect:Genomics" objectIdentifier="LocatedSequenceFeature.sequence" type="reference">
+        </tag>
+
+        <tag name="im:aspect:Genomics" objectIdentifier="Gene_FrameShifts" type="template">
+        </tag>
+
+        <tag name="im:aspect:Genomics" objectIdentifier="org.intermine.model.bio.Gene" type="class">
+        </tag>
+
+        <tag name="im:aspect:Genomics" objectIdentifier="LocatedSequenceFeature.chromosomeLocation" type="reference">
+        </tag>
+
+        <tag name="im:aspect:Genomics" objectIdentifier="AllGene_Chromosome" type="template">
+        </tag>
+
+        <tag name="im:aspect:Genomics" objectIdentifier="LocatedSequenceFeature.chromosome" type="reference">
+        </tag>
+
+        <tag name="im:aspect:Genomics" objectIdentifier="Gene_FeatureType_FrameShifts" type="template">
+        </tag>
+
+        <tag name="im:aspect:Genomics" objectIdentifier="Telomeres_Chromosome" type="template">
+        </tag>
+
+        <tag name="im:aspect:Genomics" objectIdentifier="Chromosome.features" type="collection">
+        </tag>
+
+        <tag name="im:aspect:Genomics" objectIdentifier="AllGene_Chromosome_1" type="template">
+        </tag>
+
+        <tag name="im:aspect:Genomics" objectIdentifier="Gene_Location" type="template">
+        </tag>
+
+        <tag name="im:aspect:Genomics" objectIdentifier="Gene_FST" type="template">
+        </tag>
+
+        <tag name="im:aspect:Genomics" objectIdentifier="Gene_FeatureType" type="template">
+        </tag>
+
+        <tag name="im:aspect:Genomics" objectIdentifier="AllGene_Introns" type="template">
+        </tag>
+
+        <tag name="im:aspect:Genomics" objectIdentifier="Chromosome.genes" type="collection">
+        </tag>
+
+        <tag name="im:aspect:Genomics" objectIdentifier="All_Gene_Introns" type="template">
+        </tag>
+
+        <tag name="im:aspect:Genomics" objectIdentifier="Gene_FeatureType_FivePrimeUTRIntron" type="template">
+        </tag>
+
+        <tag name="im:aspect:Genomics" objectIdentifier="ORF_FrameShifts" type="template">
+        </tag>
+
+        <tag name="im:aspect:Genomics" objectIdentifier="ORF _FivePrimeUTRIntron" type="template">
+        </tag>
+
+        <tag name="im:aspect:Genomics" objectIdentifier="ORF_Introns" type="template">
+        </tag>
+
+        <tag name="im:aspect:Genomics" objectIdentifier="ChromosomeLocation_Feature" type="template">
+        </tag>
+
+        <tag name="im:aspect:Genomics" objectIdentifier="Gene_FivePrimeUTRIntron" type="template">
+        </tag>
+
+        <tag name="im:aspect:Genomics" objectIdentifier="AllGene_FrameShifts" type="template">
+        </tag>
+
+        <tag name="im:aspect:Genomics" objectIdentifier="AllGene_FivePrimeUTRIntron" type="template">
+        </tag>
+
+        <tag name="im:aspect:Genomics" objectIdentifier="Chromosome to NcRNAs" type="template">
+        </tag>
+
+        <tag name="im:aspect:Genomics" objectIdentifier="ChromosomeLocation_AllGenes" type="template">
+        </tag>
+
+        <tag name="im:aspect:Genomics" objectIdentifier="org.intermine.model.bio.Chromosome" type="class">
+        </tag>
+
+        <tag name="im:aspect:Homology" objectIdentifier="Gene_FungalHomologs" type="template">
+        </tag>
+
+        <tag name="im:aspect:Homology" objectIdentifier="Gene_Homologs" type="template">
+        </tag>
+
+        <tag name="im:aspect:Homology" objectIdentifier="Gene_YeastParalogs" type="template">
+        </tag>
+
+        <tag name="im:aspect:Homology" objectIdentifier="Literature_Complements" type="template">
+        </tag>
+
+        <tag name="im:aspect:Interactions" objectIdentifier="Gene_Complex_New" type="template">
+        </tag>
+
+        <tag name="im:aspect:Interactions" objectIdentifier="Literature_Interaction" type="template">
+        </tag>
+
+        <tag name="im:aspect:Interactions" objectIdentifier="Complex_Details_Participant" type="template">
+        </tag>
+
+        <tag name="im:aspect:Interactions" objectIdentifier="Gene_Physical_Interaction" type="template">
+        </tag>
+
+        <tag name="im:aspect:Interactions" objectIdentifier="Gene_Genetic_Interaction" type="template">
+        </tag>
+
+        <tag name="im:aspect:Interactions" objectIdentifier="Interaction_Tab" type="template">
+        </tag>
+
+        <tag name="im:aspect:Interactions" objectIdentifier="Literature_Complex" type="template">
+        </tag>
+
+        <tag name="im:aspect:Literature" objectIdentifier="Literature_GO" type="template">
+        </tag>
+
+        <tag name="im:aspect:Literature" objectIdentifier="AllGenes_Topic_Literature" type="template">
+        </tag>
+
+        <tag name="im:aspect:Literature" objectIdentifier="Gene_Literature" type="template">
+        </tag>
+
+        <tag name="im:aspect:Literature" objectIdentifier="Literature_Gene" type="template">
+        </tag>
+
+        <tag name="im:aspect:Literature" objectIdentifier="Literature_Interaction" type="template">
+        </tag>
+
+        <tag name="im:aspect:Literature" objectIdentifier="Gene_Topic_Literature" type="template">
+        </tag>
+
+        <tag name="im:aspect:Literature" objectIdentifier="Publications_Literature" type="template">
+        </tag>
+
+        <tag name="im:aspect:Literature" objectIdentifier="GenomeWide_Papers" type="template">
+        </tag>
+
+        <tag name="im:aspect:Literature" objectIdentifier="Literature_Phenotype_New" type="template">
+        </tag>
+
+        <tag name="im:aspect:Literature" objectIdentifier="All_Literature" type="template">
+        </tag>
+
+        <tag name="im:aspect:Literature" objectIdentifier="Literature_DO" type="template">
+        </tag>
+
+        <tag name="im:aspect:Literature" objectIdentifier="Literature_Complex" type="template">
+        </tag>
+
+        <tag name="im:aspect:Literature" objectIdentifier="Literature_Complements" type="template">
+        </tag>
+
+        <tag name="im:aspect:Literature" objectIdentifier="Literature_ProteinMods" type="template">
+        </tag>
+
+        <tag name="im:aspect:Literature" objectIdentifier="Literature_Regulation" type="template">
+        </tag>
+
+        <tag name="im:aspect:Literature" objectIdentifier="SequenceFeature_Topics" type="template">
+        </tag>
+
+        <tag name="im:aspect:Phenotypes" objectIdentifier="Gene_PhenoType" type="template">
+        </tag>
+
+        <tag name="im:aspect:Phenotypes" objectIdentifier="Gene_Phenotype_New" type="template">
+        </tag>
+
+        <tag name="im:aspect:Phenotypes" objectIdentifier="Literature_Phenotype_New" type="template">
+        </tag>
+
+        <tag name="im:aspect:Phenotypes" objectIdentifier="Phenotype_Genes_New" type="template">
+        </tag>
+
+        <tag name="im:aspect:Phenotypes" objectIdentifier="Phenotype_Tab_New" type="template">
+        </tag>
+
+        <tag name="im:aspect:Proteins" objectIdentifier="Protein_GeneChromosomeLength" type="template">
+        </tag>
+
+        <tag name="im:aspect:Proteins" objectIdentifier="Gene_ProteinMods_Ntermini" type="template">
+        </tag>
+
+        <tag name="im:aspect:Proteins" objectIdentifier="Protein_Aggregation" type="template">
+        </tag>
+
+        <tag name="im:aspect:Proteins" objectIdentifier="Gene_Protein_Half_Life" type="template">
+        </tag>
+
+        <tag name="im:aspect:Proteins" objectIdentifier="Protein_Median_Abundance" type="template">
+        </tag>
+
+        <tag name="im:aspect:Proteins" objectIdentifier="Gene_ProteinAbundance" type="template">
+        </tag>
+
+        <tag name="im:aspect:Proteins" objectIdentifier="Domains_Tab" type="template">
+        </tag>
+
+        <tag name="im:aspect:Proteins" objectIdentifier="Protein_Properties_Tab" type="template">
+        </tag>
+
+        <tag name="im:aspect:Proteins" objectIdentifier="Literature_ProteinMods" type="template">
+        </tag>
+
+        <tag name="im:aspect:Regulation" objectIdentifier="Literature_Regulation" type="template">
+        </tag>
+
+        <tag name="im:frontpage" objectIdentifier="Gene_GOSlim" type="template">
+        </tag>
+
+        <tag name="im:frontpage" objectIdentifier="Gene_PhenoType" type="template">
+        </tag>
+
+        <tag name="im:frontpage" objectIdentifier="Gene_Literature" type="template">
+        </tag>
+
+        <tag name="im:frontpage" objectIdentifier="Gene_FrameShifts" type="template">
+        </tag>
+
+        <tag name="im:frontpage" objectIdentifier="AllGenes_Topic_Literature" type="template">
+        </tag>
+
+        <tag name="im:frontpage" objectIdentifier="Chromosome to NcRNAs" type="template">
+        </tag>
+
+        <tag name="im:frontpage" objectIdentifier="Literature_Gene" type="template">
+        </tag>
+
+        <tag name="im:frontpage" objectIdentifier="gene_overlapping_flanking_regions" type="template">
+        </tag>
+
+        <tag name="im:frontpage" objectIdentifier="Gene_FeatureType_FrameShifts" type="template">
+        </tag>
+
+        <tag name="im:frontpage" objectIdentifier="example list" type="bag">
+        </tag>
+
+        <tag name="im:frontpage" objectIdentifier="ORF_Introns" type="template">
+        </tag>
+
+        <tag name="im:frontpage" objectIdentifier="AllGene_FivePrimeUTRIntron" type="template">
+        </tag>
+
+        <tag name="im:frontpage" objectIdentifier="Gene_FeatureType" type="template">
+        </tag>
+
+        <tag name="im:frontpage" objectIdentifier="GoSlimTerm_Gene" type="template">
+        </tag>
+
+        <tag name="im:frontpage" objectIdentifier="Verified_ORFs" type="bag">
+        </tag>
+
+        <tag name="im:frontpage" objectIdentifier="Dubious_ORFs" type="bag">
+        </tag>
+
+        <tag name="im:frontpage" objectIdentifier="Uncharacterized_ORFs" type="bag">
+        </tag>
+
+        <tag name="im:frontpage" objectIdentifier="Uncharacterized_Verified_ORFs" type="bag">
+        </tag>
+
+        <tag name="im:frontpage" objectIdentifier="ALL_Verified_Uncharacterized_Dubious_ORFs" type="bag">
+        </tag>
+
+        <tag name="im:frontpage" objectIdentifier="Centromeres" type="bag">
+        </tag>
+
+        <tag name="im:frontpage" objectIdentifier="RNA genes and rRNA spacer regions" type="bag">
+        </tag>
+
+        <tag name="im:frontpage" objectIdentifier="Long Terminal Repeat" type="bag">
+        </tag>
+
+        <tag name="im:frontpage" objectIdentifier="Curated Macromolecular Complexes" type="bag">
+        </tag>
+
+        <tag name="im:frontpage" objectIdentifier="Human genes with yeast homologs" type="bag">
+        </tag>
+
+        <tag name="im:frontpage" objectIdentifier="Human genes complementing or complemented by yeast genes" type="bag">
+        </tag>
+
+        <tag name="im:hidden" objectIdentifier="BioEntity.relations" type="collection">
+        </tag>
+
+        <tag name="im:hidden" objectIdentifier="Evidence.relations" type="collection">
+        </tag>
+
+        <tag name="im:hidden" objectIdentifier="BioEntity.subjects" type="collection">
+        </tag>
+
+        <tag name="im:hidden" objectIdentifier="BioEntity.objects" type="collection">
+        </tag>
+
+        <tag name="im:preferredBagType" objectIdentifier="org.intermine.model.bio.Gene" type="class">
+        </tag>
+
+        <tag name="im:public" objectIdentifier="Gene_ChromosomeLocation" type="template">
+        </tag>
+
+        <tag name="im:public" objectIdentifier="Gene_FeatureType" type="template">
+        </tag>
+
+        <tag name="im:public" objectIdentifier="Gene_UpstreamIntergenic" type="template">
+        </tag>
+
+        <tag name="im:public" objectIdentifier="ChromosomeRegion_AllGenes" type="template">
+        </tag>
+
+        <tag name="im:public" objectIdentifier="organism_GOtermsOrthologues" type="template">
+        </tag>
+
+        <tag name="im:public" objectIdentifier="Literature_Gene" type="template">
+        </tag>
+
+        <tag name="im:public" objectIdentifier="AllGene_Chromosome" type="template">
+        </tag>
+
+        <tag name="im:public" objectIdentifier="Gene_FeatureType_FrameShifts" type="template">
+        </tag>
+
+        <tag name="im:public" objectIdentifier="ChromosomeLocation_Feature" type="template">
+        </tag>
+
+        <tag name="im:public" objectIdentifier="ChromosomeLocation_GO" type="template">
+        </tag>
+
+        <tag name="im:public" objectIdentifier="Chromosome_Telomeres" type="template">
+        </tag>
+
+        <tag name="im:public" objectIdentifier="Literature_GO" type="template">
+        </tag>
+
+        <tag name="im:public" objectIdentifier="gene_overlapping_flanking_regions" type="template">
+        </tag>
+
+        <tag name="im:public" objectIdentifier="example list" type="bag">
+        </tag>
+
+        <tag name="im:public" objectIdentifier="Gene_FST" type="template">
+        </tag>
+
+        <tag name="im:public" objectIdentifier="Gene_FrameShifts" type="template">
+        </tag>
+
+        <tag name="im:public" objectIdentifier="Gene_allGOTerms2" type="template">
+        </tag>
+
+        <tag name="im:public" objectIdentifier="GOSlimTerm_Genes" type="template">
+        </tag>
+
+        <tag name="im:public" objectIdentifier="Gene _FivePrimeUTRIntron" type="template">
+        </tag>
+
+        <tag name="im:public" objectIdentifier="GOSlimTerm_Direct_Gene" type="template">
+        </tag>
+
+        <tag name="im:public" objectIdentifier="ChromosomeLocation_AllGenes" type="template">
+        </tag>
+
+        <tag name="im:public" objectIdentifier="AllGenes_Topic_Literature" type="template">
+        </tag>
+
+        <tag name="im:public" objectIdentifier="AllGene_FrameShifts" type="template">
+        </tag>
+
+        <tag name="im:public" objectIdentifier="Organism_IntergenicRegions" type="template">
+        </tag>
+
+        <tag name="im:public" objectIdentifier="Gene_GOSlimTerm" type="template">
+        </tag>
+
+        <tag name="im:public" objectIdentifier="Chromosome_Gene_FeatureType" type="template">
+        </tag>
+
+        <tag name="im:public" objectIdentifier="AllGene_Introns" type="template">
+        </tag>
+
+        <tag name="im:public" objectIdentifier="Organism_GoTerm_GeneWithannotation" type="template">
+        </tag>
+
+        <tag name="im:public" objectIdentifier="ORF _FivePrimeUTRIntron" type="template">
+        </tag>
+
+        <tag name="im:public" objectIdentifier="Chromosome to NcRNAs" type="template">
+        </tag>
+
+        <tag name="im:public" objectIdentifier="Telomeres_Chromosome" type="template">
+        </tag>
+
+        <tag name="im:public" objectIdentifier="Chromosome_IntergenicSequence" type="template">
+        </tag>
+
+        <tag name="im:public" objectIdentifier="Gene_OrthologueGO_new" type="template">
+        </tag>
+
+        <tag name="im:public" objectIdentifier="Gene_OrthologueGO" type="template">
+        </tag>
+
+        <tag name="im:public" objectIdentifier="Protein_GeneChromosomeLength" type="template">
+        </tag>
+
+        <tag name="im:public" objectIdentifier="AllGene_Chromosome_1" type="template">
+        </tag>
+
+        <tag name="im:public" objectIdentifier="FeatureType_SequenceFeature" type="template">
+        </tag>
+
+        <tag name="im:public" objectIdentifier="Gene_OverlappingGenes" type="template">
+        </tag>
+
+        <tag name="im:public" objectIdentifier="AllGene_FivePrimeUTRIntron" type="template">
+        </tag>
+
+        <tag name="im:public" objectIdentifier="Gene_GenomicDNA" type="template">
+        </tag>
+
+        <tag name="im:public" objectIdentifier="Gene_Literature" type="template">
+        </tag>
+
+        <tag name="im:public" objectIdentifier="Gene_PhenoType" type="template">
+        </tag>
+
+        <tag name="im:public" objectIdentifier="Gene_FeatureType_FivePrimeUTRIntron" type="template">
+        </tag>
+
+        <tag name="im:public" objectIdentifier="Gene_FivePrimeUTRIntron" type="template">
+        </tag>
+
+        <tag name="im:public" objectIdentifier="ORF_Introns" type="template">
+        </tag>
+
+        <tag name="im:public" objectIdentifier="All_Gene_Introns" type="template">
+        </tag>
+
+        <tag name="im:public" objectIdentifier="Gene_Introns" type="template">
+        </tag>
+
+        <tag name="im:public" objectIdentifier="Gene_Identifiers" type="template">
+        </tag>
+
+        <tag name="im:public" objectIdentifier="ORF_FrameShifts" type="template">
+        </tag>
+
+        <tag name="im:public" objectIdentifier="Gene_FeatureType_Introns" type="template">
+        </tag>
+
+        <tag name="im:public" objectIdentifier="Gene_FeatureType_GOSlimTerm" type="template">
+        </tag>
+
+        <tag name="im:public" objectIdentifier="Gene_CrossRefs" type="template">
+        </tag>
+
+        <tag name="im:public" objectIdentifier="Gene_FungalHomologs" type="template">
+        </tag>
+
+        <tag name="im:public" objectIdentifier="Gene_Homologs" type="template">
+        </tag>
+
+        <tag name="im:public" objectIdentifier="Gene_YeastParalogs" type="template">
+        </tag>
+
+        <tag name="im:public" objectIdentifier="Chromosome_AllFeatures" type="template">
+        </tag>
+
+        <tag name="im:public" objectIdentifier="FeatureType_Gene" type="template">
+        </tag>
+
+        <tag name="im:public" objectIdentifier="Qualifier_ORF" type="template">
+        </tag>
+
+        <tag name="im:public" objectIdentifier="Organism_Genes" type="template">
+        </tag>
+
+        <tag name="im:public" objectIdentifier="Gene_ProteinMods_Ntermini" type="template">
+        </tag>
+
+        <tag name="im:public" objectIdentifier="Gene_Complex_New" type="template">
+        </tag>
+
+        <tag name="im:public" objectIdentifier="Gene_Flanking_Sequence" type="template">
+        </tag>
+
+        <tag name="im:public" objectIdentifier="Literature_Interaction" type="template">
+        </tag>
+
+        <tag name="im:public" objectIdentifier="Protein_Aggregation" type="template">
+        </tag>
+
+        <tag name="im:public" objectIdentifier="Gene_Protein_Half_Life" type="template">
+        </tag>
+
+        <tag name="im:public" objectIdentifier="AGR_Yeast_Genes" type="template">
+        </tag>
+
+        <tag name="im:public" objectIdentifier="GoSlimTerm_Gene" type="template">
+        </tag>
+
+        <tag name="im:public" objectIdentifier="Gene_Topic_Literature" type="template">
+        </tag>
+
+        <tag name="im:public" objectIdentifier="Publications_Literature" type="template">
+        </tag>
+
+        <tag name="im:public" objectIdentifier="AllGene_ChromosomalFeatures" type="template">
+        </tag>
+
+        <tag name="im:public" objectIdentifier="Protein_Median_Abundance" type="template">
+        </tag>
+
+        <tag name="im:public" objectIdentifier="Gene_ProteinAbundance" type="template">
+        </tag>
+
+        <tag name="im:public" objectIdentifier="Domains_Tab" type="template">
+        </tag>
+
+        <tag name="im:public" objectIdentifier="Interaction_Tab" type="template">
+        </tag>
+
+        <tag name="im:public" objectIdentifier="Deleted_Merged_Features_Tab" type="template">
+        </tag>
+
+        <tag name="im:public" objectIdentifier="GO_Terms_Tab" type="template">
+        </tag>
+
+        <tag name="im:public" objectIdentifier="Complex_Details_Participant" type="template">
+        </tag>
+
+        <tag name="im:public" objectIdentifier="CrossRefs_Tab" type="template">
+        </tag>
+
+        <tag name="im:public" objectIdentifier="Protein_Properties_Tab" type="template">
+        </tag>
+
+        <tag name="im:public" objectIdentifier="SGD_Chr_Features_Tab" type="template">
+        </tag>
+
+        <tag name="im:public" objectIdentifier="Gene_Physical_Interaction" type="template">
+        </tag>
+
+        <tag name="im:public" objectIdentifier="Gene_Genetic_Interaction" type="template">
+        </tag>
+
+        <tag name="im:public" objectIdentifier="Gene_Alleles" type="template">
+        </tag>
+
+        <tag name="im:public" objectIdentifier="GenomeWide_Papers" type="template">
+        </tag>
+
+        <tag name="im:public" objectIdentifier="Gene_Transcript" type="template">
+        </tag>
+
+        <tag name="im:public" objectIdentifier="Gene_UTRs" type="template">
+        </tag>
+
+        <tag name="im:public" objectIdentifier="Gene_Phenotype_New" type="template">
+        </tag>
+
+        <tag name="im:public" objectIdentifier="Literature_Phenotype_New" type="template">
+        </tag>
+
+        <tag name="im:public" objectIdentifier="Phenotype_Genes_New" type="template">
+        </tag>
+
+        <tag name="im:public" objectIdentifier="Phenotype_Tab_New" type="template">
+        </tag>
+
+        <tag name="im:public" objectIdentifier="All_Literature" type="template">
+        </tag>
+
+        <tag name="im:public" objectIdentifier="Literature_DO" type="template">
+        </tag>
+
+        <tag name="im:public" objectIdentifier="Literature_Complex" type="template">
+        </tag>
+
+        <tag name="im:public" objectIdentifier="Literature_Complements" type="template">
+        </tag>
+
+        <tag name="im:public" objectIdentifier="Literature_ProteinMods" type="template">
+        </tag>
+
+        <tag name="im:public" objectIdentifier="Literature_Regulation" type="template">
+        </tag>
+
+        <tag name="im:public" objectIdentifier="ALL_Yeast_Genes" type="bag">
+        </tag>
+
+        <tag name="im:public" objectIdentifier="SequenceFeature_Topics" type="template">
+        </tag>
+
+        <tag name="im:public" objectIdentifier="Verified_ORFs" type="bag">
+        </tag>
+
+        <tag name="im:public" objectIdentifier="Dubious_ORFs" type="bag">
+        </tag>
+
+        <tag name="im:public" objectIdentifier="Uncharacterized_ORFs" type="bag">
+        </tag>
+
+        <tag name="im:public" objectIdentifier="Uncharacterized_Verified_ORFs" type="bag">
+        </tag>
+
+        <tag name="im:public" objectIdentifier="ALL_Verified_Uncharacterized_Dubious_ORFs" type="bag">
+        </tag>
+
+        <tag name="im:public" objectIdentifier="Telomeres" type="bag">
+        </tag>
+
+        <tag name="im:public" objectIdentifier="Retrotransposons" type="bag">
+        </tag>
+
+        <tag name="im:public" objectIdentifier="Centromeres" type="bag">
+        </tag>
+
+        <tag name="im:public" objectIdentifier="ARSs" type="bag">
+        </tag>
+
+        <tag name="im:public" objectIdentifier="tRNAs" type="bag">
+        </tag>
+
+        <tag name="im:public" objectIdentifier="snRNAs" type="bag">
+        </tag>
+
+        <tag name="im:public" objectIdentifier="snoRNAs" type="bag">
+        </tag>
+
+        <tag name="im:public" objectIdentifier="Not In Systematic Sequence Of S288C" type="bag">
+        </tag>
+
+        <tag name="im:public" objectIdentifier="rRNA and spacer regions" type="bag">
+        </tag>
+
+        <tag name="im:public" objectIdentifier="RNA genes and rRNA spacer regions" type="bag">
+        </tag>
+
+        <tag name="im:public" objectIdentifier="Long Terminal Repeat" type="bag">
+        </tag>
+
+        <tag name="im:public" objectIdentifier="Curated Macromolecular Complexes" type="bag">
+        </tag>
+
+        <tag name="im:public" objectIdentifier="Human genes with yeast homologs" type="bag">
+        </tag>
+
+        <tag name="im:public" objectIdentifier="Human genes complementing or complemented by yeast genes" type="bag">
+        </tag>
+
+        <tag name="im:public" objectIdentifier="Pathways_Tab" type="template">
+        </tag>
+
+        <tag name="im:report" objectIdentifier="Literature_Gene" type="template">
+        </tag>
+
+        <tag name="im:report" objectIdentifier="Chromosome_Gene_FeatureType" type="template">
+        </tag>
+
+        <tag name="im:report" objectIdentifier="Organism_IntergenicRegions" type="template">
+        </tag>
+
+        <tag name="im:report" objectIdentifier="ChromosomeRegion_AllGenes" type="template">
+        </tag>
+
+        <tag name="im:report" objectIdentifier="gene_overlapping_flanking_regions" type="template">
+        </tag>
+
+        <tag name="im:report" objectIdentifier="AllGenes_Topic_Literature" type="template">
+        </tag>
+
+        <tag name="im:report" objectIdentifier="Gene_FeatureType_Introns" type="template">
+        </tag>
+
+        <tag name="im:report" objectIdentifier="Chromosome_IntergenicSequence" type="template">
+        </tag>
+
+        <tag name="im:report" objectIdentifier="Gene_Introns" type="template">
+        </tag>
+
+        <tag name="im:report" objectIdentifier="Chromosome_Telomeres" type="template">
+        </tag>
+
+        <tag name="im:report" objectIdentifier="Gene_OverlappingGenes" type="template">
+        </tag>
+
+        <tag name="im:report" objectIdentifier="GoSlimTerm_Gene" type="template">
+        </tag>
+
+        <tag name="im:report" objectIdentifier="Gene_Protein_Half_Life" type="template">
+        </tag>
+
+        <tag name="im:report" objectIdentifier="Publications_Literature" type="template">
+        </tag>
+
+        <tag name="im:summary" objectIdentifier="Gene.fiveprimeutrintrons" type="collection">
+        </tag>
+
+        <tag name="im:summary" objectIdentifier="NcRNA_Gene.internaltranscribedspacerregions" type="collection">
+        </tag>
+
+        <tag name="im:summary" objectIdentifier="NcRNA_Gene.noncodingexons" type="collection">
+        </tag>
+
+        <tag name="im:summary" objectIdentifier="NcRNA_Gene.externaltranscribedspacerregions" type="collection">
+        </tag>
+
+        <tag name="im:summary" objectIdentifier="Gene.interactions" type="collection">
+        </tag>
+
+        <tag name="im:summary" objectIdentifier="Gene.goAnnotation" type="collection">
+        </tag>
+
+        <tag name="im:summary" objectIdentifier="BioEntity.organism" type="reference">
+        </tag>
+
+        <tag name="im:summary" objectIdentifier="Gene.CDSs" type="collection">
+        </tag>
+
+        <tag name="im:summary" objectIdentifier="Gene.phenotypeAnnotations" type="collection">
+        </tag>
+
+        <tag name="im:summary" objectIdentifier="NcRNA_Gene.nontranscribedregions" type="collection">
+        </tag>
+
+        <tag name="im:summary" objectIdentifier="LocatedSequenceFeature.sequence" type="reference">
+        </tag>
+
+        <tag name="im:summary" objectIdentifier="Gene.proteins" type="collection">
+        </tag>
+
+        <tag name="im:summary" objectIdentifier="Gene.introns" type="collection">
+        </tag>
+
+        <tag name="im:summary" objectIdentifier="Gene.plusonetranslationalframeshifts" type="collection">
+        </tag>
+
+        <tag name="im:summary" objectIdentifier="Gene.phenotypes" type="collection">
+        </tag>
+
+        <tag name="im:summary" objectIdentifier="BioEntity.synonyms" type="collection">
         </tag>
     </tags>
 </userprofile>

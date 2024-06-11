@@ -1,0 +1,106 @@
+#!/bin/bash
+
+# Exit script on any error
+set -e
+
+# Check for required arguments
+if [[ -z $1 || -z $2 ]]
+then 
+	echo "Please run with via the following: $0 agr.local.alliancemine.postgres.server postgres"
+	exit 1
+fi
+
+echo "Starting Alliancemine DB Build: Host: $1 User: $2"
+date
+
+echo "Checking if the database 'alliancemine' exists and dropping it if it does..."
+psql -U $2 -h $1 -c "DROP DATABASE IF EXISTS alliancemine;"
+
+echo "Checking if the database 'items-alliancemine' exists and dropping it if it does..."
+psql -U $2 -h $1 -c 'DROP DATABASE IF EXISTS "items-alliancemine";'
+
+# Database and integration sources setup
+fasta_sources=(alliance-wb-fasta alliance-fb-fasta alliance-zfin-fasta alliance-mgi-fasta alliance-rgd-fasta)
+ontology_sources=(do go eco mmo emapa zfa wbbt fbbt so psi-mi-ontology go-slim)
+sgd_sources=(sgd sgd-gff sgd-gff-utr sgd-db-utr fungi-homologs cgob-homologs cglabrata-homologs pombe-homologs homolog-genes sgd-complementation-db sgd-complexes sgd-protein-properties sgd-protein-ntermini)
+alliance_sources=(alliance-genes go-annotation alliance-disease alliance-orthologs alliance-alleles alliance-expression entrez-organism)
+postprocess_sources=(create-references do-sources transfer-sequences create-attribute-indexes summarise-objectstore)
+solr_indexes=(create-autocomplete-index create-search-index)
+
+# Create databases
+echo createdb -U $2 -h $1 alliancemine || true
+createdb -U $2 -h $1 alliancemine || true
+echo createdb -U $2 -h $1 items-alliancemine || true
+createdb -U $2 -h $1 items-alliancemine || true
+
+# Pull Secrets file
+echo "Pulling secrets file from AWS."
+aws secretsmanager get-secret-value --region=us-east-1 --secret-id IntermineLocalPropertiesFile --query SecretString --output text > alliancemine.properties
+
+# Build database
+echo "./gradlew --stacktrace --no-daemon builddb"
+./gradlew --no-daemon --stacktrace  builddb
+date
+
+# Integrate various sources
+for i in "${fasta_sources[@]}"
+do
+	echo "./gradlew --stacktrace --no-daemon integrate -Psource=$i"
+	./gradlew --no-daemon --stacktrace integrate -Psource=$i
+	date
+done
+
+for i in "${ontology_sources[@]}"
+do
+	echo "./gradlew --stacktrace --no-daemon integrate -Psource=$i"
+	./gradlew --no-daemon --stacktrace integrate -Psource=$i
+	date
+done
+
+for i in "${sgd_sources[@]}"
+do
+	echo "./gradlew --no-daemon integrate -Psource=$i"
+	./gradlew --no-daemon --stacktrace integrate -Psource=$i
+	date
+done
+
+for i in "${alliance_sources[@]}"
+do
+	echo "./gradlew --stacktrace --no-daemon integrate -Psource=$i"
+	./gradlew --no-daemon --stacktrace integrate -Psource=$i
+	date
+done
+
+for i in "${postprocess_sources[@]}"
+do
+	echo "./gradlew --stacktrace --no-daemon postprocess -Pprocess=$i"
+	./gradlew --no-daemon --stacktrace postprocess -Pprocess=$i
+	date
+done
+
+# Dump the database
+echo pg_dump -F c -U $2 -h $1 -f /root/data/alliancemine.dump alliancemine
+pg_dump -F c -U $2 -h $1 -f /root/data/alliancemine.dump alliancemine
+date
+
+# Backup DB File to S3
+backup_file_name=$(date "+%Y-%m-%d_%H:%M:%S").dump
+echo "Backup DB File to S3: aws s3 cp /root/data/alliancemine.dump s3://agr-db-backups/alliancemine/local/$backup_file_name"
+aws s3 cp /root/data/alliancemine.dump s3://agr-db-backups/alliancemine/local/$backup_file_name
+
+# Keep only the last 5 backups
+echo "Checking and maintaining only the last 5 backups..."
+backup_files=$(aws s3 ls s3://agr-db-backups/alliancemine/local/ | awk '{print $4}' | sort)
+backup_count=$(echo "$backup_files" | wc -l)
+
+if [ "$backup_count" -gt 5 ]; then
+    echo "More than 5 backups exist. Removing the oldest ones..."
+    backups_to_remove=$(echo "$backup_files" | head -n -$((5)))
+    for file in $backups_to_remove; do
+        aws s3 rm s3://agr-db-backups/alliancemine/local/$file
+        echo "Removed $file"
+    done
+fi
+
+echo "Finished Alliancemine DB Build"
+date
