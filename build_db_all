@@ -63,3 +63,10 @@ aws s3 cp /root/data/alliancemine.dump s3://agr-db-backups/alliancemine/stage/`d
 echo "Finished Alliancemine DB Build"
 date
 
+# Pull Secrets file
+aws secretsmanager get-secret-value --region=us-east-1 --secret-id IntermineStagePropertiesFile --query SecretString --output text > alliancemine.properties
+# Copy
+echo "index.solrurl=http://agr.stage.alliancemine.solr.server:8983/solr/alliancemine-search" >> dbmodel/resources/keyword_search.properties
+echo "autocomplete.solrurl=http://agr.stage.alliancemine.solr.server:8983/solr/alliancemine-autocomplete" >> dbmodel/resources/objectstoresummary.config.properties
+# run load solr
+./build_solr postgres postgres
