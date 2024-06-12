@@ -80,3 +80,8 @@ echo "index.solrurl=http://agr.stage.alliancemine.solr.server:8983/solr/alliance
 echo "autocomplete.solrurl=http://agr.stage.alliancemine.solr.server:8983/solr/alliancemine-autocomplete" >> dbmodel/resources/objectstoresummary.config.properties
 # run load solr
 ./build_solr postgres postgres
+
+aws secretsmanager get-secret-value --region=us-east-1 --secret-id IntermineStagePropertiesFile --query SecretString --output text > alliancemine.properties
+
+# deploy tomcat
+./gradlew cargoRedeployRemote --stacktrace
