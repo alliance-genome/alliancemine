@@ -1,16 +1,48 @@
 #!/bin/bash
-# cp aws dump file
-export DB_FILE=`aws s3api list-objects-v2 --bucket "agr-db-backups" --query 'reverse(sort_by(Contents[?contains(Key, \`alliancemine/stage/\`)], &LastModified))[:1].Key' --output=text`
-aws s3 cp s3://agr-db-backups/$DB_FILE /root/data/db_backup.dump --no-progress
-# load into database
+
+# Step 1: Define the S3 bucket and file path for the database backup
+echo "Step 1: Define the S3 bucket and file path for the database backup"
+BUCKET_NAME="agr-db-backups"
+FILE_PATH="alliancemine/stage/"
+
+# Step 2: List objects in the S3 bucket, sort by last modified date, and get the most recent file
+echo "Step 2: Listing objects in S3 bucket and getting the most recent backup file"
+export DB_FILE=$(aws s3api list-objects-v2 --bucket "$BUCKET_NAME" --query "reverse(sort_by(Contents[?contains(Key, \`$FILE_PATH\`)], &LastModified))[:1].Key" --output=text)
+echo "Most recent backup file: $DB_FILE"
+
+# Step 3: Copy the most recent database backup file from S3 to the local machine
+echo "Step 3: Copying the most recent database backup file from S3 to the local machine"
+aws s3 cp s3://$BUCKET_NAME/$DB_FILE /root/data/db_backup.dump --no-progress
+echo "Backup file copied to /root/data/db_backup.dump"
+
+# Step 4: Create a new database for the restoration
+echo "Step 4: Creating a new database 'alliancemine'"
 createdb -U postgres -h agr.stage.alliancemine.postgres.server alliancemine
+echo "Database 'alliancemine' created"
+
+# Step 5: Restore the database from the backup file
+echo "Step 5: Restoring the database from the backup file"
 pg_restore -U postgres -O -x -d alliancemine -h agr.stage.alliancemine.postgres.server -j 4 /root/data/db_backup.dump
-# Pull Secrets file
+echo "Database 'alliancemine' restored from /root/data/db_backup.dump"
+
+# Step 6: Retrieve the secrets file from AWS Secrets Manager
+echo "Step 6: Retrieving the secrets file from AWS Secrets Manager"
 aws secretsmanager get-secret-value --region=us-east-1 --secret-id IntermineStagePropertiesFile --query SecretString --output text > alliancemine.properties
-# Copy
+echo "Secrets file retrieved and saved to alliancemine.properties"
+
+# Step 7: Append Solr URLs to the configuration files
+echo "Step 7: Appending Solr URLs to the configuration files"
 echo "index.solrurl=http://agr.stage.alliancemine.solr.server:8983/solr/alliancemine-search" >> dbmodel/resources/keyword_search.properties
+echo "Solr URL for index search appended to dbmodel/resources/keyword_search.properties"
 echo "autocomplete.solrurl=http://agr.stage.alliancemine.solr.server:8983/solr/alliancemine-autocomplete" >> dbmodel/resources/objectstoresummary.config.properties
-# run load solr
+echo "Solr URL for autocomplete appended to dbmodel/resources/objectstoresummary.config.properties"
+
+# Step 8: Run the Solr load script
+echo "Step 8: Running the Solr load script"
 ./build_solr postgres postgres
-# deploy tomcat
+echo "Solr load script executed"
+
+# Step 9: Deploy the application to Tomcat using Gradle
+echo "Step 9: Deploying the application to Tomcat using Gradle"
 ./gradlew cargoRedeployRemote --stacktrace
+echo "Application deployed to Tomcat"
