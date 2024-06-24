@@ -73,20 +73,20 @@ aws s3 cp /root/data/alliancemine.dump s3://agr-db-backups/alliancemine/stage/`d
 echo "Finished Alliancemine DB Build"
 date
 
-# Copy properties
-echo "Updating Solr URLs in property files..."
-echo "index.solrurl=http://agr.local.alliancemine.solr.server:8983/solr/alliancemine-search" >> dbmodel/resources/keyword_search.properties
-echo "autocomplete.solrurl=http://agr.local.alliancemine.solr.server:8983/solr/alliancemine-autocomplete" >> dbmodel/resources/objectstoresummary.config.properties
-echo "Solr URLs updated."
+# # Copy properties
+# echo "Updating Solr URLs in property files..."
+# echo "index.solrurl=http://agr.local.alliancemine.solr.server:8983/solr/alliancemine-search" >> dbmodel/resources/keyword_search.properties
+# echo "autocomplete.solrurl=http://agr.local.alliancemine.solr.server:8983/solr/alliancemine-autocomplete" >> dbmodel/resources/objectstoresummary.config.properties
+# echo "Solr URLs updated."
 
-# Run load Solr
-echo "Loading Solr with new data..."
-./build_solr postgres postgres
-echo "Solr data load complete."
+# # Run load Solr
+# echo "Loading Solr with new data..."
+# ./build_solr postgres postgres
+# echo "Solr data load complete."
 
-aws secretsmanager get-secret-value --region=us-east-1 --secret-id IntermineStagePropertiesFile --query SecretString --output text > alliancemine.properties
+# aws secretsmanager get-secret-value --region=us-east-1 --secret-id IntermineStagePropertiesFile --query SecretString --output text > alliancemine.properties
 
-# Deploy Tomcat
-echo "Redeploying Tomcat server..."
-./gradlew cargoRedeployRemote --stacktrace
-echo "Tomcat redeployed successfully."
+# # Deploy Tomcat
+# echo "Redeploying Tomcat server..."
+# ./gradlew cargoRedeployRemote --stacktrace
+# echo "Tomcat redeployed successfully."
