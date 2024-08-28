@@ -49,10 +49,18 @@ echo "Application deployed to Tomcat"
 
 # Step 10: Install Python dependencies
 echo "Step 10: Installing Python dependencies"
-pip install intermine
-pip install simplejson
-pip install requests
-pip install pandas
+which pip
+which pip3
+which python
+which python3
+pip3 install intermine
+pip3 install simplejson
+pip3 install requests
+pip3 install pandas
+python -m pip install intermine
+python -m pip install simplejson
+python -m pip install requests
+python -m pip install pandas
 echo "Python dependencies installed"
 
 # Step 11: Run the Python script
