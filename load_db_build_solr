@@ -46,3 +46,16 @@ echo "Solr load script executed"
 echo "Step 9: Deploying the application to Tomcat using Gradle"
 ./gradlew cargoRedeployRemote --stacktrace
 echo "Application deployed to Tomcat"
+
+# Step 10: Install Python dependencies
+echo "Step 10: Installing Python dependencies"
+pip install intermine
+pip install simplejson
+pip install requests
+pip install pandas
+echo "Python dependencies installed"
+
+# Step 11: Run the Python script
+echo "Step 11: Running Python script to populate lists"
+python3 recreatepubliclistsinalliance.py
+echo "Python script recreatepubliclistsinalliance.py executed"
