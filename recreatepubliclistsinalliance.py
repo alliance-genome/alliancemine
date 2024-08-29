@@ -1,14 +1,13 @@
 #!/usr/bin/env python3
-from __future__ import print_function
 from intermine.webservice import Service
-import configparser
 
 # Read the token from the properties file
 def get_list_token(file_path):
-    config = configparser.ConfigParser()
-    with open(file_path) as f:
-        config.read_string("[default]\n" + f.read())  # Adding [default] to make it compatible with configparser
-    return config.get('default', 'list_token')
+    with open(file_path, 'r') as file:
+        for line in file:
+            if line.startswith('list_token'):
+                return line.split('=', 1)[1].strip()  # Strip whitespace and newline characters
+    return None
 
 # Path to the properties file
 properties_file_path = 'alliancemine.properties'
@@ -16,7 +15,10 @@ properties_file_path = 'alliancemine.properties'
 # Get the token
 token = get_list_token(properties_file_path)
 
-service = Service("https://www.alliancegenome.org/alliancemine/service",token=token)
+if token is None:
+    raise ValueError("Token not found in properties file.")
+
+service = Service("https://www.alliancegenome.org/alliancemine/service", token=token)
 
 lm = service.list_manager()
 lm.delete_lists(["Curated Macromolecular Complexes", "RNA genes and rRNA spacer regions ", "rRNA and spacer regions ","Retrotransposons", "Uncharacterized_Verified_ORFs", "ALL_Verified_Uncharacterized_Dubious_ORFs", "Verified_ORFs", "Dubious_ORFs", "Uncharacterized_ORFs", "Long Terminal Repeat", "Telomeres", "RetroTransposons", "NotPhysicallyMapped", "Centromeres", "ARSs", "tRNAs", "All Curated Macromolecular Complexes", "Human genes with yeast homologs", "Human genes complementing or complemented by yeast genes", "Not In Systematic Sequence Of S288C", "RNA genes and rRNA spacer regions", "rRNA and spacer regions", "snoRNAs", "snRNAs", "ALL_Yeast_Genes"])
