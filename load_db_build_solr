@@ -49,22 +49,14 @@ echo "Application deployed to Tomcat"
 
 # Step 10: Install Python dependencies
 echo "Step 10: Installing Python dependencies"
-apk add --update py3-pip # Ensure pip is installed.
-which pip
-which pip3
-which python3
+# Ensure requirements for pip and python3-dev are installed.
+apk add --no-cache python3-dev py3-pip build-base libffi-dev musl-dev
+# Install pip packages
+pip install --upgrade pip wheel
 pip install intermine
 pip install simplejson
 pip install requests
 pip install pandas
-pip3 install intermine
-pip3 install simplejson
-pip3 install requests
-pip3 install pandas
-python3 -m pip install intermine
-python3 -m pip install simplejson
-python3 -m pip install requests
-python3 -m pip install pandas
 echo "Python dependencies installed"
 
 # Step 11: Run the Python script
