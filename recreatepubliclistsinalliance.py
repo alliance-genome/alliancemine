@@ -1,24 +1,42 @@
 #!/usr/bin/env python3
 from intermine.webservice import Service
 
-# Read the token from the properties file
-def get_list_token(file_path):
+# Function to read token and server name from the properties file
+def get_properties(file_path):
+    token = None
+    server_name = None
+
     with open(file_path, 'r') as file:
         for line in file:
             if line.startswith('list_token'):
-                return line.split('=', 1)[1].strip()  # Strip whitespace and newline characters
-    return None
+                token = line.split('=', 1)[1].strip()  # Strip whitespace and newline characters
+            elif line.startswith('db.production.datasource.serverName'):
+                server_name = line.split('=', 1)[1].strip()  # Strip whitespace and newline characters
+
+    return token, server_name
 
 # Path to the properties file
 properties_file_path = 'alliancemine.properties'
 
-# Get the token
-token = get_list_token(properties_file_path)
+# Get the token and server name
+token, server_name = get_properties(properties_file_path)
 
 if token is None:
     raise ValueError("Token not found in properties file.")
 
-service = Service("https://www.alliancegenome.org/alliancemine/service", token=token)
+if server_name is None:
+    raise ValueError("Server name not found in properties file.")
+
+# Determine the service URL based on the server name
+if server_name == "agr.stage.alliancemine.postgres.server":
+    service_url = "https://stage.alliancegenome.org/alliancemine/service"
+elif server_name == "agr.production.alliancemine.postgres.server":
+    service_url = "https://www.alliancegenome.org/alliancemine/service"
+else:
+    raise ValueError("Unexpected server name in properties file.")
+
+# Initialize the service with the appropriate URL and token
+service = Service(service_url, token=token)
 
 lm = service.list_manager()
 lm.delete_lists(["Curated Macromolecular Complexes", "RNA genes and rRNA spacer regions ", "rRNA and spacer regions ","Retrotransposons", "Uncharacterized_Verified_ORFs", "ALL_Verified_Uncharacterized_Dubious_ORFs", "Verified_ORFs", "Dubious_ORFs", "Uncharacterized_ORFs", "Long Terminal Repeat", "Telomeres", "RetroTransposons", "NotPhysicallyMapped", "Centromeres", "ARSs", "tRNAs", "All Curated Macromolecular Complexes", "Human genes with yeast homologs", "Human genes complementing or complemented by yeast genes", "Not In Systematic Sequence Of S288C", "RNA genes and rRNA spacer regions", "rRNA and spacer regions", "snoRNAs", "snRNAs", "ALL_Yeast_Genes"])
