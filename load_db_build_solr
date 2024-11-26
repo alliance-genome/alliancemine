@@ -1,9 +1,31 @@
 #!/bin/bash
 
+# Exit immediately if a command exits with a non-zero status
+set -e
+
+# Function to display usage information
+usage() {
+    echo "Usage: $0 --stage | --prod"
+    exit 1
+}
+
+# Check if exactly one argument is provided
+if [ "$#" -ne 1 ]; then
+    echo "Error: Exactly one argument is required."
+    usage
+fi
+
+# Validate the argument
+ENV_FLAG="$1"
+if [[ "$ENV_FLAG" != "--stage" && "$ENV_FLAG" != "--prod" ]]; then
+    echo "Error: Invalid argument '$ENV_FLAG'."
+    usage
+fi
+
 # Step 1: Define the S3 bucket and file path for the database backup
 echo "Step 1: Define the S3 bucket and file path for the database backup"
 BUCKET_NAME="agr-db-backups"
-FILE_PATH="alliancemine/stage/"
+FILE_PATH="alliancemine/stage/"  # Remains unchanged
 
 # Step 2: List objects in the S3 bucket, sort by last modified date, and get the most recent file
 echo "Step 2: Listing objects in S3 bucket and getting the most recent backup file"
@@ -59,7 +81,7 @@ pip install requests
 pip install pandas
 echo "Python dependencies installed"
 
-# Step 11: Run the Python script
+# Step 11: Run the Python script with the environment flag
 echo "Step 11: Running Python script to populate lists"
-python3 recreatepubliclistsinalliance.py
-echo "Python script recreatepubliclistsinalliance.py executed"
+python3 recreatepubliclistsinalliance.py $ENV_FLAG
+echo "Python script recreatepubliclistsinalliance.py executed with $ENV_FLAG"
