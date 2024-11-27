@@ -44,7 +44,7 @@ echo "Database 'alliancemine' created"
 
 # Step 5: Restore the database from the backup file
 echo "Step 5: Restoring the database from the backup file"
-pg_restore -U postgres -O -x -d alliancemine -h agr.stage.alliancemine.postgres.server -j 4 /root/data/db_backup.dump
+pg_restore -U postgres -O -x -d alliancemine -h agr.stage.alliancemine.postgres.server -j 8 /root/data/db_backup.dump
 echo "Database 'alliancemine' restored from /root/data/db_backup.dump"
 
 # Step 6: Retrieve the secrets file from AWS Secrets Manager
