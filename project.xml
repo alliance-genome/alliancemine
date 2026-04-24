@@ -179,8 +179,13 @@
           <property name="src.data.dir" location="/root/data/intermine/protein-ntermini"/>
       </source>
       
+      <!-- alliance-genes now reads the enriched TSV produced by
+           scripts/fetch_genes.py (in alliancemine-bio-sources). The 14-column
+           legacy schema is preserved so the converter is backward compatible
+           if you fall back to a locally-built /root/data/genes TSV. -->
       <source name="alliance-genes" type="alliance-genes">
-          <property name="src.data.dir" location="/root/data/genes"/>
+          <property name="src.data.dir" location="/root/data/api"/>
+          <property name="src.data.dir.includes" value="alliance-genes.tsv"/>
       </source>
 
       <source name="go-annotation" type="go-annotation">
