@@ -204,21 +204,63 @@
           <property name="src.data.dir.includes" value="VARIANT-ALLELE_COMBINED.tsv"/>
       </source>
 
+      <!-- EXPRESSION-ALLIANCE_COMBINED.tsv is header-only in FMS 9.0.0; the
+           populated data lives in the per-MOD files. Glob all MOD files. -->
       <source name="alliance-expression" type="alliance-expression">
           <property name="src.data.dir" location="/root/data/fms"/>
-          <property name="src.data.dir.includes" value="EXPRESSION-ALLIANCE_COMBINED.tsv"/>
+          <property name="src.data.dir.includes" value="EXPRESSION-ALLIANCE_*.tsv"/>
       </source>
 
-      <!--<source name="alliance-genetic-interactions" type="alliance-genetic-interactions">
-          <property name="src.data.dir" location="/root/data/fms"/>
-          <property name="src.data.dir.includes" value="INTERACTION-GEN_COMBINED.tsv"/>
-        </source>
+      <!-- Interaction sources: implemented against the live Alliance API,
+           fed by scripts/fetch_interactions.py in the bio-sources repo.
+           TSVs land under /root/data/api/. -->
+      <source name="alliance-genetic-interactions" type="alliance-genetic-interactions">
+          <property name="src.data.dir" location="/root/data/api"/>
+          <property name="src.data.dir.includes" value="genetic-interactions.tsv"/>
+      </source>
 
-        <source name="alliance-molecular-interactions" type="alliance-molecular-interactions">
-           <property name="src.data.dir" location="/root/data/fms"/>
-           <property name="src.data.dir.includes" value="NTERACTION-MOL_COMBINED.tsv"/>
-         </source>
-       <source name="hpo" type="hpo">
+      <source name="alliance-molecular-interactions" type="alliance-molecular-interactions">
+          <property name="src.data.dir" location="/root/data/api"/>
+          <property name="src.data.dir.includes" value="molecular-interactions.tsv"/>
+      </source>
+
+      <!-- New API-backed enrichment + companion sources.
+           Each is paired with a scripts/fetch_*.py in alliancemine-bio-sources
+           that produces the TSV listed below. See that repo's CLAUDE.md
+           "API-backed sources" table for the full mapping. -->
+      <source name="alliance-paralogs" type="alliance-paralogs">
+          <property name="src.data.dir" location="/root/data/api"/>
+          <property name="src.data.dir.includes" value="paralogs.tsv"/>
+      </source>
+
+      <source name="alliance-phenotypes" type="alliance-phenotypes">
+          <property name="src.data.dir" location="/root/data/api"/>
+          <property name="src.data.dir.includes" value="phenotypes.tsv"/>
+      </source>
+
+      <source name="alliance-disease-models" type="alliance-disease-models">
+          <property name="src.data.dir" location="/root/data/api"/>
+          <property name="src.data.dir.includes" value="disease-models.tsv"/>
+      </source>
+
+      <source name="alliance-allele-detail" type="alliance-allele-detail">
+          <property name="src.data.dir" location="/root/data/api"/>
+          <property name="src.data.dir.includes" value="allele-detail.tsv"/>
+      </source>
+
+      <source name="alliance-ortholog-detail" type="alliance-ortholog-detail">
+          <property name="src.data.dir" location="/root/data/api"/>
+          <property name="src.data.dir.includes" value="orthologs.tsv"/>
+      </source>
+
+      <source name="alliance-disease-detail" type="alliance-disease-detail">
+          <property name="src.data.dir" location="/root/data/api"/>
+          <property name="src.data.dir.includes" value="disease-annotations-detail.tsv"/>
+      </source>
+
+      <!-- hpo/mpo/pato ontology sources remain disabled pending review. -->
+      <!--
+      <source name="hpo" type="hpo">
         <property name="src.data.file" location="/root/data/fms/ONTOLOGY_HP.obo"/>
       </source>
 
@@ -228,7 +270,8 @@
 
       <source name="pato" type="pato">
         <property name="src.data.file" location="/root/data/fms/ONTOLOGY_PATO.obo"/>
-      </source>-->
+      </source>
+      -->
 
       <source name="update-publications" type="update-publications">
         <property name="src.data.file" location="publications.xml"/>
