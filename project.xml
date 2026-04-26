@@ -263,6 +263,47 @@
           <property name="src.data.dir.includes" value="disease-annotations-detail.tsv"/>
       </source>
 
+      <!-- ==========================================================
+           Phase 6a: UniProt + InterPro protein sources.
+           Declared via InterMine core types; data files expected at
+           /root/data/uniprot/current/ and /root/data/interpro/current/
+           (download step is in agr_intermine_builder/extract_data.py).
+           uniprot.organisms = Alliance taxa (yeast, human, mouse, rat,
+           worm, fly, zebrafish, xtropicalis, xlaevis).
+           ========================================================== -->
+      <source name="uniprot" type="uniprot">
+          <property name="uniprot.organisms" value="559292 9606 10090 10116 6239 7227 7955 8364 8355"/>
+          <property name="src.data.dir" location="/root/data/uniprot/current"/>
+      </source>
+
+      <source name="uniprot-keywords" type="uniprot-keywords">
+          <property name="src.data.dir" location="/root/data/uniprot/current"/>
+          <property name="src.data.dir.includes" value="keywlist.xml"/>
+      </source>
+
+      <source name="uniprot-fasta" type="fasta">
+          <property name="fasta.taxonId" value="559292 9606 10090 10116 6239 7227 7955 8364 8355"/>
+          <property name="fasta.className" value="org.intermine.model.bio.Protein"/>
+          <property name="fasta.classAttribute" value="primaryAccession"/>
+          <property name="fasta.dataSetTitle" value="UniProt data set"/>
+          <property name="fasta.dataSourceName" value="UniProt"/>
+          <property name="src.data.dir" location="/root/data/uniprot/current"/>
+          <property name="fasta.includes" value="uniprot_sprot_varsplic.fasta"/>
+      </source>
+
+      <source name="interpro" type="interpro">
+          <property name="src.data.dir" location="/root/data/interpro/current"/>
+      </source>
+
+      <!-- protein2ipr must run after uniprot - it only loads domains for
+           proteins already in the database. -->
+      <source name="protein2ipr" type="protein2ipr">
+          <property name="src.data.dir" location="/root/data/interpro/match_complete/current"/>
+          <property name="src.data.dir.includes" value="protein2ipr.dat"/>
+          <property name="protein2ipr.organisms" value="559292 9606 10090 10116 6239 7227 7955 8364 8355"/>
+          <property name="osAlias" value="os.production"/>
+      </source>
+
       <!-- hpo/mpo/pato ontology sources remain disabled pending review. -->
       <!--
       <source name="hpo" type="hpo">
