@@ -304,6 +304,25 @@
           <property name="osAlias" value="os.production"/>
       </source>
 
+      <!-- ==========================================================
+           Phase 6b: KEGG + Reactome pathway sources.
+           Populate the existing Pathway class via Gene.pathways /
+           Protein.pathways collections. Data files expected at
+           /root/data/kegg/current/ and /root/data/reactome/current/.
+           ========================================================== -->
+      <source name="kegg-pathway" type="kegg-pathway">
+          <property name="src.data.dir" location="/root/data/kegg/current"/>
+          <property name="kegg.organisms" value="559292 9606 10090 10116 6239 7227 7955"/>
+      </source>
+
+      <source name="reactome" type="reactome">
+          <property name="src.data.dir" location="/root/data/reactome/current"/>
+          <property name="reactome.organisms" value="559292 9606 10090 10116 6239 7227 7955"/>
+          <property name="reactome.datasourcename" value="Reactome"/>
+          <property name="reactome.datasetname" value="Reactome data set"/>
+          <property name="reactome.curated" value="false"/>
+      </source>
+
       <!-- hpo/mpo/pato ontology sources remain disabled pending review. -->
       <!--
       <source name="hpo" type="hpo">
