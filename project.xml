@@ -264,6 +264,22 @@
       </source>
 
       <!-- ==========================================================
+           Phase 6d: cross-mine federation. Data is pulled from sibling
+           InterMine instances (MouseMine, WormMine) by Python fetchers
+           using their PathQuery REST APIs. TSVs land in /root/data/api/
+           alongside the Alliance-API outputs.
+           ========================================================== -->
+      <source name="alliance-mouse-strains" type="alliance-mouse-strains">
+          <property name="src.data.dir" location="/root/data/api"/>
+          <property name="src.data.dir.includes" value="mouse-strains.tsv"/>
+      </source>
+
+      <source name="alliance-worm-rnai" type="alliance-worm-rnai">
+          <property name="src.data.dir" location="/root/data/api"/>
+          <property name="src.data.dir.includes" value="worm-rnai.tsv"/>
+      </source>
+
+      <!-- ==========================================================
            Phase 6a: UniProt + InterPro protein sources.
            Declared via InterMine core types; data files expected at
            /root/data/uniprot/current/ and /root/data/interpro/current/
