@@ -14,8 +14,9 @@
             <fieldconfig fieldExpr="identifier" label="EBI Complex ID" />
             <fieldconfig fieldExpr="name" label="Complex Name" />
             <fieldconfig fieldExpr="function" label="Complex Function" />
-            <fieldconfig fieldExpr="properties" label="Complex Properties" />
+
             <fieldconfig fieldExpr="systematicName" label="Complex Systematic Name" />
+            <fieldconfig fieldExpr="properties" label="Complex Properties" />
             <fieldconfig fieldExpr="goAnnotation" label="Complex GO Annotation" />
             <fieldconfig fieldExpr="publications" label="Complex Publications" />
         </fields>
