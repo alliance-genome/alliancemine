@@ -279,6 +279,11 @@
           <property name="src.data.dir.includes" value="worm-rnai.tsv"/>
       </source>
 
+      <source name="alliance-transgenic-alleles" type="alliance-transgenic-alleles">
+          <property name="src.data.dir" location="/Users/nuin/Projects/alliance/new_alliancemine/alliancemine-bio-sources/data"/>
+          <property name="src.data.dir.includes" value="transgenic-alleles.tsv"/>
+      </source>
+
       <!-- ==========================================================
            Phase 6a: UniProt + InterPro protein sources.
            Declared via InterMine core types; data files expected at
