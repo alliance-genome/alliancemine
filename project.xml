@@ -289,6 +289,13 @@
           <property name="src.data.dir.includes" value="disease-alleles.tsv"/>
       </source>
 
+      <!-- E7: gene-direct experimental disease annotations (non-orthology
+           inferred). Sets evidenceType="experimental" + experimentalGene ref. -->
+      <source name="alliance-experimental-disease" type="alliance-experimental-disease">
+          <property name="src.data.dir" location="/Users/nuin/Projects/alliance/new_alliancemine/alliancemine-bio-sources/data"/>
+          <property name="src.data.dir.includes" value="experimental-disease.tsv"/>
+      </source>
+
       <!-- ==========================================================
            Phase 6a: UniProt + InterPro protein sources.
            Declared via InterMine core types; data files expected at
@@ -328,6 +335,13 @@
           <property name="src.data.dir.includes" value="protein2ipr.dat"/>
           <property name="protein2ipr.organisms" value="559292 9606 10090 10116 6239 7227 7955 8364 8355"/>
           <property name="osAlias" value="os.production"/>
+      </source>
+
+      <!-- F1: maps InterPro domains to GO terms via interpro2go file.
+           Must run after interpro + protein2ipr so target OntologyTerm /
+           ProteinDomain rows already exist. -->
+      <source name="interpro-go" type="interpro-go">
+          <property name="src.data.dir" location="/root/data/interpro/ontology/current"/>
       </source>
 
       <!-- ==========================================================
@@ -391,6 +405,9 @@
     <post-process name="summarise-objectstore"/>
     <post-process name="create-autocomplete-index"/>
     <post-process name="create-search-index"/>
+    <!-- F8: normalise DataSource/DataSet name+url+description from datasources.xml.
+         Must run last so it sees every DataSource created by integrate. -->
+    <post-process name="update-data-sources"/>
   </post-processing>
 
 </project>
