@@ -395,11 +395,17 @@
   <post-processing>
     <post-process name="create-references"/>
     <post-process name="do-sources"/>
-    <!--<post-process name="create-intergenic-region-features"/>
+    <!-- PR4: re-enabled 2026-05-12 — without these 5 steps the intergenicregion
+         and geneflankingregion tables stay empty, breaking the
+         Organism_IntergenicRegions and gene_overlapping_flanking_regions
+         templates. populate-child-features wires up parent↔child references for
+         any feature items that exist in the objectstore (does NOT derive new
+         features). See agr_intermine_builder docs/POSTPROCESS_BLOCK_REENABLE.md. -->
+    <post-process name="create-intergenic-region-features"/>
     <post-process name="create-location-overlap-index"/>
     <post-process name="create-overlap-view"/>
     <post-process name="create-gene-flanking-features"/>
-    <post-process name="populate-child-features"/>-->
+    <post-process name="populate-child-features"/>
     <post-process name="transfer-sequences"/>
     <post-process name="create-attribute-indexes"/>
     <post-process name="summarise-objectstore"/>
