@@ -326,6 +326,15 @@
           <property name="src.data.dir.includes" value="allele-phenotypes.tsv"/>
       </source>
 
+      <!-- Q2: per-gene cross-references from FMS GENECROSSREFERENCEJSON bulk.
+           Filters to MOD-subject rows (MGI/SGD/ZFIN/FB/WB/RGD/HGNC/XB)
+           and emits CrossReference items linked to the existing Gene
+           class via the standard `subject` reverse-reference. -->
+      <source name="alliance-gene-crossrefs" type="alliance-gene-crossrefs">
+          <property name="src.data.dir" location="/Users/nuin/Projects/alliance/new_alliancemine/alliancemine-bio-sources/data"/>
+          <property name="src.data.dir.includes" value="gene-crossrefs.tsv"/>
+      </source>
+
       <!-- ==========================================================
            Phase 6a: UniProt + InterPro protein sources.
            Declared via InterMine core types; data files expected at
