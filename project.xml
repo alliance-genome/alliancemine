@@ -345,6 +345,24 @@
           <property name="src.data.dir.includes" value="htp-*.tsv"/>
       </source>
 
+      <!-- N1: AlphaFold structure URL on Protein. Synthesises
+           alphaFoldUrl + alphaFoldId from UniProtKB cross-refs already
+           captured by alliance-gene-crossrefs. No HTTP fetch — pure
+           URL template against alphafold.ebi.ac.uk/entry/{accession}. -->
+      <source name="alliance-alphafold" type="alliance-alphafold">
+          <property name="src.data.dir" location="/Users/nuin/Projects/alliance/new_alliancemine/alliancemine-bio-sources/data"/>
+          <property name="src.data.dir.includes" value="alphafold.tsv"/>
+      </source>
+
+      <!-- N2: STRING DB v12 functional protein-protein associations.
+           Per-organism download (combined_score ≥ 700 default). New
+           STRINGInteraction class links Protein-Protein pairs via
+           UniProt accession with score 0-1000. -->
+      <source name="alliance-string" type="alliance-string">
+          <property name="src.data.dir" location="/Users/nuin/Projects/alliance/new_alliancemine/alliancemine-bio-sources/data"/>
+          <property name="src.data.dir.includes" value="string-interactions.tsv"/>
+      </source>
+
       <!-- ==========================================================
            Phase 6a: UniProt + InterPro protein sources.
            Declared via InterMine core types; data files expected at
