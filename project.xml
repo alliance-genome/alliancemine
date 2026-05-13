@@ -335,6 +335,16 @@
           <property name="src.data.dir.includes" value="gene-crossrefs.tsv"/>
       </source>
 
+      <!-- B1: high-throughput experiment metadata from FMS HTPDATASET +
+           HTPDATASAMPLE bulk. Reads two TSVs (htp-datasets.tsv +
+           htp-samples.tsv) via a single converter that dispatches on the
+           header row, and emits DataSet + Sample + SampleCharacteristic
+           items. Populates the previously-empty Sample class. -->
+      <source name="alliance-htp" type="alliance-htp">
+          <property name="src.data.dir" location="/Users/nuin/Projects/alliance/new_alliancemine/alliancemine-bio-sources/data"/>
+          <property name="src.data.dir.includes" value="htp-*.tsv"/>
+      </source>
+
       <!-- ==========================================================
            Phase 6a: UniProt + InterPro protein sources.
            Declared via InterMine core types; data files expected at
