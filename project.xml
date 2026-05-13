@@ -296,6 +296,28 @@
           <property name="src.data.dir.includes" value="experimental-disease.tsv"/>
       </source>
 
+      <!-- E3: molecular variants from VARIANT-ALLELE-JSON FMS bulk. Class
+           Variant + VariantConsequence declared in alliancemine-global_additions.xml. -->
+      <source name="alliance-variants" type="alliance-variants">
+          <property name="src.data.dir" location="/Users/nuin/Projects/alliance/new_alliancemine/alliancemine-bio-sources/data"/>
+          <property name="src.data.dir.includes" value="variants.tsv"/>
+      </source>
+
+      <!-- AGR auto-curated gene descriptions (GENE-DESCRIPTION-JSON FMS bulk).
+           Enriches existing Gene class with autoDescription / goDescription /
+           do/orthology/expression description fields. -->
+      <source name="alliance-gene-descriptions" type="alliance-gene-descriptions">
+          <property name="src.data.dir" location="/Users/nuin/Projects/alliance/new_alliancemine/alliancemine-bio-sources/data"/>
+          <property name="src.data.dir.includes" value="gene-descriptions.tsv"/>
+      </source>
+
+      <!-- Affected Genomic Models from FMS AGM bulk. Emits DiseaseModel items
+           (class declared in alliancemine-global_additions.xml). -->
+      <source name="alliance-agms" type="alliance-agms">
+          <property name="src.data.dir" location="/Users/nuin/Projects/alliance/new_alliancemine/alliancemine-bio-sources/data"/>
+          <property name="src.data.dir.includes" value="agms.tsv"/>
+      </source>
+
       <!-- ==========================================================
            Phase 6a: UniProt + InterPro protein sources.
            Declared via InterMine core types; data files expected at
@@ -343,6 +365,42 @@
       <source name="interpro-go" type="interpro-go">
           <property name="src.data.dir" location="/root/data/interpro/ontology/current"/>
       </source>
+
+      <!-- F7: NCBI gene2pubmed → Gene.publications. Upstream core type.
+           Single gene2pubmed TSV; gz acceptable. Filter to AllianceMine
+           taxa via pubmed.organisms property. -->
+      <source name="pubmed-gene" type="pubmed-gene">
+          <property name="src.data.dir" location="/root/data/pubmed/current"/>
+          <property name="pubmed.organisms" value="559292 9606 10090 10116 6239 7227 7955 8364 8355"/>
+      </source>
+
+      <!-- OMIM: bio-source-omim adds Disease.publications with a different
+           reverse-reference than AllianceMine's Disease class (which
+           extends DOTerm and inherits publications from Annotatable).
+           Disabled until a per-mine additions override resolves the merge
+           conflict. Error from :dbmodel:mergeModels:
+             replacing the "Annotatable.publications" collection with
+             Disease.publications failed because the reverse references differ
+      <source name="omim" type="omim">
+          <property name="src.data.dir" location="/root/data/omim/current"/>
+      </source>
+      -->
+
+      <!-- OrthoDB orthology — supplementary evidence alongside the AGR ortholog
+           feed. Upstream core type. -->
+      <source name="orthodb" type="orthodb">
+          <property name="src.data.dir" location="/root/data/orthodb/current"/>
+          <property name="orthodb.organisms" value="559292 9606 10090 10116 6239 7227 7955 8364 8355"/>
+      </source>
+
+      <!-- PDB structures: bio-source-pdb is not published in maven central
+           or local m2 (FlyMine has the block commented out). Disabled until
+           an upstream jar appears or someone packages a local converter.
+      <source name="pdb" type="pdb">
+          <property name="src.data.dir" location="/root/data/pdb/current"/>
+          <property name="pdb.organisms" value="559292 9606 10090 10116 6239 7227 7955 8364 8355"/>
+      </source>
+      -->
 
       <!-- ==========================================================
            Phase 6b: KEGG + Reactome pathway sources.
