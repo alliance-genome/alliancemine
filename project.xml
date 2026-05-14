@@ -363,6 +363,21 @@
           <property name="src.data.dir.includes" value="string-interactions.tsv"/>
       </source>
 
+      <!-- N3: CRISPR/RNAi screen hits from FMS BIOGRID-ORCS tarballs.
+           Streaming tar-extract filters HIT=YES rows; new
+           CRISPRScreenResult class joins Gene by (symbol, organism). -->
+      <source name="alliance-crispr-screens" type="alliance-crispr-screens">
+          <property name="src.data.dir" location="/Users/nuin/Projects/alliance/new_alliancemine/alliancemine-bio-sources/data"/>
+          <property name="src.data.dir.includes" value="crispr-screens.tsv"/>
+      </source>
+
+      <!-- N5: small-molecule catalog from FMS MOLECULE bulk. New
+           Molecule class with InChI / SMILES / IUPAC + ChEBI cross-ref. -->
+      <source name="alliance-molecules" type="alliance-molecules">
+          <property name="src.data.dir" location="/Users/nuin/Projects/alliance/new_alliancemine/alliancemine-bio-sources/data"/>
+          <property name="src.data.dir.includes" value="molecules.tsv"/>
+      </source>
+
       <!-- ==========================================================
            Phase 6a: UniProt + InterPro protein sources.
            Declared via InterMine core types; data files expected at
