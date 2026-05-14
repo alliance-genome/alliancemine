@@ -378,6 +378,15 @@
           <property name="src.data.dir.includes" value="molecules.tsv"/>
       </source>
 
+      <!-- X2: ChEMBL target → UniProt mapping. Emits CrossReference items
+           on Protein (source=ChEMBL) so AllianceMine queries can pivot
+           from any UniProt-keyed Protein to its ChEMBL target report
+           card (mechanism / activity / drug indications). -->
+      <source name="alliance-chembl" type="alliance-chembl">
+          <property name="src.data.dir" location="/Users/nuin/Projects/alliance/new_alliancemine/alliancemine-bio-sources/data"/>
+          <property name="src.data.dir.includes" value="chembl-targets.tsv"/>
+      </source>
+
       <!-- ==========================================================
            Phase 6a: UniProt + InterPro protein sources.
            Declared via InterMine core types; data files expected at
