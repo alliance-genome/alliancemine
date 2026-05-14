@@ -195,8 +195,8 @@
       </source>
 
       <source name="alliance-disease" type="alliance-disease">
-          <property name="src.data.dir" location="/root/data/fms"/>
-          <property name="src.data.dir.includes" value="DISEASE-ALLIANCE_COMBINED.tsv"/>
+          <property name="src.data.dir" location="/Users/nuin/Projects/alliance/new_alliancemine/alliancemine-bio-sources/data"/>
+          <property name="src.data.dir.includes" value="disease-alliance.tsv"/>
       </source>
 
       <source name="alliance-orthologs" type="alliance-orthologs">
@@ -205,15 +205,17 @@
       </source>
 
       <source name="alliance-alleles" type="alliance-alleles">
-          <property name="src.data.dir" location="/root/data/fms"/>
-          <property name="src.data.dir.includes" value="VARIANT-ALLELE_COMBINED.tsv"/>
+          <property name="src.data.dir" location="/Users/nuin/Projects/alliance/new_alliancemine/alliancemine-bio-sources/data"/>
+          <property name="src.data.dir.includes" value="alliance-alleles.tsv"/>
       </source>
 
-      <!-- EXPRESSION-ALLIANCE_COMBINED.tsv is header-only in FMS 9.0.0; the
-           populated data lives in the per-MOD files. Glob all MOD files. -->
+      <!-- Verified 2026-05-13: FMS EXPRESSION-ALLIANCE/COMBINED shards
+           are populated (1.77M rows in shard 0 alone). scripts/
+           fetch_expression.py downloads + concatenates the 13 shards
+           into data/expression-alliance.tsv. -->
       <source name="alliance-expression" type="alliance-expression">
-          <property name="src.data.dir" location="/root/data/fms"/>
-          <property name="src.data.dir.includes" value="EXPRESSION-ALLIANCE_*.tsv"/>
+          <property name="src.data.dir" location="/Users/nuin/Projects/alliance/new_alliancemine/alliancemine-bio-sources/data"/>
+          <property name="src.data.dir.includes" value="expression-alliance.tsv"/>
       </source>
 
       <!-- Interaction sources: implemented against the live Alliance API,
