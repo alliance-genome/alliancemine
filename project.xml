@@ -41,7 +41,7 @@
          <property name="src.data.dir" location="/root/data/fms"/>
        </source>
 
-       <source name="alliance-mgi-fasta" type="fasta">
+       <source name="alliance-mgi-fasta" type="fasta" dump="true">
          <property name="fasta.className" value="org.intermine.model.bio.Chromosome"/>
          <property name="fasta.dataSourceName" value="NCBI"/>
          <property name="fasta.dataSetTitle" value="MGI Genome Sequence"/>
@@ -68,7 +68,7 @@
           <property name="src.data.dir" location="/root/data/fms"/>
        </source>
 
-       <source name="alliance-xlaevis-fasta" type="fasta">
+       <source name="alliance-xlaevis-fasta" type="fasta" dump="true">
          <property name="fasta.className" value="org.intermine.model.bio.Chromosome"/>
          <property name="fasta.dataSourceName" value="NCBI"/>
          <property name="fasta.dataSetTitle" value="XB X.laevis Genome Sequence"/>
@@ -105,7 +105,7 @@
        <property name="src.data.file" location="/root/data/fms/ONTOLOGY_WBBT.obo"/>
   </source>
 
-     <source name="fbbt" type="fbbt">
+     <source name="fbbt" type="fbbt" dump="true">
        <property name="src.data.file" location="/root/data/fms/ONTOLOGY_FBBT.obo"/>
      </source>
 
@@ -113,7 +113,7 @@
           <property name="src.data.file" location="/root/data/intermine/ontology/psi-mi.obo"/>
       </source>
 
-      <source name="go-slim" type="go-slim">
+      <source name="go-slim" type="go-slim" dump="true">
           <property name="src.data.file" location="/root/data/intermine/ontology/goslim_yeast.obo"/>
       </source>
 
@@ -165,7 +165,7 @@
           <property name="converter.class" value="org.intermine.bio.dataconversion.SgdComplementationDbConverter"/>
       </source>
 
-      <source name="sgd-complexes" type="sgd-complexes">
+      <source name="sgd-complexes" type="sgd-complexes" dump="true">
           <property name="source.db.name" value="sgd"/>
           <property name="dataSourceName" value="SGD"/>
           <property name="converter.class" value="org.intermine.bio.dataconversion.SgdComplexesConverter"/>
@@ -175,7 +175,7 @@
           <property name="src.data.dir" location="/root/data/intermine/protein-properties"/>
       </source>
 
-      <source name="sgd-protein-ntermini" type="sgd-protein-ntermini">
+      <source name="sgd-protein-ntermini" type="sgd-protein-ntermini" dump="true">
           <property name="src.data.dir" location="/root/data/intermine/protein-ntermini"/>
       </source>
       
@@ -188,14 +188,14 @@
           <property name="src.data.dir.includes" value="alliance-genes.tsv"/>
       </source>
 
-      <source name="go-annotation" type="go-annotation">
+      <source name="go-annotation" type="go-annotation" dump="true">
           <property name="src.data.dir" location="/root/data/fms"/>
           <property name="src.data.dir.includes" value="*.gaf"/>
           <property name="ontologyPrefix" value="GO"/>
       </source>
 
       <source name="alliance-disease" type="alliance-disease">
-          <property name="src.data.dir" location="/Users/nuin/Projects/alliance/new_alliancemine/alliancemine-bio-sources/data"/>
+          <property name="src.data.dir" location="/root/data/api"/>
           <property name="src.data.dir.includes" value="disease-alliance.tsv"/>
       </source>
 
@@ -205,7 +205,7 @@
       </source>
 
       <source name="alliance-alleles" type="alliance-alleles">
-          <property name="src.data.dir" location="/Users/nuin/Projects/alliance/new_alliancemine/alliancemine-bio-sources/data"/>
+          <property name="src.data.dir" location="/root/data/api"/>
           <property name="src.data.dir.includes" value="alliance-alleles.tsv"/>
       </source>
 
@@ -213,8 +213,8 @@
            are populated (1.77M rows in shard 0 alone). scripts/
            fetch_expression.py downloads + concatenates the 13 shards
            into data/expression-alliance.tsv. -->
-      <source name="alliance-expression" type="alliance-expression">
-          <property name="src.data.dir" location="/Users/nuin/Projects/alliance/new_alliancemine/alliancemine-bio-sources/data"/>
+      <source name="alliance-expression" type="alliance-expression" dump="true">
+          <property name="src.data.dir" location="/root/data/api"/>
           <property name="src.data.dir.includes" value="expression-alliance.tsv"/>
       </source>
 
@@ -260,7 +260,7 @@
           <property name="src.data.dir.includes" value="orthologs.tsv"/>
       </source>
 
-      <source name="alliance-disease-detail" type="alliance-disease-detail">
+      <source name="alliance-disease-detail" type="alliance-disease-detail" dump="true">
           <property name="src.data.dir" location="/root/data/api"/>
           <property name="src.data.dir.includes" value="disease-annotations-detail.tsv"/>
       </source>
@@ -282,26 +282,26 @@
       </source>
 
       <source name="alliance-transgenic-alleles" type="alliance-transgenic-alleles">
-          <property name="src.data.dir" location="/Users/nuin/Projects/alliance/new_alliancemine/alliancemine-bio-sources/data"/>
+          <property name="src.data.dir" location="/root/data/api"/>
           <property name="src.data.dir.includes" value="transgenic-alleles.tsv"/>
       </source>
 
       <source name="alliance-disease-alleles" type="alliance-disease-alleles">
-          <property name="src.data.dir" location="/Users/nuin/Projects/alliance/new_alliancemine/alliancemine-bio-sources/data"/>
+          <property name="src.data.dir" location="/root/data/api"/>
           <property name="src.data.dir.includes" value="disease-alleles.tsv"/>
       </source>
 
       <!-- E7: gene-direct experimental disease annotations (non-orthology
            inferred). Sets evidenceType="experimental" + experimentalGene ref. -->
       <source name="alliance-experimental-disease" type="alliance-experimental-disease">
-          <property name="src.data.dir" location="/Users/nuin/Projects/alliance/new_alliancemine/alliancemine-bio-sources/data"/>
+          <property name="src.data.dir" location="/root/data/api"/>
           <property name="src.data.dir.includes" value="experimental-disease.tsv"/>
       </source>
 
       <!-- E3: molecular variants from VARIANT-ALLELE-JSON FMS bulk. Class
            Variant + VariantConsequence declared in alliancemine-global_additions.xml. -->
       <source name="alliance-variants" type="alliance-variants">
-          <property name="src.data.dir" location="/Users/nuin/Projects/alliance/new_alliancemine/alliancemine-bio-sources/data"/>
+          <property name="src.data.dir" location="/root/data/api"/>
           <property name="src.data.dir.includes" value="variants.tsv"/>
       </source>
 
@@ -309,14 +309,14 @@
            Enriches existing Gene class with autoDescription / goDescription /
            do/orthology/expression description fields. -->
       <source name="alliance-gene-descriptions" type="alliance-gene-descriptions">
-          <property name="src.data.dir" location="/Users/nuin/Projects/alliance/new_alliancemine/alliancemine-bio-sources/data"/>
+          <property name="src.data.dir" location="/root/data/api"/>
           <property name="src.data.dir.includes" value="gene-descriptions.tsv"/>
       </source>
 
       <!-- Affected Genomic Models from FMS AGM bulk. Emits DiseaseModel items
            (class declared in alliancemine-global_additions.xml). -->
       <source name="alliance-agms" type="alliance-agms">
-          <property name="src.data.dir" location="/Users/nuin/Projects/alliance/new_alliancemine/alliancemine-bio-sources/data"/>
+          <property name="src.data.dir" location="/root/data/api"/>
           <property name="src.data.dir.includes" value="agms.tsv"/>
       </source>
 
@@ -324,7 +324,7 @@
            (filtered to rows with primaryGeneticEntityIDs). Emits partial
            PhenotypeAnnotation items keyed on alleleSubject + ontologyTerm. -->
       <source name="alliance-allele-phenotypes" type="alliance-allele-phenotypes">
-          <property name="src.data.dir" location="/Users/nuin/Projects/alliance/new_alliancemine/alliancemine-bio-sources/data"/>
+          <property name="src.data.dir" location="/root/data/api"/>
           <property name="src.data.dir.includes" value="allele-phenotypes.tsv"/>
       </source>
 
@@ -333,7 +333,7 @@
            and emits CrossReference items linked to the existing Gene
            class via the standard `subject` reverse-reference. -->
       <source name="alliance-gene-crossrefs" type="alliance-gene-crossrefs">
-          <property name="src.data.dir" location="/Users/nuin/Projects/alliance/new_alliancemine/alliancemine-bio-sources/data"/>
+          <property name="src.data.dir" location="/root/data/api"/>
           <property name="src.data.dir.includes" value="gene-crossrefs.tsv"/>
       </source>
 
@@ -342,8 +342,8 @@
            htp-samples.tsv) via a single converter that dispatches on the
            header row, and emits DataSet + Sample + SampleCharacteristic
            items. Populates the previously-empty Sample class. -->
-      <source name="alliance-htp" type="alliance-htp">
-          <property name="src.data.dir" location="/Users/nuin/Projects/alliance/new_alliancemine/alliancemine-bio-sources/data"/>
+      <source name="alliance-htp" type="alliance-htp" dump="true">
+          <property name="src.data.dir" location="/root/data/api"/>
           <property name="src.data.dir.includes" value="htp-*.tsv"/>
       </source>
 
@@ -352,7 +352,7 @@
            captured by alliance-gene-crossrefs. No HTTP fetch — pure
            URL template against alphafold.ebi.ac.uk/entry/{accession}. -->
       <source name="alliance-alphafold" type="alliance-alphafold">
-          <property name="src.data.dir" location="/Users/nuin/Projects/alliance/new_alliancemine/alliancemine-bio-sources/data"/>
+          <property name="src.data.dir" location="/root/data/api"/>
           <property name="src.data.dir.includes" value="alphafold.tsv"/>
       </source>
 
@@ -361,7 +361,7 @@
            STRINGInteraction class links Protein-Protein pairs via
            UniProt accession with score 0-1000. -->
       <source name="alliance-string" type="alliance-string">
-          <property name="src.data.dir" location="/Users/nuin/Projects/alliance/new_alliancemine/alliancemine-bio-sources/data"/>
+          <property name="src.data.dir" location="/root/data/api"/>
           <property name="src.data.dir.includes" value="string-interactions.tsv"/>
       </source>
 
@@ -369,14 +369,14 @@
            Streaming tar-extract filters HIT=YES rows; new
            CRISPRScreenResult class joins Gene by (symbol, organism). -->
       <source name="alliance-crispr-screens" type="alliance-crispr-screens">
-          <property name="src.data.dir" location="/Users/nuin/Projects/alliance/new_alliancemine/alliancemine-bio-sources/data"/>
+          <property name="src.data.dir" location="/root/data/api"/>
           <property name="src.data.dir.includes" value="crispr-screens.tsv"/>
       </source>
 
       <!-- N5: small-molecule catalog from FMS MOLECULE bulk. New
            Molecule class with InChI / SMILES / IUPAC + ChEBI cross-ref. -->
       <source name="alliance-molecules" type="alliance-molecules">
-          <property name="src.data.dir" location="/Users/nuin/Projects/alliance/new_alliancemine/alliancemine-bio-sources/data"/>
+          <property name="src.data.dir" location="/root/data/api"/>
           <property name="src.data.dir.includes" value="molecules.tsv"/>
       </source>
 
@@ -384,8 +384,8 @@
            on Protein (source=ChEMBL) so AllianceMine queries can pivot
            from any UniProt-keyed Protein to its ChEMBL target report
            card (mechanism / activity / drug indications). -->
-      <source name="alliance-chembl" type="alliance-chembl">
-          <property name="src.data.dir" location="/Users/nuin/Projects/alliance/new_alliancemine/alliancemine-bio-sources/data"/>
+      <source name="alliance-chembl" type="alliance-chembl" dump="true">
+          <property name="src.data.dir" location="/root/data/api"/>
           <property name="src.data.dir.includes" value="chembl-targets.tsv"/>
       </source>
 
@@ -415,6 +415,8 @@
           <property name="fasta.dataSourceName" value="UniProt"/>
           <property name="src.data.dir" location="/root/data/uniprot/current"/>
           <property name="fasta.includes" value="uniprot_sprot_varsplic.fasta"/>
+          <property name="fasta.sequenceType" value="protein"/>
+          <property name="fasta.loaderClassName" value="org.intermine.bio.dataconversion.UniProtFastaLoaderTask"/>
       </source>
 
       <source name="interpro" type="interpro">
@@ -423,7 +425,7 @@
 
       <!-- protein2ipr must run after uniprot - it only loads domains for
            proteins already in the database. -->
-      <source name="protein2ipr" type="protein2ipr">
+      <source name="protein2ipr" type="protein2ipr" dump="true">
           <property name="src.data.dir" location="/root/data/interpro/match_complete/current"/>
           <property name="src.data.dir.includes" value="protein2ipr.dat"/>
           <property name="protein2ipr.organisms" value="559292 9606 10090 10116 6239 7227 7955 8364 8355"/>
@@ -440,7 +442,7 @@
       <!-- F7: NCBI gene2pubmed → Gene.publications. Upstream core type.
            Single gene2pubmed TSV; gz acceptable. Filter to AllianceMine
            taxa via pubmed.organisms property. -->
-      <source name="pubmed-gene" type="pubmed-gene">
+      <source name="pubmed-gene" type="pubmed-gene" dump="true">
           <property name="src.data.dir" location="/root/data/pubmed/current"/>
           <property name="pubmed.organisms" value="559292 9606 10090 10116 6239 7227 7955 8364 8355"/>
       </source>
@@ -465,42 +467,9 @@
       </source>
 
       <!-- F2: PANTHER family-tree orthology. Upstream core type. -->
-      <source name="panther" type="panther">
+      <source name="panther" type="panther" dump="true">
           <property name="src.data.dir" location="/root/data/panther/current"/>
           <property name="panther.organisms" value="559292 9606 10090 10116 6239 7227 7955 8364 8355"/>
-      </source>
-
-      <!-- F3: TreeFam phylogenetic orthology. Upstream core type. Requires
-           ortholog.txt.table input + companion genes.txt.table. -->
-      <source name="treefam" type="treefam">
-          <property name="src.data.dir" location="/root/data/treefam/current"/>
-          <property name="src.data.dir.includes" value="ortholog.txt.table"/>
-          <property name="geneFile" value="/root/data/treefam/current/genes.txt.table"/>
-          <property name="treefam.organisms" value="559292 9606 10090 10116 6239 7227 7955 8364 8355"/>
-      </source>
-
-      <!-- F4: NCBI HomoloGene legacy orthology. Upstream core type. -->
-      <source name="homologene" type="homologene">
-          <property name="src.data.dir" location="/root/data/homologene/current"/>
-          <property name="homologene.organisms" value="559292 9606 10090 10116 6239 7227 7955 8364 8355"/>
-      </source>
-
-      <!-- F5: IntAct molecular-interaction data (PSI-MI 2.5 XML). Upstream
-           core type `psi`. Separate from AGR's molecular-interactions feed
-           (BioGRID-derived) — gives independent curation + the deeper
-           PSI-MI fields (experiment role, methods) that the API summarises. -->
-      <source name="psi-intact" type="psi">
-          <property name="src.data.dir" location="/root/data/psi/intact/current"/>
-          <property name="intact.organisms" value="559292 9606 10090 10116 6239 7227 7955 8364 8355"/>
-      </source>
-
-      <!-- F6: BioGRID PSI-MI 2.5 export. Overlaps with the AGR molecular-
-           interactions feed but ships the full PSI shape (experimentRoles,
-           methods) that the API summarises away. -->
-      <source name="biogrid" type="biogrid">
-          <property name="src.data.dir" location="/root/data/biogrid/current"/>
-          <property name="src.data.dir.includes" value="*psi25.xml"/>
-          <property name="biogrid.organisms" value="559292 9606 10090 10116 6239 7227"/>
       </source>
 
       <!-- PDB structures: bio-source-pdb is not published in maven central
@@ -523,7 +492,7 @@
           <property name="kegg.organisms" value="559292 9606 10090 10116 6239 7227 7955"/>
       </source>
 
-      <source name="reactome" type="reactome">
+      <source name="reactome" type="reactome" dump="true">
           <property name="src.data.dir" location="/root/data/reactome/current"/>
           <property name="reactome.organisms" value="559292 9606 10090 10116 6239 7227 7955"/>
           <property name="reactome.datasourcename" value="Reactome"/>
