@@ -12,7 +12,7 @@ buildscript {
 
 ext {
     minePropertyFileName = "alliancemine.properties"
-    minePropertyFile = "/root/alliancemine/$minePropertyFileName"
+    minePropertyFile = "${System.getProperty('user.home')}/.intermine/$minePropertyFileName"
     println "Using properties file: '$minePropertyFile'"
 }
 

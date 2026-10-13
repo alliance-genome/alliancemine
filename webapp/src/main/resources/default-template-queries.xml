@@ -116,12 +116,16 @@
                 <constraint path="Gene.primaryIdentifier" code="A" editable="true" op="=" value="*ZDB*"/>
             </query>
         </template>
-        <template name="Gene_Orthologs" title="Gene --&gt; Orthologs" comment="" dataTypes="java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String">
-            <query name="Gene_Orthologs" model="genomic" view="Gene.primaryIdentifier Gene.secondaryIdentifier Gene.symbol Gene.name Gene.homologues.source Gene.organism.shortName Gene.homologues.homologue.organism.shortName Gene.homologues.homologue.primaryIdentifier Gene.homologues.homologue.secondaryIdentifier Gene.homologues.algorithmsAttempted Gene.homologues.algorithmsMatch Gene.homologues.isBestScore Gene.homologues.isBestReverseScore Gene.homologues.algorithms" longDescription="For a given gene retrieve orthologs in other MOD organisms." sortOrder="Gene.primaryIdentifier asc">
-                <constraint path="Gene" editable="true" op="LOOKUP" value="ZFIN:ZDB-GENE-030131-2808"/>
+        <template name="Gene_Orthologs" title="Gene --&gt; Orthologs" comment="" dataTypes="java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.Integer java.lang.Integer java.lang.Boolean java.lang.Boolean java.lang.String">
+            <query name="Gene_Orthologs" model="genomic" view="Gene.primaryIdentifier Gene.secondaryIdentifier Gene.symbol Gene.name Gene.homologues.source Gene.organism.shortName Gene.homologues.homologue.organism.shortName Gene.homologues.homologue.primaryIdentifier Gene.homologues.homologue.secondaryIdentifier Gene.homologues.algorithmsAttempted Gene.homologues.algorithmsMatch Gene.homologues.isBestScore Gene.homologues.isBestReverseScore Gene.homologues.algorithms" longDescription="For a given gene retrieve orthologs in other MOD organisms." sortOrder="Gene.primaryIdentifier asc" constraintLogic="A and B">
+                <constraint path="Gene" code="A" editable="true" op="LOOKUP" value="ZFIN:ZDB-GENE-030131-2808"/>
+                <constraint path="Gene.homologues.dataSets.name" code="B" editable="false" description="" op="ONE OF">
+                    <value>Alliance Orthologs data set</value>
+                    <value>Alliance Ortholog Detail</value>
+                </constraint>
             </query>
         </template>
-        <template name="Gene_Variants" title="Gene --&gt; Alleles and its Variants" comment="" dataTypes="java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String">
+        <template name="Gene_Variants" title="Gene --&gt; Alleles and its Variants" comment="" dataTypes="java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.Integer java.lang.Integer java.lang.Boolean java.lang.Boolean java.lang.String java.lang.String java.lang.String java.lang.String">
             <query name="Gene_Variants" model="genomic" view="Gene.primaryIdentifier Gene.secondaryIdentifier Gene.symbol Gene.name Gene.organism.shortName Gene.alleles.alleleId Gene.alleles.alleleSymbol Gene.alleles.alleleType Gene.alleles.variants.variantId Gene.alleles.variants.VariantsHgvsNames Gene.alleles.variants.variantSymbol Gene.alleles.variants.variantType Gene.alleles.variants.variantdetails.chr Gene.alleles.variants.variantdetails.chrStartPosition Gene.alleles.variants.variantdetails.chrEndPosition Gene.alleles.variants.variantdetails.hasDiseaseAnnotations Gene.alleles.variants.variantdetails.hasPhenotypeAnnotations Gene.alleles.variants.variantdetails.mostSevereConsequenceName Gene.alleles.variants.variantdetails.variantInformationReference Gene.alleles.variants.variantdetails.sequenceOfReference Gene.alleles.variants.variantdetails.sequenceOfVariant" longDescription="For a given gene retrieve alleles and their variants." sortOrder="Gene.primaryIdentifier asc">
                 <constraint path="Gene" editable="true" op="LOOKUP" value="ZFIN:ZDB-GENE-081022-110"/>
             </query>
@@ -136,9 +140,13 @@
                 <constraint path="Gene.organism.shortName" editable="true" op="=" value="S. cerevisiae S288C"/>
             </query>
         </template>
-        <template name="Organism_Orthologs" title="Organism --&gt; Orthologs" comment="" dataTypes="java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String">
-            <query name="Organism_Orthologs" model="genomic" view="Gene.primaryIdentifier Gene.secondaryIdentifier Gene.symbol Gene.name Gene.homologues.source Gene.homologues.algorithmsAttempted Gene.homologues.algorithmsMatch Gene.homologues.isBestScore Gene.homologues.isBestReverseScore Gene.homologues.algorithms Gene.organism.shortName Gene.homologues.homologue.organism.shortName" longDescription="For a given organism retrieve orthologs in other MOD organisms." sortOrder="Gene.primaryIdentifier asc">
-                <constraint path="Gene.organism.shortName" editable="true" op="=" value="H. sapiens"/>
+        <template name="Organism_Orthologs" title="Organism --&gt; Orthologs" comment="" dataTypes="java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.Integer java.lang.Integer java.lang.Boolean java.lang.Boolean java.lang.String java.lang.String java.lang.String">
+            <query name="Organism_Orthologs" model="genomic" view="Gene.primaryIdentifier Gene.secondaryIdentifier Gene.symbol Gene.name Gene.homologues.source Gene.homologues.algorithmsAttempted Gene.homologues.algorithmsMatch Gene.homologues.isBestScore Gene.homologues.isBestReverseScore Gene.homologues.algorithms Gene.organism.shortName Gene.homologues.homologue.organism.shortName" longDescription="For a given organism retrieve orthologs in other MOD organisms." sortOrder="Gene.primaryIdentifier asc" constraintLogic="A and B">
+                <constraint path="Gene.organism.shortName" code="A" editable="true" op="=" value="H. sapiens"/>
+                <constraint path="Gene.homologues.dataSets.name" code="B" editable="false" description="" op="ONE OF">
+                    <value>Alliance Orthologs data set</value>
+                    <value>Alliance Ortholog Detail</value>
+                </constraint>
             </query>
         </template>
         <template name="AGR_Yeast_Genes" title="Organism --&gt; All genes" comment="" dataTypes="java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.Integer java.lang.Integer java.lang.String java.lang.String java.lang.String">
@@ -455,7 +463,7 @@
                 <constraint path="Gene" code="E" editable="true" op="LOOKUP" value="rad54" extraValue="S. cerevisiae"/>
             </query>
         </template>
-        <template name="Gene_Homologs" title="Gene --&gt; Non-Fungal and S. cerevisiae Homologs" comment="" dataTypes="java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String">
+        <template name="Gene_Homologs" title="Gene --&gt; Non-Fungal and S. cerevisiae Homologs" comment="" dataTypes="java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.Integer java.lang.Integer java.lang.Boolean java.lang.Boolean">
             <query name="Gene_Homologs" model="genomic" view="Gene.symbol Gene.secondaryIdentifier Gene.name Gene.sgdAlias Gene.homologues.homologue.organism.shortName Gene.homologues.homologue.primaryIdentifier Gene.homologues.homologue.symbol Gene.homologues.type Gene.homologues.dataSets.dataSource.name Gene.homologues.algorithms Gene.homologues.algorithmsMatch Gene.homologues.algorithmsAttempted Gene.homologues.isBestScore Gene.homologues.isBestReverseScore" longDescription="Retrieve all DiOPT homologs for a specified &lt;i&gt;S. cerevisiae&lt;/i&gt; &lt;a href = &quot;https://sites.google.com/view/yeastgenome-help/analyze-help/yeastmine&quot;&gt;gene&lt;/a&gt;." sortOrder="Gene.homologues.homologue.organism.shortName asc" constraintLogic="A and B and D">
                 <constraint path="Gene.organism.shortName" code="B" editable="false" description="" op="=" value="S. cerevisiae"/>
                 <constraint path="Gene.homologues.dataSets.dataSource.name" code="D" editable="false" description="" op="ONE OF">

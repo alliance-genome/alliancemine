@@ -14,8 +14,9 @@
             <fieldconfig fieldExpr="identifier" label="EBI Complex ID" />
             <fieldconfig fieldExpr="name" label="Complex Name" />
             <fieldconfig fieldExpr="function" label="Complex Function" />
-            <fieldconfig fieldExpr="properties" label="Complex Properties" />
+
             <fieldconfig fieldExpr="systematicName" label="Complex Systematic Name" />
+            <fieldconfig fieldExpr="properties" label="Complex Properties" />
             <fieldconfig fieldExpr="goAnnotation" label="Complex GO Annotation" />
             <fieldconfig fieldExpr="publications" label="Complex Publications" />
         </fields>
@@ -77,6 +78,45 @@
         <fields>
             <fieldconfig fieldExpr="annotType" />
             <fieldconfig fieldExpr="withText" />
+        </fields>
+    </class>
+
+    <class className="org.intermine.model.bio.TransgenicAllele">
+        <fields>
+            <fieldconfig fieldExpr="primaryIdentifier" />
+            <fieldconfig fieldExpr="alleleSymbol" />
+            <fieldconfig fieldExpr="constructIdentifier" />
+            <fieldconfig fieldExpr="constructName" />
+            <fieldconfig fieldExpr="reporterTag" />
+            <fieldconfig fieldExpr="organism.shortName" />
+        </fields>
+    </class>
+
+    <class className="org.intermine.model.bio.DiseaseModel">
+        <fields>
+            <fieldconfig fieldExpr="modelId" />
+            <fieldconfig fieldExpr="modelName" />
+            <fieldconfig fieldExpr="modelSubtype" />
+            <fieldconfig fieldExpr="associationType" />
+            <fieldconfig fieldExpr="disease.name" />
+            <fieldconfig fieldExpr="dataProvider" />
+        </fields>
+    </class>
+
+    <class className="org.intermine.model.bio.DiseaseAnnotation">
+        <fields>
+            <fieldconfig fieldExpr="ontologyTerm.identifier" />
+            <fieldconfig fieldExpr="ontologyTerm.name" />
+            <fieldconfig fieldExpr="evidenceType" />
+            <fieldconfig fieldExpr="diseaseQualifiers" />
+        </fields>
+    </class>
+
+    <class className="org.intermine.model.bio.PhenotypeAnnotation">
+        <fields>
+            <fieldconfig fieldExpr="phenotypeStatement" />
+            <fieldconfig fieldExpr="relation" />
+            <fieldconfig fieldExpr="category" />
         </fields>
     </class>
 
