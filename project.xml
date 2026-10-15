@@ -530,7 +530,15 @@
   </sources>
 
   <post-processing>
+    <!-- Chromosome.length and SequenceFeature.chromosome/chromosomeLocation; the intergenic
+         and flanking steps below need the lengths. -->
+    <post-process name="create-chromosome-locations-and-lengths"/>
     <post-process name="create-references"/>
+    <!-- Gene and transcript locations span their children, so Gene.length is set for genes
+         loaded without their own location. -->
+    <post-process name="make-spanning-locations"/>
+    <!-- MRNA.fivePrimeUTR / threePrimeUTR from the UTRs attached to each mRNA. -->
+    <post-process name="create-utr-references"/>
     <post-process name="do-sources"/>
     <!-- PR4: re-enabled 2026-05-12 — without these 5 steps the intergenicregion
          and geneflankingregion tables stay empty, breaking the
