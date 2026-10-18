@@ -73,7 +73,7 @@
          <property name="fasta.dataSourceName" value="NCBI"/>
          <property name="fasta.dataSetTitle" value="XB X.laevis Genome Sequence"/>
          <property name="fasta.taxonId" value="8355"/>
-         <property name="fasta.includes" value=""/>
+         <property name="fasta.includes" value="FASTA_XL10.1.fa"/>
          <property name="src.data.dir" location="/root/data/fms"/>
        </source>
 
