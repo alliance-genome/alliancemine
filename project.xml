@@ -408,7 +408,7 @@
       </source>
 
       <source name="uniprot-fasta" type="fasta">
-          <property name="fasta.taxonId" value="559292 9606 10090 10116 6239 7227 7955 8364 8355"/>
+          <property name="fasta.taxonId" value="4932 559292 9606 10090 10116 6239 7227 7955 8364 8355"/>
           <property name="fasta.className" value="org.intermine.model.bio.Protein"/>
           <property name="fasta.classAttribute" value="primaryAccession"/>
           <property name="fasta.dataSetTitle" value="UniProt data set"/>
@@ -428,7 +428,7 @@
       <source name="protein2ipr" type="protein2ipr" dump="true">
           <property name="src.data.dir" location="/root/data/interpro/match_complete/current"/>
           <property name="src.data.dir.includes" value="protein2ipr.dat"/>
-          <property name="protein2ipr.organisms" value="559292 9606 10090 10116 6239 7227 7955 8364 8355"/>
+          <property name="protein2ipr.organisms" value="4932 559292 9606 10090 10116 6239 7227 7955 8364 8355"/>
           <property name="osAlias" value="os.production"/>
       </source>
 
@@ -444,7 +444,7 @@
            taxa via pubmed.organisms property. -->
       <source name="pubmed-gene" type="pubmed-gene" dump="true">
           <property name="src.data.dir" location="/root/data/pubmed/current"/>
-          <property name="pubmed.organisms" value="559292 9606 10090 10116 6239 7227 7955 8364 8355"/>
+          <property name="pubmed.organisms" value="4932 559292 9606 10090 10116 6239 7227 7955 8364 8355"/>
       </source>
 
       <!-- OMIM: bio-source-omim adds Disease.publications with a different
@@ -469,7 +469,7 @@
       <!-- F2: PANTHER family-tree orthology. Upstream core type. -->
       <source name="panther" type="panther" dump="true">
           <property name="src.data.dir" location="/root/data/panther/current"/>
-          <property name="panther.organisms" value="559292 9606 10090 10116 6239 7227 7955 8364 8355"/>
+          <property name="panther.organisms" value="4932 559292 9606 10090 10116 6239 7227 7955 8364 8355"/>
       </source>
 
       <!-- PDB structures: bio-source-pdb is not published in maven central
@@ -489,12 +489,12 @@
            ========================================================== -->
       <source name="kegg-pathway" type="kegg-pathway">
           <property name="src.data.dir" location="/root/data/kegg/current"/>
-          <property name="kegg.organisms" value="559292 9606 10090 10116 6239 7227 7955"/>
+          <property name="kegg.organisms" value="4932 559292 9606 10090 10116 6239 7227 7955"/>
       </source>
 
       <source name="reactome" type="reactome" dump="true">
           <property name="src.data.dir" location="/root/data/reactome/current"/>
-          <property name="reactome.organisms" value="559292 9606 10090 10116 6239 7227 7955"/>
+          <property name="reactome.organisms" value="4932 559292 9606 10090 10116 6239 7227 7955"/>
           <property name="reactome.datasourcename" value="Reactome"/>
           <property name="reactome.datasetname" value="Reactome data set"/>
           <property name="reactome.curated" value="false"/>
