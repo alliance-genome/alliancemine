@@ -368,10 +368,13 @@
       <!-- N3: CRISPR/RNAi screen hits from FMS BIOGRID-ORCS tarballs.
            Streaming tar-extract filters HIT=YES rows; new
            CRISPRScreenResult class joins Gene by (symbol, organism). -->
+      <!-- rc1: off. CRISPRScreenResult.screenId and .screen both map to column screenid, so buildDB
+           created no crisprscreenresult table. Rename screenId in the model and re-enable for rc2.
       <source name="alliance-crispr-screens" type="alliance-crispr-screens">
           <property name="src.data.dir" location="/root/data/api"/>
           <property name="src.data.dir.includes" value="crispr-screens.tsv"/>
       </source>
+      -->
 
       <!-- N5: small-molecule catalog from FMS MOLECULE bulk. New
            Molecule class with InChI / SMILES / IUPAC + ChEBI cross-ref. -->
