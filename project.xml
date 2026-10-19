@@ -518,7 +518,7 @@
       </source>
       -->
 
-      <source name="update-publications" type="update-publications">
+      <source name="update-publications" type="update-publications" dump="true">
         <property name="src.data.file" location="publications.xml"/>
       </source>
 
