@@ -233,12 +233,6 @@
     </class>
 
 
-    <class className="org.intermine.model.bio.InterProDomain">
-        <fields>
-            <fieldconfig fieldExpr="name" />
-            <fieldconfig fieldExpr="description" />
-        </fields>
-    </class>
 
     <class className="org.intermine.model.bio.GOAnnotation">
         <fields>
@@ -375,27 +369,8 @@
             <fieldconfig doNotTruncate="true" fieldExpr="url"></fieldconfig>
         </fields>
     </class>
-    <class className="org.intermine.model.bio.ExpressionDataSet">
-        <fields>
-            <fieldconfig fieldExpr="name" label="short description"></fieldconfig>
-            <fieldconfig fieldExpr="description"></fieldconfig>
-            <fieldconfig fieldExpr="author"></fieldconfig>
-            <fieldconfig fieldExpr="title" label="citation"></fieldconfig>
-        </fields>
-    </class>
 
-    <class className="org.intermine.model.bio.ExpressionScore">
-        <fields>
-            <fieldconfig fieldExpr="score"></fieldconfig>
-        </fields>
-    </class>
 
-    <class className="org.intermine.model.bio.ExpressionCondition">
-        <fields>
-            <fieldconfig fieldExpr="conditionname" label="Condition"></fieldconfig>
-            <fieldconfig fieldExpr="ordernumber"></fieldconfig>
-        </fields>
-    </class>
     <class className="org.intermine.model.bio.TRNAGene">
         <fields>
             <fieldconfig fieldExpr="primaryIdentifier"></fieldconfig>
@@ -439,16 +414,6 @@
             <fieldconfig fieldExpr="secondaryIdentifier"></fieldconfig>
             <fieldconfig fieldExpr="symbol"></fieldconfig>
             <fieldconfig fieldExpr="name"></fieldconfig>
-        </fields>
-    </class>
-    <class className="org.intermine.model.bio.NotPhysicallyMapped">
-
-        <fields>
-            <fieldconfig fieldExpr="primaryIdentifier"></fieldconfig>
-            <fieldconfig fieldExpr="secondaryIdentifier"></fieldconfig>
-            <fieldconfig fieldExpr="symbol"></fieldconfig>
-            <fieldconfig fieldExpr="name"></fieldconfig>
-            <fieldconfig fieldExpr="organism.shortName"></fieldconfig>
         </fields>
     </class>
     <class className="org.intermine.model.bio.NotInSystematicSequenceOfS288C">
