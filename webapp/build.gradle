@@ -47,6 +47,9 @@ task warWebApp(type: War) {
     from "${explodedWebAppDir}"
     exclude "WEB-INF/web.properties"
     webInf { from "${mergePropsDir}" }
+    // War already adds src/main/webapp and the runtime jars; explodedWebAppDir holds copies of both.
+    // Keep the first entry so each path appears once in the archive.
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
 }
 
 task copyWebappContent(type: Copy) {
