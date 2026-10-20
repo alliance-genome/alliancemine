@@ -463,7 +463,7 @@
            feed. Upstream core type. -->
       <source name="orthodb" type="orthodb">
           <property name="src.data.dir" location="/root/data/orthodb/current"/>
-          <property name="orthodb.organisms" value="559292 9606 10090 10116 6239 7227 7955 8364 8355"/>
+          <property name="orthodb.organisms" value="559292 9606 10090 10116 7227 7955 8364 8355"/>
       </source>
 
       <!-- F2: PANTHER family-tree orthology. Upstream core type. -->
