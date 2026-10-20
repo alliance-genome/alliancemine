@@ -83,7 +83,7 @@
         </template>
         <template name="Gene_Description" title="Gene --&gt; Automated descriptions" comment="" dataTypes="java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String">
             <query name="Gene_Description" model="genomic" view="Gene.primaryIdentifier Gene.symbol Gene.name Gene.organism.shortName Gene.briefDescription Gene.description" longDescription="Retrieve genes with an automated gene description." sortOrder="Gene.primaryIdentifier asc" constraintLogic="A and B">
-                <constraint path="Gene.organism.shortName" code="A" editable="true" op="=" value="S. cerevisiae S288C"/>
+                <constraint path="Gene.organism.shortName" code="A" editable="true" op="=" value="S. cerevisiae"/>
                 <constraint path="Gene.description" code="B" editable="true" op="CONTAINS" value="actin"/>
             </query>
         </template>
@@ -338,9 +338,8 @@
             </query>
         </template>
         <template name="GeneFactor_GeneTarget" title="Gene (regulator) --&gt; Gene (targets)" comment="" dataTypes="java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String">
-            <query name="GeneFactor_GeneTarget" model="genomic" view="Gene.regulatoryRegions.regulator.symbol Gene.regulatoryRegions.regulator.secondaryIdentifier Gene.symbol Gene.secondaryIdentifier Gene.regulatoryRegions.regEvidence.ontologyTerm.name Gene.regulatoryRegions.regEvidence.ontologyTerm.identifier Gene.regulatoryRegions.experimentCondition Gene.regulatoryRegions.strainBackground Gene.regulatoryRegions.regulationDirection Gene.regulatoryRegions.regulatorType Gene.regulatoryRegions.regulationType Gene.regulatoryRegions.publications.pubMedId Gene.regulatoryRegions.datasource Gene.regulatoryRegions.annotationType" longDescription="Retrieve &lt;a href = &quot;https://sites.google.com/view/yeastgenome-help/analyze-help/yeastmine&quot;&gt;genes&lt;/a&gt; that are targets of a given regulator gene." sortOrder="Gene.secondaryIdentifier asc" constraintLogic="B and A">
+            <query name="GeneFactor_GeneTarget" model="genomic" view="Gene.regulatoryRegions.regulator.symbol Gene.regulatoryRegions.regulator.secondaryIdentifier Gene.symbol Gene.secondaryIdentifier Gene.regulatoryRegions.regEvidence.ontologyTerm.name Gene.regulatoryRegions.regEvidence.ontologyTerm.identifier Gene.regulatoryRegions.experimentCondition Gene.regulatoryRegions.strainBackground Gene.regulatoryRegions.regulationDirection Gene.regulatoryRegions.regulatorType Gene.regulatoryRegions.regulationType Gene.regulatoryRegions.publications.pubMedId Gene.regulatoryRegions.datasource Gene.regulatoryRegions.annotationType" longDescription="Retrieve &lt;a href = &quot;https://sites.google.com/view/yeastgenome-help/analyze-help/yeastmine&quot;&gt;genes&lt;/a&gt; that are targets of a given regulator gene." sortOrder="Gene.secondaryIdentifier asc">
                 <constraint path="Gene.regulatoryRegions" editable="false" type="TFBindingSite"/>
-                <constraint path="Gene.regulatoryRegions.regulator.organism.shortName" code="B" editable="false" description="" switchable="off" op="=" value="S. cerevisiae"/>
                 <constraint path="Gene.regulatoryRegions.regulator" code="A" editable="true" op="LOOKUP" value="GAL4" extraValue="S. cerevisiae"/>
             </query>
         </template>
@@ -390,7 +389,7 @@
         <template name="Gene_Flanking_Sequence" title="Gene --&gt; Sequence Upstream and Downstream (+/-) Kb." comment="" dataTypes="java.lang.String java.lang.String java.lang.Integer java.lang.String int org.intermine.objectstore.query.ClobAccess">
             <query name="Gene_Flanking_Sequence" model="genomic" view="Gene.secondaryIdentifier Gene.symbol Gene.length Gene.flankingRegions.direction Gene.flankingRegions.sequence.length Gene.flankingRegions.sequence.residues" longDescription="For a given gene(s), get a chosen length of upstream and/or downstream sequence along with the gene sequence. Choose to retrieve 0.5 kb, 1.0 kb, or 2.0 kb of upstream or downstream flanking regions, or both. To retrieve only flanking regions without the coding sequence, select false for the Gene Flanking Region &gt; Include Gene option (for this option, you must select only upstream or downstream flanking regions, not both)." sortOrder="Gene.secondaryIdentifier asc" constraintLogic="A and B and C and D">
                 <constraint path="Gene" code="B" editable="true" op="LOOKUP" value="act1" extraValue="S. cerevisiae"/>
-                <constraint path="Gene.flankingRegions.direction" code="C" editable="true" description="" op="=" value="both"/>
+                <constraint path="Gene.flankingRegions.direction" code="C" editable="true" description="" op="=" value="upstream"/>
                 <constraint path="Gene.flankingRegions.distance" code="A" editable="true" op="=" value="1.0kb"/>
                 <constraint path="Gene.flankingRegions.includeGene" code="D" editable="true" op="=" value="true"/>
             </query>
@@ -554,10 +553,9 @@
             </query>
         </template>
         <template name="Gene_UTRs" title="Gene --&gt; UTRs" comment="" dataTypes="java.lang.String java.lang.String java.lang.String java.lang.Integer java.lang.Integer java.lang.String java.lang.String org.intermine.objectstore.query.ClobAccess java.lang.String java.lang.String">
-            <query name="Gene_UTRs" model="genomic" view="Gene.secondaryIdentifier Gene.transcripts.primaryIdentifier Gene.transcripts.chromosome.primaryIdentifier Gene.transcripts.UTRs.chromosomeLocation.start Gene.transcripts.UTRs.chromosomeLocation.end Gene.chromosomeLocation.strand Gene.transcripts.UTRs.primaryIdentifier Gene.transcripts.UTRs.sequence.residues Gene.transcripts.in_gal Gene.transcripts.in_ypd" longDescription="Retrieve UTR location information for a given gene by taking the differences between the gene and  &lt;a href = &quot;https://sites.google.com/view/yeastgenome-help/analyze-help/yeastmine#h.p_uyw_Yd2T3HAF&quot;&gt; transcript &lt;/a&gt; start locations and the gene and transcript end locations.  Transcripts are based on Pelechano et al, 2013." sortOrder="Gene.transcripts.primaryIdentifier asc" constraintLogic="A and B and C">
+            <query name="Gene_UTRs" model="genomic" view="Gene.secondaryIdentifier Gene.transcripts.primaryIdentifier Gene.transcripts.chromosome.primaryIdentifier Gene.transcripts.UTRs.chromosomeLocation.start Gene.transcripts.UTRs.chromosomeLocation.end Gene.chromosomeLocation.strand Gene.transcripts.UTRs.primaryIdentifier Gene.transcripts.UTRs.sequence.residues Gene.transcripts.in_gal Gene.transcripts.in_ypd" longDescription="Retrieve UTR location information for a given gene by taking the differences between the gene and  &lt;a href = &quot;https://sites.google.com/view/yeastgenome-help/analyze-help/yeastmine#h.p_uyw_Yd2T3HAF&quot;&gt; transcript &lt;/a&gt; start locations and the gene and transcript end locations.  Transcripts are based on Pelechano et al, 2013." sortOrder="Gene.transcripts.primaryIdentifier asc" constraintLogic="A and B">
                 <constraint path="Gene.transcripts" editable="false" type="MRNA"/>
                 <constraint path="Gene.organism.shortName" code="B" editable="false" description="" op="=" value="S. cerevisiae"/>
-                <constraint path="Gene.transcripts.dataSets.name" code="C" editable="false" description="" op="=" value="SGD data set"/>
                 <constraint path="Gene" code="A" editable="true" description="" op="LOOKUP" value="YHR191C"/>
             </query>
         </template>
