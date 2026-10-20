@@ -124,7 +124,7 @@
       </source>
 
       <source name="sgd-gff" type="sgd-gff">
-          <property name="gff3.taxonId" value="4932"/>
+          <property name="gff3.taxonId" value="559292"/>
           <property name="gff3.dataSourceName" value="SGD Transcriptome v1.0"/>
           <property name="gff3.seqClsName" value="Chromosome"/>
           <property name="gff3.dataSetTitle" value="Preliminary Transcripts"/>
