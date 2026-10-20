@@ -12,21 +12,6 @@
                 <constraint path="Gene.alleles.alleleSymbol" code="B" editable="true" op="=" value="sa45217"/>
             </query>
         </template>
-        <template name="ChromosomeRegion_AllGenes" title="Chromosomal Region --&gt; All genes" comment="" dataTypes="java.lang.String java.lang.String java.lang.String java.lang.String java.lang.Integer java.lang.Integer java.lang.String java.lang.String java.lang.String java.lang.String">
-            <query name="ChromosomeRegion_AllGenes" model="genomic" view="Gene.chromosome.primaryIdentifier Gene.primaryIdentifier Gene.symbol Gene.name Gene.chromosomeLocation.start Gene.chromosomeLocation.end Gene.chromosomeLocation.strand Gene.featureType Gene.description Gene.organism.shortName" longDescription="Retrieve all &lt;a href = &quot;https://sites.google.com/view/yeastgenome-help/analyze-help/yeastmine&quot;&gt;genes&lt;/a&gt; located within the specified chromosome and coordinate range." sortOrder="Gene.primaryIdentifier asc" constraintLogic="C and D and E and A">
-                <constraint path="Gene.organism.shortName" code="A" editable="true" op="=" value="S. cerevisiae S288C"/>
-                <constraint path="Gene.chromosome.primaryIdentifier" code="C" editable="true" op="=" value="chrXIV"/>
-                <constraint path="Gene.chromosomeLocation.start" code="D" editable="true" op="&gt;=" value="1"/>
-                <constraint path="Gene.chromosomeLocation.end" code="E" editable="true" op="&lt;=" value="20000"/>
-            </query>
-        </template>
-        <template name="Chromosome_Gene_FeatureType" title="Chromosome--&gt;Genes of a selected Feature Type" comment="" dataTypes="java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String">
-            <query name="Chromosome_Gene_FeatureType" model="genomic" view="Gene.chromosome.primaryIdentifier Gene.primaryIdentifier Gene.featureType Gene.qualifier Gene.symbol Gene.name Gene.organism.shortName Gene.description" longDescription="Retrieve features located on chromosome." sortOrder="Gene.featureType asc" constraintLogic="B and A and C">
-                <constraint path="Gene.organism.shortName" code="A" editable="true" op="=" value="D. melanogaster"/>
-                <constraint path="Gene.chromosome.primaryIdentifier" code="B" editable="true" op="=" value="2R"/>
-                <constraint path="Gene.featureType" code="C" editable="true" op="=" value="protein_coding_gene"/>
-            </query>
-        </template>
         <template name="DOTerm_AllGenes" title="DO Term name --&gt; All genes" comment="" dataTypes="java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String">
             <query name="DOTerm_AllGenes" model="genomic" view="Gene.primaryIdentifier Gene.symbol Gene.featureType Gene.diseaseAnnotation.ontologyTerm.identifier Gene.diseaseAnnotation.ontologyTerm.name Gene.diseaseAnnotation.evidence.code.code Gene.diseaseAnnotation.evidence.withText Gene.diseaseAnnotation.evidence.publications.pubMedId Gene.diseaseAnnotation.evidence.publications.pubXrefId Gene.organism.shortName Gene.diseaseAnnotation.qualifier Gene.name" longDescription="Retrieve all &lt;ahref = https://sites.google.com/view/yeastgenome-help/analyze-help/yeastmine&gt; genes &lt;/a&gt; annotated to a specified Disease Ontology (DO) Term." sortOrder="Gene.primaryIdentifier asc">
                 <constraint path="Gene.diseaseAnnotation.ontologyTerm" editable="false" type="DOTerm"/>
@@ -102,11 +87,6 @@
                 <constraint path="Gene" editable="true" op="LOOKUP" value="SGD:S000005857"/>
             </query>
         </template>
-        <template name="Gene_GenomicDNA" title="Gene --&gt; Genomic DNA" comment="" dataTypes="java.lang.String java.lang.String java.lang.String org.intermine.objectstore.query.ClobAccess int">
-            <query name="Gene_GenomicDNA" model="genomic" view="Gene.primaryIdentifier Gene.featureType Gene.briefDescription Gene.sequence.residues Gene.sequence.length" longDescription="Retrieve genomic DNA (DNA sequence with introns) for the specified gene." sortOrder="Gene.primaryIdentifier asc">
-                <constraint path="Gene" editable="true" op="LOOKUP" value="SGD:S000003131"/>
-            </query>
-        </template>
         <template name="Gene_Identifiers" title="Gene --&gt; Identifiers" comment="" dataTypes="java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String">
             <query name="Gene_Identifiers" model="genomic" view="Gene.primaryIdentifier Gene.symbol Gene.name Gene.synonyms.value Gene.crossReferences.identifier" longDescription="Find all identifiers for a gene" sortOrder="Gene.primaryIdentifier asc" constraintLogic="A and B and C">
                 <join path="Gene.synonyms" style="OUTER"/>
@@ -118,7 +98,7 @@
         </template>
         <template name="Gene_Orthologs" title="Gene --&gt; Orthologs" comment="" dataTypes="java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.Integer java.lang.Integer java.lang.Boolean java.lang.Boolean java.lang.String">
             <query name="Gene_Orthologs" model="genomic" view="Gene.primaryIdentifier Gene.secondaryIdentifier Gene.symbol Gene.name Gene.homologues.source Gene.organism.shortName Gene.homologues.homologue.organism.shortName Gene.homologues.homologue.primaryIdentifier Gene.homologues.homologue.secondaryIdentifier Gene.homologues.algorithmsAttempted Gene.homologues.algorithmsMatch Gene.homologues.isBestScore Gene.homologues.isBestReverseScore Gene.homologues.algorithms" longDescription="For a given gene retrieve orthologs in other MOD organisms." sortOrder="Gene.primaryIdentifier asc" constraintLogic="A and B">
-                <constraint path="Gene" code="A" editable="true" op="LOOKUP" value="ZFIN:ZDB-GENE-030131-2808"/>
+                <constraint path="Gene" code="A" editable="true" op="LOOKUP" value="ZFIN:ZDB-GENE-990415-72"/>
                 <constraint path="Gene.homologues.dataSets.name" code="B" editable="false" description="" op="ONE OF">
                     <value>Alliance Orthologs data set</value>
                     <value>Alliance Ortholog Detail</value>
@@ -128,16 +108,6 @@
         <template name="Gene_Variants" title="Gene --&gt; Alleles and its Variants" comment="" dataTypes="java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.Integer java.lang.Integer java.lang.Boolean java.lang.Boolean java.lang.String java.lang.String java.lang.String java.lang.String">
             <query name="Gene_Variants" model="genomic" view="Gene.primaryIdentifier Gene.secondaryIdentifier Gene.symbol Gene.name Gene.organism.shortName Gene.alleles.alleleId Gene.alleles.alleleSymbol Gene.alleles.alleleType Gene.alleles.variants.variantId Gene.alleles.variants.VariantsHgvsNames Gene.alleles.variants.variantSymbol Gene.alleles.variants.variantType Gene.alleles.variants.variantdetails.chr Gene.alleles.variants.variantdetails.chrStartPosition Gene.alleles.variants.variantdetails.chrEndPosition Gene.alleles.variants.variantdetails.hasDiseaseAnnotations Gene.alleles.variants.variantdetails.hasPhenotypeAnnotations Gene.alleles.variants.variantdetails.mostSevereConsequenceName Gene.alleles.variants.variantdetails.variantInformationReference Gene.alleles.variants.variantdetails.sequenceOfReference Gene.alleles.variants.variantdetails.sequenceOfVariant" longDescription="For a given gene retrieve alleles and their variants." sortOrder="Gene.primaryIdentifier asc">
                 <constraint path="Gene" editable="true" op="LOOKUP" value="ZFIN:ZDB-GENE-081022-110"/>
-            </query>
-        </template>
-        <template name="Literature_GO" title="Literature --&gt; GO annotations" comment="" dataTypes="java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String">
-            <query name="Literature_GO" model="genomic" view="Gene.primaryIdentifier Gene.symbol Gene.featureType Gene.goAnnotation.ontologyTerm.identifier Gene.goAnnotation.ontologyTerm.name Gene.goAnnotation.ontologyTerm.namespace Gene.goAnnotation.evidence.code.code Gene.goAnnotation.qualifier Gene.goAnnotation.evidence.code.withText Gene.goAnnotation.annotationExtension Gene.goAnnotation.evidence.publications.pubMedId" longDescription="Retrieve GO annotations made from a specified PubMed ID (PMID)." sortOrder="Gene.primaryIdentifier asc">
-                <constraint path="Gene.goAnnotation.evidence.publications" editable="true" op="LOOKUP" value="17118118"/>
-            </query>
-        </template>
-        <template name="Organism_Genes" title="Organism --&gt; All genes" comment="" dataTypes="java.lang.String java.lang.String java.lang.String java.lang.String java.lang.Integer java.lang.Integer java.lang.String java.lang.String java.lang.String java.lang.String">
-            <query name="Organism_Genes" model="genomic" view="Gene.primaryIdentifier Gene.name Gene.briefDescription Gene.chromosome.primaryIdentifier Gene.chromosomeLocation.start Gene.chromosomeLocation.end Gene.chromosomeLocation.strand Gene.organism.shortName Gene.featureType Gene.symbol" longDescription="Retrieve Genes of a given Organism." sortOrder="Gene.primaryIdentifier asc">
-                <constraint path="Gene.organism.shortName" editable="true" op="=" value="S. cerevisiae S288C"/>
             </query>
         </template>
         <template name="Organism_Orthologs" title="Organism --&gt; Orthologs" comment="" dataTypes="java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.Integer java.lang.Integer java.lang.Boolean java.lang.Boolean java.lang.String java.lang.String java.lang.String">
@@ -160,7 +130,7 @@
             </query>
         </template>
         <template name="AllGene_ChromosomalFeatures" title="All genes in organism --&gt; All Chromosomal Features" comment="" dataTypes="java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String">
-            <query name="AllGene_ChromosomalFeatures" model="genomic" view="SequenceFeature.primaryIdentifier SequenceFeature.featureType SequenceFeature.secondaryIdentifier SequenceFeature.symbol SequenceFeature.description SequenceFeature.sgdAlias SequenceFeature.qualifier" longDescription="Retrieve all &lt;a href=&quot;https://sites.google.com/view/yeastgenome-help/analyze-help/yeastmine &quot;&gt;chromosomal features&lt;/a&gt; for the reference genome of S. cerevisiae.  " sortOrder="SequenceFeature.primaryIdentifier asc" constraintLogic="A and B and E">
+            <query name="AllGene_ChromosomalFeatures" model="genomic" view="SequenceFeature.primaryIdentifier SequenceFeature.featureType SequenceFeature.secondaryIdentifier SequenceFeature.symbol SequenceFeature.modDescription SequenceFeature.sgdAlias SequenceFeature.qualifier" longDescription="Retrieve all &lt;a href=&quot;https://sites.google.com/view/yeastgenome-help/analyze-help/yeastmine &quot;&gt;chromosomal features&lt;/a&gt; for the reference genome of S. cerevisiae.  " sortOrder="SequenceFeature.primaryIdentifier asc" constraintLogic="A and B and E">
                 <constraint path="SequenceFeature.status" code="B" editable="false" description="" op="=" value="Active"/>
                 <constraint path="SequenceFeature.featureType" code="E" editable="true" description="" op="ONE OF">
                     <value>ARS
@@ -235,7 +205,7 @@
             </query>
         </template>
         <template name="Chromosome_AllFeatures" title="Chromosome --&gt; All features" comment="" dataTypes="java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String">
-            <query name="Chromosome_AllFeatures" model="genomic" view="SequenceFeature.chromosome.primaryIdentifier SequenceFeature.primaryIdentifier SequenceFeature.featureType SequenceFeature.secondaryIdentifier SequenceFeature.description SequenceFeature.sgdAlias SequenceFeature.qualifier" longDescription="Retrieve all &lt;a href = &quot;https://sites.google.com/view/yeastgenome-help/analyze-help/yeastmine &quot;&gt;feature types&lt;/a&gt; for the specified chromosome." sortOrder="SequenceFeature.primaryIdentifier asc" constraintLogic="(A or B or F or K or Q or Y or O or N or G or L or H or J or P or S or I or V or W) and T and U and X">
+            <query name="Chromosome_AllFeatures" model="genomic" view="SequenceFeature.chromosome.primaryIdentifier SequenceFeature.primaryIdentifier SequenceFeature.featureType SequenceFeature.secondaryIdentifier SequenceFeature.modDescription SequenceFeature.sgdAlias SequenceFeature.qualifier" longDescription="Retrieve all &lt;a href = &quot;https://sites.google.com/view/yeastgenome-help/analyze-help/yeastmine &quot;&gt;feature types&lt;/a&gt; for the specified chromosome." sortOrder="SequenceFeature.primaryIdentifier asc" constraintLogic="(A or B or F or K or Q or Y or O or N or G or L or H or J or P or S or I or V or W) and T and U and X">
                 <constraint path="SequenceFeature.organism.name" code="T" editable="false" description="" op="=" value="Saccharomyces cerevisiae"/>
                 <constraint path="SequenceFeature.featureType" code="A" editable="false" description="" op="=" value="ORF"/>
                 <constraint path="SequenceFeature.featureType" code="B" editable="false" description="" op="=" value="ARS"/>
@@ -278,7 +248,7 @@
             </query>
         </template>
         <template name="Chromosome_Telomeres" title="Chromosome--&gt;Telomeric Regions" comment="" dataTypes="java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.Integer java.lang.Integer java.lang.String java.lang.String">
-            <query name="Chromosome_Telomeres" model="genomic" view="Telomere.chromosome.primaryIdentifier Telomere.primaryIdentifier Telomere.secondaryIdentifier Telomere.featureType Telomere.organism.shortName Telomere.chromosomeLocation.start Telomere.chromosomeLocation.end Telomere.chromosomeLocation.strand Telomere.description" longDescription="Retrieve telomeres and telomeric regions on a specified chromosome." sortOrder="Telomere.primaryIdentifier asc">
+            <query name="Chromosome_Telomeres" model="genomic" view="Telomere.chromosome.primaryIdentifier Telomere.primaryIdentifier Telomere.secondaryIdentifier Telomere.featureType Telomere.organism.shortName Telomere.chromosomeLocation.start Telomere.chromosomeLocation.end Telomere.chromosomeLocation.strand Telomere.modDescription" longDescription="Retrieve telomeres and telomeric regions on a specified chromosome." sortOrder="Telomere.primaryIdentifier asc">
                 <constraint path="Telomere.chromosome.primaryIdentifier" editable="true" op="=" value="chrI"/>
             </query>
         </template>
@@ -319,7 +289,7 @@
             </query>
         </template>
         <template name="FeatureType_SequenceFeature" title="Feature Type --&gt; Features of a selected feature Type" comment="" dataTypes="java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String">
-            <query name="FeatureType_SequenceFeature" model="genomic" view="SequenceFeature.primaryIdentifier SequenceFeature.secondaryIdentifier SequenceFeature.symbol SequenceFeature.sgdAlias SequenceFeature.description SequenceFeature.featureType SequenceFeature.qualifier" longDescription="Retrieve all &lt;a href =&quot;https://sites.google.com/view/yeastgenome-help/analyze-help/yeastmine&quot;&gt;chromosomal features&lt;/a&gt; of a selected &lt;a href=&quot;https://sites.google.com/view/yeastgenome-help/analyze-help/yeastmine&quot;&gt;feature type&lt;/a&gt;." sortOrder="SequenceFeature.description asc" constraintLogic="Q and T and U">
+            <query name="FeatureType_SequenceFeature" model="genomic" view="SequenceFeature.primaryIdentifier SequenceFeature.secondaryIdentifier SequenceFeature.symbol SequenceFeature.sgdAlias SequenceFeature.modDescription SequenceFeature.featureType SequenceFeature.qualifier" longDescription="Retrieve all &lt;a href =&quot;https://sites.google.com/view/yeastgenome-help/analyze-help/yeastmine&quot;&gt;chromosomal features&lt;/a&gt; of a selected &lt;a href=&quot;https://sites.google.com/view/yeastgenome-help/analyze-help/yeastmine&quot;&gt;feature type&lt;/a&gt;." sortOrder="SequenceFeature.modDescription asc" constraintLogic="Q and T and U">
                 <constraint path="SequenceFeature.organism.name" code="T" editable="false" description="" op="=" value="Saccharomyces cerevisiae"/>
                 <constraint path="SequenceFeature.status" code="U" editable="false" description="" op="=" value="Active"/>
                 <constraint path="SequenceFeature.featureType" code="Q" editable="true" op="=" value="telomere"/>
@@ -328,12 +298,9 @@
         <template name="GO_Terms_Tab" title="Retrieve GO Terms" comment="" dataTypes="java.lang.String java.lang.String java.lang.String java.lang.String">
             <query name="GO_Terms_Tab" model="genomic" view="GOTerm.identifier GOTerm.name GOTerm.namespace GOTerm.description" longDescription="Retrieve GO Terms" sortOrder="GOTerm.identifier asc">
                 <constraint path="GOTerm.namespace" editable="true" op="ONE OF">
-                    <value>biological_process
-                    </value>
-                    <value>cellular_component
-                    </value>
-                    <value>molecular_function
-                    </value>
+                    <value>biological_process</value>
+                    <value>cellular_component</value>
+                    <value>molecular_function</value>
                 </constraint>
             </query>
         </template>
@@ -387,7 +354,7 @@
             </query>
         </template>
         <template name="Gene_Flanking_Sequence" title="Gene --&gt; Sequence Upstream and Downstream (+/-) Kb." comment="" dataTypes="java.lang.String java.lang.String java.lang.Integer java.lang.String int org.intermine.objectstore.query.ClobAccess">
-            <query name="Gene_Flanking_Sequence" model="genomic" view="Gene.secondaryIdentifier Gene.symbol Gene.length Gene.flankingRegions.direction Gene.flankingRegions.sequence.length Gene.flankingRegions.sequence.residues" longDescription="For a given gene(s), get a chosen length of upstream and/or downstream sequence along with the gene sequence. Choose to retrieve 0.5 kb, 1.0 kb, or 2.0 kb of upstream or downstream flanking regions, or both. To retrieve only flanking regions without the coding sequence, select false for the Gene Flanking Region &gt; Include Gene option (for this option, you must select only upstream or downstream flanking regions, not both)." sortOrder="Gene.secondaryIdentifier asc" constraintLogic="A and B and C and D">
+            <query name="Gene_Flanking_Sequence" model="genomic" view="Gene.secondaryIdentifier Gene.symbol Gene.length Gene.flankingRegions.direction Gene.flankingRegions.sequence.length Gene.flankingRegions.sequence.residues" longDescription="For a given gene(s), get a chosen length of upstream and/or downstream sequence along with the gene sequence. Choose to retrieve 0.5 kb, 1.0 kb, 2.0 kb, 5.0 kb or 10.0 kb of upstream or downstream flanking regions. To retrieve only flanking regions without the coding sequence, select false for the Gene Flanking Region &gt; Include Gene option." sortOrder="Gene.secondaryIdentifier asc" constraintLogic="A and B and C and D">
                 <constraint path="Gene" code="B" editable="true" op="LOOKUP" value="act1" extraValue="S. cerevisiae"/>
                 <constraint path="Gene.flankingRegions.direction" code="C" editable="true" description="" op="=" value="upstream"/>
                 <constraint path="Gene.flankingRegions.distance" code="A" editable="true" op="=" value="1.0kb"/>
@@ -713,7 +680,7 @@
             </query>
         </template>
         <template name="SGD_Chr_Features_Tab" title="Retrieve SGD chromosomal Features" comment="" dataTypes="java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.String java.lang.Integer java.lang.Integer java.lang.String java.lang.String">
-            <query name="SGD_Chr_Features_Tab" model="genomic" view="SequenceFeature.primaryIdentifier SequenceFeature.featureType SequenceFeature.qualifier SequenceFeature.name SequenceFeature.secondaryIdentifier SequenceFeature.symbol SequenceFeature.sgdAlias SequenceFeature.chromosome.primaryIdentifier SequenceFeature.chromosomeLocation.start SequenceFeature.chromosomeLocation.end SequenceFeature.chromosomeLocation.strand SequenceFeature.description" longDescription="" sortOrder="SequenceFeature.primaryIdentifier asc" constraintLogic="A and B and C and D and E">
+            <query name="SGD_Chr_Features_Tab" model="genomic" view="SequenceFeature.primaryIdentifier SequenceFeature.featureType SequenceFeature.qualifier SequenceFeature.name SequenceFeature.secondaryIdentifier SequenceFeature.symbol SequenceFeature.sgdAlias SequenceFeature.chromosome.primaryIdentifier SequenceFeature.chromosomeLocation.start SequenceFeature.chromosomeLocation.end SequenceFeature.chromosomeLocation.strand SequenceFeature.modDescription" longDescription="" sortOrder="SequenceFeature.primaryIdentifier asc" constraintLogic="A and B and C and D and E">
                 <constraint path="SequenceFeature.featureType" code="B" editable="false" description="" op="IS NOT NULL"/>
                 <constraint path="SequenceFeature.featureType" code="C" editable="false" description="" op="!=" value="chromosome"/>
                 <constraint path="SequenceFeature.featureType" code="D" editable="false" description="" op="!=" value="not in systematic sequence of S288C"/>

@@ -81,6 +81,28 @@
         </fields>
     </class>
 
+    <class className="org.intermine.model.bio.Allele">
+        <fields>
+            <fieldconfig fieldExpr="primaryIdentifier" />
+            <fieldconfig fieldExpr="symbol" />
+            <fieldconfig fieldExpr="name" />
+            <fieldconfig fieldExpr="alleleType" />
+            <fieldconfig fieldExpr="gene.symbol" />
+            <fieldconfig fieldExpr="organism.name" />
+        </fields>
+    </class>
+
+    <class className="org.intermine.model.bio.Variant">
+        <fields>
+            <fieldconfig fieldExpr="primaryIdentifier" />
+            <fieldconfig fieldExpr="variantSymbol" />
+            <fieldconfig fieldExpr="variantType" />
+            <fieldconfig fieldExpr="allele.primaryIdentifier" />
+            <fieldconfig fieldExpr="affectedGene.symbol" />
+            <fieldconfig fieldExpr="organism.name" />
+        </fields>
+    </class>
+
     <class className="org.intermine.model.bio.TransgenicAllele">
         <fields>
             <fieldconfig fieldExpr="primaryIdentifier" />
@@ -89,6 +111,13 @@
             <fieldconfig fieldExpr="constructName" />
             <fieldconfig fieldExpr="reporterTag" />
             <fieldconfig fieldExpr="organism.shortName" />
+        </fields>
+    </class>
+
+    <class className="org.intermine.model.bio.CRISPRScreen">
+        <fields>
+            <fieldconfig fieldExpr="identifier" />
+            <fieldconfig fieldExpr="source" />
         </fields>
     </class>
 
@@ -700,7 +729,7 @@
                                    title="Pathway Enrichment"
                                    description="Pathways enriched for genes in this list - data from KEGG and Reactome"
                                    label="Pathways" filterLabel="DataSet"
-                                   filters="All,KEGG pathways data set,Reactome data set" startClass="Gene"
+                                   filters="All,KEGG pathways data set,Reactome pathways data set" startClass="Gene"
                                    startClassDisplay="secondaryIdentifier" enrich="pathways.name"
                                    enrichIdentifier="pathways.identifier"
                                    constraints="pathways.dataSets.name=[DataSet],organism.taxonId=[list], primaryIdentifier != null"
