@@ -188,6 +188,15 @@
           <property name="src.data.dir.includes" value="alliance-genes.tsv"/>
       </source>
 
+      <!-- Chromosome lengths from NCBI Datasets (scripts/fetch_chromosome_lengths.py).
+           alliance-genes makes name-only Chromosomes; create-intergenic-region-features
+           and create-gene-flanking-features skip any chromosome without a length, so
+           without this source only yeast (lengths from sgd) gets those features. -->
+      <source name="alliance-chromosome-lengths" type="alliance-chromosome-lengths">
+          <property name="src.data.dir" location="/root/data/api"/>
+          <property name="src.data.dir.includes" value="chromosome-lengths.tsv"/>
+      </source>
+
       <source name="go-annotation" type="go-annotation" dump="true">
           <property name="src.data.dir" location="/root/data/fms"/>
           <property name="src.data.dir.includes" value="*.gaf"/>
