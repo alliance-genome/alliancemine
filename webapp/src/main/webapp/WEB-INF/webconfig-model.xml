@@ -134,10 +134,13 @@
 
     <class className="org.intermine.model.bio.DiseaseAnnotation">
         <fields>
+            <!-- InlineResultsTable takes the row object from the first column's prefix and throws
+                 a NullPointerException when it is null; 21,734 rc3 annotations have no subject,
+                 so the first column is an attribute of the annotation itself. -->
+            <fieldconfig fieldExpr="evidenceType" />
             <fieldconfig fieldExpr="subject.primaryIdentifier" />
             <fieldconfig fieldExpr="ontologyTerm.identifier" />
             <fieldconfig fieldExpr="ontologyTerm.name" />
-            <fieldconfig fieldExpr="evidenceType" />
             <fieldconfig fieldExpr="diseaseQualifiers" />
         </fields>
     </class>
@@ -265,13 +268,15 @@
 
     <class className="org.intermine.model.bio.GOAnnotation">
         <fields>
+            <!-- First column is an attribute: see DiseaseAnnotation (2,745 rc3 GO annotations
+                 have no subject). -->
+            <fieldconfig fieldExpr="qualifier"></fieldconfig>
             <fieldconfig fieldExpr="subject.primaryIdentifier" />
             <!--<fieldconfig fieldExpr="subject.name" />
             <fieldconfig fieldExpr="subject.symbol" />-->
             <fieldconfig fieldExpr="ontologyTerm.identifier"></fieldconfig>
             <fieldconfig fieldExpr="ontologyTerm.name"></fieldconfig>
             <fieldconfig showInSummary="false" fieldExpr="ontologyTerm.namespace"></fieldconfig>
-            <fieldconfig fieldExpr="qualifier"></fieldconfig>
         </fields>
     </class>
 
