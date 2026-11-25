@@ -766,6 +766,171 @@
                 <constraint path="Gene.organism.shortName" editable="true" op="=" value="S. cerevisiae"/>
             </query>
         </template>
+        <!-- FlyMine templates for the im:aspect:FlyMine category. -->
+        <template name="Fly_ChromosomeRegion_Genes" title="Chromosomal region --&gt; Genes (D. melanogaster)" comment="Fly genes inside a chromosome interval, with coordinates.">
+            <query name="Fly_ChromosomeRegion_Genes" model="genomic" view="Gene.primaryIdentifier Gene.symbol Gene.name Gene.chromosome.primaryIdentifier Gene.chromosomeLocation.start Gene.chromosomeLocation.end Gene.chromosomeLocation.strand" longDescription="Fly genes inside a chromosome interval, with coordinates." sortOrder="Gene.chromosomeLocation.start asc">
+                <constraint path="Gene.organism.shortName" op="=" value="D. melanogaster"/>
+                <constraint path="Gene.chromosome.primaryIdentifier" editable="true" op="=" value="2L"/>
+                <constraint path="Gene.chromosomeLocation.start" editable="true" op="&gt;=" value="2400000"/>
+                <constraint path="Gene.chromosomeLocation.end" editable="true" op="&lt;=" value="2500000"/>
+            </query>
+        </template>
+        <template name="Fly_DOTerm_Genes" title="Disease term --&gt; Genes (D. melanogaster)" comment="Fly genes annotated to a Disease Ontology term, matched by name.">
+            <query name="Fly_DOTerm_Genes" model="genomic" view="Gene.primaryIdentifier Gene.symbol Gene.diseaseAnnotation.ontologyTerm.identifier Gene.diseaseAnnotation.ontologyTerm.name Gene.diseaseAnnotation.qualifier Gene.organism.shortName" longDescription="Fly genes annotated to a Disease Ontology term, matched by name." sortOrder="Gene.symbol asc">
+                <constraint path="Gene.organism.shortName" op="=" value="D. melanogaster"/>
+                <constraint path="Gene.diseaseAnnotation.ontologyTerm.name" editable="true" op="CONTAINS" value="Parkinson"/>
+            </query>
+        </template>
+        <template name="Fly_GOTerm_Genes" title="GO term --&gt; Genes (D. melanogaster)" comment="Fly genes annotated to a GO term, matched by name, with evidence code.">
+            <query name="Fly_GOTerm_Genes" model="genomic" view="Gene.primaryIdentifier Gene.symbol Gene.goAnnotation.ontologyTerm.identifier Gene.goAnnotation.ontologyTerm.name Gene.goAnnotation.ontologyTerm.namespace Gene.goAnnotation.evidence.code.code Gene.organism.shortName" longDescription="Fly genes annotated to a GO term, matched by name, with evidence code." sortOrder="Gene.symbol asc">
+                <constraint path="Gene.organism.shortName" op="=" value="D. melanogaster"/>
+                <constraint path="Gene.goAnnotation.ontologyTerm.name" editable="true" op="CONTAINS" value="wing disc development"/>
+            </query>
+        </template>
+        <template name="Fly_Gene_Alleles" title="Gene --&gt; Alleles (D. melanogaster)" comment="Alleles of a fly gene with Alliance allele IDs, symbols, types and publications.">
+            <query name="Fly_Gene_Alleles" model="genomic" view="Gene.primaryIdentifier Gene.symbol Gene.organism.shortName Gene.alleles.alleleId Gene.alleles.alleleSymbol Gene.alleles.alleleType Gene.alleles.description Gene.alleles.publications.pubMedId" longDescription="Alleles of a fly gene with Alliance allele IDs, symbols, types and publications." sortOrder="Gene.alleles.alleleSymbol asc">
+                <join path="Gene.alleles.publications" style="OUTER"/>
+                <constraint path="Gene" editable="true" op="LOOKUP" value="FB:FBgn0000490"/>
+            </query>
+        </template>
+        <template name="Fly_Gene_HumanOrthologs" title="Gene --&gt; Human orthologs (D. melanogaster)" comment="Human orthologs of a fly gene with the prediction methods that support each pair.">
+            <query name="Fly_Gene_HumanOrthologs" model="genomic" view="Gene.primaryIdentifier Gene.symbol Gene.homologues.homologue.primaryIdentifier Gene.homologues.homologue.symbol Gene.homologues.homologue.organism.shortName Gene.homologues.algorithmsMatch Gene.homologues.algorithmsAttempted Gene.homologues.isBestScore Gene.homologues.isBestReverseScore" longDescription="Human orthologs of a fly gene with the prediction methods that support each pair." sortOrder="Gene.homologues.algorithmsMatch desc">
+                <constraint path="Gene.homologues.homologue.organism.shortName" op="=" value="H. sapiens"/>
+                <constraint path="Gene" editable="true" op="LOOKUP" value="FB:FBgn0000490"/>
+            </query>
+        </template>
+        <template name="Fly_Gene_Interactions" title="Gene --&gt; Interactions (D. melanogaster)" comment="Interaction partners of a fly gene with interaction type and detection method.">
+            <query name="Fly_Gene_Interactions" model="genomic" view="Gene.primaryIdentifier Gene.symbol Gene.interactions.participant2.primaryIdentifier Gene.interactions.details.type Gene.interactions.details.relationshipType Gene.interactions.detectionMethod.name" longDescription="Interaction partners of a fly gene with interaction type and detection method." sortOrder="Gene.interactions.participant2.primaryIdentifier asc">
+                <join path="Gene.interactions.detectionMethod" style="OUTER"/>
+                <constraint path="Gene" editable="true" op="LOOKUP" value="FB:FBgn0000490"/>
+            </query>
+        </template>
+        <template name="Fly_Gene_Pathways" title="Gene --&gt; Pathways (D. melanogaster)" comment="Pathways that contain a fly gene.">
+            <query name="Fly_Gene_Pathways" model="genomic" view="Gene.primaryIdentifier Gene.symbol Gene.organism.shortName Gene.pathways.identifier Gene.pathways.name" longDescription="Pathways that contain a fly gene." sortOrder="Gene.pathways.name asc">
+                <constraint path="Gene" editable="true" op="LOOKUP" value="FB:FBgn0000490"/>
+            </query>
+        </template>
+        <template name="Fly_Gene_Phenotypes" title="Gene --&gt; Phenotypes (D. melanogaster)" comment="Phenotype annotations of a fly gene with ontology term, statement and publications.">
+            <query name="Fly_Gene_Phenotypes" model="genomic" view="Gene.primaryIdentifier Gene.symbol Gene.organism.shortName Gene.phenotypeAnnotations.ontologyTerm.identifier Gene.phenotypeAnnotations.ontologyTerm.name Gene.phenotypeAnnotations.phenotypeStatement Gene.phenotypeAnnotations.publications.pubMedId" longDescription="Phenotype annotations of a fly gene with ontology term, statement and publications." sortOrder="Gene.phenotypeAnnotations.phenotypeStatement asc">
+                <join path="Gene.phenotypeAnnotations.ontologyTerm" style="OUTER"/>
+                <join path="Gene.phenotypeAnnotations.publications" style="OUTER"/>
+                <constraint path="Gene" editable="true" op="LOOKUP" value="FB:FBgn0000490"/>
+            </query>
+        </template>
+        <!-- MouseMine templates for the im:aspect:MouseMine category. -->
+        <template name="Mouse_ChromosomeRegion_Genes" title="Chromosomal region --&gt; Mouse genes" comment="Retrieve mouse genes within a chromosome interval.">
+            <query name="Mouse_ChromosomeRegion_Genes" model="genomic" view="Gene.chromosome.primaryIdentifier Gene.primaryIdentifier Gene.symbol Gene.name Gene.chromosomeLocation.start Gene.chromosomeLocation.end Gene.chromosomeLocation.strand Gene.organism.shortName" longDescription="Retrieve mouse genes within a chromosome interval." sortOrder="Gene.chromosomeLocation.start asc" constraintLogic="A and B and C and D">
+                <constraint path="Gene.organism.shortName" code="A" editable="false" op="=" value="M. musculus"/>
+                <constraint path="Gene.chromosome.primaryIdentifier" code="B" editable="true" op="=" value="1"/>
+                <constraint path="Gene.chromosomeLocation.start" code="C" editable="true" op="&gt;=" value="1"/>
+                <constraint path="Gene.chromosomeLocation.end" code="D" editable="true" op="&lt;=" value="5000000"/>
+            </query>
+        </template>
+        <template name="Mouse_DOTerm_Genes" title="Disease term --&gt; Mouse genes" comment="Retrieve mouse genes annotated to a Disease Ontology term name.">
+            <query name="Mouse_DOTerm_Genes" model="genomic" view="Gene.primaryIdentifier Gene.symbol Gene.name Gene.diseaseAnnotation.ontologyTerm.identifier Gene.diseaseAnnotation.ontologyTerm.name Gene.diseaseAnnotation.qualifier Gene.organism.shortName" longDescription="Retrieve mouse genes annotated to a Disease Ontology term name." sortOrder="Gene.primaryIdentifier asc" constraintLogic="A and B">
+                <constraint path="Gene.organism.shortName" code="A" editable="false" op="=" value="M. musculus"/>
+                <constraint path="Gene.diseaseAnnotation.ontologyTerm.name" code="B" editable="true" op="=" value="*cancer*"/>
+            </query>
+        </template>
+        <template name="Mouse_GOTerm_Genes" title="GO term --&gt; Mouse genes" comment="Retrieve mouse genes annotated to a GO term name.">
+            <query name="Mouse_GOTerm_Genes" model="genomic" view="Gene.primaryIdentifier Gene.symbol Gene.name Gene.goAnnotation.ontologyTerm.identifier Gene.goAnnotation.ontologyTerm.name Gene.goAnnotation.ontologyTerm.namespace Gene.goAnnotation.evidence.code.code Gene.organism.shortName" longDescription="Retrieve mouse genes annotated to a GO term name." sortOrder="Gene.primaryIdentifier asc" constraintLogic="A and B">
+                <constraint path="Gene.organism.shortName" code="A" editable="false" op="=" value="M. musculus"/>
+                <constraint path="Gene.goAnnotation.ontologyTerm.name" code="B" editable="true" op="=" value="DNA binding"/>
+            </query>
+        </template>
+        <template name="Mouse_Gene_Alleles" title="Gene --&gt; Alleles (M. musculus)" comment="Retrieve MGI alleles with allele type for a mouse gene.">
+            <query name="Mouse_Gene_Alleles" model="genomic" view="Gene.primaryIdentifier Gene.symbol Gene.alleles.alleleId Gene.alleles.alleleSymbol Gene.alleles.alleleType Gene.organism.shortName" longDescription="Retrieve MGI alleles with allele type for a mouse gene." sortOrder="Gene.primaryIdentifier asc">
+                <constraint path="Gene" code="A" editable="true" op="LOOKUP" extraValue="M. musculus" value="Pax6"/>
+            </query>
+        </template>
+        <template name="Mouse_Gene_Identifiers" title="Gene --&gt; Identifiers (M. musculus)" comment="Find MGI identifiers, symbol and chromosomal location for mouse genes by symbol.">
+            <query name="Mouse_Gene_Identifiers" model="genomic" view="Gene.primaryIdentifier Gene.secondaryIdentifier Gene.symbol Gene.name Gene.organism.shortName Gene.chromosome.primaryIdentifier Gene.chromosomeLocation.start Gene.chromosomeLocation.end" longDescription="Find MGI identifiers, symbol and chromosomal location for mouse genes by symbol." sortOrder="Gene.primaryIdentifier asc" constraintLogic="A and B">
+                <constraint path="Gene.organism.shortName" code="A" editable="false" op="=" value="M. musculus"/>
+                <constraint path="Gene.symbol" code="B" editable="true" op="CONTAINS" value="Pax"/>
+            </query>
+        </template>
+        <template name="Mouse_Gene_Literature" title="Gene --&gt; Publications (M. musculus)" comment="Retrieve publications associated with a mouse gene.">
+            <query name="Mouse_Gene_Literature" model="genomic" view="Gene.primaryIdentifier Gene.symbol Gene.publications.pubMedId Gene.publications.title Gene.publications.firstAuthor Gene.publications.journal Gene.publications.year" longDescription="Retrieve publications associated with a mouse gene." sortOrder="Gene.primaryIdentifier asc">
+                <constraint path="Gene" code="A" editable="true" op="LOOKUP" extraValue="M. musculus" value="Pax6"/>
+            </query>
+        </template>
+        <template name="Mouse_Gene_Pathways" title="Gene --&gt; Pathways (M. musculus)" comment="Retrieve pathways for a mouse gene.">
+            <query name="Mouse_Gene_Pathways" model="genomic" view="Gene.primaryIdentifier Gene.symbol Gene.pathways.identifier Gene.pathways.name Gene.organism.shortName" longDescription="Retrieve pathways for a mouse gene." sortOrder="Gene.primaryIdentifier asc">
+                <constraint path="Gene" code="A" editable="true" op="LOOKUP" extraValue="M. musculus" value="Trp53"/>
+            </query>
+        </template>
+        <template name="Mouse_Gene_Phenotypes" title="Gene --&gt; Phenotypes (M. musculus)" comment="Retrieve phenotype annotations and publications for a mouse gene.">
+            <query name="Mouse_Gene_Phenotypes" model="genomic" view="Gene.primaryIdentifier Gene.symbol Gene.name Gene.phenotypeAnnotations.phenotypeStatement Gene.phenotypeAnnotations.publications.pubMedId Gene.organism.shortName" longDescription="Retrieve phenotype annotations and publications for a mouse gene." sortOrder="Gene.primaryIdentifier asc">
+                <join path="Gene.phenotypeAnnotations.publications" style="OUTER"/>
+                <constraint path="Gene" code="A" editable="true" op="LOOKUP" extraValue="M. musculus" value="Pax6"/>
+            </query>
+        </template>
+        <template name="Mouse_Human_Orthologs" title="Human orthologs of mouse genes" comment="Retrieve human orthologs for mouse genes, filtered by mouse gene symbol pattern.">
+            <query name="Mouse_Human_Orthologs" model="genomic" view="Gene.primaryIdentifier Gene.symbol Gene.name Gene.homologues.homologue.primaryIdentifier Gene.homologues.homologue.symbol Gene.homologues.homologue.name Gene.homologues.algorithmsMatch Gene.homologues.isBestScore" longDescription="Retrieve human orthologs for mouse genes, filtered by mouse gene symbol pattern." sortOrder="Gene.symbol asc" constraintLogic="A and B and C">
+                <constraint path="Gene.organism.shortName" code="A" editable="false" op="=" value="M. musculus"/>
+                <constraint path="Gene.homologues.homologue.organism.shortName" code="B" editable="false" op="=" value="H. sapiens"/>
+                <constraint path="Gene.symbol" code="C" editable="true" op="CONTAINS" value="Pax"/>
+            </query>
+        </template>
+        <template name="Mouse_Organism_Genes" title="Organism --&gt; All genes (M. musculus)" comment="List all mouse genes with MGI identifier, symbol, name and chromosomal location.">
+            <query name="Mouse_Organism_Genes" model="genomic" view="Gene.primaryIdentifier Gene.symbol Gene.name Gene.organism.shortName Gene.chromosome.primaryIdentifier Gene.chromosomeLocation.start Gene.chromosomeLocation.end Gene.chromosomeLocation.strand" longDescription="List all mouse genes with MGI identifier, symbol, name and chromosomal location." sortOrder="Gene.primaryIdentifier asc">
+                <constraint path="Gene.organism.shortName" code="A" editable="true" op="=" value="M. musculus"/>
+            </query>
+        </template>
+        <!-- WormMine templates for the im:aspect:WormMine category. -->
+        <template name="Worm_Chromosome_Genes" title="Chromosome interval --&gt; Genes (C. elegans)" comment="C. elegans genes within a start and end position on a chromosome.">
+            <query name="Worm_Chromosome_Genes" model="genomic" view="Gene.primaryIdentifier Gene.symbol Gene.featureType Gene.chromosome.primaryIdentifier Gene.chromosomeLocation.start Gene.chromosomeLocation.end Gene.chromosomeLocation.strand" longDescription="C. elegans genes within a start and end position on a chromosome." sortOrder="Gene.chromosomeLocation.start asc" constraintLogic="A and B and C and D">
+                <constraint path="Gene.organism.shortName" code="A" editable="false" op="=" value="C. elegans"/>
+                <constraint path="Gene.chromosome.primaryIdentifier" code="B" editable="true" op="=" value="I"/>
+                <constraint path="Gene.chromosomeLocation.start" code="C" editable="true" op="&gt;=" value="1"/>
+                <constraint path="Gene.chromosomeLocation.end" code="D" editable="true" op="&lt;=" value="100000"/>
+            </query>
+        </template>
+        <template name="Worm_Disease_Genes" title="Disease term --&gt; Genes (C. elegans)" comment="C. elegans genes annotated to a Disease Ontology term, matched by name.">
+            <query name="Worm_Disease_Genes" model="genomic" view="Gene.primaryIdentifier Gene.symbol Gene.diseaseAnnotation.ontologyTerm.identifier Gene.diseaseAnnotation.ontologyTerm.name Gene.diseaseAnnotation.qualifier Gene.diseaseAnnotation.evidenceType" longDescription="C. elegans genes annotated to a Disease Ontology term, matched by name." sortOrder="Gene.primaryIdentifier asc" constraintLogic="A and B">
+                <constraint path="Gene.diseaseAnnotation.ontologyTerm.name" code="A" editable="true" op="CONTAINS" value="Parkinson"/>
+                <constraint path="Gene.organism.shortName" code="B" editable="false" op="=" value="C. elegans"/>
+            </query>
+        </template>
+        <template name="Worm_Expression_Genes" title="Anatomy --&gt; Genes expressed (C. elegans)" comment="C. elegans genes with expression annotated to an anatomy or cell term, matched by name.">
+            <query name="Worm_Expression_Genes" model="genomic" view="Gene.primaryIdentifier Gene.symbol Gene.expressionAnnotations.anatomy.identifier Gene.expressionAnnotations.anatomy.name Gene.expressionAnnotations.stageTerm Gene.expressionAnnotations.publications.pubMedId" longDescription="C. elegans genes with expression annotated to an anatomy or cell term, matched by name." sortOrder="Gene.primaryIdentifier asc" constraintLogic="A and B">
+                <constraint path="Gene.expressionAnnotations.anatomy.name" code="A" editable="true" op="CONTAINS" value="intestine"/>
+                <constraint path="Gene.organism.shortName" code="B" editable="false" op="=" value="C. elegans"/>
+            </query>
+        </template>
+        <template name="Worm_GOTerm_Genes" title="GO term --&gt; Genes (C. elegans)" comment="C. elegans genes annotated to a GO term, matched by name.">
+            <query name="Worm_GOTerm_Genes" model="genomic" view="Gene.primaryIdentifier Gene.symbol Gene.goAnnotation.ontologyTerm.identifier Gene.goAnnotation.ontologyTerm.name Gene.goAnnotation.evidence.code.code Gene.goAnnotation.evidence.publications.pubMedId" longDescription="C. elegans genes annotated to a GO term, matched by name." sortOrder="Gene.primaryIdentifier asc" constraintLogic="A and B">
+                <constraint path="Gene.goAnnotation.ontologyTerm.name" code="A" editable="true" op="=" value="determination of adult lifespan"/>
+                <constraint path="Gene.organism.shortName" code="B" editable="false" op="=" value="C. elegans"/>
+            </query>
+        </template>
+        <template name="Worm_Gene_Alleles" title="Gene --&gt; Alleles (C. elegans)" comment="Alleles of a C. elegans gene with Alliance allele IDs, symbols, types and references.">
+            <query name="Worm_Gene_Alleles" model="genomic" view="Gene.primaryIdentifier Gene.symbol Gene.alleles.alleleId Gene.alleles.alleleSymbol Gene.alleles.alleleType Gene.alleles.description Gene.organism.shortName" longDescription="Alleles of a C. elegans gene with Alliance allele IDs, symbols, types and references." sortOrder="Gene.primaryIdentifier asc">
+                <constraint path="Gene" code="A" editable="true" op="LOOKUP" value="daf-16"/>
+            </query>
+        </template>
+        <template name="Worm_Gene_HumanOrthologs" title="Gene --&gt; Human orthologs (C. elegans)" comment="Human orthologs of a C. elegans gene with the Alliance prediction scores.">
+            <query name="Worm_Gene_HumanOrthologs" model="genomic" view="Gene.primaryIdentifier Gene.symbol Gene.homologues.homologue.primaryIdentifier Gene.homologues.homologue.symbol Gene.homologues.algorithmsMatch Gene.homologues.algorithmsAttempted Gene.homologues.isBestScore Gene.homologues.isBestReverseScore" longDescription="Human orthologs of a C. elegans gene with the Alliance prediction scores." sortOrder="Gene.primaryIdentifier asc" constraintLogic="A and B">
+                <constraint path="Gene" code="A" editable="true" op="LOOKUP" value="daf-16"/>
+                <constraint path="Gene.homologues.homologue.organism.shortName" code="B" editable="false" op="=" value="H. sapiens"/>
+            </query>
+        </template>
+        <template name="Worm_Gene_Interactions" title="Gene --&gt; Interactions (C. elegans)" comment="Interaction partners of a C. elegans gene.">
+            <query name="Worm_Gene_Interactions" model="genomic" view="Gene.primaryIdentifier Gene.symbol Gene.interactions.participant2.primaryIdentifier Gene.interactions.participant2.symbol Gene.interactions.details.relationshipType Gene.interactions.details.experiment.publication.pubMedId" longDescription="Interaction partners of a C. elegans gene." sortOrder="Gene.primaryIdentifier asc">
+                <constraint path="Gene" code="A" editable="true" op="LOOKUP" value="daf-16"/>
+            </query>
+        </template>
+        <template name="Worm_Gene_Phenotypes" title="Gene --&gt; Phenotypes (C. elegans)" comment="Phenotype annotations for a C. elegans gene, with the allele and reference.">
+            <query name="Worm_Gene_Phenotypes" model="genomic" view="Gene.primaryIdentifier Gene.symbol Gene.phenotypeAnnotations.ontologyTerm.identifier Gene.phenotypeAnnotations.phenotypeStatement Gene.phenotypeAnnotations.alleleSubject.alleleSymbol Gene.phenotypeAnnotations.publications.pubMedId" longDescription="Phenotype annotations for a C. elegans gene, with the allele and reference." sortOrder="Gene.primaryIdentifier asc">
+                <constraint path="Gene" code="A" editable="true" op="LOOKUP" value="daf-16"/>
+            </query>
+        </template>
+        <template name="Worm_Phenotype_Genes" title="Phenotype --&gt; Genes (C. elegans)" comment="C. elegans genes annotated with a phenotype term, matched by name.">
+            <query name="Worm_Phenotype_Genes" model="genomic" view="Gene.primaryIdentifier Gene.symbol Gene.phenotypeAnnotations.ontologyTerm.identifier Gene.phenotypeAnnotations.phenotypeStatement Gene.phenotypeAnnotations.publications.pubMedId Gene.organism.shortName" longDescription="C. elegans genes annotated with a phenotype term, matched by name." sortOrder="Gene.primaryIdentifier asc" constraintLogic="A and B">
+                <constraint path="Gene.phenotypeAnnotations.phenotypeStatement" code="A" editable="true" op="CONTAINS" value="dauer"/>
+                <constraint path="Gene.organism.shortName" code="B" editable="false" op="=" value="C. elegans"/>
+            </query>
+        </template>
     </template-queries>
 
     <tags>
@@ -1922,6 +2087,198 @@
         </tag>
 
         <tag name="im:summary" objectIdentifier="BioEntity.synonyms" type="collection">
+        </tag>
+
+        <!-- Mine categories for FlyMine, MouseMine and WormMine. -->
+        <tag name="im:aspect:FlyMine" objectIdentifier="Fly_Gene_Phenotypes" type="template">
+        </tag>
+        <tag name="im:public" objectIdentifier="Fly_Gene_Phenotypes" type="template">
+        </tag>
+        <tag name="im:aspect:Phenotypes" objectIdentifier="Fly_Gene_Phenotypes" type="template">
+        </tag>
+        <tag name="im:aspect:FlyMine" objectIdentifier="Fly_Gene_Alleles" type="template">
+        </tag>
+        <tag name="im:public" objectIdentifier="Fly_Gene_Alleles" type="template">
+        </tag>
+        <tag name="im:aspect:Genome" objectIdentifier="Fly_Gene_Alleles" type="template">
+        </tag>
+        <tag name="im:aspect:FlyMine" objectIdentifier="Fly_GOTerm_Genes" type="template">
+        </tag>
+        <tag name="im:public" objectIdentifier="Fly_GOTerm_Genes" type="template">
+        </tag>
+        <tag name="im:aspect:Function" objectIdentifier="Fly_GOTerm_Genes" type="template">
+        </tag>
+        <tag name="im:aspect:FlyMine" objectIdentifier="Fly_DOTerm_Genes" type="template">
+        </tag>
+        <tag name="im:public" objectIdentifier="Fly_DOTerm_Genes" type="template">
+        </tag>
+        <tag name="im:aspect:Disease" objectIdentifier="Fly_DOTerm_Genes" type="template">
+        </tag>
+        <tag name="im:aspect:FlyMine" objectIdentifier="Fly_Gene_HumanOrthologs" type="template">
+        </tag>
+        <tag name="im:public" objectIdentifier="Fly_Gene_HumanOrthologs" type="template">
+        </tag>
+        <tag name="im:aspect:Homology" objectIdentifier="Fly_Gene_HumanOrthologs" type="template">
+        </tag>
+        <tag name="im:aspect:FlyMine" objectIdentifier="Fly_Gene_Interactions" type="template">
+        </tag>
+        <tag name="im:public" objectIdentifier="Fly_Gene_Interactions" type="template">
+        </tag>
+        <tag name="im:aspect:Interactions" objectIdentifier="Fly_Gene_Interactions" type="template">
+        </tag>
+        <tag name="im:aspect:FlyMine" objectIdentifier="Fly_Gene_Pathways" type="template">
+        </tag>
+        <tag name="im:public" objectIdentifier="Fly_Gene_Pathways" type="template">
+        </tag>
+        <tag name="im:aspect:Function" objectIdentifier="Fly_Gene_Pathways" type="template">
+        </tag>
+        <tag name="im:aspect:FlyMine" objectIdentifier="Fly_ChromosomeRegion_Genes" type="template">
+        </tag>
+        <tag name="im:public" objectIdentifier="Fly_ChromosomeRegion_Genes" type="template">
+        </tag>
+        <tag name="im:aspect:Genome" objectIdentifier="Fly_ChromosomeRegion_Genes" type="template">
+        </tag>
+        <tag name="im:aspect:MouseMine" objectIdentifier="Mouse_ChromosomeRegion_Genes" type="template">
+        </tag>
+        <tag name="im:public" objectIdentifier="Mouse_ChromosomeRegion_Genes" type="template">
+        </tag>
+        <tag name="im:aspect:Genome" objectIdentifier="Mouse_ChromosomeRegion_Genes" type="template">
+        </tag>
+        <tag name="im:aspect:MouseMine" objectIdentifier="Mouse_DOTerm_Genes" type="template">
+        </tag>
+        <tag name="im:public" objectIdentifier="Mouse_DOTerm_Genes" type="template">
+        </tag>
+        <tag name="im:aspect:Disease" objectIdentifier="Mouse_DOTerm_Genes" type="template">
+        </tag>
+        <tag name="im:aspect:MouseMine" objectIdentifier="Mouse_GOTerm_Genes" type="template">
+        </tag>
+        <tag name="im:public" objectIdentifier="Mouse_GOTerm_Genes" type="template">
+        </tag>
+        <tag name="im:aspect:Function" objectIdentifier="Mouse_GOTerm_Genes" type="template">
+        </tag>
+        <tag name="im:aspect:MouseMine" objectIdentifier="Mouse_Gene_Alleles" type="template">
+        </tag>
+        <tag name="im:public" objectIdentifier="Mouse_Gene_Alleles" type="template">
+        </tag>
+        <tag name="im:aspect:Genome" objectIdentifier="Mouse_Gene_Alleles" type="template">
+        </tag>
+        <tag name="im:aspect:MouseMine" objectIdentifier="Mouse_Gene_Identifiers" type="template">
+        </tag>
+        <tag name="im:public" objectIdentifier="Mouse_Gene_Identifiers" type="template">
+        </tag>
+        <tag name="im:aspect:Genome" objectIdentifier="Mouse_Gene_Identifiers" type="template">
+        </tag>
+        <tag name="im:aspect:MouseMine" objectIdentifier="Mouse_Gene_Literature" type="template">
+        </tag>
+        <tag name="im:public" objectIdentifier="Mouse_Gene_Literature" type="template">
+        </tag>
+        <tag name="im:aspect:Literature" objectIdentifier="Mouse_Gene_Literature" type="template">
+        </tag>
+        <tag name="im:aspect:MouseMine" objectIdentifier="Mouse_Gene_Pathways" type="template">
+        </tag>
+        <tag name="im:public" objectIdentifier="Mouse_Gene_Pathways" type="template">
+        </tag>
+        <tag name="im:aspect:Function" objectIdentifier="Mouse_Gene_Pathways" type="template">
+        </tag>
+        <tag name="im:aspect:MouseMine" objectIdentifier="Mouse_Gene_Phenotypes" type="template">
+        </tag>
+        <tag name="im:public" objectIdentifier="Mouse_Gene_Phenotypes" type="template">
+        </tag>
+        <tag name="im:aspect:Phenotypes" objectIdentifier="Mouse_Gene_Phenotypes" type="template">
+        </tag>
+        <tag name="im:aspect:MouseMine" objectIdentifier="Mouse_Human_Orthologs" type="template">
+        </tag>
+        <tag name="im:public" objectIdentifier="Mouse_Human_Orthologs" type="template">
+        </tag>
+        <tag name="im:aspect:Homology" objectIdentifier="Mouse_Human_Orthologs" type="template">
+        </tag>
+        <tag name="im:aspect:MouseMine" objectIdentifier="Mouse_Organism_Genes" type="template">
+        </tag>
+        <tag name="im:public" objectIdentifier="Mouse_Organism_Genes" type="template">
+        </tag>
+        <tag name="im:aspect:Genome" objectIdentifier="Mouse_Organism_Genes" type="template">
+        </tag>
+        <tag name="im:aspect:WormMine" objectIdentifier="Worm_Chromosome_Genes" type="template">
+        </tag>
+        <tag name="im:public" objectIdentifier="Worm_Chromosome_Genes" type="template">
+        </tag>
+        <tag name="im:aspect:Genome" objectIdentifier="Worm_Chromosome_Genes" type="template">
+        </tag>
+        <tag name="im:aspect:WormMine" objectIdentifier="Worm_Disease_Genes" type="template">
+        </tag>
+        <tag name="im:public" objectIdentifier="Worm_Disease_Genes" type="template">
+        </tag>
+        <tag name="im:aspect:Disease" objectIdentifier="Worm_Disease_Genes" type="template">
+        </tag>
+        <tag name="im:aspect:WormMine" objectIdentifier="Worm_Expression_Genes" type="template">
+        </tag>
+        <tag name="im:public" objectIdentifier="Worm_Expression_Genes" type="template">
+        </tag>
+        <tag name="im:aspect:Expression" objectIdentifier="Worm_Expression_Genes" type="template">
+        </tag>
+        <tag name="im:aspect:WormMine" objectIdentifier="Worm_GOTerm_Genes" type="template">
+        </tag>
+        <tag name="im:public" objectIdentifier="Worm_GOTerm_Genes" type="template">
+        </tag>
+        <tag name="im:aspect:Function" objectIdentifier="Worm_GOTerm_Genes" type="template">
+        </tag>
+        <tag name="im:aspect:WormMine" objectIdentifier="Worm_Gene_Alleles" type="template">
+        </tag>
+        <tag name="im:public" objectIdentifier="Worm_Gene_Alleles" type="template">
+        </tag>
+        <tag name="im:aspect:Genome" objectIdentifier="Worm_Gene_Alleles" type="template">
+        </tag>
+        <tag name="im:aspect:WormMine" objectIdentifier="Worm_Gene_HumanOrthologs" type="template">
+        </tag>
+        <tag name="im:public" objectIdentifier="Worm_Gene_HumanOrthologs" type="template">
+        </tag>
+        <tag name="im:aspect:Homology" objectIdentifier="Worm_Gene_HumanOrthologs" type="template">
+        </tag>
+        <tag name="im:aspect:WormMine" objectIdentifier="Worm_Gene_Interactions" type="template">
+        </tag>
+        <tag name="im:public" objectIdentifier="Worm_Gene_Interactions" type="template">
+        </tag>
+        <tag name="im:aspect:Interactions" objectIdentifier="Worm_Gene_Interactions" type="template">
+        </tag>
+        <tag name="im:aspect:WormMine" objectIdentifier="Worm_Gene_Phenotypes" type="template">
+        </tag>
+        <tag name="im:public" objectIdentifier="Worm_Gene_Phenotypes" type="template">
+        </tag>
+        <tag name="im:aspect:Phenotypes" objectIdentifier="Worm_Gene_Phenotypes" type="template">
+        </tag>
+        <tag name="im:aspect:WormMine" objectIdentifier="Worm_Phenotype_Genes" type="template">
+        </tag>
+        <tag name="im:public" objectIdentifier="Worm_Phenotype_Genes" type="template">
+        </tag>
+        <tag name="im:aspect:Phenotypes" objectIdentifier="Worm_Phenotype_Genes" type="template">
+        </tag>
+        <tag name="im:aspect:WormMine" objectIdentifier="Gene_GOTerms" type="template">
+        </tag>
+        <tag name="im:aspect:WormMine" objectIdentifier="Gene_Orthologs" type="template">
+        </tag>
+        <tag name="im:aspect:WormMine" objectIdentifier="Gene_DOTerm" type="template">
+        </tag>
+        <tag name="im:aspect:WormMine" objectIdentifier="Gene_Expression" type="template">
+        </tag>
+        <tag name="im:aspect:WormMine" objectIdentifier="Organism_Genes" type="template">
+        </tag>
+        <tag name="im:aspect:FlyMine" objectIdentifier="Gene_GOTerms" type="template">
+        </tag>
+        <tag name="im:aspect:FlyMine" objectIdentifier="Gene_Orthologs" type="template">
+        </tag>
+        <tag name="im:aspect:FlyMine" objectIdentifier="Gene_DOTerm" type="template">
+        </tag>
+        <tag name="im:aspect:FlyMine" objectIdentifier="Gene_Expression" type="template">
+        </tag>
+        <tag name="im:aspect:MouseMine" objectIdentifier="Gene_GOTerms" type="template">
+        </tag>
+        <tag name="im:aspect:MouseMine" objectIdentifier="Gene_Orthologs" type="template">
+        </tag>
+        <tag name="im:aspect:MouseMine" objectIdentifier="Gene_DOTerm" type="template">
+        </tag>
+        <tag name="im:aspect:MouseMine" objectIdentifier="Gene_Expression" type="template">
+        </tag>
+        <tag name="im:aspect:MouseMine" objectIdentifier="Gene_Variants" type="template">
         </tag>
     </tags>
 </userprofile>
