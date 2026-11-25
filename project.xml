@@ -41,7 +41,7 @@
          <property name="src.data.dir" location="/root/data/fms"/>
        </source>
 
-       <source name="alliance-mgi-fasta" type="fasta">
+       <source name="alliance-mgi-fasta" type="fasta" dump="true">
          <property name="fasta.className" value="org.intermine.model.bio.Chromosome"/>
          <property name="fasta.dataSourceName" value="NCBI"/>
          <property name="fasta.dataSetTitle" value="MGI Genome Sequence"/>
@@ -68,7 +68,7 @@
           <property name="src.data.dir" location="/root/data/fms"/>
        </source>
 
-       <source name="alliance-xlaevis-fasta" type="fasta">
+       <source name="alliance-xlaevis-fasta" type="fasta" dump="true">
          <property name="fasta.className" value="org.intermine.model.bio.Chromosome"/>
          <property name="fasta.dataSourceName" value="NCBI"/>
          <property name="fasta.dataSetTitle" value="XB X.laevis Genome Sequence"/>
@@ -105,7 +105,7 @@
        <property name="src.data.file" location="/root/data/fms/ONTOLOGY_WBBT.obo"/>
   </source>
 
-     <source name="fbbt" type="fbbt">
+     <source name="fbbt" type="fbbt" dump="true">
        <property name="src.data.file" location="/root/data/fms/ONTOLOGY_FBBT.obo"/>
      </source>
 
@@ -113,7 +113,7 @@
           <property name="src.data.file" location="/root/data/intermine/ontology/psi-mi.obo"/>
       </source>
 
-      <source name="go-slim" type="go-slim">
+      <source name="go-slim" type="go-slim" dump="true">
           <property name="src.data.file" location="/root/data/intermine/ontology/goslim_yeast.obo"/>
       </source>
 
@@ -165,7 +165,7 @@
           <property name="converter.class" value="org.intermine.bio.dataconversion.SgdComplementationDbConverter"/>
       </source>
 
-      <source name="sgd-complexes" type="sgd-complexes">
+      <source name="sgd-complexes" type="sgd-complexes" dump="true">
           <property name="source.db.name" value="sgd"/>
           <property name="dataSourceName" value="SGD"/>
           <property name="converter.class" value="org.intermine.bio.dataconversion.SgdComplexesConverter"/>
@@ -175,23 +175,28 @@
           <property name="src.data.dir" location="/root/data/intermine/protein-properties"/>
       </source>
 
-      <source name="sgd-protein-ntermini" type="sgd-protein-ntermini">
+      <source name="sgd-protein-ntermini" type="sgd-protein-ntermini" dump="true">
           <property name="src.data.dir" location="/root/data/intermine/protein-ntermini"/>
       </source>
       
+      <!-- alliance-genes now reads the enriched TSV produced by
+           scripts/fetch_genes.py (in alliancemine-bio-sources). The 14-column
+           legacy schema is preserved so the converter is backward compatible
+           if you fall back to a locally-built /root/data/genes TSV. -->
       <source name="alliance-genes" type="alliance-genes">
-          <property name="src.data.dir" location="/root/data/genes"/>
+          <property name="src.data.dir" location="/root/data/api"/>
+          <property name="src.data.dir.includes" value="alliance-genes.tsv"/>
       </source>
 
-      <source name="go-annotation" type="go-annotation">
+      <source name="go-annotation" type="go-annotation" dump="true">
           <property name="src.data.dir" location="/root/data/fms"/>
           <property name="src.data.dir.includes" value="*.gaf"/>
           <property name="ontologyPrefix" value="GO"/>
       </source>
 
       <source name="alliance-disease" type="alliance-disease">
-          <property name="src.data.dir" location="/root/data/fms"/>
-          <property name="src.data.dir.includes" value="DISEASE-ALLIANCE_COMBINED.tsv"/>
+          <property name="src.data.dir" location="/root/data/api"/>
+          <property name="src.data.dir.includes" value="disease-alliance.tsv"/>
       </source>
 
       <source name="alliance-orthologs" type="alliance-orthologs">
@@ -200,25 +205,304 @@
       </source>
 
       <source name="alliance-alleles" type="alliance-alleles">
-          <property name="src.data.dir" location="/root/data/fms"/>
-          <property name="src.data.dir.includes" value="VARIANT-ALLELE_COMBINED.tsv"/>
+          <property name="src.data.dir" location="/root/data/api"/>
+          <property name="src.data.dir.includes" value="alliance-alleles.tsv"/>
       </source>
 
-      <source name="alliance-expression" type="alliance-expression">
-          <property name="src.data.dir" location="/root/data/fms"/>
-          <property name="src.data.dir.includes" value="EXPRESSION-ALLIANCE_COMBINED.tsv"/>
+      <!-- Verified 2026-05-13: FMS EXPRESSION-ALLIANCE/COMBINED shards
+           are populated (1.77M rows in shard 0 alone). scripts/
+           fetch_expression.py downloads + concatenates the 13 shards
+           into data/expression-alliance.tsv. -->
+      <source name="alliance-expression" type="alliance-expression" dump="true">
+          <property name="src.data.dir" location="/root/data/api"/>
+          <property name="src.data.dir.includes" value="expression-alliance.tsv"/>
       </source>
 
-      <!--<source name="alliance-genetic-interactions" type="alliance-genetic-interactions">
-          <property name="src.data.dir" location="/root/data/fms"/>
-          <property name="src.data.dir.includes" value="INTERACTION-GEN_COMBINED.tsv"/>
-        </source>
+      <!-- Interaction sources: implemented against the live Alliance API,
+           fed by scripts/fetch_interactions.py in the bio-sources repo.
+           TSVs land under /root/data/api/. -->
+      <source name="alliance-genetic-interactions" type="alliance-genetic-interactions">
+          <property name="src.data.dir" location="/root/data/api"/>
+          <property name="src.data.dir.includes" value="genetic-interactions.tsv"/>
+      </source>
 
-        <source name="alliance-molecular-interactions" type="alliance-molecular-interactions">
-           <property name="src.data.dir" location="/root/data/fms"/>
-           <property name="src.data.dir.includes" value="NTERACTION-MOL_COMBINED.tsv"/>
-         </source>
-       <source name="hpo" type="hpo">
+      <source name="alliance-molecular-interactions" type="alliance-molecular-interactions">
+          <property name="src.data.dir" location="/root/data/api"/>
+          <property name="src.data.dir.includes" value="molecular-interactions.tsv"/>
+      </source>
+
+      <!-- New API-backed enrichment + companion sources.
+           Each is paired with a scripts/fetch_*.py in alliancemine-bio-sources
+           that produces the TSV listed below. See that repo's CLAUDE.md
+           "API-backed sources" table for the full mapping. -->
+      <source name="alliance-paralogs" type="alliance-paralogs">
+          <property name="src.data.dir" location="/root/data/api"/>
+          <property name="src.data.dir.includes" value="paralogs.tsv"/>
+      </source>
+
+      <source name="alliance-phenotypes" type="alliance-phenotypes">
+          <property name="src.data.dir" location="/root/data/api"/>
+          <property name="src.data.dir.includes" value="phenotypes.tsv"/>
+      </source>
+
+      <source name="alliance-disease-models" type="alliance-disease-models">
+          <property name="src.data.dir" location="/root/data/api"/>
+          <property name="src.data.dir.includes" value="disease-models.tsv"/>
+      </source>
+
+      <source name="alliance-allele-detail" type="alliance-allele-detail">
+          <property name="src.data.dir" location="/root/data/api"/>
+          <property name="src.data.dir.includes" value="allele-detail.tsv"/>
+      </source>
+
+      <source name="alliance-ortholog-detail" type="alliance-ortholog-detail">
+          <property name="src.data.dir" location="/root/data/api"/>
+          <property name="src.data.dir.includes" value="orthologs.tsv"/>
+      </source>
+
+      <source name="alliance-disease-detail" type="alliance-disease-detail" dump="true">
+          <property name="src.data.dir" location="/root/data/api"/>
+          <property name="src.data.dir.includes" value="disease-annotations-detail.tsv"/>
+      </source>
+
+      <!-- ==========================================================
+           Phase 6d: cross-mine federation. Data is pulled from sibling
+           InterMine instances (MouseMine, WormMine) by Python fetchers
+           using their PathQuery REST APIs. TSVs land in /root/data/api/
+           alongside the Alliance-API outputs.
+           ========================================================== -->
+      <source name="alliance-mouse-strains" type="alliance-mouse-strains">
+          <property name="src.data.dir" location="/root/data/api"/>
+          <property name="src.data.dir.includes" value="mouse-strains.tsv"/>
+      </source>
+
+      <source name="alliance-worm-rnai" type="alliance-worm-rnai">
+          <property name="src.data.dir" location="/root/data/api"/>
+          <property name="src.data.dir.includes" value="worm-rnai.tsv"/>
+      </source>
+
+      <source name="alliance-transgenic-alleles" type="alliance-transgenic-alleles">
+          <property name="src.data.dir" location="/root/data/api"/>
+          <property name="src.data.dir.includes" value="transgenic-alleles.tsv"/>
+      </source>
+
+      <source name="alliance-disease-alleles" type="alliance-disease-alleles">
+          <property name="src.data.dir" location="/root/data/api"/>
+          <property name="src.data.dir.includes" value="disease-alleles.tsv"/>
+      </source>
+
+      <!-- E7: gene-direct experimental disease annotations (non-orthology
+           inferred). Sets evidenceType="experimental" + experimentalGene ref. -->
+      <source name="alliance-experimental-disease" type="alliance-experimental-disease">
+          <property name="src.data.dir" location="/root/data/api"/>
+          <property name="src.data.dir.includes" value="experimental-disease.tsv"/>
+      </source>
+
+      <!-- E3: molecular variants from VARIANT-ALLELE-JSON FMS bulk. Class
+           Variant + VariantConsequence declared in alliancemine-global_additions.xml. -->
+      <source name="alliance-variants" type="alliance-variants">
+          <property name="src.data.dir" location="/root/data/api"/>
+          <property name="src.data.dir.includes" value="variants.tsv"/>
+      </source>
+
+      <!-- AGR auto-curated gene descriptions (GENE-DESCRIPTION-JSON FMS bulk).
+           Enriches existing Gene class with autoDescription / goDescription /
+           do/orthology/expression description fields. -->
+      <source name="alliance-gene-descriptions" type="alliance-gene-descriptions">
+          <property name="src.data.dir" location="/root/data/api"/>
+          <property name="src.data.dir.includes" value="gene-descriptions.tsv"/>
+      </source>
+
+      <!-- Affected Genomic Models from FMS AGM bulk. Emits DiseaseModel items
+           (class declared in alliancemine-global_additions.xml). -->
+      <source name="alliance-agms" type="alliance-agms">
+          <property name="src.data.dir" location="/root/data/api"/>
+          <property name="src.data.dir.includes" value="agms.tsv"/>
+      </source>
+
+      <!-- E1: per-allele phenotype annotations from FMS PHENOTYPE bulk
+           (filtered to rows with primaryGeneticEntityIDs). Emits partial
+           PhenotypeAnnotation items keyed on alleleSubject + ontologyTerm. -->
+      <source name="alliance-allele-phenotypes" type="alliance-allele-phenotypes">
+          <property name="src.data.dir" location="/root/data/api"/>
+          <property name="src.data.dir.includes" value="allele-phenotypes.tsv"/>
+      </source>
+
+      <!-- Q2: per-gene cross-references from FMS GENECROSSREFERENCEJSON bulk.
+           Filters to MOD-subject rows (MGI/SGD/ZFIN/FB/WB/RGD/HGNC/XB)
+           and emits CrossReference items linked to the existing Gene
+           class via the standard `subject` reverse-reference. -->
+      <source name="alliance-gene-crossrefs" type="alliance-gene-crossrefs">
+          <property name="src.data.dir" location="/root/data/api"/>
+          <property name="src.data.dir.includes" value="gene-crossrefs.tsv"/>
+      </source>
+
+      <!-- B1: high-throughput experiment metadata from FMS HTPDATASET +
+           HTPDATASAMPLE bulk. Reads two TSVs (htp-datasets.tsv +
+           htp-samples.tsv) via a single converter that dispatches on the
+           header row, and emits DataSet + Sample + SampleCharacteristic
+           items. Populates the previously-empty Sample class. -->
+      <source name="alliance-htp" type="alliance-htp" dump="true">
+          <property name="src.data.dir" location="/root/data/api"/>
+          <property name="src.data.dir.includes" value="htp-*.tsv"/>
+      </source>
+
+      <!-- N1: AlphaFold structure URL on Protein. Synthesises
+           alphaFoldUrl + alphaFoldId from UniProtKB cross-refs already
+           captured by alliance-gene-crossrefs. No HTTP fetch — pure
+           URL template against alphafold.ebi.ac.uk/entry/{accession}. -->
+      <source name="alliance-alphafold" type="alliance-alphafold">
+          <property name="src.data.dir" location="/root/data/api"/>
+          <property name="src.data.dir.includes" value="alphafold.tsv"/>
+      </source>
+
+      <!-- N2: STRING DB v12 functional protein-protein associations.
+           Per-organism download (combined_score ≥ 700 default). New
+           STRINGInteraction class links Protein-Protein pairs via
+           UniProt accession with score 0-1000. -->
+      <source name="alliance-string" type="alliance-string">
+          <property name="src.data.dir" location="/root/data/api"/>
+          <property name="src.data.dir.includes" value="string-interactions.tsv"/>
+      </source>
+
+      <!-- N3: CRISPR/RNAi screen hits from FMS BIOGRID-ORCS tarballs.
+           Streaming tar-extract filters HIT=YES rows; new
+           CRISPRScreenResult class joins Gene by (symbol, organism). -->
+      <source name="alliance-crispr-screens" type="alliance-crispr-screens">
+          <property name="src.data.dir" location="/root/data/api"/>
+          <property name="src.data.dir.includes" value="crispr-screens.tsv"/>
+      </source>
+
+      <!-- N5: small-molecule catalog from FMS MOLECULE bulk. New
+           Molecule class with InChI / SMILES / IUPAC + ChEBI cross-ref. -->
+      <source name="alliance-molecules" type="alliance-molecules">
+          <property name="src.data.dir" location="/root/data/api"/>
+          <property name="src.data.dir.includes" value="molecules.tsv"/>
+      </source>
+
+      <!-- X2: ChEMBL target → UniProt mapping. Emits CrossReference items
+           on Protein (source=ChEMBL) so AllianceMine queries can pivot
+           from any UniProt-keyed Protein to its ChEMBL target report
+           card (mechanism / activity / drug indications). -->
+      <source name="alliance-chembl" type="alliance-chembl" dump="true">
+          <property name="src.data.dir" location="/root/data/api"/>
+          <property name="src.data.dir.includes" value="chembl-targets.tsv"/>
+      </source>
+
+      <!-- ==========================================================
+           Phase 6a: UniProt + InterPro protein sources.
+           Declared via InterMine core types; data files expected at
+           /root/data/uniprot/current/ and /root/data/interpro/current/
+           (download step is in agr_intermine_builder/extract_data.py).
+           uniprot.organisms = Alliance taxa (yeast, human, mouse, rat,
+           worm, fly, zebrafish, xtropicalis, xlaevis).
+           ========================================================== -->
+      <source name="uniprot" type="uniprot">
+          <property name="uniprot.organisms" value="559292 9606 10090 10116 6239 7227 7955 8364 8355"/>
+          <property name="src.data.dir" location="/root/data/uniprot/current"/>
+      </source>
+
+      <source name="uniprot-keywords" type="uniprot-keywords">
+          <property name="src.data.dir" location="/root/data/uniprot/current"/>
+          <property name="src.data.dir.includes" value="keywlist.xml"/>
+      </source>
+
+      <source name="uniprot-fasta" type="fasta">
+          <property name="fasta.taxonId" value="559292 9606 10090 10116 6239 7227 7955 8364 8355"/>
+          <property name="fasta.className" value="org.intermine.model.bio.Protein"/>
+          <property name="fasta.classAttribute" value="primaryAccession"/>
+          <property name="fasta.dataSetTitle" value="UniProt data set"/>
+          <property name="fasta.dataSourceName" value="UniProt"/>
+          <property name="src.data.dir" location="/root/data/uniprot/current"/>
+          <property name="fasta.includes" value="uniprot_sprot_varsplic.fasta"/>
+          <property name="fasta.sequenceType" value="protein"/>
+          <property name="fasta.loaderClassName" value="org.intermine.bio.dataconversion.UniProtFastaLoaderTask"/>
+      </source>
+
+      <source name="interpro" type="interpro">
+          <property name="src.data.dir" location="/root/data/interpro/current"/>
+      </source>
+
+      <!-- protein2ipr must run after uniprot - it only loads domains for
+           proteins already in the database. -->
+      <source name="protein2ipr" type="protein2ipr" dump="true">
+          <property name="src.data.dir" location="/root/data/interpro/match_complete/current"/>
+          <property name="src.data.dir.includes" value="protein2ipr.dat"/>
+          <property name="protein2ipr.organisms" value="559292 9606 10090 10116 6239 7227 7955 8364 8355"/>
+          <property name="osAlias" value="os.production"/>
+      </source>
+
+      <!-- F1: maps InterPro domains to GO terms via interpro2go file.
+           Must run after interpro + protein2ipr so target OntologyTerm /
+           ProteinDomain rows already exist. -->
+      <source name="interpro-go" type="interpro-go">
+          <property name="src.data.dir" location="/root/data/interpro/ontology/current"/>
+      </source>
+
+      <!-- F7: NCBI gene2pubmed → Gene.publications. Upstream core type.
+           Single gene2pubmed TSV; gz acceptable. Filter to AllianceMine
+           taxa via pubmed.organisms property. -->
+      <source name="pubmed-gene" type="pubmed-gene" dump="true">
+          <property name="src.data.dir" location="/root/data/pubmed/current"/>
+          <property name="pubmed.organisms" value="559292 9606 10090 10116 6239 7227 7955 8364 8355"/>
+      </source>
+
+      <!-- OMIM: bio-source-omim adds Disease.publications with a different
+           reverse-reference than AllianceMine's Disease class (which
+           extends DOTerm and inherits publications from Annotatable).
+           Disabled until a per-mine additions override resolves the merge
+           conflict. Error from :dbmodel:mergeModels:
+             replacing the "Annotatable.publications" collection with
+             Disease.publications failed because the reverse references differ
+      <source name="omim" type="omim">
+          <property name="src.data.dir" location="/root/data/omim/current"/>
+      </source>
+      -->
+
+      <!-- OrthoDB orthology — supplementary evidence alongside the AGR ortholog
+           feed. Upstream core type. -->
+      <source name="orthodb" type="orthodb">
+          <property name="src.data.dir" location="/root/data/orthodb/current"/>
+          <property name="orthodb.organisms" value="559292 9606 10090 10116 6239 7227 7955 8364 8355"/>
+      </source>
+
+      <!-- F2: PANTHER family-tree orthology. Upstream core type. -->
+      <source name="panther" type="panther" dump="true">
+          <property name="src.data.dir" location="/root/data/panther/current"/>
+          <property name="panther.organisms" value="559292 9606 10090 10116 6239 7227 7955 8364 8355"/>
+      </source>
+
+      <!-- PDB structures: bio-source-pdb is not published in maven central
+           or local m2 (FlyMine has the block commented out). Disabled until
+           an upstream jar appears or someone packages a local converter.
+      <source name="pdb" type="pdb">
+          <property name="src.data.dir" location="/root/data/pdb/current"/>
+          <property name="pdb.organisms" value="559292 9606 10090 10116 6239 7227 7955 8364 8355"/>
+      </source>
+      -->
+
+      <!-- ==========================================================
+           Phase 6b: KEGG + Reactome pathway sources.
+           Populate the existing Pathway class via Gene.pathways /
+           Protein.pathways collections. Data files expected at
+           /root/data/kegg/current/ and /root/data/reactome/current/.
+           ========================================================== -->
+      <source name="kegg-pathway" type="kegg-pathway">
+          <property name="src.data.dir" location="/root/data/kegg/current"/>
+          <property name="kegg.organisms" value="559292 9606 10090 10116 6239 7227 7955"/>
+      </source>
+
+      <source name="reactome" type="reactome" dump="true">
+          <property name="src.data.dir" location="/root/data/reactome/current"/>
+          <property name="reactome.organisms" value="559292 9606 10090 10116 6239 7227 7955"/>
+          <property name="reactome.datasourcename" value="Reactome"/>
+          <property name="reactome.datasetname" value="Reactome data set"/>
+          <property name="reactome.curated" value="false"/>
+      </source>
+
+      <!-- hpo/mpo/pato ontology sources remain disabled pending review. -->
+      <!--
+      <source name="hpo" type="hpo">
         <property name="src.data.file" location="/root/data/fms/ONTOLOGY_HP.obo"/>
       </source>
 
@@ -228,7 +512,8 @@
 
       <source name="pato" type="pato">
         <property name="src.data.file" location="/root/data/fms/ONTOLOGY_PATO.obo"/>
-      </source>-->
+      </source>
+      -->
 
       <source name="update-publications" type="update-publications">
         <property name="src.data.file" location="publications.xml"/>
@@ -247,16 +532,25 @@
   <post-processing>
     <post-process name="create-references"/>
     <post-process name="do-sources"/>
-    <!--<post-process name="create-intergenic-region-features"/>
+    <!-- PR4: re-enabled 2026-05-12 — without these 5 steps the intergenicregion
+         and geneflankingregion tables stay empty, breaking the
+         Organism_IntergenicRegions and gene_overlapping_flanking_regions
+         templates. populate-child-features wires up parent↔child references for
+         any feature items that exist in the objectstore (does NOT derive new
+         features). See agr_intermine_builder docs/POSTPROCESS_BLOCK_REENABLE.md. -->
+    <post-process name="create-intergenic-region-features"/>
     <post-process name="create-location-overlap-index"/>
     <post-process name="create-overlap-view"/>
     <post-process name="create-gene-flanking-features"/>
-    <post-process name="populate-child-features"/>-->
+    <post-process name="populate-child-features"/>
     <post-process name="transfer-sequences"/>
     <post-process name="create-attribute-indexes"/>
     <post-process name="summarise-objectstore"/>
     <post-process name="create-autocomplete-index"/>
     <post-process name="create-search-index"/>
+    <!-- F8: normalise DataSource/DataSet name+url+description from datasources.xml.
+         Must run last so it sees every DataSource created by integrate. -->
+    <post-process name="update-data-sources"/>
   </post-processing>
 
 </project>
