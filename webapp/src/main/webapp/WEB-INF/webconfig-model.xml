@@ -105,6 +105,7 @@
 
     <class className="org.intermine.model.bio.DiseaseAnnotation">
         <fields>
+            <fieldconfig fieldExpr="subject.primaryIdentifier" />
             <fieldconfig fieldExpr="ontologyTerm.identifier" />
             <fieldconfig fieldExpr="ontologyTerm.name" />
             <fieldconfig fieldExpr="evidenceType" />
@@ -248,17 +249,6 @@
             <fieldconfig fieldExpr="ontologyTerm.name"></fieldconfig>
             <fieldconfig showInSummary="false" fieldExpr="ontologyTerm.namespace"></fieldconfig>
             <fieldconfig fieldExpr="qualifier"></fieldconfig>
-        </fields>
-    </class>
-
-    <class className="org.intermine.model.bio.DiseaseAnnotation">
-        <fields>
-            <fieldconfig fieldExpr="subject.primaryIdentifier" />
-            <fieldconfig fieldExpr="ontologyTerm.identifier"></fieldconfig>
-            <fieldconfig fieldExpr="ontologyTerm.name"></fieldconfig>
-            <!--<fieldconfig fieldExpr="evidence.code.code"> </fieldconfig>
-            <fieldconfig fieldExpr="evidence.publications.pubmedId"> </fieldconfig>
-            <fieldconfig fieldExpr="qualifier"></fieldconfig>-->
         </fields>
     </class>
 
