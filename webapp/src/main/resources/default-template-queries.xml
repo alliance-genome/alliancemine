@@ -256,7 +256,7 @@
             <query name="Complex_Details_Participant" model="genomic" view="Complex.accession Complex.name Complex.function Complex.systematicName Complex.allInteractors.biologicalRole Complex.allInteractors.stoichiometry Complex.allInteractors.type Complex.goAnnotation.id Complex.goAnnotation.qualifier Complex.publications.pubMedId Complex.allInteractors.participant.secondaryIdentifier Complex.allInteractors.participant.symbol" longDescription="For a given macromolecular complex, retrieve Gene Ontology annotations and references for the complex as a whole; also retrieve the subunits of the complex, their stoichiometry, and their biological roles in the complex." sortOrder="Complex.name asc" constraintLogic="A and B">
                 <join path="Complex.publications" style="OUTER"/>
                 <join path="Complex.goAnnotation" style="OUTER"/>
-                <constraint path="Complex.accession" code="B" editable="true" description="" switchable="on" op="=" value="CPX-599"/>
+                <constraint path="Complex.accession" code="B" editable="true" description="" switchable="on" op="=" value="CPX-32"/>
                 <constraint path="Complex.name" code="A" editable="true" description="" switchable="off" op="CONTAINS" value="U4/U6 small nuclear ribonucleoprotein complex"/>
             </query>
         </template>
